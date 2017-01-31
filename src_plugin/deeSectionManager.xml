@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="deeSectionDao" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.plugin.deeSection.dao.DeeSectionDaoImpl">
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="deeSectionManager"
+		class="com.seeyon.v3x.plugin.deeSection.manager.DeeSectionManagerImpl" init-method="init">
+		<property name="deeSectionDao" ref="deeSectionDao"></property>	
+	</bean>
+	<bean id="deeSectionController"
+		class="com.seeyon.v3x.plugin.deeSection.controller.DeeSectionController"
+		autowire="byName">
+		<property name="deeSectionManager" ref="deeSectionManager"></property>
+	</bean>
+</beans>

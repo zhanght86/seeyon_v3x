@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.seeyon.v3x.bulletin.domain">
+	<class
+		name="BulTypeManagers"
+		table="bul_type_managers"
+	>
+		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="id"
+		>
+			<generator class="assigned"/>
+		</id>
+
+		<property
+			name="managerId"
+			column="manager_id"
+			type="java.lang.Long"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="orderNum"
+			column="order_num"
+			type="integer"
+			not-null="false"
+			length="11"
+		/>
+		<property
+			name="ext1"
+			column="ext1"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="ext2"
+			column="ext2"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<many-to-one
+			name="type"
+			column="type_id"
+			class="BulType"
+			not-null="true"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

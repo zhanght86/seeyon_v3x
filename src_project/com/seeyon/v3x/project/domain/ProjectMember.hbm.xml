@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.project.domain.ProjectMember" 
+    table="project_member"
+    lazy="true"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="memberType"
+        type="byte"
+        column="member_type"
+        length="4"
+    />
+     <property
+        name="memberSort"
+        type="int"
+        column="member_sort"
+        length="11"
+    />
+    <property
+        name="memberid"
+        type="long"
+        column="memberid"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="userProjectSort"
+        type="int"
+        column="user_project_sort"
+        length="11"
+    />
+      <!-- Associations -->
+    <many-to-one name="projectSummary"
+			class="com.seeyon.v3x.project.domain.ProjectSummary">
+			<column name="project_id" not-null="true" length="20" />
+	</many-to-one>
+
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

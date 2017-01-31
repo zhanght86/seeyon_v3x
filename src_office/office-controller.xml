@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!--  - Application context definition for "springapp" DispatcherServlet.  -->
+<beans default-autowire="byName">
+
+  <!-- 注册Controller -->
+  <bean id="autoInfoPortlet" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
+  
+  <bean id="stockInfoController"
+		class="com.seeyon.v3x.office.stock.controller.StockInfoController">
+		<property name="stockManager" ref="stockManager"/>
+		<property name="orgManager" ref="OrgManager" />
+		<property name="officeCommonManager" ref="officeCommonManager"/>
+		<!-- 办公用品首页 -->
+		<property name="indexView" value="office/stock/stockIndex"></property>
+		<property name="contentView" value="office/stock/stockContent"></property>
+		<!-- 办公用品详细信息界面 -->
+		<property name="showView" value="office/stock/stockInfoShow"></property>
+		<!--新增/修改 界面 -->
+		<property name="editView" value="office/stock/stockInfoEdit"></property>
+		<!-- 查询列表显示界面 -->
+		<property name="listView" value="office/stock/stockInfoList"></property>
+		<!-- 保存成功结果界面 -->
+		<property name="successView" value="office/stock/success"></property>
+  </bean>
+  <!-- 办公用品申请控制类 -->
+  <bean id="stockApplyController"
+		class="com.seeyon.v3x.office.stock.controller.StockApplyController">
+		<property name="stockManager" ref="stockManager"/>
+		<property name="orgManager" ref="OrgManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="officeCommonManager" ref="officeCommonManager"/>
+		<!-- 办公用品详细信息界面 -->
+		<property name="showView" value="office/stock/stockApplyShow"></property>
+		<!--新增/修改 界面 -->
+		<property name="editView" value="office/stock/stockApplyEdit"></property>
+		<!-- 查询列表显示界面 -->
+		<property name="listView" value="office/stock/stockApplyList"></property>
+		<!-- 保存成功结果界面 -->
+		<property name="successView" value="office/stock/success"></property>
+  </bean>	
+  
+  <!-- 办公用品申请审核控制类 -->
+  <bean id="stockAuditController"
+		class="com.seeyon.v3x.office.stock.controller.StockAuditController">
+		<property name="stockManager" ref="stockManager"/>
+		<property name="autoManager" ref="autoManager"/>
+		<property name="orgManager" ref="OrgManager" />
+		<property name="adminManager" ref="officeAdminManager" />
+		<property name="officeCommonManager" ref="officeCommonManager"/>
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<!-- 办公用品详细信息界面 -->
+		<property name="showView" value="office/stock/stockAuditShow"></property>
+		<!--新增/修改 界面 -->
+		<property name="editView" value="office/stock/stockAuditEdit"></property>
+		<!-- 查询列表显示界面 -->
+		<property name="listView" value="office/stock/stockAuditList"></property>
+		<!-- 保存成功结果界面 -->
+		<property name="successView" value="office/stock/success"></property>
+  </bean>
+  
+  <!-- 车辆申请控制类 -->
+  <bean id="autoApplyController"
+  		class="com.seeyon.v3x.office.auto.controller.AutoApplyController">
+  		<property name="autoManager" ref="autoManager"/>
+  		<property name="orgManager" ref="OrgManager" />
+  		<property name="userMessageManager" ref="UserMessageManager" />
+  		<!-- 车辆申请详细信息界面 -->
+		<property name="showView" value="office/auto/autoApplyShow"></property>
+		<!--新增/修改 界面 -->
+		<property name="editView" value="office/auto/autoApplyEdit"></property>
+		<!-- 查询列表显示界面 -->
+		<property name="listView" value="office/auto/autoApplyList"></property>
+		<!-- 保存成功结果界面 -->
+		<property name="successView" value="office/auto/success"></property>
+  </bean>	
+  	
+  <!-- 车辆详细信息控制类 -->
+  <bean id="autoInfoController"
+  		class="com.seeyon.v3x.office.auto.controller.AutoInfoController">
+  		<property name="autoManager" ref="autoManager"/>
+  		<property name="orgManager" ref="OrgManager" />
+  		<property name="officeCommonManager" ref="officeCommonManager"/>
+  		<!-- 功能首页 -->
+  		<property name="indexView" value="office/auto/autoInfoIndex"></property>
+  		<!-- 功能说明 -->
+  		<property name="contentView" value="office/auto/autoInfoContent"></property>
+  		<!-- 车辆详细信息界面 -->
+		<property name="showView" value="office/auto/autoInfoShow"></property>
+		<!--新增/修改 界面 -->
+		<property name="editView" value="office/auto/autoInfoEdit"></property>
+		<!-- 查询列表显示界面 -->
+		<property name="listView" value="office/auto/autoInfoList"></property>
+		<!-- 保存成功结果界面 -->
+		<property name="successView" value="office/auto/success"></property>
+		
+  </bean>
+  
+  <!-- 车辆审核信息控制类 -->
+  <bean id="autoAuditController"
+  		class="com.seeyon.v3x.office.auto.controller.AutoAuditController">
+  		<property name="autoManager" ref="autoManager"/>
+  		<property name="orgManager" ref="OrgManager" />
+  		<property name="officeCommonManager" ref="officeCommonManager"/>
+  		<property name="adminManager" ref="officeAdminManager" />
+  		<property name="userMessageManager" ref="UserMessageManager" />
+  		<!-- 车辆申请审核详细信息界面 -->
+		<property name="showView" value="office/auto/autoAuditShow"></property>
+		<!--新增/修改 界面 -->
+		<property name="editView" value="office/auto/autoAuditEdit"></property>
+		<!-- 查询列表显示界面 -->
+		<property name="listView" value="office/auto/autoAuditList"></property>
+		<!-- 保存成功结果界面 -->
+		<property name="successView" value="office/auto/success"></property>
+  </bean>	
+  
+  <!-- 车辆详细信息控制类 -->
+  <bean id="autoDepartBackController"
+  		class="com.seeyon.v3x.office.auto.controller.AutoDepartBackController">
+  		<property name="autoManager" ref="autoManager"/>
+		<property name="orgManager" ref="OrgManager" />
+		<property name="adminManager" ref="officeAdminManager" />
+		<property name="officeCommonManager" ref="officeCommonManager"/>
+  		<!-- 车辆详细信息界面 -->
+		<property name="showView" value="office/auto/autoDepartBackShow"></property>
+		<!--新增/修改 界面 -->
+		<property name="editView" value="office/auto/autoDepartBackEdit"></property>
+		<!-- 查询列表显示界面 -->
+		<property name="listView" value="office/auto/autoDepartBackList"></property>
+		<!-- 保存成功结果界面 -->
+		<property name="successView" value="office/auto/success"></property>
+  </bean>
+  
+  <!-- 车辆违章详细信息控制类 -->
+  <bean id="autoViolateController"
+  		class="com.seeyon.v3x.office.auto.controller.AutoViolateController">
+  		<property name="autoManager" ref="autoManager"/>
+  		<property name="orgManager" ref="OrgManager" />
+  		<property name="officeCommonManager" ref="officeCommonManager"/>
+  		<!-- 车辆违章详细信息界面 -->
+		<property name="showView" value="office/auto/autoViolateShow"></property>
+		<!--新增/修改 界面 -->
+		<property name="editView" value="office/auto/autoViolateEdit"></property>
+		<!-- 查询列表显示界面 -->
+		<property name="listView" value="office/auto/autoViolateList"></property>
+		<!-- 保存成功结果界面 -->
+		<property name="successView" value="office/auto/success"></property>
+  </bean>
+  
+  <!-- 丢失报损操作类 -->
+  <bean id="officeLossController"
+		class="com.seeyon.v3x.office.common.controller.OfficeLossController">
+		<property name="officeCommonManager" ref="officeCommonManager"/>
+		<property name="orgManager" ref="OrgManager" />
+		<!-- 首页 -->
+		<property name="indexView" value="office/loss/lossIndex"></property>
+		<property name="contentView" value="office/loss/lossContent"></property>
+		<!-- 详细信息界面 -->
+		<property name="showView" value="office/loss/lossInfoShow"></property>
+		<!--新增/修改 界面 -->
+		<property name="editView" value="office/loss/lossInfoEdit"></property>
+		<!-- 查询列表显示界面 -->
+		<property name="listView" value="office/loss/lossInfoList"></property>
+		<!-- 保存成功结果界面 -->
+		<property name="successView" value="office/loss/success"></property>
+  </bean>
+  
+  <!-- 资源选择窗口 -->
+  <bean id="selectResourceController"
+  		class="com.seeyon.v3x.office.common.controller.SelectResourceController">
+  		<property name="officeCommonManager" ref="officeCommonManager"/>
+  		<property name="indexView" value="office/common/resourceIndex"></property>
+  		<property name="headView" value="office/common/resourceHead"></property>
+  		<property name="autoView" value="office/common/resourceAuto"></property>
+  		<property name="assetView" value="office/common/resourceAsset"></property>
+  		<property name="stockView" value="office/common/resourceStock"></property>
+  		<property name="bookView" value="office/common/resourceBook"></property>
+  </bean>	
+  	
+  <!--分类信息 -->
+  <bean id="officeTypeInfoController"
+  		class="com.seeyon.v3x.office.common.controller.OfficeTypeInfoController">
+  		<property name="officeCommonManager" ref="officeCommonManager"/>
+  		<property name="indexView" value="office/common/typeInfoIndex"></property>
+		<property name="showView" value="office/common/typeInfoShow"></property>
+		<!--新增/修改 界面 -->
+		<property name="editView" value="office/common/typeInfoEdit"></property>
+		<!-- 查询列表显示界面 -->
+		<property name="listView" value="office/common/typeInfoList"></property>
+		<!-- 保存成功结果界面 -->
+		<property name="successView" value="office/common/success"></property>
+  </bean>
+</beans>

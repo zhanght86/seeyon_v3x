@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.taskmanage.domain.TaskInfo" lazy="false" table="task_info">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />			
+		</id>
+		<property name="subject" type="string" column="subject" not-null="true" length="255" />
+		<property name="plannedStartTime" type="java.util.Date" column="planned_start_time" length="19" />
+		<property name="plannedEndTime" type="java.util.Date" column="planned_end_time" length="19" />
+		<property name="fullTime" type="boolean" column="full_time" not-null="true" length="4" />
+		<property name="actualStartTime" type="java.util.Date" column="actual_start_time" length="19" />
+		<property name="actualEndTime" type="java.util.Date" column="actual_end_time" length="19" />
+		<property name="remindStartTime" type="integer" column="remind_start_time" not-null="true" length="11" />
+		<property name="remindEndTime" type="integer" column="remind_end_time" not-null="true" length="11" />
+		<property name="createUser" type="long" column="create_user" not-null="true" length="20" />
+		<property name="createTime" type="java.util.Date" column="create_time" not-null="true" length="19" />
+		<property name="managers" type="string" column="managers" not-null="true" length="1000" />
+		<property name="participators" type="string" column="participators" length="4000" />
+		<property name="updateUser" type="long" column="update_user" not-null="true" length="20" />
+		<property name="updateTime" type="java.util.Date" column="update_time" not-null="true" length="19" />
+		<property name="importantLevel" type="integer" column="important_level" not-null="true" length="4" />
+		<property name="status" type="integer" column="status" not-null="true" length="4" />
+		<property name="plannedTaskTime" type="float" column="planned_task_time" length="12" />
+		<property name="actualTaskTime" type="float" column="actual_task_time" length="12" />
+		<property name="finishRate" type="float" column="finish_rate" length="12" />	
+		<property name="riskLevel" type="integer" column="risk_level" not-null="true" length="4" />
+		<property name="hasAttachments" type="boolean" column="has_attachments" not-null="true" length="4" />
+		<property name="importToCalendar" type="boolean" column="import_to_calendar" not-null="true" length="4" />
+		<property name="parentTaskId" type="long" column="parent_task_id" not-null="true" length="20" />
+		<property name="parentTaskSubject" type="string" column="parent_task_subject" length="255" />
+		<property name="logicalPath" type="string" column="logical_path" not-null="true" length="500" />
+		<property name="logicalDepth" type="integer" column="logical_depth" not-null="true" length="4" />
+		<property name="projectId" type="long" column="project_id" not-null="true" length="20" />
+		<property name="projectPhaseId" type="long" column="project_phase_id" not-null="true" length="20" />
+	</class>
+</hibernate-mapping>

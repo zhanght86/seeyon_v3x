@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.inquiry.domain.InquirySurveydiscuss" 
+    table="inquiry_surveydiscuss"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="discussContent"
+        type="string"
+        column="discuss_content"
+        length="3000"
+    />
+    <property
+        name="discussDate"
+        type="timestamp"
+        column="discuss_date"
+        length="19"
+    />
+    <property
+        name="subsurveyId"
+        type="long"
+        column="subsurvey_id"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="userId"
+        type="long"
+        column="user_id"
+        length="20"
+    />
+
+    <!-- Associations -->
+    <!-- bi-directional many-to-one association to InquirySurveybasic -->
+    <many-to-one
+        name="inquirySurveybasic"
+        class="com.seeyon.v3x.inquiry.domain.InquirySurveybasic"
+    >
+        <column name="surveybasic_id" not-null="true" length="20"/>
+    </many-to-one>
+
+</class>
+</hibernate-mapping>

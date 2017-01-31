@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class 
+	    name="com.seeyon.v3x.bbs.domain.V3xBbsArticle" 
+	    table="v3x_bbs_article"
+	    lazy="false"
+	>
+	    <id
+	        name="id"
+	        type="long"
+	        column="id"
+	        length="20"
+	    >
+	        <generator class="assigned" />
+	    </id>
+	    <property
+	        name="articleName"
+	        type="string"
+	        column="article_name"
+	        not-null="true"
+	        length="255"
+	    />
+	    <property
+	        name="clickNumber"
+	        type="integer"
+	        column="click_number"
+	        length="20"
+	    />
+	    <property
+	        name="replyNumber"
+	        type="integer"
+	        column="reply_number"
+	        length="20"
+	    />
+	    <property
+	        name="content"
+	        type="clob"
+	        column="content"
+	        length="65535"
+	    />
+	    <property
+	        name="department"
+	        type="long"
+	        column="department"
+	        length="20"
+	    />
+	    <property
+	        name="eliteFlag"
+	        type="boolean"
+	        column="elite_flag"
+	        length="4"
+	    />
+	    
+	   <property
+	        name="anonymousFlag"
+	        type="boolean"
+	        column="anonymous_flag"
+	        length="4"
+	    />
+	    
+	    <!-- 讨论主题增加一项设定：是否允许匿名回复 added by Meng Yang 2009-05-11 -->
+	    <property
+	        name="anonymousReplyFlag"
+	        type="boolean"
+	        column="anonymous_reply_flag"
+	        length="4"
+	    />
+	
+	    <property
+	        name="issueTime"
+	        type="timestamp"
+	        column="issue_time"
+	        not-null="true"
+	        length="19"
+	    />
+	    
+	    <property
+	        name="modifyTime"
+	        type="timestamp"
+	        column="modify_time"
+	        length="19"
+	    />
+	    
+	    <property
+	        name="issueUserId"
+	        type="long"
+	        column="issue_user_id"
+	        length="20"
+	    />
+	    
+	    <property
+	        name="messageNotifyFlag"
+	        type="boolean"
+	        column="message_notify_flag"
+	        length="4"
+	    />
+	    <property
+	        name="post"
+	        type="long"
+	        column="post"
+	        length="20"
+	    />
+	    <property
+	        name="resourceFlag"
+	        type="byte"
+	        column="resource_flag"
+	        length="4"
+	    />
+	    <property
+	        name="topSequence"
+	        type="integer"
+	        column="top_sequence"
+	        length="11"
+	    />
+	    <property
+	        name="state"
+	        type="byte"
+	        column="state"
+	        length="4"
+	    />
+	    <property
+	        name="boardId"
+	        type="long"
+	        column="v3x_bbs_board_id"
+	        length="20"
+	    />
+	    <property
+	        name="identifier"
+	        type="string"
+	        column="identifier"
+	        length="20"
+	    />
+	    <property
+	        name="accountId"
+	        type="long"
+	        column="account_id"
+	        length="20"
+	    />
+	    
+	    
+	</class>
+</hibernate-mapping>

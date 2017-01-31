@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+
+<class
+    name="com.seeyon.v3x.office.auto.domain.AutoDepartInfo" 
+    table="T_auto_departinfo"
+>
+	
+	<id
+        name="applyId"
+        type="long"
+        column="apply_id"
+        length="20"
+    >
+      <generator class="assigned" />
+    </id>
+    
+    <property
+        name="autoId"
+        type="string"
+        column="auto_id"
+        length="7"
+    />
+    
+    <property
+        name="autoDepartTime"
+        type="string"
+        column="auto_departtime"
+        length="20"
+    />
+    
+    <property
+        name="autoBackTime"
+        type="string"
+        column="auto_backtime"
+        length="20"
+    />
+    
+    <property 
+    	name="autoPerNum"
+        type="string"
+        column="auto_pernum"
+        length="2"
+    />
+    
+    <property 
+    	name="autoMileAge"
+        type="float"    
+    >
+    	<column name="auto_mileage" sql-type="decimal(7,2)"/>
+    </property>
+    
+    <property
+        name="autoDriver"
+        type="long"
+        column="auto_driver"
+        length="20"
+    />
+    
+    <property 
+    	name="autoFuel"
+        type="float"
+    >
+    	<column name="auto_fuel" sql-type="decimal(7,2)"/>
+    </property>
+    
+    <property 
+    	name="fuelPrice"
+        type="float"
+    >
+    	<column name="fuel_price" sql-type="decimal(7,2)"/>
+    </property>
+    <property 
+    	name="roadPrice"
+        type="float"
+    >
+    	<column name="road_price" sql-type="decimal(7,2)"/>
+    </property>
+    <property 
+    	name="otherPrice"
+        type="float"
+    >
+    	<column name="other_price" sql-type="decimal(7,2)"/>
+    </property>
+    
+    <property 
+    	name="autoMemo"
+    	type="string"
+    	column="auto_memo"
+    	length="4000"
+     />
+     
+    <property 
+    	name="deleteFlag"
+    	type="integer"
+    	column="del_flag"
+    	length="1"
+    />
+    
+</class> 
+</hibernate-mapping>

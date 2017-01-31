@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- 公告管理 -->
+<beans default-autowire="byName">
+	<!-- 公告基本信息 -->
+    <bean id="bulDataController"
+          class="com.seeyon.v3x.bulletin.controller.BulDataController" autowire="byName">
+          <property name="userMessageManager">
+			<ref bean="UserMessageManager" />
+		  </property>
+		  <property name="orgManager" ref="OrgManager" />
+		  <property name="bulDataCache" ref="BulDataCache" />
+		  <!--   <property name="orgManagerDirect" ref="OrgManagerDirect" />   -->
+    </bean>    
+    <bean id="bulDataManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.bulletin.manager.BulDataManagerImpl" singleton="true">    
+            	<property name="orgManager" ref="OrgManager" />
+            	<property name="spaceManager" ref="spaceManager"/> 
+            </bean>        
+        </property>
+        <property name="transactionAttributes">
+			<props>			
+				<prop key="groupAllBoardList">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>	
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="groupFind*">PROPAGATION_SUPPORTS</prop>
+				<prop key="deptFind*">PROPAGATION_SUPPORTS</prop>
+				<prop key="otherFind*">PROPAGATION_SUPPORTS</prop>
+				<prop key="statistics">PROPAGATION_SUPPORTS</prop>
+				<prop key="init">PROPAGATION_SUPPORTS</prop>
+				<prop key="has*">PROPAGATION_SUPPORTS</prop>	
+				<prop key="iSearch*">PROPAGATION_SUPPORTS</prop>
+				<prop key="dataExist">PROPAGATION_SUPPORTS</prop>
+				<prop key="typeExist">PROPAGATION_SUPPORTS</prop>
+				<prop key="show*">PROPAGATION_SUPPORTS</prop>
+				
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="bulDataDao" class="com.seeyon.v3x.bulletin.dao.BulDataDao"></bean>
+	
+	
+	<!-- 公告阅读信息 -->
+    <bean id="bulReadController"
+          class="com.seeyon.v3x.bulletin.controller.BulReadController" autowire="byName">
+    </bean>    
+    <bean id="bulReadManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.bulletin.manager.BulReadManagerImpl"/>            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+                <prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="bulReadDao" class="com.seeyon.v3x.bulletin.dao.BulReadDao"></bean>
+    
+    
+    <!-- 公告版面信息 -->
+    <bean id="bulTemplateController"
+          class="com.seeyon.v3x.bulletin.controller.BulTemplateController" autowire="byName">
+          <property name="orgManager" ref="OrgManager" />
+    </bean>    
+    <bean id="bulTemplateManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.bulletin.manager.BulTemplateManagerImpl"/>            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+			<prop key="find*">PROPAGATION_SUPPORTS</prop>
+			<prop key="get*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="bulTemplateDao" class="com.seeyon.v3x.bulletin.dao.BulTemplateDao"></bean>
+    
+    <!-- 公告类型信息 -->
+    <bean id="bulTypeController"
+          class="com.seeyon.v3x.bulletin.controller.BulTypeController" autowire="byName">
+          <property name="orgManager" ref="OrgManager" />
+    </bean>    
+    <bean id="bulTypeManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.bulletin.manager.BulTypeManagerImpl"  init-method="init" singleton="true" >
+            	<property name="orgManager" ref="OrgManager" />
+            </bean>            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="boardFind*">PROPAGATION_SUPPORTS</prop>
+				<prop key="groupFind*">PROPAGATION_SUPPORTS</prop>
+				<prop key="otherFind*">PROPAGATION_SUPPORTS</prop>
+				<prop key="show*">PROPAGATION_SUPPORTS</prop>
+				<prop key="is*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="setTotalItemsOfType*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="bulTypeDao" class="com.seeyon.v3x.bulletin.dao.BulTypeDao"></bean>
+    
+  
+    <bean id="bulTypeManagersManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.bulletin.manager.BulTypeManagersManagerImpl"/>            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="bulTypeManagersDao" class="com.seeyon.v3x.bulletin.dao.BulTypeManagersDao"></bean>
+    
+    
+    <bean id="bulLogManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.bulletin.manager.BulLogManagerImpl"/>            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+                <prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="bulLogDao" class="com.seeyon.v3x.bulletin.dao.BulLogDao"></bean>
+    
+    
+    <bean id="bulletinUtils" class="com.seeyon.v3x.bulletin.util.BulletinUtils" autowire="byName">
+    	<property name="orgManager" ref="OrgManager"></property>
+    </bean>
+    
+    <bean id="bulPublishScopeDao" class="com.seeyon.v3x.bulletin.dao.BulPublishScopeDao"></bean>
+    
+    <bean id="bulletinManager4ISearch" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.bulletin.manager.BulletinManager4ISearch"  init-method="init" />            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+                <prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+    </bean>  
+    
+    <bean id="bulBodyDao" class="com.seeyon.v3x.bulletin.dao.BulBodyDao"></bean>
+    
+    <bean id="BulDataCache" class="com.seeyon.v3x.bulletin.util.BulDataCache" init-method="init" destroy-method="destroy" />
+    
+    <bean id="bulOrganizationEventListener" class="com.seeyon.v3x.bulletin.listener.BulOrganizationEventListener">
+		<property name="bulDataManager" ref="bulDataManager" />
+		<property name="bulTypeManager" ref="bulTypeManager" />
+	</bean>
+</beans>

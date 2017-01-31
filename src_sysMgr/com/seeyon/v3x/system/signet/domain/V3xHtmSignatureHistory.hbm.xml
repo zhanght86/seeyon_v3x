@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.system.signet.domain.V3xHtmlSignatureHistory" 
+    table="v3x_htm_signature_history"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="dateTime"
+        type="timestamp"
+        column="date_time"
+        length="19"
+    />
+    <property
+        name="fieldName"
+        type="string"
+        column="field_name"
+        length="50"
+    />
+    <property
+        name="hostName"
+        type="string"
+        column="host_name"
+        length="50"
+    />
+    <property
+        name="markGuid"
+        type="string"
+        column="mark_guid"
+        length="128"
+    />
+    <property
+        name="markName"
+        type="string"
+        column="mark_name"
+        length="255"
+    />
+    <property
+        name="summaryId"
+        type="long"
+        column="summary_id"
+        length="20"
+    />
+    <property
+        name="userName"
+        type="string"
+        column="user_name"
+        length="50"
+    />
+
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

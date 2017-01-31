@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName" default-lazy-init="false">
+	<bean id="oaManagerInterface" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.mobile.manager.OAManagerInterfaceImpl"
+				autowire="byName">
+				<property name="orgManager" ref="OrgManager" />
+				<property name="peopleRelateManager" ref="peoplerelateManager"></property>
+				<property name="PAGE_COUNTER" value="${mobile.page_counter}" />
+				<property name="MOBILE" value="${mobile.version_1}" />
+				<property name="CAT" value="${mobile.cat}" />
+				<property name="htmlSuffix" value="doc|txt|xls|docx|xlsx|pptx|ppt" />
+				<property name="userMessageManager" ref="UserMessageManager" />
+				<property name="pageCount" value="${mobile.page_content_count}"></property>
+				<property name="supMaxSizeFile" value="${mobile.support_max_file}"></property>
+				<property name="userMsgDao" ref="userMessageDAO" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="mobController"
+		class="com.seeyon.v3x.mobile.controller.MobileController"
+		autowire="byName">
+		<property name="oaManagerInterface" ref="oaManagerInterface" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+
+	<bean id="smsSender" class="com.tidyinfo.utils.SMSSender"></bean>
+
+	<bean id="messageSender" class="com.tidyinfo.utils.MessageSender"></bean>
+
+	<bean id="mobileconstant"
+		class="com.seeyon.v3x.mobile.utils.MobileConstants">
+	</bean>
+	
+	<bean id="mobileMenuManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.mobile.menu.manager.MobileMenuManagerImpl" autowire="byName"  init-method="init">
+				<property name="mobileMenuDao">
+					<bean class="com.seeyon.v3x.mobile.menu.dao.MobileMenuDao"/>
+				</property>
+				<property name="allMobileMenu">
+					<list>
+						<!-- 待办事项 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="1"/>
+							<property name="name" value="coll.pending.label"/>
+							<property name="isDefaultChecked" value="true"/>
+							<property name="forceChecked" value="true"/>
+							<property name="sortId" value="1"/>
+							<property name="action" value="/mob.do?method=showAffairs"/>
+						</bean>
+						<!-- 新建协同 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="2"/>
+							<property name="name" value="coll.create.label"/>
+							<property name="isDefaultChecked" value="true"/>
+							<property name="sortId" value="2"/>
+							<property name="action" value="/mob.do?method=showNewCollaborationDetial"/>
+						</bean>
+						<!-- 已办事项 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="3"/>
+							<property name="name" value="coll.done.label"/>
+							<property name="isDefaultChecked" value="true"/>
+							<property name="sortId" value="3"/>
+							<property name="action" value="/mob.do?method=getDoneCollaborationList"/>
+						</bean>
+						<!-- 已办公文 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="4"/>
+							<property name="name" value="edoc.doneList"/>
+							<property name="sortId" value="4"/>
+							<property name="action" value="/mob.do?method=showDoneEdocList"/>
+							<property name="menuCheck">
+								<bean class="com.seeyon.v3x.mobile.menu.EdocMenuChecker"/>
+							</property>
+						</bean>
+						<!-- 已发事项 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="5"/>
+							<property name="name" value="coll.send.label"/>
+							<property name="sortId" value="5"/>
+							<property name="action" value="/mob.do?method=getSendCollaborationList"/>
+						</bean>
+						<!-- 跟踪事项 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="6"/>
+							<property name="name" value="coll.track.label"/>
+							<property name="isDefaultChecked" value="true"/>
+							<property name="sortId" value="6"/>
+							<property name="action" value="/mob.do?method=followAffairListEntrance"/>
+						</bean>
+						<!-- 员工通讯录 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="7"/>
+							<property name="name" value="online.addressBook.employe"/>
+							<property name="isDefaultChecked" value="true"/>
+							<property name="sortId" value="7"/>
+							<property name="action" value="/mob.do?method=getAddressBook"/>
+						</bean>
+						<!-- 个人通讯录 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="8"/>
+							<property name="name" value="online.addressBook.private"/>
+							<property name="sortId" value="8"/>
+							<property name="action" value="/mob.do?method=getAddressBookPrivate"/>
+						</bean>
+						<!-- 在线人员 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="9"/>
+							<property name="name" value="online.onlineMember.label"/>
+							<property name="isDefaultChecked" value="true"/>
+							<property name="sortId" value="9"/>
+							<property name="action" value="/mob.do?method=getOnLineMemberList"/>
+						</bean>
+						<!-- 日程事件 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="10"/>
+							<property name="name" value="cal.label"/>
+							<property name="sortId" value="10"/>
+							<property name="action" value="/mob.do?method=getCalendarList"/>
+						</bean>
+						<!-- 公告 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="11"/>
+							<property name="name" value="bul.label"/>
+							<property name="sortId" value="11"/>
+							<property name="action" value="/mob.do?method=getBullList"/>
+						</bean>
+						<!-- 新闻 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="12"/>
+							<property name="name" value="news.label"/>
+							<property name="sortId" value="12"/>
+							<property name="action" value="/mob.do?method=getNewsList"/>
+						</bean>
+						<!-- 会议 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="13"/>
+							<property name="name" value="meeting.label"/>
+							<property name="sortId" value="13"/>
+							<property name="action" value="/mob.do?method=meetListEntrance"/>
+						</bean>
+						<!-- 全文检索-->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="14"/>
+							<property name="name" value="search.label"/>
+							<property name="sortId" value="14"/>
+							<property name="action" value="/mob.do?method=searchEntrance"/>
+							<property name="menuCheck">
+								<bean class="com.seeyon.v3x.mobile.menu.IndexMenuChecker"/>
+							</property>
+						</bean>
+						<!-- 历史消息 -->
+						<bean class="com.seeyon.v3x.mobile.menu.BaseMobileMenu">
+							<property name="id" value="15"/>
+							<property name="name" value="online.message.history"/>
+							<property name="sortId" value="15"/>
+							<property name="action" value="/mob.do?method=showHistoryMessage"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	
+</beans>

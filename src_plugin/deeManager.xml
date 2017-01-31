@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<bean id="deeManager" class="com.seeyon.v3x.plugin.dee.manager.DEEManagerImpl"
+		init-method="init" />
+	<bean id="DeeSynchronLogController"
+		class="com.seeyon.v3x.plugin.dee.controller.DeeSynchronLogController"
+		autowire="byName">
+		<property name="deeSynchronLogManager" ref="deeSynchronLogManager" />
+	</bean>
+	<bean id="deeSynchronLogManager"
+		class="com.seeyon.v3x.plugin.dee.manager.DeeSynchronLogManagerImpl">
+	</bean>
+	<bean id="DeeDataSourceController"
+		class="com.seeyon.v3x.plugin.dee.controller.DeeDataSourceController"
+		autowire="byName">
+		<property name="deeDataSourceManager" ref="deeDataSourceManager" />
+	</bean>
+	<bean id="deeDataSourceManager"
+		class="com.seeyon.v3x.plugin.dee.manager.DeeDataSourceManagerImpl">
+	</bean>
+	<bean id="DeeScheduleController"
+		class="com.seeyon.v3x.plugin.dee.controller.DeeScheduleController"
+		autowire="byName">
+		<property name="deeScheduleManager" ref="deeScheduleManager" />
+	</bean>
+	<bean id="deeScheduleManager"
+		class="com.seeyon.v3x.plugin.dee.manager.DeeScheduleManagerImpl">
+	</bean>
+	<bean id="DEEDeployDRPController"
+		class="com.seeyon.v3x.plugin.dee.controller.DEEDeployDRPController"
+		autowire="byName">
+	</bean>
+</beans>

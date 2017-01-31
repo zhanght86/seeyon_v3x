@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="com.seeyon.v3x.calendar.domain.CalEventPeriodicalRelation" lazy="false" table="cal_event_periodical_relation">
+	<id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+		<generator class="assigned" />
+	</id>
+	<property
+        name="calEventId"
+        type="long"
+        column="cal_event_id"
+        length="20"
+    />
+    <property
+        name="calEventPeriodicalInfoId"
+        type="long"
+        column="cal_event_periodical_info_id"
+        length="20"
+    />
+   	<property
+        name="createDate"
+        type="java.util.Date"
+        column="create_date"
+        length="19"
+    />
+    <property
+        name="memberId"
+        type="long"
+        column="member_id"
+        length="20"
+    />
+</class>
+</hibernate-mapping>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<total>35</total>
+	<MoreLink><![CDATA[/collaboration.do?method=more]]></MoreLink>
+	<item>
+		<title>
+			<![CDATA[标题]]>
+		</title>
+		<link>
+			<![CDATA[method=detail&from=Pending&affairId=-8812596006531153483]]>
+		</link>
+		<author>
+			<![CDATA[创建者]]>
+		</author>
+		<createTimestamp>1234937827000</createTimestamp>
+		<category>
+			<![CDATA[新闻系统]]>
+		</category>
+	</item>
+	<item>
+		<title>
+			<![CDATA[2009年A8产品开发工作规划纲要]]>
+		</title>
+		<link>
+			<![CDATA[method=detail&from=Pending&affairId=-1832556406541553463]]>
+		</link>
+		<author>
+			<![CDATA[谭敏锋]]>
+		</author>
+		<createTimestamp>1234937827324</createTimestamp>
+		<category>
+			<![CDATA[公告]]>
+		</category>
+	</item>
+</data>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.inquiry.domain.InquiryClick" 
+    table="inquiry_click"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="surveybasicId"
+        type="long"
+        column="surveybasic_id"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="userId"
+        type="long"
+        column="user_id"
+        length="20"
+    />
+</class>
+</hibernate-mapping>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.seeyon.v3x.formbizconfig.domain">
+<class 
+    name="FormBizConfigColumn" 
+    table="form_bf_column"
+    lazy="false"
+>
+    <id
+		name="id"
+		type="java.lang.Long"
+		column="id"
+		length="20"
+	>
+		<generator class="assigned"/>
+	</id>	
+	
+	<property
+		name="category"
+		column="category"
+		type="integer"
+		length="4"
+	/>
+	
+	<property
+		name="parentCategory"
+		column="parent_category"
+		type="integer"
+		length="4"
+	/>
+	
+	<property
+		name="sortId"
+		column="sort_id"
+		type="integer"
+		length="4"
+	/>
+	
+    <property
+        name="name"
+        type="string"
+        column="name"
+        length="255"
+    />
+    
+    <property
+		name="formBizConfigId"
+		column="form_biz_config_id"
+		type="java.lang.Long"
+		length="20"
+	/>
+	
+	<property
+		name="formId"
+		column="form_id"
+		type="java.lang.Long"
+		length="20"
+	/>
+	
+	
+	
+</class>
+</hibernate-mapping>

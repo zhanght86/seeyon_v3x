@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="com.seeyon.v3x.calendar.domain.CalContent" lazy="false" table="cal_content">
+	<id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+		<generator class="assigned" />
+	</id>
+	<property
+        name="content"
+        type="clob"
+        column="content"
+    />
+	<property
+        name="contentType"
+        type="string"
+        column="content_type"
+        length="20"
+    />
+	<property
+        name="createDate"
+        type="java.util.Date"
+        column="create_date"
+        length="19"
+    />
+	<property
+        name="eventId"
+        type="long"
+        column="event_id"
+        not-null="true"
+        length="20"
+    />
+
+	<!-- Associations -->
+
+</class>
+</hibernate-mapping>

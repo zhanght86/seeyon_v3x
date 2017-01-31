@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<bean id="ldapSynchronController"
+		class="com.seeyon.v3x.plugin.ldap.controller.LDAPSynchronController">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="ldapBindingMgr" ref="ldapBindingMgr" />
+		<property name="orgManager" ref="OrgManager" />
+		<property name="verifyConnection">
+			<bean id="verifyConnection" class="com.seeyon.v3x.plugin.ldap.manager.VerifyConnection"/>
+		</property>
+	</bean>
+	
+	<bean id="ldapBindingMgrTarget" class="com.seeyon.v3x.plugin.ldap.manager.LdapBindingMgrImp" autowire="byName">
+		<property name="userMapperDao" ref="userMapperDao" />
+		<property name="orgManageDao" ref="orgManageDao" />
+		<property name="om" ref="OrgManagerDirect" />
+	</bean>
+		<bean id="ldapBindingMgr" parent="baseTxService">
+		<property name="target">
+			<ref local="ldapBindingMgrTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="ldapDao" class="com.seeyon.v3x.common.ldap.dao.LdapDaoImp">
+			 <property name="canEmptyPassword" value="false"/>
+	</bean>
+	<bean id="adDao" class="com.seeyon.v3x.common.ldap.dao.AdDaoImp"/>
+	<bean id="openldapDao" class="com.seeyon.v3x.common.ldap.dao.OpenLdapDaoImp"/>
+	<bean id="organizationLdapEvent" class="com.seeyon.v3x.plugin.ldap.manager.OrganizationLdapEvent">
+			<property name="ldapBindingMgr" ref="ldapBindingMgr" />
+			<property name="userMapperDao" ref="userMapperDao" />
+	</bean>
+	<bean id="ldapSetDao" class="com.seeyon.v3x.plugin.ldap.dao.LDAPSetDaoImp"/>
+	
+	<!-- 
+	<bean id="ldapBindingMgr" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="target">
+		    <ref local="ldapBindingMgrTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	-->
+</beans>

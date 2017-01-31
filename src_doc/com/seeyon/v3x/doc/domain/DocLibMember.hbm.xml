@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocLibMember" lazy="false"
+		table="doc_lib_members">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="docLibId" type="long" column="doc_lib_id"
+			not-null="true" length="20" />
+		<property name="userId" type="long" column="user_id"
+			not-null="true" length="20" />
+		<property name="userType" type="string" column="user_type"
+			not-null="true" length="50" />
+
+		<!-- Associations -->
+
+	</class>
+</hibernate-mapping>

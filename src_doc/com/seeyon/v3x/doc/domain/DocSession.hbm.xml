@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocSession" lazy="false"
+		table="doc_session">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<!--
+		<property name="docMimeTypeId" type="long" column="doc_mimetype_id"
+			not-null="true" length="20" />
+		-->
+
+		<property name="name" type="string"
+			column="name" not-null="false" length="255" />	
+		<property name="docResourceId" type="long"
+			column="doc_resource_id" not-null="true" length="20" />
+		<property name="accessUserId" type="long"
+			column="access_user_id" not-null="true" length="20" />
+		<property name="accessTime" type="timestamp"
+			column="access_time" not-null="true" length="19" />				
+
+		<!-- Associations -->
+		<many-to-one name="docMimeType"
+			class="com.seeyon.v3x.doc.domain.DocMimeType" 
+			column="doc_mimetype_id"
+			unique="true"
+		/>
+
+	</class>
+</hibernate-mapping>

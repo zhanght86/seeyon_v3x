@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="projectController"
+		class="com.seeyon.v3x.project.controller.ProjectController"
+		autowire="byName">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="orgManager" ref="OrgManager"/>
+	</bean>
+	<bean id="projectManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.project.manager.ProjectManagerImpl" init-method="init" singleton="true">
+				<property name="orgManager" ref="OrgManager"/>
+				<property name="invalidDaoBean" ref="InvalidDaoBean" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="is*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="projectDao"
+		class="com.seeyon.v3x.project.dao.ProjectDao">
+	</bean>
+	<bean id="projectLogDao"
+		class="com.seeyon.v3x.project.dao.ProjectLogDao">
+	</bean>
+	
+	<bean class="com.seeyon.v3x.project.listener.ProjectOrganizationEventListener">
+		<property name="projectManager" ref="projectManager" />
+	</bean>
+	
+	<bean id="projectPhaseEventDao" class="com.seeyon.v3x.project.dao.ProjectPhaseEventDao"></bean>
+	
+	<bean id="projectPhaseEventManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.project.manager.ProjectPhaseEventManagerImpl" singleton="true"></bean>        
+        </property>
+    </bean>
+    
+    <bean id="projectPhaseDao" class="com.seeyon.v3x.project.dao.ProjectPhaseDao"></bean>
+    
+    <bean id="projectPhaseManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.project.manager.ProjectPhaseManagerImpl" singleton="true"></bean>        
+        </property>
+    </bean>
+    
+    <bean id="projectManagerCAP" class="com.seeyon.v3x.project.manager.cap.ProjectManagerCAPImpl" singleton="true">
+    </bean>
+    
+    <bean id="projectPhaseEventManagerCAP" class="com.seeyon.v3x.project.manager.cap.ProjectPhaseEventManagerCAPImpl" singleton="true">
+    </bean>
+    
+</beans>

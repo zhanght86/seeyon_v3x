@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.collaboration.domain.ManagementSet" 
+    table="v3x_management_set"
+    lazy="true"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+    <generator class="assigned" />
+    </id>
+    
+    <property
+        name="memberId"
+        type="string"
+        column="member_id"
+        not-null="true"
+        length="4000"
+    />
+    <property
+        name="manageRange"
+        type="string"
+        column="manage_range"
+        length="50"
+    />
+
+    <property
+        name="showContent"
+        type="integer"
+        column="show_content"
+		not-null="false"
+        length="4"
+    />
+    
+    <property
+        name="extConfigure"
+        type="integer"
+        column="ext_configure"
+		not-null="false"
+        length="4"
+    /> 
+	<property
+        name="createUserId"
+        type="long"
+        column="create_user_id"
+        length="20"
+    />
+	<property
+        name="createTime"
+        type="timestamp"
+        column="create_time"
+		not-null="true"
+        length="19"
+    />
+	<property
+        name="lastUserId"
+        type="long"
+        column="last_user_id"
+        length="20"
+    />
+	<property
+        name="lastUpdate"
+        type="timestamp"
+        column="last_update"
+		not-null="true"
+        length="19"
+    />
+
+    <property
+        name="domainId"
+        type="java.lang.Long"
+        column="domain_id"
+        not-null="true"
+        length="20"
+    /> 
+    
+
+	<!-- Associations -->
+
+	<set
+        name="managementSetAcls"
+        lazy="true"
+        cascade="all"
+        inverse="true"
+    >
+        <key>
+            <column name="management_set_id" /> <!-- a foreign key in edoc_form_acl referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.collaboration.domain.ManagementSetAcl" />
+    </set>
+
+
+</class>
+</hibernate-mapping>

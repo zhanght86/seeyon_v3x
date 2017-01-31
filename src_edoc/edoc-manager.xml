@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+
+	<bean id="edocFormExtendInfoDao"
+		class="com.seeyon.v3x.edoc.dao.EdocFormExtendInfoDao">
+	</bean>	
+	<bean id="edocElementDao"
+		class="com.seeyon.v3x.edoc.dao.EdocElementDao">
+	</bean>	
+	
+	
+	<bean id="edocDocTemplateDao"
+		class="com.seeyon.v3x.edoc.dao.EdocDocTemplateDao">
+	</bean>
+	
+	<bean id="edocFormElementDao"
+		class="com.seeyon.v3x.edoc.dao.EdocFormElementDao">
+	</bean>
+	
+	<bean id="edocFormFlowPermBoundDao"
+		class="com.seeyon.v3x.edoc.dao.EdocFormFlowPermBoundDao">
+	</bean>
+	
+	<bean id="xmlConverter"
+		class="com.seeyon.v3x.edoc.util.XMLConverter">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	
+	<bean id="edocFormDao"
+		class="com.seeyon.v3x.edoc.dao.EdocFormDao">
+	</bean>
+	
+	<bean id="edocDocTemplateAclDao"
+		class="com.seeyon.v3x.edoc.dao.EdocDocTemplateAclDao">
+	</bean>	
+	
+	<bean id="edocMarkAclDAO"
+		class="com.seeyon.v3x.edoc.dao.EdocMarkAclDAO">
+	</bean>
+	
+	<bean id="edocMarkCategoryDAO"
+		class="com.seeyon.v3x.edoc.dao.EdocMarkCategoryDAO">
+	</bean>
+	
+	<bean id="edocMarkDAO"
+		class="com.seeyon.v3x.edoc.dao.EdocMarkDAO">
+	</bean>
+	
+	<bean id="edocMarkDefinitionDAO"
+		class="com.seeyon.v3x.edoc.dao.EdocMarkDefinitionDAO">
+	</bean>
+	
+	<bean id="edocInnerMarkDefinitionDao"
+		class="com.seeyon.v3x.edoc.dao.EdocInnerMarkDefinitionDao">
+	</bean>
+	
+	<bean id="edocSupervisorDao"
+		class="com.seeyon.v3x.edoc.dao.EdocSupervisorDao">
+	</bean>	
+
+	<bean id="edocSuperviseDetailDao"
+		class="com.seeyon.v3x.edoc.dao.EdocSuperviseDetailDao">
+	</bean>
+
+	<bean id="edocSuperviseLogDao"
+		class="com.seeyon.v3x.edoc.dao.EdocSuperviseLogDao">
+	</bean>	
+
+	<bean id="edocSuperviseRemindDao"
+		class="com.seeyon.v3x.edoc.dao.EdocSuperviseRemindDao">
+	</bean>
+	
+	<bean id="edocMarkHistoryDAO"
+		class="com.seeyon.v3x.edoc.dao.EdocMarkHistoryDAO">
+	</bean>	
+	<bean id="edocElementManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocElementManagerImpl"></bean>
+		</property>	
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>			
+	</bean>
+	
+	<bean id="edocMarkAclManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocMarkAclManagerImpl"></bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="query*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="processLogManager"
+		class="com.seeyon.v3x.common.processlog.manager.ProcessLogManagerImpl">
+		<property name="processLogDAO" ref="processLogDAO"/>
+	</bean>
+	<!-- 流程日志DAO -->
+	<bean id="processLogDAO" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.common.processlog.dao.ProcessLogDAO">
+			</bean>
+		</property>
+	</bean>	
+	<bean id="edocInnerMarkDefinitionManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocInnerMarkDefinitionManagerImpl">
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="getEdocInnerMarkDefs">PROPAGATION_SUPPORTS</prop>
+				<prop key="getEdocInnerMarkDefsList">PROPAGATION_SUPPORTS</prop>
+				<prop key="getInnerMarkStatus">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>	
+	
+	<bean id="edocDocTemplateAclManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocDocTemplateAclManagerImpl">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>	
+	
+	<bean id="edocMarkCategoryManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocMarkCategoryManagerImpl"></bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="containEdocMarkCategory">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>		
+	
+	<bean id="edocMarkDefinitionManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocMarkDefinitionManagerImpl">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="containEdocMarkDefinition">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>		
+	
+	<bean id="edocMarkHistoryManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocMarkHistoryManagerImpl">
+			<property name="edocMarkManager" ref="edocMarksManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+			
+	<bean id="edocMarksManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocMarkManagerImpl"></bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="edocFormManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocFormManagerImpl" singleton="true">
+					<property name="fileManager" ref="fileManager" />
+					<property name="orgManager" ref="OrgManager"></property>
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="edocSummaryManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocSummaryManagerImpl"></bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="edocSuperviseManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocSuperviseManagerImpl">
+				<property name="colSuperviseManager" ref="colSuperviseManager" />			
+				<property name="edocSummaryDao" ref="edocSummaryDao" />
+				<property name="metadataManager" ref="metadataManager" />
+				<property name="orgManager" ref="OrgManager" />
+				<property name="userMessageManager" ref="UserMessageManager" />
+				<property name="affairManager" ref="affairManager" />
+				<property name="edocSummaryManager" ref="edocSummaryManager" />
+				<property name="messageMailManager" ref="messageMailManager" />
+				<property name="mobileMessageManager" ref="mobileMessageManager" />
+				<property name="colSupervisorDao" ref="colSupervisorDao" />				
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>	
+	
+	<bean id="edocManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocManagerImpl">
+				<property name="userMessageManager" ref="UserMessageManager" />
+				<property name="processLogManager" ref="processLogManager"/>
+				<property name="sendEdocManager" ref="sendEdocManager" />
+				<property name="docHierarchyManager" ref="docHierarchyManager" />
+				<property name="orgManager" ref="OrgManager" />
+				<property name="htmlSignDao" ref="v3xHtmDocumentSignatureDao" />
+				<property name="edocStatManager" ref="edocStatManager" />				
+				<property name="edocFormManager" ref="edocFormManager" />
+				<property name="edocElementManager" ref="edocElementManager" />
+				<property name="edocMarkManager" ref="edocMarksManager" />
+				<property name="signetManager" ref="signetManager" />
+				<property name="colSuperviseManager" ref="colSuperviseManager"/>
+			</bean>
+		</property>		
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+				<prop key="query*">PROPAGATION_SUPPORTS</prop>
+				<prop key="list*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="search*">PROPAGATION_REQUIRED,readOnly</prop>				
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="load*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+				<prop key="check*">PROPAGATION_REQUIRED</prop>
+
+				<!-- 前面已经有get*匹配了，这里只是演示在不匹配的情况下，用全名指定事务类型 -->
+				<!--  <prop key="getAllUsers">PROPAGATION_REQUIRED,readOnly</prop>-->
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="edocManagerFacade" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocManagerFacadeImpl"/>
+		</property>		
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+				<prop key="run*">PROPAGATION_REQUIRED</prop>
+				<prop key="finishWorkItem*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="edocPermissionControlManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocPermissionControlManagerImpl"></bean>
+		</property>	
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="edocObjTeamManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocObjTeamManagerImpl" init-method="init"></bean>
+		</property>	
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="workflowEventListenerBeanEdoc" class="com.seeyon.v3x.edoc.workflow.event.WorkflowEventListener"
+		init-method="init">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+	</bean>
+	<bean id="workflowEventListenerEdoc" parent="baseTxService" lazy-init="false" singleton="true">
+		<property name="target" ref="workflowEventListenerBeanEdoc" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>	
+	
+	<bean id="edocDocTemplateManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocDocTemplateManagerImpl">
+				<property name="fileManager" ref="fileManager" />
+				<property name="attachmentManager" ref="attachmentManager" />
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>	
+
+	<bean id="edocElementFlowPermAclManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocElementFlowPermAclManagerImpl"></bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- //综合查询中去掉此功能
+	<bean id="edocManager4ISearch" parent="baseTxService" >
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocManager4ISearchManager" init-method="init"></bean>
+		</property>
+		<property name="transactionAttributes">
+			<props><prop key="*">PROPAGATION_REQUIRED</prop></props>
+		</property>
+	</bean>
+	-->
+	<!-- DAO 定义开始 -->
+	<bean id="edocSummaryDao"
+		class="com.seeyon.v3x.edoc.dao.EdocSummaryDao">
+	</bean>
+	<bean id="edocElementFlowPermAclDao"
+		class="com.seeyon.v3x.edoc.dao.EdocElementFlowPermAclDao">
+	</bean>
+	<bean id="edocBodyDao"
+		class="com.seeyon.v3x.edoc.dao.EdocBodyDao">
+	</bean>
+		<bean id="edocOpinionDao"
+		class="com.seeyon.v3x.edoc.dao.EdocOpinionDao">
+	</bean>
+	<bean id="edocObjTeamDao"
+		class="com.seeyon.v3x.edoc.dao.EdocObjTeamDao">
+	</bean>
+	<bean id="edocObjTeamMemberDao"
+		class="com.seeyon.v3x.edoc.dao.EdocObjTeamMemberDao">
+	</bean>
+	<bean id="colSupervisorDao"
+		class="com.seeyon.v3x.collaboration.dao.ColSupervisorDao">
+	</bean>
+	
+	<!-- DAO 定义结束 -->
+	
+	<!-- 公文统计开始 -->
+	<bean id="edocStatDao"
+		class="com.seeyon.v3x.edoc.dao.EdocStatDao">
+	</bean>
+	<bean id="edocStatManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.edoc.manager.EdocStatManagerImpl"></bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="query*">PROPAGATION_SUPPORTS</prop>
+				<prop key="list*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 公文统计结束 -->
+	<bean id="edocSignHandler" class="com.seeyon.v3x.edoc.event.EdocSignHandler">
+		<property name="userMessageManager" ref="UserMessageManager" />			
+	</bean>	
+	
+	<bean class="com.seeyon.v3x.edoc.listener.EdocOrganizationEventListener">
+	</bean>
+</beans>

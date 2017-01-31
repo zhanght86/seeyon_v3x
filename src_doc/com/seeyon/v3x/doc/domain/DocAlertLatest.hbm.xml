@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocAlertLatest" lazy="false"
+		table="doc_alert_latest">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="docResourceId" type="long"
+			column="doc_resource_id" not-null="true" length="20" />
+		<property name="docResourceName" type="string" column="doc_resource_name"
+			not-null="true" length="255" />
+		<property name="mimeTypeId" type="long" column="mime_type_id"
+			not-null="true" length="20" />
+		<property name="changeType" type="byte" column="change_type"
+			not-null="true" length="4" />
+		<property name="alertUserId" type="long" column="alert_user_id"
+			not-null="true" length="20" />
+		<property name="lastUserId" type="long" column="last_user_id"
+			not-null="true" length="20" />
+		<property name="lastUpdate" type="timestamp"
+			column="last_update" not-null="true" length="19" />
+		<property name="status" type="byte" column="status"
+			not-null="false" length="4" />	
+	</class>
+</hibernate-mapping>

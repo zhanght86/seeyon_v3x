@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class
+    name="com.seeyon.v3x.office.common.domain.OfficeLossInfo" 
+    table="M_Loss_Info"
+>
+	
+	<id
+        name="lossId"
+        type="long"
+        column="loss_id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+	
+	<property
+        name="resourceId"
+        type="string"
+        column="resource_id"
+        length="20"
+    />
+    
+    <property
+        name="resourceName"
+        type="string"
+        column="resource_name"
+        length="128"
+    />
+    
+	<property
+        name="lossField"
+        type="string"
+        column="loss_field"
+        length="1"
+    />
+	
+	<property
+        name="lossDiff"
+        type="string"
+        column="loss_diff"
+        length="1"
+    />
+    
+	<property 
+    	name="lossCount"
+        type="integer"    
+    >
+    	<column name="loss_count" sql-type="decimal(3,0)"/>
+    </property>
+
+	<property
+        name="createDate"
+        type="date"
+        column="create_date"
+    />
+    
+    <property
+        name="modifyDate"
+        type="date"
+        column="modify_date"
+    />
+	
+	<property
+        name="createUser"
+        type="long"
+        column="create_user"
+        length="20"
+    />
+    
+    <property
+        name="lossManager"
+        type="long"
+        column="loss_mge"
+        length="20"
+    />
+    
+    <property 
+    	name="lossMemo"
+    	type="string"
+    	column="loss_memo"
+    	length="4000"
+     />
+	<property 
+    	name="deleteFlag"
+    	type="integer"
+    	column="del_flag"
+    	length="1"
+    />
+        <property
+        name="domainId"
+        type="java.lang.Long"
+        column="domain_id"
+        not-null="true"
+        length="20"
+    />
+</class>
+</hibernate-mapping>

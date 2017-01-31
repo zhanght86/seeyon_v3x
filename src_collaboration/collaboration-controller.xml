@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd"><!--  - Application context definition for "springapp" DispatcherServlet.  -->
+<beans>
+	<!-- 注册Controller -->
+	<bean id="collaborationController"
+		class="com.seeyon.v3x.collaboration.controller.CollaborationController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="permissionManager" ref="permissionManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+	</bean>
+
+	<bean id="templeteController"
+		class="com.seeyon.v3x.collaboration.templete.controller.TempleteController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+
+	<!-- 定义消息Bean -->
+	<bean id="messageCallbackBean"
+		class="com.seeyon.v3x.collaboration.callback.ColMsgHandler">
+	</bean>
+	
+	<!-- 协同督办 -->
+	<bean id="colSuperviseController" class="com.seeyon.v3x.collaboration.controller.ColSuperviseController"
+	    autowire="byName">
+	    <property name="orgManager" ref="OrgManager" />
+	</bean>
+
+	<!-- 工作管理Controller -->
+	<bean id="workManageController" class="com.seeyon.v3x.collaboration.controller.WorkManageController"
+	    autowire="byName">
+	    <property name="orgManager" ref="OrgManager" />
+	</bean>
+	
+	<!-- 批处理 -->
+	<bean id="batchController" class="com.seeyon.v3x.batch.controller.BatchController" autowire="byName">
+	</bean>
+</beans>

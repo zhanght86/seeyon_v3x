@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.news.domain.NewsBody" lazy="false"
+		table="news_body">
+		<id name="newsDataId" type="long" column="news_data_id"
+			length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="bodyType" type="string" column="body_type"
+			length="20" />
+		<property name="content" type="clob" column="content"/>
+		<property name="createDate" type="date" column="create_date"
+			not-null="false" length="19" />
+
+		<!-- Associations -->
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+		
+	<bean id="caAccountManagerController"
+		class="com.seeyon.v3x.plugin.ca.caaccount.controller.CAAccountManagerController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="caAccountManager" ref="caAccountManager" />
+		<property name="fileToExcelManager" ref="fileToExcelManager" />
+		<property name="caAccountDao" ref="caAccountDao"/>
+	</bean>
+	
+	<bean id="caAccountDao" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.plugin.ca.caaccount.dao.CAAccountDao">
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="caAccountManager" class="com.seeyon.v3x.plugin.ca.caaccount.manager.CAAccountManagerImpl">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="configManager" ref="configManager"></property>
+		<property name="organizationManager" ref="organizationManager"></property>
+	</bean>
+	<!-- 
+	<bean id="caAccountManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.plugin.ca.caaccount.manager.CAAccountManagerImpl" />
+		</property>
+		<property name="orgManager" ref="OrgManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>	
+	</bean>
+	 -->
+</beans>

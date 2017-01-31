@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.seeyon.v3x.collaboration.domain">
+<class 
+    name="ColRelationAuthority" 
+    table="col_relation_authority"
+    lazy="false"
+>
+        <id
+			name="id"
+			type="java.lang.Long"
+			column="id"
+		>
+			<generator class="assigned"/>
+		</id>
+		
+    <property
+        name="summaryId"
+        type="long"
+        column="summary_id" 
+        not-null="true" 
+        length="20"
+    />
+    
+    <property
+        name="usertype"
+        type="integer"
+        column="usertype"
+        length="6"
+    />
+
+    <property
+        name="userid"
+        type="long"
+        column="userid"
+        length="20"
+    />
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

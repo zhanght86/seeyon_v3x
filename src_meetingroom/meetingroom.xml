@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+
+	<!-- MeetingRoomController -->
+	<bean id="meetingRoomController" class="com.seeyon.v3x.meetingroom.controller.MeetingRoomController" autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="meetingRoomManager" ref="meetingRoomManager" />
+		<property name="fileToExcelManager" ref="fileToExcelManager" />
+	</bean>
+	
+	<!-- MeetingRoomManager -->
+	<bean id="meetingRoomTarget" class="com.seeyon.v3x.meetingroom.manager.MeetingRoomManagerImpl" autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="meetingRoomDao" ref="meetingRoomDao"></property>
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="mtMeetingManager" ref="mtMeetingManager" />
+		<property name="affairManager" ref="affairManager" />
+ 	</bean>
+ 	
+ 	<bean id="meetingRoomManager" parent="baseTxService">
+		<property name="target">
+		    <ref local="meetingRoomTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+ 	
+ 	<bean id="meetingRoomDao" class="com.seeyon.v3x.meetingroom.dao.MeetingRoomDaoImpl"></bean>
+ 	
+ 	<bean id="meetingRoomManagerCAP" class="com.seeyon.v3x.meetingroom.manager.cap.MeetingRoomManagerCAPImpl" singleton="true">
+    </bean>
+
+</beans>

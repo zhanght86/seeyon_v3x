@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.seeyon.v3x.formbizconfig.domain">
+<class 
+    name="V3xBizConfigItem" 
+    table="v3x_biz_config_item"
+    lazy="false">
+	
+    <id
+		name="id"
+		type="long"
+		column="id"
+		length="20">
+		<generator class="assigned"/>
+	</id>
+	
+	<property
+		name="bizConfigId"
+		column="biz_config_id"
+		type="long"
+		not-null="true"
+		length="20"
+	/>
+
+    <property
+        name="sourceType"
+        column="source_type"
+        type="int"
+        length="4"
+    />
+    
+    <property
+        name="sourceId"
+        column="source_id"
+        type="long"
+        length="20"
+    />
+    
+    <property
+        name="name"
+        type="string"
+        column="name"
+        length="255"
+    />
+    
+    <property
+        name="menuId"
+        column="menu_id"
+        type="long"
+        length="20"
+    />
+    
+    <property
+        name="sortId"
+        column="sort_id"
+        type="int"
+        length="11"
+    />
+    
+    <property
+        name="formAppmainId"
+        column="form_appmain_id"
+        type="long"
+        length="20"
+    />
+    
+    <property
+        name="flowMenuType"
+        column="flow_menu_type"
+        type="int"
+        length="4"
+    />
+    
+</class>
+</hibernate-mapping>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<!-- 监听器注册 -->
+	<bean id="notificationListenerRegistry" class="com.seeyon.v3x.cluster.NotificationListenerRegistry" singleton="true">
+		<!-- 服务初始化时注册的监听器 -->
+		<property name="listeners">
+			<list/>
+		</property>
+		<!-- 服务初始化时发送的通知 -->
+		<!-- 
+		<property name="initNotifications">
+			<list>
+				<value>PullAllOnlineUser</value>
+			</list>
+		</property>
+		-->
+	</bean>
+	<!-- Annotation handler -->
+    <bean id="notificationAnnotationAware" class="com.seeyon.v3x.cluster.NotificationAnnotationAware">
+    	<property name="annotationFactory" ref="annotationFactory" />
+    </bean>
+	<!-- 用户通知监听处理 -->
+    <bean id="userNotificationHandler" class="com.seeyon.v3x.cluster.listener.UserNotificationHandler">
+        <property name="orgManager" ref="OrgManager"/>
+        <property name="onlineManager" ref="onLineManager"/>
+    </bean>	
+    <!-- 组织模型通知监听处理 -->
+    <bean id="organizationNotificationHandler" class="com.seeyon.v3x.cluster.listener.OrganizationNotificationHandler">
+        <property name="orgManager" ref="OrgManager"/>
+        <property name="organization" ref="Organization"/>
+    </bean>    
+    <!-- 第三方插件通知监听处理 -->
+    <bean id="thirdpartySpaceHandler" class="com.seeyon.v3x.cluster.listener.ThirdpartySpaceHandler"/>                                
+    
+     <!-- SSOTicket通知监听处理  -->
+    <bean id="sSOTicketHandler" class="com.seeyon.v3x.cluster.listener.SSOTicketHandler"/>   
+    
+     <!-- SSOTicket通知监听处理  -->
+    <bean id="formLockHandler" class="com.seeyon.v3x.cluster.listener.FormLockHandler"/>                   
+    
+    <!-- 文档元数据通知监听处理 -->
+    <bean id="docMetadataNotificationHandler" class="com.seeyon.v3x.cluster.listener.DocMetadataNotificationHandler">
+      <property name="detadataDefManager" ref="metadataDefManager"/>
+    </bean>  
+    
+	 <!-- 系统配置通知监听处理 --> 
+    <bean id="sysConfigNotificationHandler" class="com.seeyon.v3x.cluster.listener.SysConfigNotificationHandler"/>
+    <!-- 移动应用通知监听 -->
+    <bean id="mobileNotificationHandler" class="com.seeyon.v3x.cluster.listener.MobileNotificationHandler"/>
+
+	<!-- 单位标识通知监听处理 -->
+    <bean id="accountSymbolHandler" class="com.seeyon.v3x.cluster.listener.AccountSymbolNotificationHandler">
+    </bean> 
+    <!-- 协同通知监听处理 -->
+    <bean id="collaborationHandler" class="com.seeyon.v3x.cluster.listener.CollaborationNotificationHandler">
+    </bean> 
+        
+    <!-- 公告通知监听处理 -->
+	<bean id="bulletinNotificationHandler" class="com.seeyon.v3x.cluster.listener.BulletinNotificationHandler">
+		<property name="bulDataManager" ref="bulDataManager"/>
+		<property name="bulTypeManager" ref="bulTypeManager"/>
+		<property name="bulDataController" ref="bulDataController"/>
+    </bean> 
+    <!-- 新闻通知监听处理 -->
+	<bean id="newsNotificationHandler" class="com.seeyon.v3x.cluster.listener.NewsNotificationHandler">
+		<property name="newsDataManager" ref="newsDataManager"/>
+		<property name="newsTypeManager" ref="newsTypeManager"/>
+		<property name="newsDataController" ref="newsDataController"/>
+    </bean> 
+    <!-- 调查通知监听处理 -->
+    <bean id="inquiryNotificationHandler" class="com.seeyon.v3x.cluster.listener.InquiryNotificationHandler">
+    	<property name="inquiryManager" ref="inquiryManager"/>
+    </bean> 
+    <!-- BBS通知监听处理 -->
+    <bean id="bbsNotificationHandler" class="com.seeyon.v3x.cluster.listener.BbsNotificationHandler">
+        <property name="bbsBoardManager" ref="bbsBoardManager"/>
+    </bean> 
+    <!-- 自增通知监听处理  -->    
+    <bean id="autoIncreamentNotificationHandler" class="com.seeyon.v3x.cluster.listener.AutoIncreamentNotificationHandler"/>
+    <!-- 知识管理通知监听处理 -->
+    <bean id="DocNotificationHandler" class="com.seeyon.v3x.cluster.listener.DocNotificationHandler">
+        <property name="contentTypeManager" ref="contentTypeManager"/>
+        <property name="metadataDefManager" ref="metadataDefManager"/>
+    </bean>  
+	<!--公文 多人修改OFFICE 正文-->
+	<bean id="edocUpdateUserObjectHandler" class="com.seeyon.v3x.cluster.listener.EdocUpdateUserObjectHandler">
+		<property name="edocSummaryManager" ref="edocSummaryManager"></property>
+		<property name="htmlHandWriteManager" ref="htmlHandWriteManager"></property>
+		<property name="handWriteManager" ref="handWriteManager"></property>
+	</bean>
+	<!-- 文档 -->
+	<bean id="docLibNotificationHandler" class="com.seeyon.v3x.cluster.listener.DocLibNotificationHandler">
+		<property name="docLibManager" ref="docLibManager"></property>
+	</bean>
+	
+	 <!-- 公文元素 -->
+    <bean id="edocElementHandler" class="com.seeyon.v3x.cluster.listener.EdocElementHandler">
+    	<property name="edocElementManager" ref="edocElementManager"/>
+    	<property name="orgManager" ref="OrgManager"/>
+    </bean>
+    <!-- 公文表单元素 -->
+    <bean id="edocFormHandle" class="com.seeyon.v3x.cluster.listener.EdocFormHandler">
+    	<property name="edocFormManager" ref="edocFormManager"/>
+    </bean>
+    <!-- 系统分区监听 -->
+    <bean id="partitationNotificationHandler" class="com.seeyon.v3x.cluster.listener.PartitationNotificationHandler">
+        <property name="partitionManager" ref="partitionManager"/>
+    </bean>
+    <!-- HR职员信息增删改通知监听处理 -->
+	<bean id="staffInfoNotificationHandler" class="com.seeyon.v3x.cluster.listener.StaffInfoNotificationHandler">
+		<property name="staffInfoManager" ref="staffInfoManager"/>
+    </bean> 
+    <!-- 讨论主题帖子缓存删、改缓存 -->
+	<bean id="bbsArticleNotificationHandler" class="com.seeyon.v3x.cluster.listener.BbsArticleNotificationHandler">
+		<property name="bbsController" ref="bbsController"/>
+		<property name="bbsArticleManager" ref="bbsArticleManager"/>
+    </bean>
+    <bean id="indexHandler" class="com.seeyon.v3x.cluster.listener.IndexHandler"/>    
+  	<bean id="formNotificationHandler" class="com.seeyon.v3x.cluster.listener.FormNotificationHandler"/>      
+
+</beans>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class
+    name="com.seeyon.v3x.office.stock.domain.StockApplyInfo" 
+    table="T_Stock_ApplyInfo"
+>
+	<id
+        name="applyId"
+        type="long"
+        column="apply_id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    
+    <property 
+    	name="stockId"
+    	type="long"
+    	column="stock_id"
+    	length="20"
+    />
+    
+    
+    
+    <property 
+    	name="applyCount"
+        type="integer"    
+    >
+    	<column name="apply_count" sql-type="decimal(10,0)"/>
+    </property>
+   
+    
+    <property 
+    	name="deleteFlag"
+    	type="integer"
+    	column="del_flag"
+    	length="1"
+    />
+</class>
+</hibernate-mapping>

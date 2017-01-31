@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="edocController"
+		class="com.seeyon.v3x.edoc.controller.EdocController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="processLogManager" ref="processLogManager"/>
+		<property name="edocManager" ref="edocManager" />
+		<property name="edocPermissionControlManager" ref="edocPermissionControlManager" />
+		<property name="edocFormManager" ref="edocFormManager" />
+		<property name="flowPermManager" ref="flowPermManager" />
+		<property name="permissionManager" ref="permissionManager" />
+		<property name="recieveEdocManager" ref="recieveEdocManager" />		
+		<property name="edocMarkManager" ref="edocMarksManager" />
+		<property name="edocMarkHistoryManager" ref="edocMarkHistoryManager" />
+		<property name="edocInnerMarkDefinitionManager" ref="edocInnerMarkDefinitionManager" />
+		<property name="edocMarkDefinitionManager" ref="edocMarkDefinitionManager"></property>
+		<property name="htmlHandWriteManager" ref="htmlHandWriteManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="fileManager" ref="fileManager" />		
+	</bean>	
+	<bean id="edocStatController"
+		class="com.seeyon.v3x.edoc.controller.EdocStatController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="edocStatManager" ref="edocStatManager" />
+		<property name="edocManager" ref="edocManager" />
+		<property name="edocPermissionControlManager" ref="edocPermissionControlManager" />
+		<property name="edocFormManager" ref="edocFormManager" />
+		<property name="flowPermManager" ref="flowPermManager" />
+		<property name="permissionManager" ref="permissionManager" />
+		<property name="recieveEdocManager" ref="recieveEdocManager" />		
+		<property name="edocMarkManager" ref="edocMarksManager" />
+		<property name="edocMarkHistoryManager" ref="edocMarkHistoryManager" />
+	</bean>		
+	<bean id="edocFormController"
+		class="com.seeyon.v3x.edoc.controller.EdocFormController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="edocFormManager" ref="edocFormManager" />
+		<property name="edocElementManager" ref="edocElementManager" />
+		<property name="XMLConverter" ref="xmlConverter" />
+		<property name="attachmentManager" ref="attachmentManager" />
+		<property name="configManager" ref="configManager" />
+	</bean>
+	<bean id="edocElementController"
+		class="com.seeyon.v3x.edoc.controller.EdocElementController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="edocElementManager" ref="edocElementManager" />
+		<property name="metadataManager" ref="metadataManager" />
+	</bean>
+	<bean id="edocTempleteController" class="com.seeyon.v3x.edoc.controller.EdocTempleteController" autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="templeteManager" ref="templeteManager" />
+		<property name="templeteCategoryManager" ref="templeteCategoryManager" />
+	</bean>
+	
+		<bean id="edocDocTemplateController"
+		class="com.seeyon.v3x.edoc.controller.EdocDocTemplateController"
+		autowire="byName">
+		<property name="edocDocTemplateManager" ref="edocDocTemplateManager" />
+	</bean>
+<bean id="edocDocMarkController"
+		class="com.seeyon.v3x.edoc.controller.EdocDocMarkController"
+		autowire="byName">
+		<property name="edocMarkCategoryManager" ref="edocMarkCategoryManager" />
+		<property name="edocMarkDefinitionManager" ref="edocMarkDefinitionManager" />
+		<property name="edocMarkAclManager" ref="edocMarkAclManager" />
+		<property name="edocMarksManager" ref="edocMarksManager" />
+		<property name="orgManager" ref="OrgManager" />
+		<property name="edocInnerMarkDefinitionManager" ref="edocInnerMarkDefinitionManager" />
+		<property name="jsonView" value="jsonView"/>
+	</bean>
+	<bean id="edocSuperviseController" class="com.seeyon.v3x.edoc.controller.EdocSuperviseController" autowire="byName">
+		<property name="edocSuperviseManager" ref="edocSuperviseManager" />
+		<property name="edocSummaryManager" ref="edocSummaryManager" />
+		<property name="orgManager" ref="OrgManager" />
+		<property name="mobileMessageManager" ref="mobileMessageManager" />
+	</bean>
+	<!-- 公文开关 -->
+	<bean id="edocOpenController"
+		class="com.seeyon.v3x.edoc.controller.EdocOpenController"
+		autowire="byName">
+		<property name="configManager" ref="configManager" />
+	</bean>
+	<bean id="edocObjTeamController"
+		class="com.seeyon.v3x.edoc.controller.EdocObjTeamController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="edocObjTeamManager" ref="edocObjTeamManager" />
+	</bean>
+	
+</beans>

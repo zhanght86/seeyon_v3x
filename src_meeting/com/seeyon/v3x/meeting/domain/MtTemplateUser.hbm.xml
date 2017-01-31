@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.seeyon.v3x.meeting.domain">
+	<class
+		name="MtTemplateUser"
+		table="mt_template_user"
+	>
+		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="id"
+		>
+			<generator class="assigned"/>
+		</id>
+		<property
+			name="authType"
+			column="auth_type"
+			type="string"
+			not-null="false"
+			length="20"
+		/>
+		<property
+			name="authId"
+			column="auth_id"
+			type="java.lang.Long"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="sort"
+			column="sort"
+			type="java.lang.Integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="ext1"
+			column="ext1"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="ext2"
+			column="ext2"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<many-to-one
+			name="template"
+			column="template_id"
+			class="MtTemplate"
+			not-null="false"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

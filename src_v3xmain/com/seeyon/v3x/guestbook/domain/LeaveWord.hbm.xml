@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.guestbook.domain.LeaveWord" table="v3x_guestbook"
+		lazy="false">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+
+		<property name="departmentId" type="long" column="department_id"
+			length="20" />
+		<property name="creatorId" type="long" column="member_id"
+			length="20" />
+		<property name="content" type="clob" column="content"/>
+		<property name="createTime" type="timestamp" column="create_time"
+			length="19" />
+		<property name="replyId" type="java.lang.Long" column="reply_id"
+			length="20" />
+		<property name="replyerId" type="java.lang.Long" column="replyer_id"
+			length="20" />	
+	</class>
+</hibernate-mapping>

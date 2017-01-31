@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+
+	<bean id="workFlowAnalysisController" 
+		class="com.seeyon.v3x.workflowanalysis.controller.WorkFlowAnalysisController" 
+		autowire="byName">
+	</bean>
+	
+	<bean id="workFlowAnalysisManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.workflowanalysis.manager.impl.WorkFlowAnalysisManagerImpl" ></bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="workFlowAnalysisAclManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.workflowanalysis.manager.impl.WorkFlowAnalysisAclManagerImpl" 
+			init-method="init"></bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		
+	<bean id="workFlowAnalysisDao" 
+		class="com.seeyon.v3x.workflowanalysis.dao.impl.WorkFlowAnalysisDaoImpl"></bean>
+		
+	<bean id="workFlowAnalysisAclDao" 
+		class="com.seeyon.v3x.workflowanalysis.dao.impl.WorkFlowAnalysisAclDaoAclImpl"></bean>
+	<bean id ="workFlowAnalysisJob"
+		class="com.seeyon.v3x.workflowanalysis.manager.impl.WorkFlowAnalysisJob"></bean>
+	<bean id ="workFlowAnalysisQuartz"
+		class="com.seeyon.v3x.workflowanalysis.manager.impl.WorkFlowAnalysisQuartz"
+		init-method="init"></bean>
+</beans>

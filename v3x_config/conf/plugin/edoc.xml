@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="edocPluginDefintion" class="com.seeyon.v3x.plugin.edoc.EdocPluginDefintion">
+		<property name="id" value="edoc" />
+		<property name="name" value="公文插件" />
+	</bean>
+</beans>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.plugin.deeSection.domain.DeeSectionProps" 
+    table="v3x_section_dee_props"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="deeSectionId"
+        type="long"
+        column="dee_section_id"
+    />
+    <property
+        name="propName"
+        type="string"
+        column="prop_name"
+        length="255"
+    />
+    <property
+        name="propValue"
+        type="string"
+        column="prop_value"
+        length="255"
+    />
+ 	<property
+        name="propMeta"
+        type="string"
+        column="prop_meta"
+        length="255"
+    />
+     <property
+        name="isShow"
+        type="integer"
+        column="isShow"
+        length="4"
+    />
+     <property
+        name="sort"
+        type="integer"
+        column="sort"
+        length="4"
+    />
+
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

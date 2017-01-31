@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.main.section.definition.domain.SectionDefinition" 
+    table="v3x_section_definition"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="type"
+        type="int"
+        column="type"
+    />
+    <property
+        name="name"
+        type="string"
+        column="name"
+        length="255"
+    />
+    <property
+        name="state"
+        type="int"
+        column="state"
+    />
+    <property
+        name="createDate"
+        type="timestamp"
+        column="create_date"
+    />
+
+    <property
+        name="sort"
+        type="int"
+        column="sort"
+    />
+
+</class>
+</hibernate-mapping>

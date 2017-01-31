@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.link.domain.LinkOption" 
+    table="v3x_link_option"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="isDefault"
+        type="boolean"
+        column="is_default"
+        not-null="true"
+        length="4"
+    />
+    <property
+        name="isPassword"
+        type="boolean"
+        column="is_password"
+        length="4"
+    />
+    <property
+        name="linkSystemId"
+        type="long"
+        column="link_system_id"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="orderNum"
+        type="integer"
+        column="order_num"
+        not-null="true"
+        length="11"
+    />
+    <property
+        name="paramName"
+        type="string"
+        column="param_name"
+        not-null="true"
+        length="50"
+    />
+    <property
+        name="paramSign"
+        type="string"
+        column="param_sign"
+        not-null="true"
+        length="50"
+    />
+    <property
+        name="paramValue"
+        type="string"
+        column="param_value"
+        
+        length="255"
+    />
+    
+     <set
+        name="linkOptionValue"
+        inverse="true"
+        lazy="false"
+        cascade="delete"
+    >
+        <key>
+            <column name="link_option_id" /> <!-- a foreign key in v3x_bbs_article_issue_area referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.link.domain.LinkOptionValue" />
+    </set>
+
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

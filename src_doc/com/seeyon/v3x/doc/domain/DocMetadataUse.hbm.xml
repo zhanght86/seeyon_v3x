@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocMetadataUse" lazy="false"
+		table="doc_metadata_use">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="fieldName" type="string" column="field_name"
+			not-null="true" length="30" />
+		<property name="type" type="byte" column="type" not-null="true"
+			length="4" />
+		<property name="useMark" type="boolean" column="use_mark"
+			not-null="true" length="4" />
+
+		<!-- Associations -->
+
+	</class>
+</hibernate-mapping>

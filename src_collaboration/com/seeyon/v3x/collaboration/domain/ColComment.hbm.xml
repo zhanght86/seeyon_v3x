@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.collaboration.domain.ColComment" 
+    table="col_comment"
+    lazy="true"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="content"
+        type="clob"
+        column="content"
+    />
+    <property
+        name="createDate"
+        type="timestamp"
+        column="create_date"
+        length="19"
+    />
+    <property
+        name="isHidden"
+        type="boolean"
+        column="is_hidden"
+        length="4"
+    />
+  
+    <property
+        name="writeMemberId"
+        type="long"
+        column="writer_id" 
+        not-null="true" 
+        length="20"
+    />
+
+    <property
+        name="summaryId"
+        type="long"
+        column="col_id" 
+        not-null="true" 
+        length="20"
+    />
+
+    <property
+        name="opinionId"
+        type="java.lang.Long"
+        column="opinion_id"
+        length="20"
+    />
+    
+    <property
+        name="proxyName"
+        type="string"
+        column="proxy_name"
+        length="255"
+    />
+    
+    <property 
+    	name="isHidden4Sender"
+    	type="boolean"
+    	column="is_hidden_sender"
+    	length="4"
+    />
+  <property
+        name="showToId"
+        type="clob"
+        column="show_to_id"
+    />
+</class>
+</hibernate-mapping>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.project.domain.ProjectType" table="project_type">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property
+          name="name"
+          type="string"
+          column="name"
+          length="255"
+          not-null="true"
+       />
+       <property
+          name="memo"
+          type="string"
+          column="memo"
+          length="255"
+          not-null="false"
+       />
+        <property
+          name="accountId"
+          type="long"
+          column="accountId"
+          length="20"
+             
+       />
+       
+	</class>
+</hibernate-mapping>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.seeyon.v3x.bulletin.domain">
+<class name="com.seeyon.v3x.bulletin.domain.BulPublishScope" lazy="false"
+		table="bul_publish_scope">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		
+		<property name="bulDataId" type="long"
+			column="bul_data_id" not-null="true" length="20" />
+		<property name="userId" type="long" column="user_id"
+			not-null="true" length="20" />
+		<property name="userType" type="string" column="user_type"
+			not-null="true" length="50" />
+
+	</class>
+</hibernate-mapping>

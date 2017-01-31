@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="identificationDogPluginDefintion" class="com.seeyon.v3x.plugin.identification.IdentificationDogPluginDefintion">
+		<property name="id" value="identificationDog" />
+		<property name="name" value="身份验证狗插件" />
+		<property name="contextConfigLocation">
+			<list>
+				<value>classpath*:identificationDogManager.xml</value>
+			</list>
+		</property>
+		<property name="urlMapping">
+			<props>
+				<prop key="/identification.do">identificationController</prop>
+			</props>
+		</property>
+    	<property name="noCheckSessionURL">
+   			<map>
+   				<entry key="com.seeyon.v3x.plugin.identification.controller.IdentificationController">
+   					<list>
+   						<value>getSessionId</value>
+   					</list>
+   				</entry>
+   			</map>
+    	</property>
+		<property name="menuI18NResource" value="com.seeyon.v3x.plugin.identification.resources.i18n.identificationResources" />
+		<property name="systemMenus">
+			<list>
+				<bean class="com.seeyon.v3x.plugin.PluginMainMenu">
+					<property name="name" value="menu.identificationManage" />
+					<property name="children">
+						<list>
+							<bean class="com.seeyon.v3x.plugin.PluginMenu">
+								
+								<property name="name" value="menu.USBKey.make" />
+								<property name="icon" value="/apps_res/plugin/USBKey/images/6001.gif" />
+								<property name="url"  value="/identification.do?method=makeIndex" />
+							</bean>
+							<bean class="com.seeyon.v3x.plugin.PluginMenu">
+								
+								<property name="name" value="menu.USBKey.config" />
+								<property name="icon" value="/apps_res/plugin/USBKey/images/6002.gif" />
+								<property name="url"  value="/identification.do?method=identificationConfig" />
+							</bean>
+						</list>
+					</property>								
+				</bean>
+			</list>
+		</property>
+		
+	</bean>
+</beans>

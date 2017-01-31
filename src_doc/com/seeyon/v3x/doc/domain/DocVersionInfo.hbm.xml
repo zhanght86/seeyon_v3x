@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocVersionInfo" lazy="false" table="doc_version_info">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />			
+		</id>
+		<!--  版本信息 -->
+		<property name="version" type="integer" column="version" not-null="true" length="4" />
+		<property name="docResourceId" type="long" column="doc_resource_id" not-null="true" length="20" />
+			
+		<!-- 对应历史版本文档的前端展现信息 -->		
+		<property name="frName" type="string" column="fr_name" not-null="true" length="1000" />
+		<property name="frSize" type="long" column="fr_size" not-null="true" length="20" />
+		<property name="lastUpdate" type="timestamp" column="last_update" not-null="true" length="19" />
+		<property name="lastUserId" type="long" column="last_user_id" not-null="true" length="20" />
+		<property name="mimeTypeId" type="long" column="mime_type_id" not-null="true" length="20" />
+		<property name="hasAttachments" type="boolean" column="has_attachments" not-null="true" length="4" />
+		<property name="versionComment" type="string" column="version_comment" length="1000" />
+		
+		<!-- 正文内容 -->
+		<property name="docBodyInfo" type="clob" column="doc_body_info" />
+		<property name="docResourceInfo" type="clob" column="doc_resource_info" not-null="true" />
+	</class>
+</hibernate-mapping>

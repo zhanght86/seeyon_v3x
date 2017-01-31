@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.project.domain.ProjectEvolution" 
+    table="project_evolution"
+    lazy="true"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="evolutionPercent"
+        type="float"
+        column="evolution_percent"
+        length="12"
+    />
+    <property
+        name="evolutionState"
+        type="byte"
+        column="evolution_state"
+        length="4"
+    />
+      <property
+        name="userId"
+        type="long"
+        column="userId"
+        not-null="true"
+        length="20"
+    />
+     <property
+        name="evolutionDate"
+        type="java.util.Date"
+        column="evolution_date"
+    />
+
+    <property
+        name="evolutionDesc"
+        type="string"
+        column="evolution_desc"
+        length="255"
+    />
+    <!-- Associations -->
+    <many-to-one name="projectPhase"
+			class="com.seeyon.v3x.project.domain.ProjectPhase">
+			<column name="phase_id" not-null="true" length="20" />
+	</many-to-one>
+
+</class>
+</hibernate-mapping>

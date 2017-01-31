@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- 新闻管理 -->
+<beans default-autowire="byName">
+	<!-- 新闻基本信息 -->
+	<bean id="newsDataController"
+		class="com.seeyon.v3x.news.controller.NewsDataController"
+		autowire="byName" init-method="init">
+		<property name="userMessageManager">
+			<ref bean="UserMessageManager" />
+		</property>
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	<bean id="newsDataManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.news.manager.NewsDataManagerImpl" init-method="init" singleton="true">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+
+				<prop key="isManagerOfType">PROPAGATION_SUPPORTS</prop>
+				<prop key="show*">PROPAGATION_SUPPORTS</prop>
+
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="groupFind*">PROPAGATION_SUPPORTS</prop>
+				<prop key="statistics">PROPAGATION_SUPPORTS</prop>
+				<prop key="init">PROPAGATION_SUPPORTS</prop>
+				<prop key="has*">PROPAGATION_SUPPORTS</prop>
+				<prop key="iSearch*">PROPAGATION_SUPPORTS</prop>
+				<prop key="dataExist">PROPAGATION_SUPPORTS</prop>
+				<prop key="typeExist">PROPAGATION_SUPPORTS</prop>
+
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="newsDataDao"
+		class="com.seeyon.v3x.news.dao.NewsDataDao">
+	</bean>
+
+
+	<!-- 新闻阅读信息 -->
+	<bean id="newsReadController"
+		class="com.seeyon.v3x.news.controller.NewsReadController"
+		autowire="byName">
+	</bean>
+	<bean id="newsReadManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.news.manager.NewsReadManagerImpl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="newsReadDao"
+		class="com.seeyon.v3x.news.dao.NewsReadDao">
+	</bean>
+
+
+	<!-- 新闻版面信息 -->
+	<bean id="newsTemplateController"
+		class="com.seeyon.v3x.news.controller.NewsTemplateController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	<bean id="newsTemplateManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.news.manager.NewsTemplateManagerImpl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+
+	</bean>
+	<bean id="newsTemplateDao"
+		class="com.seeyon.v3x.news.dao.NewsTemplateDao">
+	</bean>
+
+	<!-- 新闻类型信息 -->
+	<bean id="newsTypeController"
+		class="com.seeyon.v3x.news.controller.NewsTypeController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	<bean id="newsTypeManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.news.manager.NewsTypeManagerImpl"
+				init-method="init" singleton="true">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="groupFind*">PROPAGATION_SUPPORTS</prop>
+				<prop key="is*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="setTotalItemsOfType">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="newsTypeDao"
+		class="com.seeyon.v3x.news.dao.NewsTypeDao">
+	</bean>
+
+
+	<bean id="newsTypeManagersManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.news.manager.NewsTypeManagersManagerImpl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="newsTypeManagersDao"
+		class="com.seeyon.v3x.news.dao.NewsTypeManagersDao">
+	</bean>
+
+
+	<bean id="newsLogManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.news.manager.NewsLogManagerImpl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="newsLogDao" class="com.seeyon.v3x.news.dao.NewsLogDao"></bean>
+
+
+	<bean id="newsUtils" class="com.seeyon.v3x.news.util.NewsUtils"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager"></property>
+	</bean>
+
+	<bean id="newsManager4ISearch" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.news.manager.NewsManager4ISearch"
+				init-method="init" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="newsBodyDao"
+		class="com.seeyon.v3x.news.dao.NewsBodyDao">
+	</bean>
+
+	<!--bean id="newsHTMLConvertManager" class="com.seeyon.v3x.util.html.HTMLConvertManagerImpl">
+		<property name="htmlDestPath" value="${A8ApplicationRoot}/USER-DATA/html/news" />
+		<property name="htmlTemplatePath">
+		<value>${A8ApplicationRoot}/apps_res/news/html/newst.html</value>
+		</property>
+		</bean-->
+		
+	<bean class="com.seeyon.v3x.news.listener.NewsOrganizationEventListener">
+		<property name="newsTypeManager" ref="newsTypeManager" />
+	</bean>
+
+</beans>

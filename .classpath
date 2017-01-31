@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src_organization"/>
+	<classpathentry kind="src" path="src_secret"/>
+	<classpathentry kind="src" path="src_meeting"/>
+	<classpathentry kind="src" path="src_workflowanalysis"/>
+	<classpathentry kind="src" path="src_videoconference"/>
+	<classpathentry kind="src" path="src_meetingroom"/>
+	<classpathentry kind="src" path="src_collaboration"/>
+	<classpathentry kind="src" path="src_project"/>
+	<classpathentry kind="src" path="src_indexresume"/>
+	<classpathentry kind="src" path="src_peoplerelate"/>
+	<classpathentry kind="src" path="src_v3xmain"/>
+	<classpathentry kind="src" path="src_mobile"/>
+	<classpathentry kind="src" path="src_blog"/>
+	<classpathentry kind="src" path="src_menu_plugin"/>
+	<classpathentry kind="src" path="src_form"/>
+	<classpathentry kind="src" path="src_doc"/>
+	<classpathentry kind="src" path="src_log"/>
+	<classpathentry kind="src" path="src_usermapper"/>
+	<classpathentry kind="src" path="src_sysMgr"/>
+	<classpathentry kind="src" path="src_timecard"/>
+	<classpathentry kind="src" path="src_ldap"/>
+	<classpathentry kind="src" path="src_cluster"/>
+	<classpathentry kind="src" path="src_webServices"/>
+	<classpathentry kind="src" path="src_bulletin"/>
+	<classpathentry kind="src" path="src_SMS_Adapter"/>
+	<classpathentry kind="src" path="src_worktimeset"/>
+	<classpathentry kind="src" path="v3x_config"/>
+	<classpathentry kind="src" path="src_formbizconfig"/>
+	<classpathentry kind="src" path="src_portal"/>
+	<classpathentry kind="src" path="src_rss"/>
+	<classpathentry kind="src" path="src_taskmanage"/>
+	<classpathentry kind="src" path="src_plugin"/>
+	<classpathentry kind="src" path="src_exchange"/>
+	<classpathentry kind="src" path="src_news"/>
+	<classpathentry kind="src" path="src_a8genius"/>
+	<classpathentry kind="src" path="src_bbs"/>
+	<classpathentry kind="src" path="src_calendar"/>
+	<classpathentry kind="src" path="src_edoc"/>
+	<classpathentry kind="src" path="src_plan"/>
+	<classpathentry kind="src" path="src_hr"/>
+	<classpathentry kind="src" path="src_agent"/>
+	<classpathentry kind="src" path="src_flowperm"/>
+	<classpathentry kind="src" path="src_web_common"/>
+	<classpathentry kind="src" path="src_addressbook"/>
+	<classpathentry kind="src" path="src_office"/>
+	<classpathentry kind="src" path="src_webmail"/>
+	<classpathentry kind="src" path="src_index"/>
+	<classpathentry kind="src" path="src_SMS"/>
+	<classpathentry kind="src" path="src_link"/>
+	<classpathentry kind="src" path="src_inquiry"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/V3xInterfaceImpl"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/V3xInterface"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/V350sp1_201402_V3XCommon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/V350sp1_201402_V3XShare"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/V350sp1_201402_V3XApp"/>
+	<classpathentry exported="true" kind="lib" path="E:/UFSeeyon/A8/Enterprise/ApacheJetspeed/webapps/seeyon/WEB-INF/classes"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-workflow.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-cap.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/v3x"/>
+	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
+</classpath>

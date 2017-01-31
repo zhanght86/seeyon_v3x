@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocStorageSpace" lazy="false"
+		table="doc_storage_spaces">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="status" type="byte" column="status"
+			not-null="true" length="4" />
+		<property name="totalSpaceSize" type="long"
+			column="total_space_size" not-null="true" length="20" />
+		<property name="usedSpaceSize" type="long"
+			column="used_space_size" not-null="true" length="20" />
+		<property name="userId" type="long" column="user_id"
+			not-null="true" length="20" />
+	
+		<property name="mailSpace" type="long" column="mail_space" not-null="true" length="20" />
+			
+		<property name="mailUsedSpace" type="long" column="mail_used_space" not-null="true" length="20" />
+			
+		<property name="mailStatus" type="byte" column="mail_status" not-null="true" length="4" />
+		
+		<property name="blogSpace" type="long" column="blog_space" length="20" />
+			
+		<property name="blogUsedSpace" type="long" column="blog_used_space"  length="20" />
+			
+		<property name="blogStatus" type="byte" column="blog_status" not-null="true" length="4" />
+		<!-- Associations -->
+
+	</class>
+</hibernate-mapping>

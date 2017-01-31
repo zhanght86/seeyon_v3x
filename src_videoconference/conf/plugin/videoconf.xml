@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="videoConfPluginDefintion" class="com.seeyon.v3x.plugin.videoconf.VideoConferencePluginDefintion">
+		<property name="id" value="videoconf" />
+		<property name="name" value="视频会议插件" />
+		<property name="properties">
+			<list>
+				<value>classpath*:conf/videoconference.properties</value>
+			</list>
+		</property>
+		<property name="urlMapping">
+			<props>
+				<prop key="/videoConference.do">videoConfController</prop>
+			</props>
+		</property>                           
+		<property name="menuI18NResource" value="com.seeyon.v3x.plugin.videoconf.resource.i18n.VideoConferenceResources" />
+		<property name="pluginInitializtion" value="com.seeyon.v3x.plugin.videoconf.VideoConferenceSysInit" />
+		<property name="systemMenus">
+			<list>
+				<bean class="com.seeyon.v3x.plugin.PluginMainMenu">
+					<property name="name" value="mt.mtMeeting.label.video" />
+					<property name="children">
+						<list>
+							<bean class="com.seeyon.v3x.plugin.PluginMenu">
+								<property name="name" value="org.synchron.videoconf" />
+								<property name="icon" value="/apps_res/plugin/uc/videoconf/images/2401.gif" />
+								<property name="url"  value="/videoConference.do?method=framesetThree" />
+							</bean>
+						</list>
+					</property>								
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	
+</beans>

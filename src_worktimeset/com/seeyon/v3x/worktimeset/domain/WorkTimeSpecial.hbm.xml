@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="com.seeyon.v3x.worktimeset.domain.WorkTimeSpecial" lazy="false" table="v3x_worktime_specialday">
+	<id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+		<generator class="assigned" />
+	</id>
+	<property
+        name="orgAcconutID"
+        type="long"
+        column="ORG_ACCOUNT_ID"
+        length="20"
+    />
+   	<property
+        name="dateNum"
+        type="string"
+        column="DATE_NUM"
+        length="8"
+    />
+   	<property
+        name="isRest"
+        type="string"
+        column="IS_REST"
+        length="8"
+    />
+    <property
+        name="restInfo"
+        type="string"
+        column="REST_INFO"
+        length="500"
+    />
+    <property
+        name="weekNum"
+        type="string"
+        column="WEEK_NUM"
+        length="2"
+    />
+   	<property
+        name="year"
+        type="string"
+        column="YEAR"
+        length="4"
+    />
+   	<property
+        name="month"
+        type="string"
+        column="MONTH"
+        length="4"
+    />
+   	<property
+        name="updateTime"
+        type="timestamp"
+        column="UPDATE_TIME"
+        length="19"
+    />
+</class>
+</hibernate-mapping>

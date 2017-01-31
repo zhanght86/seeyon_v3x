@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<!-- 表单的关联数据记录 xgghen  
+	<bean id="colQuoteformRecordManger" class="com.seeyon.v3x.collaboration.manager.impl.ColQuoteformRecordImpl"></bean>
+	-->
+	<bean id="colQuoteformRecordDao" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.collaboration.dao.ColQuoteformRecordDao"></bean>
+		</property>
+	</bean>
+	
+
+</beans>

@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.seeyon.v3x.meeting.domain">
+	<class
+		name="MtSummaryTemplate"
+		table="mt_summary_template"
+	>
+		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="id"
+		>
+			<generator class="assigned"/>
+		</id>
+
+		<property
+			name="templateName"
+			column="template_name"
+			type="string"
+			not-null="true"
+			length="50"
+		/>
+		<property
+			name="meetingId"
+			column="meeting_id"
+			type="java.lang.Long"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="description"
+			column="description"
+			type="clob"
+			not-null="false"
+		/>
+		<property
+			name="templateFormat"
+			column="template_format"
+			type="string"
+			not-null="true"
+			length="50"
+		/>
+		<property
+			name="content"
+			column="content"
+			type="clob"
+			not-null="false"
+		/>
+		<property
+			name="createUser"
+			column="create_user"
+			type="java.lang.Long"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="createDate"
+			column="create_date"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="updateDate"
+			column="update_date"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="updateUser"
+			column="update_user"
+			type="java.lang.Long"
+			not-null="false"
+			length="20"
+		/>
+		<property
+			name="ext1"
+			column="ext1"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="ext2"
+			column="ext2"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CVMConfig>
+	<CRLContext>
+		<RetryPolicy>60,600,6000</RetryPolicy>
+		<NotCheckCRL>true</NotCheckCRL>
+		<CrlUrl>
+			http://ica.itrus.com.cn/public/cgi-bin/itruscrl.pl?CA=01DAC3AFFCFE2A68668AD0E56D3CF201
+		</CrlUrl>
+		<CaFileName>cafiles/midca.cer</CaFileName>
+	</CRLContext>
+</CVMConfig>

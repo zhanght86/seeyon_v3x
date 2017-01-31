@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocMetadataDefinition"
+		lazy="false" table="doc_metadata_definition">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="category" type="string" column="category"
+			length="30" />
+		<property name="defaultValue" type="string"
+			column="default_value" length="20" />
+		<property name="description" type="string" column="description"
+			length="255" />
+		<property name="isHidden" type="boolean" column="is_hidden"
+			not-null="true" length="4" />
+		<property name="length" type="integer" column="length"
+			length="11" />
+		<property name="name" type="string" column="name"
+			not-null="true" length="255" />
+		<property name="nullable" type="boolean" column="nullable"
+			not-null="true" length="4" />
+		<property name="optionType" type="byte" column="option_type"
+			length="4" />
+		<property name="physicalName" type="string"
+			column="physical_name" not-null="true" length="30" />
+		<property name="scopeMaxValue" type="string"
+			column="scope_max_value" length="30" />
+		<property name="scopeMinValue" type="string"
+			column="scope_min_value" length="30" />
+		<property name="type" type="byte" column="type" not-null="true"
+			length="4" />
+		<property name="isSystem" type="boolean" column="is_system"
+			not-null="true" length="4" />
+		<property name="searchable" type="boolean" column="searchable"
+			not-null="true" length="4" />
+		<property name="isDefault" type="boolean" column="is_default"
+			not-null="true" length="4" />
+		<!--<property name="readOnly" type="boolean" column="readonly"
+			not-null="true" length="4" />
+			 -->
+		<property name="isPercent" type="boolean" column="is_percent"
+			not-null="true" length="4" />
+		<property name="domainId" type="long" column="domain_id"
+			not-null="true" length="20" />
+			
+		<property name="status" type="integer" column="status"
+			length="11" />
+		
+		<!--property name="isFolder" type="boolean" column="is_folder"
+			not-null="true" length="4" /-->
+		<!-- Associations -->
+
+		<!--<set name="docTypeDetail" inverse="true" lazy="false"
+			cascade="none">
+			<key column="metadata_definition_id" />
+			<one-to-many
+				class="com.seeyon.v3x.doc.domain.DocTypeDetail" />
+		</set>
+		 -->
+		<!-- bi-directional many-to-one association to DocMetadataOptions -->
+		<set name="metadataOption" inverse="true" lazy="false" order-by="id"
+			cascade="all-delete-orphan">
+			<key column="metadata_definition_id" />
+			<one-to-many
+				class="com.seeyon.v3x.doc.domain.DocMetadataOption" />
+		</set>
+
+	</class>
+</hibernate-mapping>

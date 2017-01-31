@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<!-- DocController -->
+	<bean id="docController" class="com.seeyon.v3x.doc.controller.DocController">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="userMessageManager" ref="UserMessageManager"/>
+		<property name="partitionManager" ref="partitionManager"/>
+		<property name="searchManager" ref="searchManager" />
+		<property name="jsonView" value="jsonView"/>
+		<!-- 上传后，点击打开时可以直接查看文件内容，限制其大小，如果已经超过，则提示下载后阅读。单位：MB -->
+		<property name="maxSize4ShowContent" value="1" />
+		<!-- 上传后，点击打开时可以直接查看文件内容的格式，key为mimetypeId，value为文件扩张名，请使用小写 -->
+		<property name="typesShowContentDirectlyTEXT" value="txt" /> <!-- 输出时需要toHTML一下，使得页面显示和在Notepad中显示的样子一样  -->
+		<property name="typesShowContentDirectlyHTML" value="htm,html" /> <!-- 不需要toHTML，直接显示成网页 -->
+	</bean>
+	<bean id="docManagerController"  class="com.seeyon.v3x.doc.controller.DocManagerController">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	<bean id="docSpaceController"  class="com.seeyon.v3x.doc.controller.DocSpaceController">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+</beans>
+

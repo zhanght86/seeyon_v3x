@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.seeyon.v3x.formbizconfig.domain">
+<class 
+    name="FormBizConfig" 
+    table="form_biz_config"
+    lazy="false"
+>
+    <id
+		name="id"
+		type="java.lang.Long"
+		column="id"
+		length="20"
+	>
+		<generator class="assigned"/>
+	</id>
+
+    <property
+        name="name"
+        type="string"
+        column="name"
+        length="255"
+    />
+    
+    <property
+		name="createDate"
+		column="create_date"
+		type="timestamp"
+		length="19"
+	/>
+	
+	<property
+		name="createUser"
+		column="create_user"
+		type="java.lang.Long"
+		length="20"
+	/>
+	
+	<property
+		name="updateDate"
+		column="update_date"
+		type="timestamp"
+		length="19"
+	/>
+	
+	<!-- 此字段实际无法起到预期作用，已被废弃 -->
+	<property
+		name="publishFlag"
+		column="publish_flag"
+		type="boolean"
+		not-null="true"
+		length="1"
+	/>
+	
+	<property
+		name="bizConfigType"
+		column="biz_config_type"
+		type="integer"
+		not-null="true"
+		length="4"
+	/>
+</class>
+</hibernate-mapping>

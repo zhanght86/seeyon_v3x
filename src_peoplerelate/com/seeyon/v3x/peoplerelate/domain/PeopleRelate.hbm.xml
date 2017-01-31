@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.peoplerelate.domain.PeopleRelate"
+		table="relate_member" lazy="false">
+		<id name="id" column="id" length="20" type="long">
+			<generator class="assigned" />
+		</id>
+
+		<property name="relateMemberId" column="relate_member_id"
+			not-null="true" length="20" type="long" />
+
+		<property name="relateWsbs" column="relate_wsbs" not-null="true"
+			length="1" type="integer" />
+
+		<property name="relatedMemberId" column="related_id"
+			not-null="true" length="20" type="long" />
+
+		<property name="relateType" column="relate_type" not-null="true"
+			length="1" type="integer" />
+		
+		<property name="orderNum" column="order_num" not-null="false"
+			length="4" type="integer" />
+	</class>
+
+</hibernate-mapping>

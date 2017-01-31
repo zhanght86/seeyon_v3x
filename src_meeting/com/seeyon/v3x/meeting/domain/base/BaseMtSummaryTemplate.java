@@ -1,0 +1,327 @@
+package com.seeyon.v3x.meeting.domain.base;
+
+import java.io.Serializable;
+import com.seeyon.v3x.common.domain.BaseModel;
+
+
+/**
+ * This is an object that contains data related to the mt_summary_template table.
+ * Do not modify this class because it will be overwritten if the configuration file
+ * related to this class is modified.
+ *
+ * @hibernate.class
+ *  table="mt_summary_template"
+ */
+
+public abstract class BaseMtSummaryTemplate extends BaseModel  implements Serializable {
+
+	public static String REF = "MtSummaryTemplate";
+	public static String PROP_EXT1 = "ext1";
+	public static String PROP_CREATE_USER = "createUser";
+	public static String PROP_UPDATE_DATE = "updateDate";
+	public static String PROP_DESCRIPTION = "description";
+	public static String PROP_EXT2 = "ext2";
+	public static String PROP_TEMPLATE_NAME = "templateName";
+	public static String PROP_CREATE_DATE = "createDate";
+	public static String PROP_CONTENT = "content";
+	public static String PROP_ID = "id";
+	public static String PROP_UPDATE_USER = "updateUser";
+	public static String PROP_TEMPLATE_FORMAT = "templateFormat";
+	public static String PROP_MEETING_ID = "meetingId";
+
+
+	// constructors
+	public BaseMtSummaryTemplate () {
+		initialize();
+	}
+
+	/**
+	 * Constructor for primary key
+	 */
+	public BaseMtSummaryTemplate (java.lang.Long id) {
+		this.setId(id);
+		initialize();
+	}
+
+	/**
+	 * Constructor for required fields
+	 */
+	public BaseMtSummaryTemplate (
+		java.lang.Long id,
+		java.lang.String templateName,
+		java.lang.Long meetingId,
+		java.lang.String templateFormat,
+		java.lang.Long createUser,
+		java.util.Date createDate) {
+
+		this.setId(id);
+		this.setTemplateName(templateName);
+		this.setMeetingId(meetingId);
+		this.setTemplateFormat(templateFormat);
+		this.setCreateUser(createUser);
+		this.setCreateDate(createDate);
+		initialize();
+	}
+
+	protected void initialize () {}
+
+
+
+	private int hashCode = Integer.MIN_VALUE;
+
+	// primary key
+	////private java.lang.Long id;
+
+	// fields
+	private java.lang.String templateName;
+	private java.lang.Long meetingId;
+	private java.lang.String description;
+	private java.lang.String templateFormat;
+	private java.lang.String content;
+	private java.lang.Long createUser;
+	private java.util.Date createDate;
+	private java.util.Date updateDate;
+	private java.lang.Long updateUser;
+	private java.lang.String ext1;
+	private java.lang.String ext2;
+
+
+
+	/**
+	 * Return the unique identifier of this class
+     * @hibernate.id
+     *  generator-class="assigned"
+     *  column="id"
+     */
+	public java.lang.Long getId () {
+		return id;
+	}
+
+	/**
+	 * Set the unique identifier of this class
+	 * @param id the new ID
+	 */
+	public void setId (java.lang.Long id) {
+		this.id = id;
+		this.hashCode = Integer.MIN_VALUE;
+	}
+
+
+
+
+	/**
+	 * Return the value associated with the column: template_name
+	 */
+	public java.lang.String getTemplateName () {
+		return templateName;
+	}
+
+	/**
+	 * Set the value related to the column: template_name
+	 * @param templateName the template_name value
+	 */
+	public void setTemplateName (java.lang.String templateName) {
+		this.templateName = templateName;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: meeting_id
+	 */
+	public java.lang.Long getMeetingId () {
+		return meetingId;
+	}
+
+	/**
+	 * Set the value related to the column: meeting_id
+	 * @param meetingId the meeting_id value
+	 */
+	public void setMeetingId (java.lang.Long meetingId) {
+		this.meetingId = meetingId;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: description
+	 */
+	public java.lang.String getDescription () {
+		return description;
+	}
+
+	/**
+	 * Set the value related to the column: description
+	 * @param description the description value
+	 */
+	public void setDescription (java.lang.String description) {
+		this.description = description;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: template_format
+	 */
+	public java.lang.String getTemplateFormat () {
+		return templateFormat;
+	}
+
+	/**
+	 * Set the value related to the column: template_format
+	 * @param templateFormat the template_format value
+	 */
+	public void setTemplateFormat (java.lang.String templateFormat) {
+		this.templateFormat = templateFormat;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: content
+	 */
+	public java.lang.String getContent () {
+		return content;
+	}
+
+	/**
+	 * Set the value related to the column: content
+	 * @param content the content value
+	 */
+	public void setContent (java.lang.String content) {
+		this.content = content;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: create_user
+	 */
+	public java.lang.Long getCreateUser () {
+		return createUser;
+	}
+
+	/**
+	 * Set the value related to the column: create_user
+	 * @param createUser the create_user value
+	 */
+	public void setCreateUser (java.lang.Long createUser) {
+		this.createUser = createUser;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: create_date
+	 */
+	public java.util.Date getCreateDate () {
+		return createDate;
+	}
+
+	/**
+	 * Set the value related to the column: create_date
+	 * @param createDate the create_date value
+	 */
+	public void setCreateDate (java.util.Date createDate) {
+		this.createDate = createDate;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: update_date
+	 */
+	public java.util.Date getUpdateDate () {
+		return updateDate;
+	}
+
+	/**
+	 * Set the value related to the column: update_date
+	 * @param updateDate the update_date value
+	 */
+	public void setUpdateDate (java.util.Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: update_user
+	 */
+	public java.lang.Long getUpdateUser () {
+		return updateUser;
+	}
+
+	/**
+	 * Set the value related to the column: update_user
+	 * @param updateUser the update_user value
+	 */
+	public void setUpdateUser (java.lang.Long updateUser) {
+		this.updateUser = updateUser;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ext1
+	 */
+	public java.lang.String getExt1 () {
+		return ext1;
+	}
+
+	/**
+	 * Set the value related to the column: ext1
+	 * @param ext1 the ext1 value
+	 */
+	public void setExt1 (java.lang.String ext1) {
+		this.ext1 = ext1;
+	}
+
+
+
+	/**
+	 * Return the value associated with the column: ext2
+	 */
+	public java.lang.String getExt2 () {
+		return ext2;
+	}
+
+	/**
+	 * Set the value related to the column: ext2
+	 * @param ext2 the ext2 value
+	 */
+	public void setExt2 (java.lang.String ext2) {
+		this.ext2 = ext2;
+	}
+
+
+
+
+	public boolean equals (Object obj) {
+		if (null == obj) return false;
+		if (!(obj instanceof com.seeyon.v3x.meeting.domain.MtSummaryTemplate)) return false;
+		else {
+			com.seeyon.v3x.meeting.domain.MtSummaryTemplate mtSummaryTemplate = (com.seeyon.v3x.meeting.domain.MtSummaryTemplate) obj;
+			if (null == this.getId() || null == mtSummaryTemplate.getId()) return false;
+			else return (this.getId().equals(mtSummaryTemplate.getId()));
+		}
+	}
+
+	public int hashCode () {
+		if (Integer.MIN_VALUE == this.hashCode) {
+			if (null == this.getId()) return super.hashCode();
+			else {
+				String hashStr = this.getClass().getName() + ":" + this.getId().hashCode();
+				this.hashCode = hashStr.hashCode();
+			}
+		}
+		return this.hashCode;
+	}
+
+
+	public String toString () {
+		return super.toString();
+	}
+
+
+}

@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.blog.domain.BlogFavorites" 
+    table="blog_favorites"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+      <property
+        name="familyId"
+        type="long"
+        column="family_id"
+        length="20"
+    />
+    
+    <!--property
+        name="articleId"
+        type="long"
+        column="article_id"
+        length="20"
+    /-->
+    <property
+        name="employeeId"
+        type="long"
+        column="employee_id"
+        length="20"
+    />
+   <!--   
+     <many-to-one 
+    	name="BlogEmployee"
+        class="com.seeyon.v3x.blog.domain.BlogEmployee"
+        lazy="false"
+         >
+        <column 
+        	name="employee_id" 
+        	not-null="true" 
+        	length="20"/>
+    </many-to-one>
+     <many-to-one 
+    	name="BlogFamily"
+        class="com.seeyon.v3x.blog.domain.BlogFamily"
+        lazy="false"
+         >
+        <column 
+        	name="family_id" 
+        	not-null="true" 
+        	length="20"/>
+    </many-to-one> -->
+     <many-to-one 
+    	name="BlogArticle"
+        class="com.seeyon.v3x.blog.domain.BlogArticle"
+        lazy="false"
+         >
+        <column 
+        	name="article_id" 
+        	not-null="true" 
+        	length="20"/>
+    </many-to-one>
+    
+
+</class>
+</hibernate-mapping>

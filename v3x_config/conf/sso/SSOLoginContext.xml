@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<bean id="nc" class="com.seeyon.v3x.sso.SSOLoginContext">
+		<property name="name" value="nc" />
+		<property name="ticketName" value="ticket" />
+		<property name="topFrameName" value="frame_A8" />
+		<property name="handshake">
+			<bean class="com.seeyon.v3x.sso.nc.NCSSOLoginHandshakeImpl" />
+		</property>
+	</bean>
+	
+	<bean id="gke" class="com.seeyon.v3x.sso.SSOLoginContext">
+		<property name="name" value="gke" />
+		<property name="ticketName" value="ticket" />
+		<property name="handshake">
+			<bean class="com.seeyon.v3x.sso.gke.GKEA8SSOLoginImp" />
+		</property>
+	</bean>
+	
+	<!-- 与NC是一样一样的 -->
+	<bean id="ncportal" class="com.seeyon.v3x.sso.SSOLoginContext">
+		<property name="name" value="ncportal" />
+		<property name="ticketName" value="ticket" />
+		<property name="topFrameName" value="frame_A8" />
+		<property name="forward" value="false" />
+		<property name="handshake">
+			<bean class="com.seeyon.v3x.sso.nc.NCSSOLoginHandshakeImpl" />
+		</property>
+	</bean>
+	
+	<bean id="webSite" class="com.seeyon.v3x.sso.SSOLoginContext">
+		<property name="name" value="webSite" />
+		<property name="ticketName" value="ticket" />
+		<property name="forward" value="false" />
+		<property name="handshake">
+			<bean class="com.seeyon.v3x.sso.nc.NCSSOLoginHandshakeImpl" />
+		</property>
+	</bean>
+	
+</beans>

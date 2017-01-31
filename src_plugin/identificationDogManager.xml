@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="identificationManager"
+		class="com.seeyon.v3x.plugin.identification.manager.IdentificationManagerImpl" init-method="init">
+		<property name="configManager" ref="configManager" />
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	
+	<bean id="identificationController" class="com.seeyon.v3x.plugin.identification.controller.IdentificationController">
+		<property name="parameterNameDogId" value="dogId" />
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	
+</beans>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<!-- 关联人员设置 -->
+    <bean id="peoplerelateController"
+          class="com.seeyon.v3x.peoplerelate.controller.PeopleRelateController" autowire="byName">
+          <property name="orgManager" ref="OrgManager" />
+          <property name="spaceManager" ref="spaceManager" />
+          <property name="userMessageManager" ref="UserMessageManager" />
+          <property name="onLineManager" ref="onLineManager" />
+          <property name="docHierarchyManager" ref="docHierarchyManager" />
+          <property name="calEventManager" ref="calEventManager" />
+    </bean>
+    <bean id="peoplerelateManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.peoplerelate.manager.PeopleRelateManagerImpl" >
+				<property name="peoplerelateDao" ref="peoplerelateDao"/>
+				<property name="orgManager" ref="OrgManager"></property>
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="is*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="peoplerelateDao" class="com.seeyon.v3x.peoplerelate.dao.PeopleRelateDao" autowire="byName">
+        <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+    </bean>	
+</beans>

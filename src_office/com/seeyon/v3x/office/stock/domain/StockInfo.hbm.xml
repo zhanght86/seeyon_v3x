@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.office.stock.domain.StockInfo"
+		table="M_Stock_Info">
+		<id name="stockId" type="long" column="stock_id" length="20">
+			<generator class="assigned" />
+		</id>
+
+		<property name="stockName" type="string" column="stock_name"
+			length="50" />
+		<!-- 
+			
+			<property name="stockType" type="string" column="stock_type"
+			length="20" />
+		-->
+
+		<property name="stockModel" type="string" column="stock_model"
+			length="100" />
+
+		<property name="stockUnit" type="string" column="stock_unit"
+			length="20" />
+
+		<property name="stockDate" type="date" column="stock_date" />
+
+		<property name="stockPrice" type="float">
+			<column name="stock_price" sql-type="decimal(10,2)" />
+		</property>
+
+		<property name="stockCount" type="integer">
+			<column name="stock_count" sql-type="decimal(10,0)" />
+		</property>
+
+		<property name="stockAvacount" type="integer">
+			<column name="stock_avacount" sql-type="decimal(10,0)" />
+		</property>
+
+		<property name="stockRes" type="long" column="stock_res"
+			length="20" />
+
+		<property name="createDate" type="date" column="create_date" />
+
+		<property name="modifyDate" type="date" column="modify_date" />
+
+		<property name="stockState" type="integer" column="stock_state"
+			length="1" />
+
+		<property name="deleteFlag" type="integer" column="del_flag"
+			length="1" />
+		<property name="accountId" type="long" column="accountId"
+			length="20" />
+		<many-to-one name="officeType"
+			class="com.seeyon.v3x.office.common.domain.OfficeTypeInfo"
+			lazy="false">
+			<column name="stock_type" not-null="true" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

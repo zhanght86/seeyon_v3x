@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.collaboration.templete.domain.ColBranch" 
+    table="col_branch"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="conditionType"
+        type="integer"
+        column="condition_type"
+        length="11"
+    />
+    <property
+        name="formCondition"
+        type="string"
+        column="form_condition"
+        length="2000"
+    />
+    <property
+        name="conditionTitle"
+        type="string"
+        column="condition_title"
+        length="2000"
+    />
+    <property
+        name="conditionDesc"
+        type="clob"
+        column="condition_desc"
+    />
+    <property
+        name="templateId"
+        type="long"
+        column="template_id"
+        length="20"
+    />
+    <property
+        name="linkId"
+        type="long"
+        column="link_id"
+        length="20"
+    />
+    <property
+        name="isForce"
+        type="integer"
+        column="is_force"
+        length="2"
+    />
+    <property
+        name="conditionBase"
+        type="string"
+        column="condition_base"
+        length="30"
+    />
+    <property
+        name="appType"
+        type="int"
+        column="app_type"
+        length="2"
+    />
+</class>
+</hibernate-mapping>

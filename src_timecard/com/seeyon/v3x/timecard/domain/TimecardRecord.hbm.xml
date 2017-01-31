@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.timecard.domain.TimecardRecord" 
+	       table="timecard_record"
+	       lazy="false"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="id"
+			column="id"
+			type="long"
+			length="20"
+		>
+		<generator class="assigned"/>
+		</id>
+		<property
+			name="memberId"
+			column="member_id"
+			type="long"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="ondutyTime"
+			column="onduty_time"
+			type="string"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="offdutyTime"
+			column="offduty_time"
+			type="string"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="workDate"
+			column="work_date"
+			type="string"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="ondutyType"
+			column="onduty_type"
+			type="int"
+			length="1"
+		/>
+	</class>	
+</hibernate-mapping>

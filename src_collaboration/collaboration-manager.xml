@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<bean id="workflowEventListenerBean"
+		class="com.seeyon.v3x.workflow.event.WorkflowEventListener"
+		init-method="init">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+	</bean>
+
+	<bean id="workflowEventListener" parent="baseTxService"
+		lazy-init="false" singleton="true">
+		<property name="target" ref="workflowEventListenerBean" />
+	</bean>
+	<bean id="colManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.collaboration.manager.impl.ColManagerImpl">
+				<!--<property name="orgManager" ref="OrgManager" />-->
+				<property name="userMessageManager" ref="UserMessageManager" />
+				<property name="orgManager" ref="OrgManager" />
+				<!-- 处理后不允许撤销的节点权限 -->
+				<property name="cannotRepealList">
+					<list>
+						<value>formaudit</value>
+						<value>newsaudit</value>
+						<value>bulletionaudit</value>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+				<prop key="cancel*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="run*">PROPAGATION_REQUIRED</prop>
+				<prop key="finishWorkItem*">PROPAGATION_REQUIRED</prop>
+				<prop key="zcdb">PROPAGATION_REQUIRED</prop>
+				<prop key="step*">PROPAGATION_REQUIRED</prop>
+				<prop key="take*">PROPAGATION_REQUIRED</prop>
+				<prop key="change*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="colManagerFacade" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.collaboration.manager.impl.ColManagerFacadeImpl"/>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+				<prop key="run*">PROPAGATION_REQUIRED</prop>
+				<prop key="finishWorkItem*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 模板分类 -->
+	<bean id="templeteCategoryManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.collaboration.templete.manager.TempleteCategoryManagerImpl" init-method="init">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 模板 -->
+	<bean id="templeteManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.collaboration.templete.manager.TempleteManagerImpl">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="templeteAuthManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.collaboration.templete.manager.TempleteAuthManagerImpl" />
+		</property>
+	</bean>
+
+	<bean id="templeteConfigManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.collaboration.templete.manager.TempleteConfigManagerImpl">
+				<property name="templeteManager" ref="templeteManager" />
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- 协同callback -->
+	<bean id="colCallback" class="com.seeyon.v3x.collaboration.callback.ColIndexHandler" autowire="byName">
+	   <property name="indexManager" ref="indexManager"/>
+	</bean>
+	
+	<!-- colSuperviseDetailDao -->
+	<bean id="colSuperviseDetailDao" class="com.seeyon.v3x.collaboration.dao.ColSuperviseDetailDao" >
+	</bean>
+
+	<bean id="colSuperviseTemplateRoleDao" class="com.seeyon.v3x.collaboration.dao.ColSuperviseTemplateRoleDao" >
+	</bean>
+
+	<!-- colSuperviseDetailDao -->
+	<bean id="managementSetDao" class="com.seeyon.v3x.collaboration.dao.ManagementSetDao" >
+	</bean>
+
+	<bean id="managementSetAclDao" class="com.seeyon.v3x.collaboration.dao.ManagementSetAclDao" >
+	</bean>		
+	<bean id="colTrackMemberDao" class="com.seeyon.v3x.collaboration.dao.ColTrackMemberDao" >
+	</bean>		
+	<bean id="colSummaryDao" class="com.seeyon.v3x.collaboration.dao.ColSummaryDao"></bean>
+
+	<!-- 协同督办 -->
+	<bean id="colSuperviseManager"  parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.collaboration.manager.impl.ColSuperviseManagerImpl">
+				<property name="orgManager" ref="OrgManager" />
+				<property name="userMessageManager" ref="UserMessageManager" />
+				<property name="colSuperviseDetailDao" ref="colSuperviseDetailDao"></property>
+				<property name="edocSummaryDao" ref="edocSummaryDao" />
+				<property name="colSuperviseTemplateRoleDao" ref="colSuperviseTemplateRoleDao" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+				<prop key="query*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="list*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="search*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="find*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="load*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 工作管理 -->
+	<bean id="workStatManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.collaboration.manager.impl.WorkStatManagerImpl">
+					<property name="orgManager" ref="OrgManager" />
+					<property name="edocSummaryDao" ref="edocSummaryDao" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="colManagerISearch" parent="baseTxService" >
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.collaboration.manager.impl.ColManagerISearch" init-method="init">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 分段流程-新流程发起 added by Mazc 2009-06-18. -->
+	<bean id="newflowManager" class="com.seeyon.v3x.collaboration.manager.impl.NewflowManagerImpl"></bean>
+	<bean id="newflowDao" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.collaboration.dao.NewflowDao"></bean>
+		</property>
+	</bean>
+	
+	<!-- 表单的关联授权  -->
+	<bean id="colRelationAuthorityManager" class="com.seeyon.v3x.collaboration.manager.impl.ColRelationAuthorityImpl"></bean>
+	<bean id="colRelationAuthorityDao" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.collaboration.dao.ColRelationAuthorityDao"></bean>
+		</property>
+	</bean>
+	
+	<!-- 表单的关联数据记录 xgghen  -->
+	<bean id="colQuoteformRecordManger" class="com.seeyon.v3x.collaboration.manager.impl.ColQuoteformRecordImpl"></bean>
+	<bean id="colQuoteformRecordDao" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.collaboration.dao.ColQuoteformRecordDao"></bean>
+		</property>
+	</bean>
+	
+	<bean id="processCycRemindQuartzJob" class="com.seeyon.v3x.collaboration.manager.impl.ProcessCycRemind">
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	
+	<bean id="affairIsOvertopTimeJob" class="com.seeyon.v3x.collaboration.manager.impl.IsOvertopTimeJob">
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	
+	<bean id="formLockManager" parent="lockManager">
+		<property name="module" value="formLock" />
+	</bean>
+	<bean id="colLockManager" parent="lockManager">
+		<property name="module" value="colLock" />
+	</bean>
+	
+	<bean class="com.seeyon.v3x.collaboration.templete.listener.TempleteOrganizationEventListener">
+		<property name="templeteConfigManager" ref="templeteConfigManager" />
+	</bean>
+	<bean class="com.seeyon.v3x.collaboration.listener.CollaborationOperationEventListener"/>
+	
+	<bean id="batchManager" class="com.seeyon.v3x.batch.manager.BatchManagerImpl">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="supportCategory">
+			<list>
+				<!-- 配置支持的应用 -->
+				<value>1</value>
+				<value>2</value>
+				<value>4</value>
+				<value>19</value>
+				<value>20</value>
+				<value>21</value>
+				<!-- branches_a8_v350sp1_r_gov GOV-4029 魏俊标 首页信息报送批处理 start-->
+				<value>32</value>
+				<!-- branches_a8_v350sp1_r_gov GOV-4029 魏俊标 首页信息报送批处理 end-->
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="terminateColSuperviseJob" class="com.seeyon.v3x.collaboration.callback.TerminateColSupervise">
+	</bean>
+	
+	<bean class="www.seeyon.com.v3x.form.listener.FormOrganizationEventListener">
+	</bean>
+	
+	<bean id="formTriggerEventListener" class="www.seeyon.com.v3x.form.listener.FormTriggerEventListener">
+    	<property name="orgManager" ref="OrgManager"/>
+	</bean>
+	<bean id="collaborationTriggerEventListener" class="www.seeyon.com.v3x.form.listener.CollaborationTriggerEventListener">
+	</bean>
+
+	<bean id="formTriggerEventQuartzJob" class="www.seeyon.com.v3x.form.event.FormTriggerEventJob">
+	</bean>
+	
+	<bean id="colManagerCAP" class="com.seeyon.v3x.collaboration.manager.cap.ColManagerCAPImpl" singleton="true">
+	</bean>
+	<bean id="collaborationFormBindEventListener"
+		class="www.seeyon.com.v3x.form.listener.CollaborationFormBindEventListener" init-method="init">
+	</bean>
+	<bean id="hisColManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.collaboration.his.manager.HisColManagerImpl">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+				<prop key="save">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+</beans>

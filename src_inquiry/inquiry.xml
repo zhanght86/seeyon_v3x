@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="inquiryController"
+		class="com.seeyon.v3x.inquiry.controller.InquiryController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	<bean id="inquiryBasicController"
+		class="com.seeyon.v3x.inquiry.controller.InquiryBasicController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+	</bean>
+
+	<bean id="inquiryManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.inquiry.manager.InquiryManagerImpl" init-method="initAllSurveyType" singleton="true">
+				<property name="orgManager" ref="OrgManager" />
+				<property name="userMessageManager" ref="UserMessageManager" />
+				<property name="orgManagerDirect" ref="OrgManagerDirect" />
+				<property name="inquiryScopeDAO" ref="inquiryScopeDAO"/>
+				<property name="inquiryitemDao" ref="inquiryitemDao"/>
+			</bean>		
+		</property>
+		
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="has*">PROPAGATION_SUPPORTS</prop>
+				<prop key="is*">PROPAGATION_SUPPORTS</prop>
+				<prop key="iSearch">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+
+			</props>
+		</property>
+	</bean>
+
+	<bean id="inquiryDao"
+		class="com.seeyon.v3x.inquiry.dao.InquiryDao">
+	</bean>
+	<bean id="inquiryTypeDao"
+		class="com.seeyon.v3x.inquiry.dao.InquiryTypeDao">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	<bean id="inquiryBasicDao"
+		class="com.seeyon.v3x.inquiry.dao.InquiryBasicDao">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	<bean id="inquiryAuthDao"
+		class="com.seeyon.v3x.inquiry.dao.InquiryAuthDao">
+	</bean>
+	<bean id="inquiryScopeDAO" class="com.seeyon.v3x.inquiry.dao.InquiryScopeDAO">
+	</bean>
+	<bean id="inquiryitemDao" class="com.seeyon.v3x.inquiry.dao.InquiryItemDao">
+	</bean>
+	
+	<bean id="inquiryManager4ISearch" parent="baseTxService" >
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.inquiry.manager.InquiryManager4ISearch" init-method="init">
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean class="com.seeyon.v3x.inquiry.listener.InquiryOrganizationEventListener">
+		<property name="inquiryManager" ref="inquiryManager" />
+	</bean>
+</beans>

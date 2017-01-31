@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<!-- 计划service -->
+	<bean id="planTarget"
+		class="com.seeyon.v3x.plan.manager.PlanManagerImpl"
+		autowire="byName">
+		<property name="planDao">
+			<ref local="planDao" />
+		</property>
+		<property name="planSummaryDao">
+			<ref local="planSummaryDao" />
+		</property>
+		<property name="planReplyDao">
+			<ref local="planReplyDao" />
+		</property>
+		<property name="planBodyDao">
+			<ref local="planBodyDao" />
+		</property>
+		<property name="planUserScopeDao">
+			<ref local="planUserScopeDao" />
+		</property>
+		<property name="orgManager">
+			<ref bean="OrgManager" />
+		</property>
+	</bean>
+	<bean id="planManager" parent="baseTxService">
+		<property name="target">
+			<ref local="planTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="list*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="is*">PROPAGATION_SUPPORTS</prop>
+				<prop key="count*">PROPAGATION_SUPPORTS</prop>
+				<prop key="iSearch">PROPAGATION_SUPPORTS</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 计划样式service -->
+	<bean id="planStyleTarget"
+		class="com.seeyon.v3x.plan.manager.PlanStyleManagerImpl" init-method="init"
+		autowire="byName">
+		<property name="planStyleDao">
+			<ref local="planStyleDao" />
+		</property>
+		<property name="planStyleBodyDao">
+			<ref local="planStyleBodyDao" />
+		</property>
+	</bean>
+	<bean id="planStyleManager" parent="baseTxService">
+		<property name="target">
+			<ref local="planStyleTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="list*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 计划用户查看范围service -->
+	<bean id="planUserScopeTarget"
+		class="com.seeyon.v3x.plan.manager.PlanUserScopeManagerImpl"
+		autowire="byName">
+		<property name="planUserScopeDao">
+			<ref local="planUserScopeDao" />
+		</property>
+	</bean>
+	<bean id="planUserScopeManager" parent="baseTxService">
+		<property name="target">
+			<ref local="planUserScopeTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="list*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- DAO -->
+	<bean id="planDao" class="com.seeyon.v3x.plan.dao.PlanDao"></bean>
+	<bean id="planRelevantUserDao"
+		class="com.seeyon.v3x.plan.dao.PlanRelevantUserDao">
+	</bean>
+	<bean id="planReplyDao"
+		class="com.seeyon.v3x.plan.dao.PlanReplyDao">
+	</bean>
+	<bean id="planStyleDao"
+		class="com.seeyon.v3x.plan.dao.PlanStyleDao">
+	</bean>
+	<bean id="planSummaryDao"
+		class="com.seeyon.v3x.plan.dao.PlanSummaryDao">
+	</bean>
+	<bean id="planStyleBodyDao"
+		class="com.seeyon.v3x.plan.dao.PlanStyleBodyDao">
+	</bean>
+	<bean id="planBodyDao"
+		class="com.seeyon.v3x.plan.dao.PlanBodyDao">
+	</bean>
+	<bean id="planUserScopeDao"
+		class="com.seeyon.v3x.plan.dao.PlanUserScopeDao">
+	</bean>
+
+	<bean id="planStyleController"
+		class="com.seeyon.v3x.plan.controller.PlanStyleController"
+		autowire="byName">
+	</bean>
+	<bean id="planSystemMgrController"
+		class="com.seeyon.v3x.plan.controller.SystemManagerController"
+		autowire="byName">
+	</bean>
+	<bean id="planController"
+		class="com.seeyon.v3x.plan.controller.PlanController"
+		autowire="byName">
+		<property name="orgManager">
+			<ref bean="OrgManager" />
+		</property>
+		<property name="userMessageManager">
+			<ref bean="UserMessageManager" />
+		</property>
+		<property name="projectManager">
+			<ref bean="projectManager"/>
+		</property>
+	</bean>
+	<bean id="planUserScopeController"
+		class="com.seeyon.v3x.plan.controller.PlanUserScopeController"
+		autowire="byName">
+	</bean>
+	<bean id="planManagerISearch" parent="baseTxService" >
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.plan.manager.PlanManagerISearch" init-method="init">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="planManagerCAP" class="com.seeyon.v3x.plan.manager.cap.PlanManagerCAPImpl" singleton="true">
+	</bean>
+</beans>

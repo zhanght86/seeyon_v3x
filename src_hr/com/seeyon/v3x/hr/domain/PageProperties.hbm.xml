@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.PageProperties" table="hr_pages_properties">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+       <property
+          name="property_ordering"
+          type="int"
+          column="property_ordering"
+          length="4"
+          not-null="true"
+       />
+       
+       <many-to-one name="page" column="page_id" not-null="true" ></many-to-one>
+       <many-to-one name="pageProperty" column="property_id" not-null="true" ></many-to-one>
+	</class>
+</hibernate-mapping>

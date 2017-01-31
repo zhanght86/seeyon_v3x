@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="com.seeyon.v3x.calendar.domain.CalEventPeriodicalInfo" lazy="false" table="cal_event_periodical_info">
+	<id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+		<generator class="assigned" />
+	</id>
+	<property
+        name="calEventId"
+        type="long"
+        column="cal_event_id"
+        length="20"
+    />
+	<property
+        name="periodicalType"
+        type="integer"
+        column="periodical_type"
+        length="2"
+    />
+    <property
+        name="dayDate"
+        type="integer"
+        column="day_date"
+        length="2"
+    />
+    <property
+        name="dayWeek"
+        type="integer"
+        column="day_week"
+        length="2"
+    />
+    <property
+        name="week"
+        type="integer"
+        column="week"
+        length="2"
+    />
+    <property
+        name="month"
+        type="integer"
+        column="month"
+        length="2"
+    />
+    <property
+        name="memberId"
+        type="long"
+        column="member_id"
+        length="20"
+    />
+    <property
+        name="weeks"
+        type="string"
+        column="weeks"
+        length="20"
+    />
+    <property
+        name="beginTime"
+        type="timestamp"
+        column="begintime"
+        length="19"
+    />
+    <property
+        name="endTime"
+        type="timestamp"
+        column="endtime"
+        length="19"
+    />
+</class>
+</hibernate-mapping>

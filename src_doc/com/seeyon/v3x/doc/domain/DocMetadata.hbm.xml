@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class entity-name="DocMetadata" table="doc_metadata">
+		<id name="docResourceId" type="long" column="doc_resource_id"
+			length="20">
+			<generator class="assigned" />
+		</id>
+
+		<property name="boolean1" type="boolean" column="boolean1"
+			not-null="false" length="4" />
+		<property name="boolean2" type="boolean" column="boolean2"
+			not-null="false" length="4" />
+		<property name="boolean3" type="boolean" column="boolean3"
+			not-null="false" length="4" />
+		<property name="boolean4" type="boolean" column="boolean4"
+			not-null="false" length="4" />
+		<property name="boolean5" type="boolean" column="boolean5"
+			not-null="false" length="4" />
+			
+		<property name="date1" type="date" column="date1" length="10" />
+		<property name="date10" type="date" column="date10" length="10" />
+		<property name="date2" type="date" column="date2" length="10" />
+		<property name="date3" type="date" column="date3" length="10" />
+		<property name="date4" type="date" column="date4" length="10" />
+		<property name="date5" type="date" column="date5" length="10" />
+		<property name="date6" type="date" column="date6" length="10" />
+		<property name="date7" type="date" column="date7" length="10" />
+		<property name="date8" type="date" column="date8" length="10" />
+		<property name="date9" type="date" column="date9" length="10" />
+		<property name="date11" type="date" column="date11" length="10" />
+		<property name="date20" type="date" column="date20" length="10" />
+		<property name="date12" type="date" column="date12" length="10" />
+		<property name="date13" type="date" column="date13" length="10" />
+		<property name="date14" type="date" column="date14" length="10" />
+		<property name="date15" type="date" column="date15" length="10" />
+		<property name="date16" type="date" column="date16" length="10" />
+		<property name="date17" type="date" column="date17" length="10" />
+		<property name="date18" type="date" column="date18" length="10" />
+		<property name="date19" type="date" column="date19" length="10" />
+		
+		<property name="datetime1" type="timestamp" column="datetime1" length="19" />
+		<property name="datetime2" type="timestamp" column="datetime2" length="19" />
+		<property name="datetime3" type="timestamp" column="datetime3" length="19" />
+		<property name="datetime4" type="timestamp" column="datetime4" length="19" />
+		<property name="datetime5" type="timestamp" column="datetime5" length="19" />
+		<property name="datetime6" type="timestamp" column="datetime6" length="19" />
+		<property name="datetime7" type="timestamp" column="datetime7" length="19" />
+		<property name="datetime8" type="timestamp" column="datetime8" length="19" />
+		<property name="datetime9" type="timestamp" column="datetime9" length="19" />
+		<property name="datetime10" type="timestamp" column="datetime10" length="19" />
+		<property name="datetime11" type="timestamp" column="datetime11" length="19" />
+		<property name="datetime12" type="timestamp" column="datetime12" length="19" />
+		<property name="datetime13" type="timestamp" column="datetime13" length="19" />
+		<property name="datetime14" type="timestamp" column="datetime14" length="19" />
+		<property name="datetime15" type="timestamp" column="datetime15" length="19" />
+		<property name="datetime16" type="timestamp" column="datetime16" length="19" />
+		<property name="datetime17" type="timestamp" column="datetime17" length="19" />
+		<property name="datetime18" type="timestamp" column="datetime18" length="19" />
+		<property name="datetime19" type="timestamp" column="datetime19" length="19" />
+		<property name="datetime20" type="timestamp" column="datetime20" length="19" />
+			
+		<property name="decimal1" type="double" column="decimal1"
+			length="10" />
+		<property name="decimal10" type="double" column="decimal10"
+			length="10" />
+		<property name="decimal2" type="double" column="decimal2"
+			length="10" />
+		<property name="decimal3" type="double" column="decimal3"
+			length="10" />
+		<property name="decimal4" type="double" column="decimal4"
+			length="10" />
+		<property name="decimal5" type="double" column="decimal5"
+			length="10" />
+		<property name="decimal6" type="double" column="decimal6"
+			length="10" />
+		<property name="decimal7" type="double" column="decimal7"
+			length="10" />
+		<property name="decimal8" type="double" column="decimal8"
+			length="10" />
+		<property name="decimal9" type="double" column="decimal9"
+			length="10" />
+			
+		<property name="integer1" type="integer" column="integer1"
+			length="11" />
+		<property name="integer10" type="integer" column="integer10"
+			length="11" />
+		<property name="integer2" type="integer" column="integer2"
+			length="11" />
+		<property name="integer3" type="integer" column="integer3"
+			length="11" />
+		<property name="integer4" type="integer" column="integer4"
+			length="11" />
+		<property name="integer5" type="integer" column="integer5"
+			length="11" />
+		<property name="integer6" type="integer" column="integer6"
+			length="11" />
+		<property name="integer7" type="integer" column="integer7"
+			length="11" />
+		<property name="integer8" type="integer" column="integer8"
+			length="11" />
+		<property name="integer9" type="integer" column="integer9"
+			length="11" />
+			
+		<property name="reference1" type="long" column="reference1"
+			length="20" />
+		<property name="reference10" type="long" column="reference10"
+			length="20" />
+		<property name="reference2" type="long" column="reference2"
+			length="20" />
+		<property name="reference3" type="long" column="reference3"
+			length="20" />
+		<property name="reference4" type="long" column="reference4"
+			length="20" />
+		<property name="reference5" type="long" column="reference5"
+			length="20" />
+		<property name="reference6" type="long" column="reference6"
+			length="20" />
+		<property name="reference7" type="long" column="reference7"
+			length="20" />
+		<property name="reference8" type="long" column="reference8"
+			length="20" />
+		<property name="reference9" type="long" column="reference9"
+			length="20" />
+			
+		<property name="text1" type="clob" column="text1"/>
+		<property name="text10" type="clob" column="text10"/>
+		<property name="text2" type="clob" column="text2"/>
+		<property name="text3" type="clob" column="text3"/>
+		<property name="text4" type="clob" column="text4"/>
+		<property name="text5" type="clob" column="text5"/>
+		<property name="text6" type="clob" column="text6"/>
+		<property name="text7" type="clob" column="text7"/>
+		<property name="text8" type="clob" column="text8"/>
+		<property name="text9" type="clob" column="text9"/>
+		<property name="text11" type="clob" column="text11"/>
+		<property name="text12" type="clob" column="text12"/>
+		<property name="text13" type="clob" column="text13"/>
+		<property name="text14" type="clob" column="text14"/>
+		<property name="text15" type="clob" column="text15"/>
+			
+		<property name="avarchar1" type="string" column="avarchar1"
+			length="1000" />
+		<property name="avarchar10" type="string" column="avarchar10"
+			length="200" />
+		<property name="avarchar11" type="string" column="avarchar11"
+			length="200" />
+		<property name="avarchar12" type="string" column="avarchar12"
+			length="200" />
+		<property name="avarchar13" type="string" column="avarchar13"
+			length="200" />
+		<property name="avarchar14" type="string" column="avarchar14"
+			length="200" />
+		<property name="avarchar15" type="string" column="avarchar15"
+			length="200" />
+		<property name="avarchar16" type="string" column="avarchar16"
+			length="200" />
+		<property name="avarchar17" type="string" column="avarchar17"
+			length="200" />
+		<property name="avarchar18" type="string" column="avarchar18"
+			length="200" />
+		<property name="avarchar19" type="string" column="avarchar19"
+			length="200" />
+		<property name="avarchar2" type="string" column="avarchar2"
+			length="200" />
+		<property name="avarchar20" type="string" column="avarchar20"
+			length="200" />
+		<property name="avarchar3" type="string" column="avarchar3"
+			length="200" />
+		<property name="avarchar4" type="string" column="avarchar4"
+			length="200" />
+		<property name="avarchar5" type="string" column="avarchar5"
+			length="200" />
+		<property name="avarchar6" type="string" column="avarchar6"
+			length="200" />
+		<property name="avarchar7" type="string" column="avarchar7"
+			length="200" />
+		<property name="avarchar8" type="string" column="avarchar8"
+			length="200" />
+		<property name="avarchar9" type="string" column="avarchar9"	
+			length="200" />
+		
+		<property name="avarchar21" type="string" column="avarchar21"	length="200" />
+		<property name="avarchar22" type="string" column="avarchar22"	length="200" />
+		<property name="avarchar23" type="string" column="avarchar23"	length="200" />
+		<property name="avarchar24" type="string" column="avarchar24"	length="200" />
+		<property name="avarchar25" type="string" column="avarchar25"	length="200" />
+		<property name="avarchar26" type="string" column="avarchar26"	length="200" />
+		<property name="avarchar27" type="string" column="avarchar27"	length="200" />
+		<property name="avarchar28" type="string" column="avarchar28"	length="200" />
+		<property name="avarchar29" type="string" column="avarchar29"	length="200" />
+		<property name="avarchar30" type="string" column="avarchar30"	length="200" />
+		<property name="avarchar31" type="string" column="avarchar31"	length="200" />
+		<property name="avarchar32" type="string" column="avarchar32"	length="200" />
+		<property name="avarchar33" type="string" column="avarchar33"	length="200" />
+		<property name="avarchar34" type="string" column="avarchar34"	length="200" />
+		<property name="avarchar35" type="string" column="avarchar35"	length="200" />
+		<property name="avarchar36" type="string" column="avarchar36"	length="200" />
+		<property name="avarchar37" type="string" column="avarchar37"	length="200" />
+		<property name="avarchar38" type="string" column="avarchar38"	length="200" />
+		<property name="avarchar39" type="string" column="avarchar39"	length="200" />
+		<property name="avarchar40" type="string" column="avarchar40"	length="200" />
+		<property name="avarchar41" type="string" column="avarchar41"	length="200" />
+		<property name="avarchar42" type="string" column="avarchar42"	length="200" />
+		<property name="avarchar43" type="string" column="avarchar43"	length="200" />
+		<property name="avarchar44" type="string" column="avarchar44"	length="200" />
+		<property name="avarchar45" type="string" column="avarchar45"	length="200" />
+		<property name="avarchar46" type="string" column="avarchar46"	length="200" />
+		<property name="avarchar47" type="string" column="avarchar47"	length="200" />
+		<property name="avarchar48" type="string" column="avarchar48"	length="200" />
+		<property name="avarchar49" type="string" column="avarchar49"	length="200" />
+		<property name="avarchar50" type="string" column="avarchar50"	length="200" />
+		<property name="avarchar51" type="string" column="avarchar51"	length="200" />
+		<property name="avarchar52" type="string" column="avarchar52"	length="200" />
+		<property name="avarchar53" type="string" column="avarchar53"	length="200" />
+		<property name="avarchar54" type="string" column="avarchar54"	length="200" />
+		<property name="avarchar55" type="string" column="avarchar55"	length="200" />
+		<property name="avarchar56" type="string" column="avarchar56"	length="200" />
+		<property name="avarchar57" type="string" column="avarchar57"	length="200" />
+		<property name="avarchar58" type="string" column="avarchar58"	length="200" />
+		<property name="avarchar59" type="string" column="avarchar59"	length="200" />
+		<property name="avarchar60" type="string" column="avarchar60"	length="200" />
+		
+
+	<property name="enum1" type="long" column="enum1"
+			length="20" />
+	<property name="enum2" type="long" column="enum2"
+			length="20" />
+	<property name="enum3" type="long" column="enum3"
+			length="20" />
+	<property name="enum4" type="long" column="enum4"
+			length="20" />
+	<property name="enum5" type="long" column="enum5"
+			length="20" />
+	<property name="enum6" type="long" column="enum6"
+			length="20" />
+	<property name="enum7" type="long" column="enum7"
+			length="20" />
+	<property name="enum8" type="long" column="enum8"
+			length="20" />
+	<property name="enum9" type="long" column="enum9"
+			length="20" />
+	<property name="enum10" type="long" column="enum10"
+			length="20" />
+
+	<!-- edit flag,do not delete !!! -->
+	
+	</class>
+</hibernate-mapping>

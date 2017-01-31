@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class
+    name="com.seeyon.v3x.office.common.domain.OfficeTypeInfo" 
+    table="M_Type_Info"
+>
+	<id
+        name="typeId"
+        type="long"
+        column="type_id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    
+    <property
+        name="modelId"
+        type="string"
+        column="model_id"
+        length="1"
+    />
+    
+    <property
+        name="typeInfo"
+        type="string"
+        column="type_info"
+        length="128"
+    />
+    
+    <property
+        name="departId"
+        type="long"
+        column="dep_id"
+        length="20"
+    />
+    <property
+        name="createDate"
+        type="date"
+        column="create_date"
+    />
+    
+    <property
+        name="modifyDate"
+        type="date"
+        column="modify_date"
+    />
+    
+    <property 
+    	name="deleteFlag"
+    	type="integer"
+    	column="del_flag"
+    	length="1"
+    />
+</class>
+</hibernate-mapping>    

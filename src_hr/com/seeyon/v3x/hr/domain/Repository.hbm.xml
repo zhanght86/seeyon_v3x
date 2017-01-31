@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.Repository" table="hr_properties_repositories">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property
+          name="memberId"
+          type="long"
+          column="member_id"
+          length="20"
+          not-null="true"
+       />
+       <property
+          name="f1"
+          type="long"
+          column="f1"
+          length="20"
+          not-null="false"
+       />
+       <property
+          name="f2"
+          type="double"
+          column="f2"
+          length="12"
+          not-null="false"
+       />
+       <property
+          name="f3"
+          type="date"
+          column="f3"
+          not-null="false"
+       />
+       <property
+          name="f4"
+          type="string"
+          column="f4"
+          length="255"
+          not-null="false"
+       />
+       <property
+          name="f5"
+          type="clob"
+          column="f5"
+          not-null="false"
+       />
+       <property
+          name="property_id"
+          type="long"
+          column="property_id"
+          length="20"
+          not-null="true"
+       />
+       <property
+          name="page_id"
+          type="long"
+          column="page_id"
+          length="20"
+          not-null="true"
+       />
+       <property
+          name="operation_id"
+          type="long"
+          column="operation_id"
+          length="20"
+          not-null="true"
+       />
+       <property
+          name="createTime"
+          type="timestamp"
+          column="createTime"
+          not-null="false"
+       />
+       <property
+          name="ordering"
+          type="int"
+          column="ordering"
+          length="4"
+          not-null="true"
+       />
+       
+	</class>
+</hibernate-mapping>
+
+

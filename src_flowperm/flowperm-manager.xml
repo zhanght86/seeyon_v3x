@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<bean id="flowPermManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.flowperm.manager.FlowPermManagerImpl" init-method="init">
+				<property name="configManager" ref="configManager" />
+				<property name="edocElementFlowPermAclManager" ref="edocElementFlowPermAclManager"/>
+				<property name="edocElementManager" ref="edocElementManager" />
+				<property name="metadataManager" ref="metadataManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean class="com.seeyon.v3x.flowperm.listener.FlowOrganizationEventListener">
+	</bean>
+</beans>

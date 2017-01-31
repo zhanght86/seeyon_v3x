@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="taskController" class="com.seeyon.v3x.taskmanage.controller.TaskController">
+		<property name="userMessageManager" ref="UserMessageManager"/>
+	</bean>
+	
+	<bean id="taskManageLock" parent="lockManager">
+		<property name="module" value="taskManageLock"/>
+	</bean>
+	
+	<bean id="taskInfoManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.taskmanage.manager.TaskInfoManagerImpl" >
+				<property name="userMessageManager" ref="UserMessageManager"/>
+				<property name="taskManageLock" ref="taskManageLock"/>
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="query*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>		
+	</bean>
+	
+	<bean id="taskRoleManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.taskmanage.manager.TaskRoleManagerImpl" >
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="query*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>		
+	</bean>
+	
+	<bean id="taskInfoDao" class="com.seeyon.v3x.taskmanage.dao.TaskInfoDao" />
+	<bean id="taskInfoBodyDao" class="com.seeyon.v3x.taskmanage.dao.TaskInfoBodyDao" />
+	<bean id="taskRoleDao" class="com.seeyon.v3x.taskmanage.dao.TaskRoleDao" />
+	<bean id="taskReplyDao" class="com.seeyon.v3x.taskmanage.dao.TaskReplyDao" />
+	<bean id="taskFeedbackDao" class="com.seeyon.v3x.taskmanage.dao.TaskFeedbackDao" />
+</beans>
+

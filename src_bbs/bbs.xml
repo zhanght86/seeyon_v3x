@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="bbsController"
+		class="com.seeyon.v3x.bbs.controller.BbsController"
+		autowire="byName" init-method="init">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="replyCounts" value="50" />
+	</bean>
+	
+	<bean id="bbsBoardManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.bbs.manager.BbsBoardManagerImpl" init-method="init" singleton="true">
+				<property name="orgManager" ref="OrgManager"></property>
+				<property name="spaceManager" ref="spaceManager"/> 
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="init*">PROPAGATION_REQUIRED</prop>
+				<prop key="create*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="auth*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="bbsBoardDao" class="com.seeyon.v3x.bbs.dao.BbsBoardDao">
+	</bean>
+	
+	<bean id="bbsArticleManager"  parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.bbs.manager.BbsArticleManagerImpl">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>				
+		</property>
+		
+		<property name="transactionAttributes">
+			<props>
+				<prop key="list*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="count*">PROPAGATION_SUPPORTS</prop>
+				<prop key="iSearch">PROPAGATION_SUPPORTS</prop>
+				<prop key="getSQLQueryArticleList">PROPAGATION_SUPPORTS</prop>
+				<prop key="getQueryArticleList">PROPAGATION_SUPPORTS</prop>
+				<prop key="DeptqueryArticleList">PROPAGATION_SUPPORTS</prop>
+				<prop key="query*">PROPAGATION_SUPPORTS</prop>
+				<prop key="updateClickNumber">PROPAGATION_SUPPORTS</prop>
+				
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="bbsArticleDao" class="com.seeyon.v3x.bbs.dao.BbsArticleDao">
+	</bean>
+	
+	<bean id="bbsArticleReplyDao" class="com.seeyon.v3x.bbs.dao.BbsArticleReplyDao">
+	</bean>
+	<bean id="bbsBoardAuthDao" class="com.seeyon.v3x.bbs.dao.BbsBoardAuthDao">
+	</bean>
+	
+	<bean id="vbsArticleIssueAreaDao" class="com.seeyon.v3x.bbs.dao.BbsArticleIssueAreaDao">
+	</bean>
+		
+	<bean id="validateBoardNameManager"   parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.bbs.manager.ValidateBoardNameManager" >
+				<property name="orgManager" ref="OrgManager" />
+			</bean>				
+		</property>
+		
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="bbsManager4ISearch" parent="baseTxService" >
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.bbs.manager.BbsManager4ISearch" init-method="init">
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean class="com.seeyon.v3x.bbs.listener.BbsOrganizationEventListener">
+		<property name="bbsBoardManager" ref="bbsBoardManager" />
+	</bean>
+</beans>

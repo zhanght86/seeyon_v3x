@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd"><!--  - Application context definition for "springapp" DispatcherServlet.  -->
+<beans default-autowire="byName" default-lazy-init="true">
+	<!-- 注册Controller -->
+	<bean id="mainController"
+		class="com.seeyon.v3x.main.controller.MainController">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="configManager" ref="configManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="shortcutManager" ref="shortcutManager" />
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="mobileMessageManager" ref="mobileMessageManager" />
+		<property name="menuManager" ref="menuManager" />
+		<property name="staffInfoManager" ref="staffInfoManager" />		
+		<property name="metadataManager" ref="metadataManager" />
+		<property name="colManager" ref="colManager"/>	
+		<property name="edocManager" ref="edocManager" />	
+		<property name="edocSummaryManager" ref="edocSummaryManager"></property>
+	</bean>
+	
+	<!-- 常用语 -->
+	<bean id="phraseController"
+		class="com.seeyon.v3x.main.phrase.CommonPhraseController"
+		autowire="byName">
+		<property name="phraseManager" ref="phraseManager" />
+	</bean>
+
+	<!-- 在线消息 -->
+	<bean id="messageController"
+		class="com.seeyon.v3x.online.controller.MessageController"
+		autowire="byName">
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="orgManager" ref="OrgManager" />
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="mobileMessageManager" ref="mobileMessageManager" />
+		<property name="userMessageFilterConfigManager" ref="userMessageFilterConfigManager" />
+		<property name="messageMailManager" ref="messageMailManager" />
+		<property name="bulDataManager" ref="bulDataManager" />
+		<property name="newsDataManager" ref="newsDataManager" />		
+		<property name="inquiryManager" ref="inquiryManager" />
+		<property name="bbsBoardManager" ref="bbsBoardManager" />
+		<property name="fileManager" ref="fileManager" />
+		<property name="projectManager" ref="projectManager" />
+		<property name="wimManager" ref="wimManager"/>
+		<property name="affairManager" ref="affairManager"/>
+		<property name="colManager" ref="colManager"/>
+		<property name="videoConferenceManager" ref="videoConferenceManager"/>
+	</bean>
+	
+    <!-- 公共信息管理 -->
+	<bean id="publicManagerController"
+		class="com.seeyon.v3x.publicManager.controller.PublicManagerController"
+		autowire="byName">
+	</bean>
+	
+	<!-- 个人模版管理 -->
+	<bean id="myTemplateController"
+		class="com.seeyon.v3x.mytemplate.controller.MyTemplateController"
+		autowire="byName">
+	</bean>
+	
+	<!-- 资源管理 -->
+	<bean id="resourceController"
+		class="com.seeyon.v3x.resource.controller.ResourceController"
+		autowire="byName">
+		<property name="resourceManager" ref="resourceManager" />
+	</bean>
+	
+	<!-- 空间管理 -->
+	<bean id="spaceController" class="com.seeyon.v3x.space.controller.SpaceController">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="spaceManager" ref="spaceManager" />
+	</bean>
+	<bean id="sectionDefinitionController" class="com.seeyon.v3x.main.section.definition.controller.SectionDefinitionController">
+		<property name="sectionDefinitionManager" ref="sectionDefinitionManager" />
+	</bean>
+	
+	<!-- 消息管理 -->
+	<bean id="messageManagerController"
+		class="com.seeyon.v3x.messageManager.controller.MessageManagerController"
+		autowire="byName">
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="messageDelsetManager" ref="messageDelsetManager" />
+	</bean>
+	
+	<!-- 系统开关 -->
+	<bean id="SystemOpenController"
+		class="com.seeyon.v3x.systemopen.controller.SystemOpenController"
+		autowire="byName">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+	</bean>
+	
+	<!-- (部门空间)留言管理 -->
+	<bean id="guestbookController" 
+	      class="com.seeyon.v3x.guestbook.controller.GuestbookController" 
+		  autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="guestbookManager" ref="guestbookManager" />
+		<property name="staffInfoManager" ref="staffInfoManager" />	
+		<property name="peoplerelateManager" ref="peoplerelateManager" />	
+	</bean>
+	
+	<!-- 菜单权限管理 -->
+	<bean id="menuManagerController"
+		class="com.seeyon.v3x.menu.controller.MenuManagerController"
+		autowire="byName">
+		<property name="menuManager" ref="menuManager" />
+	</bean>	
+	
+		<!-- 综合查询 lihf 2008.03.17 -->
+	<bean id="iSearchController"
+		class="com.seeyon.v3x.isearch.controller.ISearchController"
+		autowire="byName">
+
+	</bean>
+	
+	<!-- 栏目公示板内容 -->
+	<bean id="noticeController" class="com.seeyon.v3x.notice.controller.NoticeController" autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+	</bean>
+	
+</beans>

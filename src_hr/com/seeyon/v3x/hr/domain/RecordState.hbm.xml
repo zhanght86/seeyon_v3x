@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.RecordState" table="hr_record_state">
+	<id name="id" type="integer">
+			<column name="id" />
+			<generator class="assigned" />
+	</id>
+	<property
+          name="state_name"
+          type="string"
+          column="state_name"
+          length="255"
+          not-null="true"
+    />
+    <property
+          name="trueName"
+          type="string"
+          column="true_name"
+          length="255"
+          not-null="true"
+    />
+	
+	</class>
+</hibernate-mapping>

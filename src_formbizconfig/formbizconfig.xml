@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="formBizConfigController" class="com.seeyon.v3x.formbizconfig.controller.FormBizConfigController">
+		<property name="userMessageManager">
+			<ref bean="UserMessageManager" />
+		</property>
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+
+	<bean id="formBizConfigManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.formbizconfig.manager.FormBizConfigManagerImpl" >
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>		
+	</bean>
+	
+	<bean id="formBizConfigColumnManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.formbizconfig.manager.FormBizConfigColumnManagerImpl" >
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>		
+	</bean>
+	
+	<bean id="v3xBizConfigManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.formbizconfig.manager.V3xBizConfigManagerImpl" init-method="init">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>		
+	</bean>
+
+	<bean id="formBizConfigDao" class="com.seeyon.v3x.formbizconfig.dao.FormBizConfigDao">
+	</bean>
+	
+	<bean id="formBizConfigColumnDao" class="com.seeyon.v3x.formbizconfig.dao.FormBizConfigColumnDao">
+	</bean>
+	
+	<bean id="formBizConfigShareScopeDao" class="com.seeyon.v3x.formbizconfig.dao.FormBizConfigShareScopeDao">
+	</bean>
+	
+	<bean id="formBizConfigMenuProfileDao" class="com.seeyon.v3x.formbizconfig.dao.FormBizConfigMenuProfileDao">
+	</bean>
+	
+	<bean id="formBizConfigTempletProfileDao" class="com.seeyon.v3x.formbizconfig.dao.FormBizConfigTempletProfileDao">
+	</bean>
+	
+	<bean id="v3xBizConfigDao" class="com.seeyon.v3x.formbizconfig.dao.V3xBizConfigDao">
+	</bean>
+	
+</beans>

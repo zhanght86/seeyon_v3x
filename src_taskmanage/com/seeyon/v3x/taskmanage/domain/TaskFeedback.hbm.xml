@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.taskmanage.domain.TaskFeedback" lazy="false" table="task_feedback">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />			
+		</id>
+		<property name="createTime" type="timestamp" column="create_time" not-null="true" length="19" />
+		<property name="createUser" type="long" column="create_user" not-null="true" length="20" />
+		<property name="updateTime" type="timestamp" column="update_time" not-null="true" length="19" />
+		<property name="updateUser" type="long" column="update_user" not-null="true" length="20" />
+		<property name="elapsedTime" type="float" column="elapsed_time" not-null="true" length="12" />
+		<property name="finishRate" type="float" column="finish_rate" not-null="true" length="12" />
+		<property name="content" type="string" column="content" not-null="true" length="4000" />
+		<property name="hasAttachments" type="boolean" column="has_attachments" not-null="true" length="4" />
+		<property name="taskId" type="long" column="task_id" not-null="true" length="20" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.project.domain.ProjectSummary" 
+    table="project_summary"
+    lazy="true"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="begintime"
+        type="java.util.Date"
+        column="begintime"
+    />
+    <property
+        name="closetime"
+        type="java.util.Date"
+        column="closetime"
+    />
+    <property
+        name="projectCreator"
+        type="long"
+        column="project_creator"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="projectManager"
+        type="long"
+        column="project_manager"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="department"
+        type="long"
+        column="department"
+        not-null="true"
+        length="20"
+    />
+     <property
+        name="publicState"
+        type="byte"
+        column="public_state"
+        length="4"
+    />
+    <property
+        name="projectDesc"
+        type="string"
+        column="project_desc"
+        length="4000"
+    />
+    <property
+        name="projectName"
+        type="string"
+        column="project_name"
+        not-null="true"
+        length="1000"
+    />
+    <property
+        name="projectProcess"
+        type="float"
+        column="project_process"
+        length="10"
+    />
+    <property
+        name="projectState"
+        type="byte"
+        column="project_state"
+        length="4"
+    />
+    <property
+        name="projectTypeName"
+        type="string"
+        column="project_type"
+        not-null="true"
+        length="255"
+    />
+    <property
+        name="projectTypeId"
+        type="long"
+        column="project_type_id"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="domainId"
+        type="long"
+        column="domain_id"
+        length="20"
+    />
+
+	 <property
+        name="phaseId"
+        type="long"
+        column="phase_id"
+        length="20"
+    />
+    <property
+        name="templates"
+        type="string"
+        column="templates"
+        length="4000"
+    />
+
+    <!-- Associations -->
+    
+    <!-- uni-directional many-to-one association to ProjectMember -->
+    <set
+        name="projectMembers"
+        inverse="true"
+        cascade="all-delete-orphan"
+        lazy="false"
+        order-by="member_sort"
+    >
+        <key>
+            <column name="project_id" /> <!-- a foreign key in project_member referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.project.domain.ProjectMember" />
+    </set>
+    <!-- uni-directional many-to-one association to ProjectPhase -->
+    <set
+        name="projectPhases"
+        inverse="true"
+        cascade="all-delete-orphan"
+        lazy="false"
+        order-by="phase_begintime"
+    >
+        <key>
+            <column name="project_id" /> <!-- a foreign key in project_phase referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.project.domain.ProjectPhase" />
+    </set>
+
+</class>
+</hibernate-mapping>

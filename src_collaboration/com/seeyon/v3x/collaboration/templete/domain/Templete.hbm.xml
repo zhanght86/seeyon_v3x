@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.collaboration.templete.domain.Templete" 
+    table="v3x_templete"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="body"
+        type="clob"
+        column="body"
+    />
+    <property 
+    	name="bodyType"
+    	type="string"
+    	column="body_type"
+    	length="255"
+	/>
+    <property
+        name="categoryId"
+        type="long"
+        column="category_id"
+        length="20"
+    />
+    <property
+        name="createDate"
+        type="timestamp"
+        column="create_date"
+        length="19"
+    />
+    <property
+        name="collSubject"
+        type="string"
+        column="col_subject"
+        length="255"
+    />
+    <property
+        name="description"
+        type="string"
+        column="description"
+        length="255"
+    />
+    <property
+        name="memberId"
+        type="long"
+        column="member_id"
+        length="20"
+    />
+    <property
+        name="orgAccountId"
+        type="long"
+        column="org_account_id"
+        length="20"
+    />
+    <property
+        name="sort"
+        type="integer"
+        column="sort"
+        length="11"
+    />
+    <property
+        name="state"
+        type="integer"
+        column="state"
+        length="4"
+    />
+    <property
+        name="subject"
+        type="string"
+        column="subject"
+        length="255"
+    />
+     <property
+        name="standardDuration"
+        type="integer"
+        column="standard_duration"
+        length="11"
+    />
+    <property
+        name="summary"
+        type="clob"
+        column="summary"
+    />
+    <property
+        name="type"
+        type="string"
+        column="type"
+        length="50"
+    />
+    <property 
+    	name="isSystem"
+    	type="boolean"
+    	column="is_system"
+    />
+    
+    <property
+    	name="identifier"
+    	type="string"
+    	column="identifier"
+    />
+    <property
+    	name="workflowRule"
+    	type="clob"
+    	column="workflow_rule"
+    />
+    <property
+        name="workflow"
+        type="clob"
+        column="workflow"
+    />
+    <property
+        name="projectId"
+        type="long"
+        column="project_id"
+        length="20"
+    />
+    
+    <property
+        name="categoryType"
+        type="integer"
+        column="category_type"
+        length="4"
+    />
+    <property
+        name="formParentId"
+        type="long"
+        column="form_parentId"
+        length="20"
+    />
+     <property
+        name="templeteNumber"
+        type="string"
+        column="templete_number"
+        length="255"
+    />
+    
+    <property
+    	name="subCategoryType"
+    	column="sub_category_type"
+    	type="long"
+    	length="20"
+    />
+    
+    <property
+        name="secretLevel"
+        type="integer"
+        column="secret_level"
+        length="4"
+    />
+
+    <!-- Associations -->
+    <!-- bi-directional many-to-one association to V3xTempleteAuth -->
+    <set
+        name="templeteAuths"
+        inverse="true"
+        lazy="true"
+        cascade="all"
+        order-by="sort"
+    >
+        <key>
+            <column name="object_id" /> <!-- a foreign key in v3x_templete_auth referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.collaboration.templete.domain.TempleteAuth" />
+    </set>
+
+</class>
+</hibernate-mapping>

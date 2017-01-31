@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.Assess" table="hr_staff_assess">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property
+          name="begin_date"
+          type="timestamp"
+          column="begin_date"
+          length="19"
+        />
+        <property
+          name="end_date"
+          type="timestamp"
+          column="end_date"
+          length="19"
+        />
+        <property
+          name="assess_name"
+          type="string"
+          column="assess_name"
+          length="255"
+       />
+       <property
+          name="organization"
+          type="string"
+          column="organization"
+          length="255"
+       />
+       <property
+          name="assess_result"
+          type="string"
+          column="assess_result"
+          length="255"
+       />
+       <property
+          name="assess_content"
+          type="clob"
+          column="assess_content"
+       />
+       <property
+          name="member_id"
+          type="long"
+          column="member_id"
+          length="20"
+          not-null="true"
+        />
+	</class>
+</hibernate-mapping>

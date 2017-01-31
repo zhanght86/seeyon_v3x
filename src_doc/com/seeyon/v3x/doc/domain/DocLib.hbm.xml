@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocLib" lazy="false"
+		table="doc_libs">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="columnEditable" type="boolean"
+			column="column_editable" not-null="true" length="4" />
+		<property name="searchConditionEditable" type="boolean"
+			column="search_condition_editable" not-null="true" length="4" />
+		<property name="createTime" type="timestamp"
+			column="create_time" not-null="true" length="19" />
+		<property name="createUserId" type="long"
+			column="create_user_id" length="20" />
+		<property name="description" type="string" column="description"
+			length="255" />
+		<property name="folderEnabled" type="boolean"
+			column="folder_enabled" not-null="true" length="4" />
+		<property name="isHidden" type="boolean" column="is_hidden"
+			not-null="true" length="4" />
+		<property name="isDefault" type="boolean" column="is_default"
+			not-null="true" length="4" />
+		<property name="isSearchConditionDefault" type="boolean" column="is_search_condition_default"
+			not-null="true" length="4" />
+		<property name="lastUpdate" type="timestamp"
+			column="last_update" not-null="true" length="19" />
+		<property name="lastUserId" type="long" column="last_user_id"
+			length="20" />
+		<property name="name" type="string" column="name"
+			not-null="true" length="255" />
+		<property name="status" type="byte" column="status"
+			not-null="true" length="4" />
+		<property name="type" type="byte" column="type" not-null="true"
+			length="4" />
+		<property name="typeEditable" type="boolean"
+			column="type_editable" not-null="true" length="4" />
+		<property name="orderNum" type="integer" column="order_num"
+			not-null="true" length="11" />
+			
+		<property name="listByDefaultOrder" type="boolean"
+			column="list_by_default_order" not-null="true" length="4" />
+		<property name="officeEnabled" type="boolean"
+			column="office_enabled" not-null="true" length="4" />
+		<property name="a6Enabled" type="boolean"
+			column="a6_enabled" not-null="true" length="4" />
+		<property name="uploadEnabled" type="boolean"
+			column="upload_enabled" not-null="true" length="4" />
+		<property name="logView" type="boolean"
+			column="log_view" not-null="true" length="4" />
+		<property name="domainId" type="long"
+			column="domain_id" length="20" />
+		<property name="printLog" type="boolean"
+			column="printLog_view"  length="4" />			
+		<property name="downloadLog" type="boolean"
+			column="downloadLog_view"  length="4" />
+	
+	<!-- 	<set name="docOwners" inverse="true" lazy="false"
+			cascade="delete,all-delete-orphan">
+			<key>
+				<column name="doc_lib_id" />
+			</key>
+			<one-to-many class="com.seeyon.v3x.doc.domain.DocLibOwner" />
+		</set> -->
+
+		<!--set name="docMemeber" inverse="true" lazy="true"
+			cascade="delete">
+			<key>
+				<column name="doc_lib_id" />
+			</key>
+			<one-to-many class="com.seeyon.v3x.doc.domain.DocLibMember" />
+		</set-->
+		
+		<!--set name="docLibOwners" inverse="true" lazy="true"
+			cascade="delete">
+			<key>
+				<column name="doc_lib_id" />
+			</key>
+			<one-to-many class="com.seeyon.v3x.doc.domain.DocLibOwner" />
+		</set-->		
+
+		<!--set name="docResource" inverse="true" lazy="true" cascade="delete">
+			<key>
+				<column name="doc_lib_id" />
+			</key>
+			<one-to-many class="com.seeyon.v3x.doc.domain.DocResource" />
+		</set-->		
+
+		<!-- Associations -->
+
+	</class>
+</hibernate-mapping>

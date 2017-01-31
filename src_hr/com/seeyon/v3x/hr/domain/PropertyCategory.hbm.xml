@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.PropertyCategory" table="hr_properties_categories">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property
+          name="name"
+          type="string"
+          column="name"
+          length="255"
+          not-null="true"
+       />
+       <property
+          name="memo"
+          type="string"
+          column="memo"
+          length="255"
+          not-null="false"
+       />
+       <property
+          name="remove"
+          type="int"
+          column="remove"
+          length="4"
+          not-null="false"
+       />
+        <property
+          name="accountId"
+          type="long"
+          column="accountId"
+          length="20"
+       />
+       <property
+			name="sysFlag"
+			column="sys_flag"
+			type="boolean"
+			not-null="true"
+			length="1"
+		/>
+	</class>
+</hibernate-mapping>

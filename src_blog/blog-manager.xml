@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="blogManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.blog.manager.BlogManagerImpl" >
+			<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="list*">PROPAGATION_SUPPORTS</prop>
+				<prop key="check*">PROPAGATION_SUPPORTS</prop>
+				<prop key="blogIsOpen">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+		
+	</bean>
+
+	<bean id="blogDao" class="com.seeyon.v3x.blog.dao.BlogDao">
+	</bean>
+	
+	<bean id="blogFamilyManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.blog.manager.BlogFamilyManagerImpl" >
+			<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="list*">PROPAGATION_SUPPORTS</prop>
+				<prop key="valid*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="blogFamilyDao" class="com.seeyon.v3x.blog.dao.BlogFamilyDao">
+	</bean>
+	
+	<bean id="blogArticleManager"  parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.blog.manager.BlogArticleManagerImpl">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>				
+		</property>
+		
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="list*">PROPAGATION_SUPPORTS</prop>
+				<prop key="has*">PROPAGATION_SUPPORTS</prop>
+				<prop key="query*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="blogArticleDao" class="com.seeyon.v3x.blog.dao.BlogArticleDao">
+	</bean>
+	
+	<bean id="blogReplyDao" class="com.seeyon.v3x.blog.dao.BlogReplyDao">
+	</bean>
+	<bean id="blogAttentionDao" class="com.seeyon.v3x.blog.dao.BlogAttentionDao">
+	</bean>
+	
+	<bean id="blogEmployeeDao" class="com.seeyon.v3x.blog.dao.BlogEmployeeDao">
+	</bean>
+	<bean id="blogFavoritesDao" class="com.seeyon.v3x.blog.dao.BlogFavoritesDao">
+	</bean>
+		<bean id="blogShareDao" class="com.seeyon.v3x.blog.dao.BlogShareDao">
+	</bean>
+		
+	
+	<bean	class="com.seeyon.v3x.collaboration.manager.impl.ColManagerImpl">
+		<property name="userMessageManager" ref="UserMessageManager" />
+	</bean>
+	
+	<bean id="validateFamilyNameManager"   parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.blog.manager.ValidateFamilyNameManager" />				
+		</property>
+		
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean class="com.seeyon.v3x.blog.listener.BlogOrganizationEventListener">
+		<property name="blogManager" ref="blogManager" />
+	</bean>
+</beans>

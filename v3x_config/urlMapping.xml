@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+
+	<bean id="GenericFilterBean" class="com.seeyon.v3x.common.web.GenericFilterBean">
+		<property name="genericFilterProxies">
+			<list>
+				<bean class="com.seeyon.v3x.common.web.security.qs.QSFilter">
+					<property name="urlPattern" value="*.do" />
+				</bean>
+				<bean class="com.seeyon.v3x.common.office.trans.OfficeTransFilterImpl">
+					<property name="urlPattern" value="/office/cache/*" />
+				</bean>
+				<bean class="com.seeyon.v3x.common.web.LoggerGenericFilterProxy">
+					<property name="urlPattern" value="/logs/*" />
+					<property name="infoOpenManager" ref="infoOpenManager" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+    <!-- 定义Spring MVC 的Controller 的urlMapping -->
+    <bean id="urlMapping"
+          class="com.seeyon.v3x.common.SimpleUrlHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="commonInterceptor"/>
+                <ref bean="openSessionInViewInterceptor"/>
+                <ref bean="addinMenuInterceptor"/>
+                <ref bean="roleSecurityCheckInterceptor"/>
+            </list>
+        </property>
+        <property name="mappings">
+            <props>
+                <prop key="/genericController.do">genericController</prop>
+                <prop key="/selectPeople.do">selectPeopleController</prop>
+                <prop key="/main.do">mainController</prop>
+                <prop key="/collaboration.do">collaborationController</prop>
+                <prop key="/templete.do">templeteController</prop>
+                <prop key="/message.do">messageController</prop>
+                <prop key="/fileUpload.do">fileUploadController</prop>
+                <prop key="/office.do">officeController</prop>
+                <prop key="/phrase.do">phraseController</prop>
+                <prop key="/bbs.do">bbsController</prop>
+                <prop key="/blog.do">blogController</prop>
+                <prop key="/timecard.do">timecardController</prop>
+                <prop key="/publicManager.do">publicManagerController</prop>
+                <prop key="/doc.do">docController</prop>
+                <prop key="/docManager.do">docManagerController</prop>
+                <prop key="/docSpace.do">docSpaceController</prop>
+                <prop key="/popeleLeave.do">memberLeaveController</prop>
+               <!-- <prop key="/metadataDef.do">
+                    metadataDefController
+                </prop>-->
+                <!-- 系统开关 -->
+                <prop key="/systemopen.do">SystemOpenController</prop> 
+                
+                <!-- 调查 -->
+                <prop key="/inquiry.do">inquiryController</prop>
+				<prop key="/inquirybasic.do">inquiryBasicController</prop>
+                
+                <!-- 公告管理 -->
+				<prop key="/bulData.do">bulDataController</prop>
+				<prop key="/bulRead.do">bulReadController</prop>
+				<prop key="/bulTemplate.do">bulTemplateController</prop>
+				<prop key="/bulType.do">bulTypeController</prop>
+				
+				<!-- 新闻 -->
+				<prop key="/newsData.do">newsDataController</prop>
+				<prop key="/newsRead.do">newsReadController</prop>
+				<prop key="/newsTemplate.do">newsTemplateController</prop>
+				<prop key="/newsType.do">newsTypeController</prop>
+				
+				<!-- 计划 -->
+				<prop key="/planStyle.do">planStyleController</prop>
+				<prop key="/planSystemMgr.do">planSystemMgrController</prop>
+				<prop key="/plan.do">planController</prop>
+				<prop key="/planUserScope.do">planUserScopeController</prop>
+				
+				<!-- 会议 -->
+				<prop key="/mtContentTemplate.do">mtContentTemplateController</prop>
+				<prop key="/mtSummaryTemplate.do">mtSummaryTemplateController</prop>
+				<prop key="/mtMeeting.do">mtMeetingController</prop>
+				<prop key="/mtTemplate.do">mtTemplateController</prop>
+				<!-- hr工资 -->
+				<prop key="/hrSalary.do">hrSalaryController</prop>
+				<prop key="/hrViewSalary.do">hrViewSalaryController</prop>
+				<!-- hr统计分析 -->
+				<prop key="/hrStatistic.do">hrStatisticController</prop>	
+                <!-- hr人员基本信息 -->
+                <prop key="/hrStaff.do">hrStaffInfoController</prop>
+                <!-- hr打卡记录 -->
+                <prop key="/hrRecord.do">hrRecordController</prop>
+                <!-- hr调配管理 -->
+                <prop key="/hrStaffTransfer.do">hrStaffTransferController</prop>
+				<!-- hr自定义选项 -->
+				<prop key="/hrUserDefined.do">hrUserDefinedController</prop>
+				<!-- hr日志查询 -->
+				<prop key="/hrLog.do">hrLogController</prop>
+				<!-- hr打印 -->
+				<prop key="/hrPrint.do">hrPrintController</prop>
+				<!-- hr表单 -->
+				<prop key="/hrForm.do">hrFormController</prop>
+				<!--hr 组织管理 -->
+                <prop key="/hrOrgMgr.do">hrOrgMgrController</prop>
+                <!-- 考勤申请表单 -->
+                <prop key="/hrApp.do">hrRecordAppController</prop>
+								
+				<!-- 日程事件 -->
+				<prop key="/calEvent.do">calEventController</prop>
+                
+                <!-- 组织模型 -->
+                <prop key="/organization.do">organizationController</prop>
+                
+                <prop key="/indexInterface.do">indexController</prop>
+                
+                <!-- 关联人员 -->
+				<prop key="/relateMember.do">peoplerelateController</prop>
+				<!-- 角色管理 -->
+				<prop key="/roleManage.do">roleController</prop>
+				<!-- 公文 -->
+                <!-- <prop key="/edocWordNo.do">edocWordNoController</prop> -->
+                <prop key="/edocController.do">edocController</prop>
+                <prop key="/edocStat.do">edocStatController</prop>
+                <prop key="/edocElement.do">edocElementController</prop>
+                <prop key="/edocForm.do">edocFormController</prop>
+                <prop key="/edocTempleteController.do">edocTempleteController</prop>
+                <prop key="/exchangeEdoc.do">exchangeEdocController</prop>
+                <prop key="/edocMark.do">edocDocMarkController</prop>  
+                <prop key="/edocDocTemplate.do">edocDocTemplateController</prop>  
+                <prop key="/edocSupervise.do">edocSuperviseController</prop> 
+                <prop key="/edocOpenController.do">edocOpenController</prop> 
+                <prop key="/edocObjTeamController.do">edocObjTeamController</prop> 
+                                
+                <prop key="/webmail.do">webMailController</prop>
+                
+                <!-- 分区管理 -->
+                <prop key="/partition.do">partitionController</prop>
+                <!--项目管理  -->
+                <prop key="/project.do">projectController</prop>
+          
+
+				<!-- 管理员维护 -->
+				<prop key="/manager.do">managerController</prop>
+				<prop key="/accountManager.do">accountManagerController</prop>
+				
+				<!-- 锁定账户管理 -->
+				<prop key="/lockedUserManager.do">lockedUserManagerController</prop>
+				
+				<!-- 工作范围设置  -->
+				<prop key="/worksarea.do">workscopeController</prop>
+				<!-- 元数据管理  -->
+				<prop key="/metadata.do">metaDataMgrController</prop>
+
+				<!-- 印章管理设置 -->
+				<prop key="/signet.do">signetController</prop>
+				<!-- 个人代理设置 -->
+				<prop key="/proxy.do">proxyController</prop>
+				<!-- 个人模版管理 -->
+				<prop key="/mytemplate.do">myTemplateController</prop>
+				<!-- 消息管理 -->
+				<prop key="/messageManager.do">messageManagerController</prop>								
+				<prop key="/addressbook.do">addressBookController</prop>				
+				<!-- 流程权限管理 -->
+                <prop key="/flowPerm.do">flowPermController</prop>
+                 <!-- 空间管理 -->
+                <prop key="/space.do">spaceController</prop>
+                <prop key="/sectionDefinition.do">sectionDefinitionController</prop>
+                
+                <!-- 常用连接 -->
+                <prop key="/linkManager.do">linkManagerController</prop>
+            	<!-- RSS 管理 -->
+				<prop key="/rssManager.do">rssManagerController</prop>
+				<!-- 资源管理 -->
+				<prop key="/comResource.do">resourceController</prop>
+				<!-- 管理岗位类别 -->				
+				<prop key="/post.do">postController</prop>
+				<!-- 个人密码设置 -->
+				<prop key="/individual.do">individualManagerController</prop>
+				
+				<!-- 系统未分配人员设置 -->
+				<prop key="/distribute.do">distributeManagerController</prop>
+				<!-- 系统兼职管理 -->
+				<prop key="/plurality.do">pluralityManagerController</prop>
+				
+				<!-- 移动应用-->	
+				<!-- 		
+         		<prop key="/mobile.do">mobileController</prop>
+				<prop key="/mobileNewCo.do">newCollaborationController</prop>
+				<prop key="/mobileFChart.do">flowChartController</prop>
+				<prop key="/mobileDAffairs.do">disposingAffairsController</prop>
+				 -->
+				<prop key="/mob.do">mobController</prop>
+				
+				<prop key="/webservice.do">webServiceController</prop>	
+				
+				<!-- 综合办公 -->	
+				<prop key="/stockInfo.do">stockInfoController</prop>
+                <prop key="/stockApply.do">stockApplyController</prop>
+                <prop key="/stockAudit.do">stockAuditController</prop>
+                <prop key="/autoInfo.do">autoInfoController</prop>
+                <prop key="/autoApply.do">autoApplyController</prop>
+                <prop key="/autoAudit.do">autoAuditController</prop>
+                <prop key="/autoDepart.do">autoDepartBackController</prop>
+                <prop key="/autoViolate.do">autoViolateController</prop>
+                <prop key="/lossInfo.do">officeLossController</prop>
+                <prop key="/selectResource.do">selectResourceController</prop>
+				<prop key="/asset.do">assetController</prop>
+				<prop key="/book.do">bookController</prop>
+				<prop key="/myApply.do">myApplyController</prop>
+				<prop key="/typeInfo.do">officeTypeInfoController</prop>
+				<prop key="/officeadmin.do">officeAdminController</prop>
+
+                <!-- 表单设置  -->
+                <prop key="/bindForm.do">bindController</prop>
+                <prop key="/form.do">formAppMainController</prop>
+                <prop key="/formquery.do">formQueryController</prop>
+                <prop key="/formreport.do">formReportController</prop>
+                <prop key="/formenum.do">formEnumController</prop>
+                <prop key="/menubind.do">menuBindController</prop>
+                <prop key="/formserialNumber.do">serialNumberController</prop>  
+                <prop key="/formappMgrController.do">formappMgrController</prop>  
+                <prop key="/appFormController.do">appFormController</prop>  
+                <prop key="/triggerController.do">triggerController</prop>  
+                 
+                <!-- 部门空间留言本 -->
+				<prop key="/guestbook.do">guestbookController</prop>
+				
+				<prop key="/serverState.do">serverStateController</prop>
+				<!-- 移动应用管理 -->
+				<prop key="/mobileManager.do">mobileManagerController</prop>
+				<!-- 菜单权限管理 -->
+				<prop key="/menuManager.do">menuManagerController</prop>
+				
+				<!-- 日志应用管理 -->
+				<prop key="/log.do">logController</prop>			
+				<prop key="/logonLog.do">logonLogController</prop>
+				<prop key="/thirdparty.do">thirdpartyController</prop>
+				<prop key="/appLog.do">appLogController</prop>	
+				
+				<!-- 协同督办 -->		
+				<prop key="/colSupervise.do">colSuperviseController</prop>
+
+				
+				<!-- 综合查询 -->
+				<prop key="/isearch.do">iSearchController</prop>
+				
+				<!-- 代理设置 -->
+				<prop key="/agent.do">agentIntercalateController</prop>	
+				
+				<!-- 会议室管理 -->
+				<prop key="/meetingroom.do">meetingRoomController</prop>	
+
+				<!-- 工作管理Controller -->
+				<prop key="/workManage.do">workManageController</prop>	
+				
+				<!-- 表单业务配置：栏目、菜单挂接 -->
+				<prop key="/formBizConfig.do">formBizConfigController</prop>	
+				<!-- 流程日志 -->
+				<prop key="/processLog.do">processLogController</prop>
+				<!-- a8精灵 -->
+				<prop key="/a8genius.do">a8geniusController</prop>
+				<!-- 接口 上传文件服务-->
+				<prop key="/uploadService.do">attachmentUploadService</prop>
+				<!-- ip访问控制 -->
+				<prop key="/ipcontrol.do">ipcontrolController</prop>
+				<!-- 工作时间设置 -->
+				<prop key="/workTimeSetController.do">workTimeSetController</prop>
+				<!-- 公文协同 批量处理 -->
+				<prop key="/batch.do">batchController</prop>
+				<prop key="/infoOpen.do">infoOpenController</prop>
+				<!-- 任务管理 -->
+				<prop key="/taskManage.do">taskController</prop>
+				<prop key="/officeTrans.do">officeTransController</prop>
+				<!-- 流程分析设置 -->
+				<prop key="/workFlowAnalysis.do">workFlowAnalysisController</prop>
+				<!-- 栏目公示板内容 -->
+				<prop key="/notice.do">noticeController</prop>
+				<!-- 分表 -->
+				<prop key="/storeRule.do">storeRuleController</prop>
+				<!-- 皮肤设置（政务） -->
+				<prop key="/skinManager.do">skinController</prop>
+				
+				<!-- 成发集团   添加 密级审核管理  yangyh-->
+				<prop key="/secretAudit.do">secretAuditController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="commonInterceptor" class="com.seeyon.v3x.common.web.interceptor.CommonInterceptor" init-method="init">
+    	<property name="annotationFactory" ref="annotationFactory" />
+    	<property name="onLineManager" ref="onLineManager" />
+    	<property name="queryStringAnnotationAwareBean" ref="queryStringAnnotationAwareBean" />
+    	<!-- 不需要验证是否登录的Controller, key - Controller的标准类名，value是Controller里面不需要验证的method -->
+    	<property name="noCheckURL">
+   			<map>
+   				<entry key="com.seeyon.v3x.main.controller.MainController">
+   					<set>
+   						<value>login</value>
+   						<value>vistaDown</value>
+   						<value>officeDown</value>
+   						<value>certDown</value>
+   						<value>ieSetDown</value>
+   					</set>
+   				</entry>
+   				<entry key="com.seeyon.v3x.doc.controller.DocController">
+   					<set>
+   						<value>docDownloadNew</value>
+   					</set>
+   				</entry>
+   				<entry key="com.seeyon.v3x.common.controller.GenericController">
+   					<set>
+   						<value>common/SessionBridge</value>
+   						<value>common/assistantSetup</value>
+   						<value>common/assistantIE</value>
+   						<value>common/assistantGenius</value>
+   						<value>common/assistantOffice</value>
+   						<value>common/assistantDefault</value>
+   						<value>common/assistantFlash</value>
+   						<value>common/assistantNotice</value>
+   						<value>common/assistantUSBKey</value>
+   						<value>common/assistantCert</value>
+   						<value>caaccount/selectPage</value>
+   						<value>common/downLoadIESet</value>
+   					</set>
+   				</entry>
+   				<entry key="com.seeyon.v3x.log.controller.LogonLogController">
+   					<set>
+   						<value>logout</value>
+   					</set>
+   				</entry>
+   				<!--
+   				<entry key="www.seeyon.com.v3x.form.controller.FormAppMainController">
+   					<set>
+   						<value>getHWjsStr</value>
+   					</set>
+   				</entry>
+   		     	-->
+   			</map>
+    	</property>
+    </bean>
+    
+    <bean id="queryStringAnnotationAwareBean" class="com.seeyon.v3x.common.web.security.qs.QueryStringAnnotationAwareBean" depends-on="annotationFactory">
+    </bean>
+
+    <bean id="openSessionInViewInterceptor"
+          class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+    <bean id="addinMenuInterceptor" class="com.seeyon.v3x.plugin.menu.AddinMenuInterceptor" />
+    <bean id="roleSecurityCheckInterceptor" class="com.seeyon.v3x.common.security.roleauthcheck.RoleSecurityCheckInterceptor" autowire="byName" init-method="init">
+    	<property name="annotationFactory" ref="annotationFactory" />
+    	<property name="orgManager" ref="OrgManager" />
+    </bean>
+</beans>

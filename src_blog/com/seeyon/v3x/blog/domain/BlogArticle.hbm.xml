@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.blog.domain.BlogArticle" 
+    table="blog_article"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="subject"
+        type="string"
+        column="subject"
+        not-null="true"
+        length="255"
+    />
+    <property
+        name="content"
+        type="clob"
+        column="content"
+    />
+    <property
+        name="issueTime"
+        type="timestamp"
+        column="issue_time"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="modifyTime"
+        type="timestamp"
+        column="modify_time"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="clickNumber"
+        type="integer"
+        column="click_number"
+        length="11"
+    />
+    <property
+        name="replyNumber"
+        type="integer"
+        column="reply_number"
+        length="11"
+    />
+    <property
+        name="state"
+        type="byte"
+        column="state"
+        length="4"
+    />
+    <property
+        name="attachmentFlag"
+        type="byte"
+        column="attachment_flag"
+        length="4"
+    />
+    <property
+        name="idCompany"
+        type="long"
+        column="id_company"
+        length="20"
+    />
+    <property
+        name="y"
+        type="integer"
+        column="y"
+        length="11"
+    />
+    <property
+        name="m"
+        type="integer"
+        column="m"
+        length="11"
+    />
+     <property
+        name="employeeId"
+        type="long"
+        column="employee_id"
+        length="20"
+    />
+     <property
+        name="familyId"
+        type="long"
+        column="family_id"
+        length="20"
+    />
+     <property
+        name="articleSize"
+        type="long"
+        column="article_size"
+        length="20"
+    />
+ <!-- 
+     <many-to-one 
+    	name="BlogEmployee"
+        class="com.seeyon.v3x.blog.domain.BlogEmployee"
+        lazy="false"
+         >
+        <column 
+        	name="employee_id" 
+        	not-null="true" 
+        	length="20"/>
+    </many-to-one>
+ 
+    <many-to-one 
+    	name="BlogFamily"
+        class="com.seeyon.v3x.blog.domain.BlogFamily"
+        lazy="false"
+         >
+        <column 
+        	name="family_id" 
+        	not-null="true" 
+        	length="20"/>
+    </many-to-one>
+ -->  
+    <set name="BlogReply" 
+    	 cascade="all-delete-orphan" 
+    	 inverse="true" 
+    	 lazy="true">
+    	<key>
+    		<column name="article_id" />
+    	</key>
+    	<one-to-many class="com.seeyon.v3x.blog.domain.BlogReply" />
+    </set>
+    
+    <set name="BlogFavorites" 
+    	 cascade="all-delete-orphan" 
+    	 inverse="true" 
+    	 lazy="true">
+    	<key>
+    		<column name="article_id" />
+    	</key>
+    	<one-to-many class="com.seeyon.v3x.blog.domain.BlogFavorites" />
+    </set>
+
+</class>
+</hibernate-mapping>

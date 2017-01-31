@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.PageLabel" table="hr_pages_labels">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property
+          name="language"
+          type="string"
+          column="language"
+          length="255"
+          not-null="true"
+       />
+        <property
+          name="pageLabelValue"
+          type="string"
+          column="page_label_value"
+          length="255"
+          not-null="true"
+       />
+       <property
+          name="page_id"
+          type="long"
+          column="page_id"
+          length="20"
+          not-null="false"
+       />
+	</class>
+</hibernate-mapping>

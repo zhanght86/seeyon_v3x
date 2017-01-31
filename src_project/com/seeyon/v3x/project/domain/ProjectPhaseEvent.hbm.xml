@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.project.domain.ProjectPhaseEvent" table="project_phase_event" lazy="true">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="eventType" type="integer" column="event_type" length="11" />
+		<property name="eventId" type="long" column="event_id" length="20" />
+		<property name="phaseId" type="long" column="phase_id" length="20" />
+	</class>
+</hibernate-mapping>

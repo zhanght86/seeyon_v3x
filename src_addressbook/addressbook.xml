@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	
+	<!-- addressbook controller -->
+	<bean id="addressBookController"
+		class="com.seeyon.v3x.addressbook.controller.AddressBookController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="addressBookManager" ref="addressBookManager" />
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="staffInfoManager" ref="staffInfoManager" />
+		<property name="fileToExcelManager" ref="fileToExcelManager" />
+		<property name="jsonView" value="jsonView"/>
+	</bean>
+	
+	<!-- addressbook service -->
+	<bean id="addressBookTarget"
+		class="com.seeyon.v3x.addressbook.manager.AddressBookManagerImpl"
+		autowire="byName">
+		<property name="addressBookMemberDao">
+			<ref local="addressBookMemberDao" />
+		</property>
+		<property name="addressBookTeamDao">
+			<ref local="addressBookTeamDao" />
+		</property>
+	</bean>
+	<bean id="addressBookManager" parent="baseTxService">
+		<property name="target">
+			<ref local="addressBookTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 打印 -->
+	<bean id="hrPrintController"
+		class="com.seeyon.v3x.hr.controller.HrPrintController"
+		autowire="byName">
+	</bean>
+	
+	<!--addressbook DAO -->
+	<bean id="addressBookMemberDao" class="com.seeyon.v3x.addressbook.dao.AddressBookMemberDao"></bean>
+	<bean id="addressBookTeamDao" class="com.seeyon.v3x.addressbook.dao.AddressBookTeamDao"></bean>
+</beans>

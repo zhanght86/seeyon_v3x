@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName" default-lazy-init="false"
+	default-dependency-check="none">
+	<!-- 心跳接口 -->
+	<bean id="checkInfoWareServiceTask" name="checkInfoWareServiceTask" class="com.seeyon.v3x.plugin.videoconf.util.CheckInfoWareServiceTask">
+		<property name="checkVideoConferenceServerStatusManagerCAP" ref="checkVideoConferenceServerStatusManagerCAP" />
+	</bean>
+	<bean id="checkVideoConferenceServerStatusManagerCAP"
+		class="com.seeyon.v3x.videoconference.manager.cap.CheckInfoWareVideoConferenceServerStatusManagerImplCAP">
+	</bean>
+	<bean id="checkVideoConferenceServerStatusManager"
+		class="com.seeyon.v3x.videoconference.ws.CheckInfoWareVideoConferenceServerStatusManagerImpl">
+	</bean>
+
+	<!-- controller -->
+	<bean id="videoConfController"
+		class="com.seeyon.v3x.plugin.videoconf.controller.VideoConfController">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="guidMapper" ref="guidMapper" />
+	</bean>
+	<!--cap层  -->
+	<bean id="createVideoConferenceManagerCAP"
+		class="com.seeyon.v3x.videoconference.manager.cap.CreateInfoWareVideoConferenceManagerImplCAP"
+		depends-on="OrgManager">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="createVideoConferenceManager"
+			ref="createVideoConferenceManager" />
+	</bean>
+	<bean id="createInfoWareInstantMeetingManagerImplCAP"
+		class="com.seeyon.v3x.videoconference.manager.cap.CreateInfoWareInstantMeetingManagerImplCAP">
+	</bean>
+	<bean id="deleteVideoConferenceManagerCAP"
+		class="com.seeyon.v3x.videoconference.manager.cap.DeleteInfoWareVideoConferenceManagerImplCAP">
+	</bean>
+	<bean id="joinVideoConferenceManagerCAP"
+		class="com.seeyon.v3x.videoconference.manager.cap.JoinInfoWareVideoConferenceManagerImplCAP">
+	</bean>
+	<bean id="startVideoConferenceManagerCAP"
+		class="com.seeyon.v3x.videoconference.manager.cap.StartInfoWareVideoConferenceManagerImplCAP">
+	</bean>
+	<bean id="updateVideoConferenceManagerCAP"
+		class="com.seeyon.v3x.videoconference.manager.cap.UpdateInfoWareVideoConferenceManagerImplCAP">
+	</bean>
+	<bean id="getVideoConferenceServerListManagerCAP"
+		class="com.seeyon.v3x.videoconference.manager.cap.GetVideoConferenceServerListManagerImplCAP">
+	</bean>
+
+	<!-- ws第三方通信实现 -->
+	<bean id="createVideoConferenceManager"
+		class="com.seeyon.v3x.videoconference.ws.CreateInfoWareVideoConferenceManagerImpl">
+	</bean>
+	<bean id="createInfoWareInstantMeetingManagerImpl"
+		class="com.seeyon.v3x.videoconference.ws.CreateInfoWareInstantMeetingManagerImpl">
+	</bean>
+	<bean id="deleteVideoConferenceManager"
+		class="com.seeyon.v3x.videoconference.ws.DeleteInfoWareVideoConferenceManagerImpl">
+	</bean>
+	<bean id="joinVideoConferenceManager"
+		class="com.seeyon.v3x.videoconference.ws.JoinInfoWareVideoConferenceManagerImpl">
+	</bean>
+	<bean id="startVideoConferenceManager"
+		class="com.seeyon.v3x.videoconference.ws.StartInfoWareVideoConferenceManagerImpl">
+	</bean>
+	<bean id="updateVideoConferenceManager"
+		class="com.seeyon.v3x.videoconference.ws.UpdateInfoWareVideoConferenceManagerImpl">
+	</bean>
+	<bean id="getVideoConferenceServerListManager"
+		class="com.seeyon.v3x.videoconference.ws.GetVideoConferenceServerListManagerImpl">
+	</bean>
+	
+
+	<!-- manager -->
+	<bean id="videoConferenceManager" class="com.seeyon.v3x.videoconference.manager.VideoConferenceManagerImpl" depends-on="principalManager" init-method="init">
+	  <property name="principalManager" ref="principalManager" />
+	</bean>
+	<bean id="videoConfSynchronManager"
+		class="com.seeyon.v3x.plugin.videoconf.manager.VideoConfSynchronManagerImpl">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="guidMapper" ref="guidMapper" />
+	</bean>
+</beans>

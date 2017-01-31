@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<!-- BookController -->
+	<bean id="bookController" class="com.seeyon.v3x.office.book.controller.BookController">
+		<property name="bookManager" ref="bookManager" />
+		<property name="orgManager" ref="OrgManager" />
+		<property name="myApplyManager" ref="myApplyManager" />
+		<property name="officeAdminManager" ref="officeAdminManager" />
+		<property name="officeApplyManager" ref="officeApplyManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="adminManager" ref="officeAdminManager" />
+	</bean>
+</beans>

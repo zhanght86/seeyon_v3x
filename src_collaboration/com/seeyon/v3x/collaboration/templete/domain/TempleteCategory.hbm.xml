@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.collaboration.templete.domain.TempleteCategory" 
+    table="v3x_templete_category"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="createDate"
+        type="timestamp"
+        column="create_date"
+        length="19"
+    />
+    <property
+        name="description"
+        type="string"
+        column="description"
+        length="255"
+    />
+    <property
+        name="name"
+        type="string"
+        column="name"
+        length="255"
+    />
+    <property
+        name="orgAccountId"
+        type="long"
+        column="org_account_id"
+        length="20"
+    />
+    <property
+        name="parentId"
+        type="long"
+        column="parent_id"
+        length="20"
+    />
+    <property
+        name="sort"
+        type="integer"
+        column="sort"
+        length="11"
+    />
+    <property
+        name="type"
+        type="integer"
+        column="type"
+        length="11"
+    />
+    <!-- Associations -->
+    <!-- bi-directional many-to-one association to V3xTempleteAuth -->
+    <set
+        name="categoryAuths"
+        inverse="true"
+        lazy="false"
+        cascade="all"
+        order-by="sort"
+    >
+        <key>
+            <column name="object_id" /> <!-- a foreign key in v3x_templete_auth referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.collaboration.templete.domain.TempleteAuth" />
+    </set>
+</class>
+</hibernate-mapping>

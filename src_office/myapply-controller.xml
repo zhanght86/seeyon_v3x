@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<!-- MyApplyController -->
+	<bean id="myApplyController" class="com.seeyon.v3x.office.myapply.controller.MyApplyController">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="myApplyManager" ref="myApplyManager" />
+		<property name="assetManager" ref="assetManager" />
+		<property name="bookManager" ref="bookManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+	</bean>
+</beans>

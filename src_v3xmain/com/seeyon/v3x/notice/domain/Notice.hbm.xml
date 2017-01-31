@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.notice.domain.Notice" table="v3x_notice">
+		<id name="id" column="id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="paramName" column="param_name" type="string"
+			not-null="true" length="50" />
+		<property name="paramValue" column="param_value" type="string"
+			not-null="false" length="2000" />
+		<property name="createDate" column="create_date" type="timestamp"
+			not-null="false" length="19" />
+		<property name="updateDate" column="update_date" type="timestamp"
+			not-null="false" length="19" />
+		<property name="boardId" column="fragment_id" type="long"
+			not-null="true" />
+	</class>
+</hibernate-mapping>

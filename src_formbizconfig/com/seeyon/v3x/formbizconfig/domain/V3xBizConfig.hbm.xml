@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.seeyon.v3x.formbizconfig.domain">
+<class 
+    name="V3xBizConfig" 
+    table="v3x_biz_config"
+    lazy="false">
+	
+    <id
+		name="id"
+		type="long"
+		column="id"
+		length="20">
+		<generator class="assigned"/>
+	</id>
+
+    <property
+        name="name"
+        type="string"
+        column="name"
+        length="255"
+    />
+    
+    <property
+        name="menuId"
+        type="long"
+        column="menu_id"
+        length="20"
+    />
+    
+    <property
+		name="createDate"
+		column="create_date"
+		type="timestamp"
+		length="19"
+	/>
+	
+	<property
+		name="createUser"
+		column="create_user"
+		type="long"
+		length="20"
+	/>
+	
+	<property
+		name="updateDate"
+		column="update_date"
+		type="timestamp"
+		length="19"
+	/>
+	
+</class>
+</hibernate-mapping>

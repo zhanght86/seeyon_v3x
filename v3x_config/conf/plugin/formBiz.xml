@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="formBizPluginDefintion" class="com.seeyon.v3x.plugin.formBiz.FormBizPluginDefintion">
+		<property name="id" value="formBiz" />
+		<property name="name" value="业务生成器" />
+	</bean>
+</beans>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.collaboration.his.domain.HisColBody" 
+    table="his_col_body"
+    lazy="true"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="bodyType"
+        type="string"
+        column="body_type"
+        length="20"
+    />
+    <property
+        name="content"
+        type="clob"
+        column="content"
+        not-null="false"
+    />
+    <property
+        name="contentName"
+        type="string"
+        column="content_name"
+        not-null="false"
+        length="32"
+    />
+    <property
+        name="createDate"
+        type="timestamp"
+        column="create_date"
+        length="19"
+    />
+    <property
+        name="updateDate"
+        type="timestamp"
+        column="update_date"
+        length="19"
+    />
+
+    <property
+        name="summaryId"
+        type="long"
+        column="col_id" 
+        not-null="true" 
+        length="20"
+    />
+
+</class>
+</hibernate-mapping>

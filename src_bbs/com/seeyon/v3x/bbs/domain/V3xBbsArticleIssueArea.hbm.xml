@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class 
+	    name="com.seeyon.v3x.bbs.domain.V3xBbsArticleIssueArea" 
+	    table="v3x_bbs_article_issue_area"
+	    lazy="false"
+	>
+	    <id
+	        name="id"
+	        type="long"
+	        column="id"
+	        length="20"
+	    >
+	        <generator class="assigned" />
+	    </id>
+	    <property
+	        name="moduleId"
+	        type="long"
+	        column="module_id"
+	        length="20"
+	    />
+	    <property
+	        name="moduleType"
+	        type="string"
+	        column="module_type"
+	        length="10"
+	    />
+	    <property
+	        name="issueTime"
+	        type="timestamp"
+	        column="issue_time"
+	        not-null="true"
+	        length="19"
+	    />
+	    <property
+	        name="articleId"
+	        type="long"
+	        column="v3x_bbs_article_id"
+	        not-null="true"
+	        length="20"
+	    />
+	     
+	</class>
+</hibernate-mapping>

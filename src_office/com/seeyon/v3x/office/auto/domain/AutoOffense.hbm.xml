@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class
+    name="com.seeyon.v3x.office.auto.domain.AutoOffense" 
+    table="M_Auto_Violate"
+>
+	<id
+        name="applyId"
+        type="long"
+        column="apply_id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    
+    <property
+        name="autoId"
+        type="string"
+        column="auto_id"
+        length="20"
+    />
+    
+    <property
+        name="regTime"
+        type="string"
+        column="reg_time"
+        length="20"
+    />
+    
+    <property
+        name="regAddress"
+        type="string"
+        column="reg_addr"
+        length="200"
+    />
+    
+    <property
+        name="regBehavior"
+        type="string"
+        column="reg_behavior"
+        length="200"
+    />
+    
+    <property
+        name="regSituation"
+        type="integer"
+        column="reg_situ"
+        length="1"
+    />
+    
+    <property 
+    	name="autoManager"
+    	type="long"
+    	column="auto_driver"
+    	length="20"
+    />
+    	
+    <property
+        name="regMemo"
+        type="string"
+        column="reg_memo"
+        length="4000"
+    />
+    <property
+        name="createDate"
+        type="date"
+        column="create_date"
+    />
+    
+    <property
+        name="updateDate"
+        type="date"
+        column="update_date"
+    />
+    
+    <property 
+    	name="deleteFlag"
+    	type="integer"
+    	column="del_flag"
+    	length="1"
+    />
+</class>
+
+</hibernate-mapping>

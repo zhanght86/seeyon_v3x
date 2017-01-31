@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+
+	<import resource="classpath:org/codehaus/xfire/spring/xfire.xml"/>
+	<bean id="baseWebService" class="org.codehaus.xfire.spring.remoting.XFireExporter" lazy-init="false"
+		  abstract="true">
+		<property name="serviceFactory" ref="xfire.serviceFactory"/>
+		<property name="xfire" ref="xfire"/>
+	</bean>
+
+	<bean id="domInHandler" class="org.codehaus.xfire.util.dom.DOMInHandler"/>
+
+	<bean id="wss4jInHandler" class="org.codehaus.xfire.security.wss4j.WSS4JInHandler">
+		<property name="properties">
+			<props>
+				<prop key="action">UsernameToken</prop>
+				<prop key="passwordCallbackClass">
+					com.seeyon.v3x.interfaces.security.PasswordHandler
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="validateUserTokenHandler"
+		  class="com.seeyon.v3x.interfaces.security.WSS4JTokenHandler"/>
+    
+    <bean id="webServiceController" class="com.seeyon.v3x.interfaces.controller.WebServiceController" >
+    	
+    </bean>
+    
+    <bean id="webServiceDAO" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.interfaces.dao.WebServiceDAO" >
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="wsCallBackService" class="com.seeyon.v3x.interfaces.WSCallBackService">
+	</bean>
+
+</beans>

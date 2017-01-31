@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.blog.domain.BlogEmployee" 
+    table="blog_employee"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="introduce"
+        type="clob"
+        column="introduce"
+        unique="false"
+    />
+    <property
+        name="image"
+        type="string"
+        column="image"
+        length="255"
+    />
+    <property
+        name="flagStart"
+        type="byte"
+        column="flag_start"
+        length="4"
+    />
+    <property
+        name="flagShare"
+        type="byte"
+        column="flag_share"
+        length="4"
+    />
+    <property
+        name="articleNumber"
+        type="integer"
+        column="article_number"
+        not-null="true"
+        length="11"
+    />
+    <property
+        name="idCompany"
+        type="long"
+        column="id_company"
+        length="20"
+    />
+    
+    <set name="BlogAttention" 
+    	 cascade="all-delete-orphan" 
+    	 inverse="true" 
+    	 lazy="true">
+    	<key>
+    		<column name="employee_id" />
+    	</key>
+    	<one-to-many class="com.seeyon.v3x.blog.domain.BlogAttention" />
+    </set>
+    
+    <set name="BlogShare" 
+    	 cascade="all-delete-orphan" 
+    	 inverse="true" 
+    	 lazy="true">
+    	<key>
+    		<column name="employee_id" />
+    	</key>
+    	<one-to-many class="com.seeyon.v3x.blog.domain.BlogShare" />
+    </set>
+    
+    <set name="BlogFamily" 
+    	 cascade="all-delete-orphan" 
+    	 inverse="true" 
+    	 lazy="true">
+    	<key>
+    		<column name="employee_id" />
+    	</key>
+    	<one-to-many class="com.seeyon.v3x.blog.domain.BlogFamily" />
+    </set>
+    
+    <set name="BlogReply" 
+    	 cascade="all-delete-orphan" 
+    	 inverse="true" 
+    	 lazy="true">
+    	<key>
+    		<column name="employee_id" />
+    	</key>
+    	<one-to-many class="com.seeyon.v3x.blog.domain.BlogReply" />
+    </set>
+    
+    <set name="BlogArticle" 
+    	 cascade="all-delete-orphan" 
+    	 inverse="true" 
+    	 lazy="true">
+    	<key>
+    		<column name="employee_id" />
+    	</key>
+    	<one-to-many class="com.seeyon.v3x.blog.domain.BlogArticle" />
+    </set>
+    
+    <set name="BlogFavorites" 
+    	 cascade="all-delete-orphan" 
+    	 inverse="true" 
+    	 lazy="true">
+    	<key>
+    		<column name="employee_id" />
+    	</key>
+    	<one-to-many class="com.seeyon.v3x.blog.domain.BlogFavorites" />
+    </set>
+
+</class>
+</hibernate-mapping>

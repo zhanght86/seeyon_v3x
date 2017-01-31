@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<description>This is the bean define for Index interface.lixin 2007-02-02 </description>
+	
+	 <bean id="indexController" class="com.seeyon.v3x.indexInterface.controller.IndexController">
+    	<property name="fileManager" ref="fileManager" />
+    	<property name="orgManager" ref="OrgManager"/>
+    	<property name="projectManager" ref="projectManager"/>
+    </bean>
+    
+    <!--  
+    <bean id="updateDAO" class="com.seeyon.v3x.indexInterface.domain.UpdateIndexDAO" >
+    </bean>
+    -->
+    
+    <bean id="updateDAO" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.indexInterface.domain.UpdateIndexDAO" >
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+                <prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="urlLinkDAO" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.indexInterface.domain.UrlLinkDAO" >
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+                <prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="indexManager" class="com.seeyon.v3x.indexInterface.ProxyManager" >
+	</bean>
+    
+    <bean id="updateIndexManager" class="com.seeyon.v3x.indexInterface.IndexManager.UpdateIndexManager" depends-on="indexManager,updateContext">
+    </bean>
+    
+    <bean id="updateContext" class="com.seeyon.v3x.indexInterface.TimeJob.UpdateContext">
+    </bean>
+    
+    <bean id="updateMap" class="com.seeyon.v3x.indexInterface.TimeJob.UpdateDataMap">
+    </bean>
+
+	<bean id="indexUtil" class="com.seeyon.v3x.indexInterface.IndexUtil" depends-on="partitionManager">
+	</bean>
+	
+	<bean id="indexContext" class="com.seeyon.v3x.index.IndexContext"  init-method="initIndexContext" depends-on="configHolder" />
+    
+    <bean id="updateIndexManagerCAP" class="com.seeyon.v3x.indexInterface.IndexManager.cap.UpdateIndexManagerCAPImpl" singleton="true">
+    </bean>
+    
+</beans>

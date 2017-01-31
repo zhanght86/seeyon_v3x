@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.inquiry.domain.InquirySurveytype"
+		table="inquiry_surveytype" lazy="true">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="censorDesc" type="integer" column="censor_desc"
+			length="11" />
+		<property name="flag" type="integer" column="flag" length="11" />
+		<property name="surveyDesc" type="string" column="survey_desc"
+			length="500" />
+		<property name="typeName" type="string" column="type_name"
+			length="255" />
+		<property name="spaceType" type="integer" column="space_type"
+			length="11" />
+		<property name="accountId" type="long" column="account_id"
+			length="20" not-null="true" />
+			
+		<property name="sort" type="integer" column="sort" length="11" />
+		
+		<!-- Associations -->
+		<!-- bi-directional many-to-one association to InquiryAuthority -->
+		<set name="inquiryAuthorities" inverse="true" lazy="false" cascade="all-delete-orphan">
+			<key>
+				<column name="surveytype_id" /><!-- a foreign key in inquiry_authorities referencing the primary key of this table. -->
+			</key>
+			<one-to-many
+				class="com.seeyon.v3x.inquiry.domain.InquiryAuthority" />
+		</set>
+		
+		<!-- bi-directional many-to-one association to InquirySurveytypeextend -->
+		<set name="inquirySurveytypeextends" inverse="true" lazy="false"
+			cascade="all-delete-orphan"   order-by="sort">
+			<key>
+				<column name="surveytype_id" /><!-- a foreign key in inquiry_surveytypeextend referencing the primary key of this table. -->
+			</key>
+			<one-to-many
+				class="com.seeyon.v3x.inquiry.domain.InquirySurveytypeextend" />
+		</set>
+
+	</class>
+</hibernate-mapping>

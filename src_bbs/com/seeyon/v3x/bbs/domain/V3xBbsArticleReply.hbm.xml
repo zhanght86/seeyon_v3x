@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class 
+		name="com.seeyon.v3x.bbs.domain.V3xBbsArticleReply"
+		table="v3x_bbs_article_reply" 
+		lazy="false"
+		>
+		
+		<id 
+			name="id" 
+			type="long" 
+			column="id" 
+			length="20">
+			<generator class="assigned" />
+		</id>
+		
+		<property 
+			name="content" 
+			type="clob" 
+			column="content"
+			length="65535" 
+		/>
+		
+		<property 
+			name="replyName" 
+			type="string" 
+			column="name"
+			not-null="true" 
+			length="255" 
+		/>
+		
+		<property 
+			name="replyUserId" 
+			type="long" 
+			column="reply_user_id"
+			not-null="true" 
+			length="20" 
+		/>
+		<!-- 
+		<property 
+			name="useReplyName" 
+			type="string"
+			column="use_reply_name" 
+			length="255" 
+		/>
+		
+		<property 
+			name="useReplyContent" 
+			type="string"
+			column="use_reply_content" 
+			length="65535" 
+		/>
+		 -->
+	 	<property 
+			name="useReplyId" 
+			type="long" 
+			column="use_reply_id"
+			not-null="false" 
+			length="20" 
+		/>
+		<property 
+			name="useReplyFlag" 
+			type="byte"
+			column="use_reply_flag" 
+			length="4" 
+		/>
+		<!-- 讨论回复增加一项设定：是否允许匿名发布回复 added by Meng Yang 2009-05-11 -->
+		<property
+	        name="anonymousFlag"
+	        type="boolean"
+	        column="anonymous_flag"
+	        length="4"
+	    />		
+		<property 
+			name="replyTime" 
+			type="timestamp" 
+			column="reply_time"
+			not-null="true" 
+			length="19" 
+		/>
+		
+		<property 
+			name="modifyTime" 
+			type="timestamp"
+			column="modify_time"
+			length="19" 
+		/>
+		
+		<property 
+			name="state" 
+			type="byte" 
+			column="state" 
+			length="4" 
+		/>
+
+	    <property
+	        name="articleId"
+	        type="long"
+	        column="v3x_bbs_article_id"
+	        not-null="true"
+	        length="20"
+	    />
+
+	</class>
+</hibernate-mapping>
