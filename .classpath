@@ -51,14 +51,17 @@
 	<classpathentry kind="src" path="src_link"/>
 	<classpathentry kind="src" path="src_inquiry"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/V3xInterfaceImpl"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/V3xInterface"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/V350sp1_201402_V3XCommon"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/V350sp1_201402_V3XShare"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/V350sp1_201402_V3XApp"/>
 	<classpathentry exported="true" kind="lib" path="E:/UFSeeyon/A8/Enterprise/ApacheJetspeed/webapps/seeyon/WEB-INF/classes"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-workflow.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-common-2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/seeyon-common-2.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/v3x2"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/seeyon-api.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-cap.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/v3x"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-index.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-login.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-officetrans.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-product.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-services.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-workflow.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
