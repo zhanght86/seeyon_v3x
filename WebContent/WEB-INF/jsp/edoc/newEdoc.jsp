@@ -456,8 +456,72 @@ if(isFromTemplate || "${comm}"=="register" ) {
     <td>  
     <fmt:message key="${selfCreateFlow?'default.workflowInfo.value':'alert_notcreateflow_loadtemplate'}" var="dfwf" /><c:set value="${col:getWorkflowInfo(workflowInfo, flowPermPolicyMetadata, pageContext)}" var="wfInfo" />      
         <input id="workflowInfo" name="workflowInfo" class="input-100per cursor-hand" readonly value="<c:out value="${wfInfo}" default="${dfwf}" />" onClick="doWorkFlow('new')" ${((isFromTemplate == true && templateType !='text') || selfCreateFlow==false) ? 'disabled' : ''}></td>
+
+	<!--流程期限 -->
+	<td nowrap="nowrap" class="bg-gray"><fmt:message key="process.cycle.label"/>:</td> 
+    <td>
+    	<!-- 
+    		流程期限与提醒规则：如果模版中设置了流程期限和提醒，则前台调用模版时均不能编辑，设置流程期限，未设置提醒，则提醒可编辑，都未设置则都可以编辑，流程期限和提醒为绑定关系（设置提醒必须设置流程期限） 
+    		1.新建：调用设置流程期限和提醒的模版不可编辑    		
+    		2.待发：设置流程期限或者提醒的模版待发后进行编辑流程期限和提醒不可编辑
+    		3.模版中流程期限和提醒均未设置，调用模版后设置流程期限和提醒后保存待发，在待发列表中进行编辑可以修改
+    		4.自由：新建与待发均可以编辑
+    	-->
+    	<select name="deadline" id="deadline" ${isTempleteHasDeadline ? 'disabled=disabled' : ''} style="width:120px" onChange="javascript:compareTime(this)">
+    		<v3x:metadataItem metadata="${deadlineMetadata}" showType="option" name="deadline" selected="${formModel.deadline}" bundle="${colI18N}"/>
+		</select>
+		<c:if test="${isTempleteHasDeadline }">
+			<select name="deadline" id="deadline" style="display: none;" style="width:120px" onChange="javascript:compareTime(this)">
+	    		<v3x:metadataItem metadata="${deadlineMetadata}" showType="option" name="deadline" selected="${formModel.deadline}" bundle="${colI18N}"/>
+			</select>
+		</c:if>
+    </td>
     
-   <!--流程密级-->
+    <td width="5%" class="bg-gray"><fmt:message key="common.remind.time.label" bundle='${v3xCommonI18N}' />:</td>
+    <c:choose>
+    	<c:when test="${not empty tempId }"><!-- 调用模板 -->
+    		<td width="10%">
+    			<select name="advanceRemind" id="advanceRemind" ${isTempleteHasRemind ? 'disabled=disabled' : ''}  class="input-100per" onChange="javascript:compareTime(this)">
+		    		<v3x:metadataItem metadata="${remindMetadata}" showType="option" name="deadline" selected="${formModel.edocSummary.advanceRemind}"  bundle="${v3xCommonI18N}"/>
+		    	</select>
+		    	<c:if test="${isTempleteHasRemind }">
+		    		<select name="advanceRemind" id="advanceRemind" style="display: none;" class="input-100per" onChange="javascript:compareTime(this)">
+			    		<v3x:metadataItem metadata="${remindMetadata}" showType="option" name="deadline" selected="${formModel.edocSummary.advanceRemind}"  bundle="${v3xCommonI18N}"/>
+			    	</select>
+		    	</c:if>
+		    </td>
+		    <td width="6%" class="bg-gray"><fmt:message key="common.reference.time.label" bundle='${v3xCommonI18N}' />:</td>
+		    <td width="10%" class="bg-gray" colspan="3">
+	    		<c:choose>
+		     		<c:when test = "${empty standardDuration or standardDuration eq 0 }">
+		     			<fmt:message key="time.no" bundle="${workflowI18N}" var="v"></fmt:message>
+		     		</c:when>
+		     		<c:otherwise>
+		     			<c:set value="${v3x:showDateByNature(standardDuration)}" var ="v" ></c:set>
+		     		</c:otherwise>
+	     		</c:choose>
+		    	<input type="text" disabled="disabled" value="${v}" />
+		    	<input type="hidden" name="standardDuration" id="standardDuration" value="${standardDuration}" />
+		    </td>
+    	</c:when>
+    	<c:otherwise><!-- 新建公文 -->
+	   	 	<td width="10%" colspan="6">
+		    	<select name="advanceRemind" id="advanceRemind" class="input-100per" onChange="javascript:compareTime(this)">
+		    		<v3x:metadataItem metadata="${remindMetadata}" showType="option" name="deadline" selected="${formModel.edocSummary.advanceRemind}"  bundle="${v3xCommonI18N}"/>
+		    	</select>
+		    </td>
+    	</c:otherwise>
+    </c:choose>
+  </tr>
+  <tr class="bg-summary"> 
+    <td nowrap="nowrap" height="24" class="bg-gray"><fmt:message key="edocTable.label" />:</td>
+    <td nowrap="nowrap"><select name="edoctable" id="edoctable" class="input-100per" onChange="javascript:changeEdocForm(this);" <c:if test="${isFromTemplate && templateType!='workflow'}">DISABLED</c:if>>
+    <c:forEach var="edocForm" items="${edocForms}">
+    <option value="<c:out value="${edocForm.id}"/>" <c:if test="${edocForm.id==edocFormId}">selected</c:if>><c:out value="${edocForm.name}"/></option>
+    </c:forEach>
+    </select></td>
+    
+    <!--流程密级-->
 	<td width="8%" nowrap="nowrap"  class="bg-gray"><font color="red"><fmt:message key="collaboration.secret.flowsecret" bundle="${colI18N}"/>:</font></td>
 	<c:if test="${not empty tempId}">	
 	    <td width="10%">
@@ -519,128 +583,8 @@ if(isFromTemplate || "${comm}"=="register" ) {
     </select>
     </td>
    	</c:if>
-
-    <td width="5%" class="bg-gray"><fmt:message key="common.remind.time.label" bundle='${v3xCommonI18N}' />:</td>
-    <c:choose>
-    	<c:when test="${not empty tempId }"><!-- 调用模板 -->
-    		<td width="10%">
-    			<select name="advanceRemind" id="advanceRemind" ${isTempleteHasRemind ? 'disabled=disabled' : ''}  class="input-100per" onChange="javascript:compareTime(this)">
-		    		<v3x:metadataItem metadata="${remindMetadata}" showType="option" name="deadline" selected="${formModel.edocSummary.advanceRemind}"  bundle="${v3xCommonI18N}"/>
-		    	</select>
-		    	<c:if test="${isTempleteHasRemind }">
-		    		<select name="advanceRemind" id="advanceRemind" style="display: none;" class="input-100per" onChange="javascript:compareTime(this)">
-			    		<v3x:metadataItem metadata="${remindMetadata}" showType="option" name="deadline" selected="${formModel.edocSummary.advanceRemind}"  bundle="${v3xCommonI18N}"/>
-			    	</select>
-		    	</c:if>
-		    </td>
-		    <td width="6%" class="bg-gray"><fmt:message key="common.reference.time.label" bundle='${v3xCommonI18N}' />:</td>
-		    <td width="10%" class="bg-gray" colspan="3">
-	    		<c:choose>
-		     		<c:when test = "${empty standardDuration or standardDuration eq 0 }">
-		     			<fmt:message key="time.no" bundle="${workflowI18N}" var="v"></fmt:message>
-		     		</c:when>
-		     		<c:otherwise>
-		     			<c:set value="${v3x:showDateByNature(standardDuration)}" var ="v" ></c:set>
-		     		</c:otherwise>
-	     		</c:choose>
-		    	<input type="text" disabled="disabled" value="${v}" />
-		    	<input type="hidden" name="standardDuration" id="standardDuration" value="${standardDuration}" />
-		    </td>
-    	</c:when>
-    	<c:otherwise><!-- 新建公文 -->
-	   	 	<td width="10%" colspan="6">
-		    	<select name="advanceRemind" id="advanceRemind" class="input-100per" onChange="javascript:compareTime(this)">
-		    		<v3x:metadataItem metadata="${remindMetadata}" showType="option" name="deadline" selected="${formModel.edocSummary.advanceRemind}"  bundle="${v3xCommonI18N}"/>
-		    	</select>
-		    </td>
-    	</c:otherwise>
-    </c:choose>
-  </tr>
-  <tr class="bg-summary"> 
-    <td nowrap="nowrap" height="24" class="bg-gray"><fmt:message key="edocTable.label" />:</td>
-    <td nowrap="nowrap"><select name="edoctable" id="edoctable" class="input-100per" onChange="javascript:changeEdocForm(this);" <c:if test="${isFromTemplate && templateType!='workflow'}">DISABLED</c:if>>
-    <c:forEach var="edocForm" items="${edocForms}">
-    <option value="<c:out value="${edocForm.id}"/>" <c:if test="${edocForm.id==edocFormId}">selected</c:if>><c:out value="${edocForm.name}"/></option>
-    </c:forEach>
-    </select></td>
-    
-    <!--流程期限 -->
-	<td nowrap="nowrap" class="bg-gray"><fmt:message key="process.cycle.label"/>:</td> 
-    <td>
-    	<!-- 
-    		流程期限与提醒规则：如果模版中设置了流程期限和提醒，则前台调用模版时均不能编辑，设置流程期限，未设置提醒，则提醒可编辑，都未设置则都可以编辑，流程期限和提醒为绑定关系（设置提醒必须设置流程期限） 
-    		1.新建：调用设置流程期限和提醒的模版不可编辑    		
-    		2.待发：设置流程期限或者提醒的模版待发后进行编辑流程期限和提醒不可编辑
-    		3.模版中流程期限和提醒均未设置，调用模版后设置流程期限和提醒后保存待发，在待发列表中进行编辑可以修改
-    		4.自由：新建与待发均可以编辑
-    	-->
-    	<select name="deadline" id="deadline" ${isTempleteHasDeadline ? 'disabled=disabled' : ''} style="width:120px" onChange="javascript:compareTime(this)">
-    		<v3x:metadataItem metadata="${deadlineMetadata}" showType="option" name="deadline" selected="${formModel.deadline}" bundle="${colI18N}"/>
-		</select>
-		<c:if test="${isTempleteHasDeadline }">
-			<select name="deadline" id="deadline" style="display: none;" style="width:120px" onChange="javascript:compareTime(this)">
-	    		<v3x:metadataItem metadata="${deadlineMetadata}" showType="option" name="deadline" selected="${formModel.deadline}" bundle="${colI18N}"/>
-			</select>
-		</c:if>
-    </td>
-    
-<td nowrap="nowrap" class="bg-gray"><fmt:message key="collaboration.secret.flowsecret" bundle="${colI18N}"/>:</td>
-	 <c:if test="${not empty tempId}">	
-    <td>
-    	<select style="width:120px" >
-    		<c:if test="${secret != null}">
-    		<option value="${secret}" disabled="disabled">${flowSecretLevel}</option>
-    		</c:if>
-    		<c:if test="${secret == null}">
-    		<option value="1" disabled="disabled"><fmt:message key="collaboration.secret.nosecret" bundle="${colI18N}"/></option>
-    		</c:if>
-   		</select>
-   		<input name=edocSecretLevel id="edocSecretLevel" type="hidden" value="${secret}"/>
-	</td>
-	</c:if>
-	<c:if test="${tempId == null && secretFlag != 'wait' && param.reSendSecretLevel!= null}">	
-		<td>
-		<select name="secretLevel" id="secretLevel" style="width:120px" onchange="changeSecretLevel(this);">
-			<c:if test="${peopleSecretLevel >= 1 && param.reSendSecretLevel <= 1 }">
-			<option value="1" ${param.reSendSecretLevel == 1 ? 'selected' :''}><fmt:message key="collaboration.secret.nosecret" bundle="${colI18N}"/></option>
-			</c:if>
-	    	<c:if test="${peopleSecretLevel >= 2 && param.reSendSecretLevel <= 2}">
-	    	<option value="2" ${param.reSendSecretLevel == 2 ? 'selected' :''}><fmt:message key="collaboration.secret.secret" bundle="${colI18N}"/></option>
-	    	</c:if>
-	    	<c:if test="${peopleSecretLevel >= 3 && param.reSendSecretLevel <= 3}">
-	    	<option value="3" ${param.reSendSecretLevel == 3 ? 'selected' :''}><fmt:message key="collaboration.secret.secretmore" bundle="${colI18N}"/></option>
-	    	</c:if>
-    	</select>
-    	</td>
-	</c:if>
-	<c:if test="${tempId == null && secretFlag != 'wait' && param.reSendSecretLevel== null}">	
-    <td>
-    <select name="secretLevel" id="secretLevel" style="width:120px" onchange="changeSecretLevel(this);">
-    	<option value="1"><fmt:message key="collaboration.secret.nosecret" bundle="${colI18N}"/></option>
-    	<c:if test="${peopleSecretLevel >= 2 }">
-    	<option value="2"><fmt:message key="collaboration.secret.secret" bundle="${colI18N}"/></option>
-    	</c:if>
-    	<c:if test="${peopleSecretLevel >= 3 }">
-    	<option value="3"><fmt:message key="collaboration.secret.secretmore" bundle="${colI18N}"/></option>
-    	</c:if>
-    </select>
-    </td>
-   	</c:if>
-   	<c:if test="${tempId == null && secretFlag == 'wait'&& param.reSendSecretLevel== null}">	
-    <td>
-    <select name="secretLevel" id="secretLevel" style="width:120px" onchange="changeSecretLevel(this);">
-    	<option value="1" ${secret == 1 ? 'selected' :''}><fmt:message key="collaboration.secret.nosecret" bundle="${colI18N}"/></option>
-    	<c:if test="${peopleSecretLevel >= 2 }">
-    	<option value="2" ${secret == 2 ? 'selected' :''}><fmt:message key="collaboration.secret.secret" bundle="${colI18N}"/></option>
-    	</c:if>
-    	<c:if test="${peopleSecretLevel >= 3 }">
-    	<option value="3" ${secret == 3 ? 'selected' :''}><fmt:message key="collaboration.secret.secretmore" bundle="${colI18N}"/></option>
-    	</c:if>
-    </select>
-    </td>
-   	</c:if>
    	
- 	<td nowrap="nowrap" height="24" colspan="4" class="bg-gray">
+ 	<td nowrap="nowrap" height="24" colspan="2" class="bg-gray">
  		<div style="width: 100%; text-align: center;">
   		<label for="isTrack">
    			<input type="checkbox" name="canTrack" value="1"  onclick="setTrackRadiio();"id="isTrack" 
