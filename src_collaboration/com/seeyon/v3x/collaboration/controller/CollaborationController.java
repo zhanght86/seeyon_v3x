@@ -2931,6 +2931,7 @@ public class CollaborationController extends BaseController {
 	    			for (PersonInfo personInfo : list) {
 	    				V3xOrgMember member = orgManager.getMemberById(Long.parseLong(personInfo.getId()));
 	    				Integer memberSecretLevel = member.getSecretLevel();
+	    				// 2017-02-09 诚佰公司 修改空值判断
 	    				if(memberSecretLevel != null && memberSecretLevel >= Integer.parseInt(secretLevel)){
 	    					newList.add(personInfo);
 	    				}
