@@ -52,8 +52,8 @@
 	<classpathentry kind="src" path="src_inquiry"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="E:/UFSeeyon/A8/Enterprise/ApacheJetspeed/webapps/seeyon/WEB-INF/classes"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-common-2.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/seeyon-common-2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/seeyon-common.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-common.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/v3x2"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/seeyon-api.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/v3x-cap.jar"/>
