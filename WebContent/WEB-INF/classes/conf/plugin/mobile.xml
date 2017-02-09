@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="mobileWapPluginDefintion" class="com.seeyon.v3x.plugin.mobile.MobileWapPluginDefintion">
+		<property name="id" value="mobileWap" />
+		<property name="name" value="移动应用插件" />
+	</bean>
+</beans>

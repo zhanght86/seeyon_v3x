@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<!-- OfficeAdminController -->
+	<bean id="officeAdminController" class="com.seeyon.v3x.office.admin.controller.AdminController">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="officeAdminManager" ref="officeAdminManager" />
+		<property name="autoManager" ref="autoManager" />
+		<property name="assetManager" ref="assetManager" />
+		<property name="bookManager" ref="bookManager" />
+		<property name="stockManager" ref="stockManager"/>
+		<property name="applogManager" ref="appLogManager"/>
+	</bean>
+</beans>

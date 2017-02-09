@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.blog.domain.BlogAttention" 
+    table="blog_attention"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>   
+      <property
+        name="employeeId"
+        type="long"
+        column="employee_id"
+        length="20"
+    />
+      <property
+        name="attentionId"
+        type="long"
+        column="attention_id"
+        length="20"
+    />
+ <!-- 
+     <many-to-one 
+    	name="BlogEmployee"
+        class="com.seeyon.v3x.blog.domain.BlogEmployee"
+        lazy="false"
+         >
+        <column 
+        	name="employee_id" 
+        	not-null="true" 
+        	length="20"/>
+    </many-to-one>
+ -->   
+</class>
+</hibernate-mapping>

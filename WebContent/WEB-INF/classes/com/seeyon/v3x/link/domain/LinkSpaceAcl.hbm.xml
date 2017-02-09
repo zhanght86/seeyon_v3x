@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.link.domain.LinkSpaceAcl" 
+    table="v3x_link_space_acl"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    
+    <property
+        name="userId"
+        type="long"
+        column="user_id"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="userType"
+        type="string"
+        column="user_type"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="linkSpaceId"
+        type="long"
+        column="link_space_id"
+        not-null="false"
+        length="20"
+    />
+
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

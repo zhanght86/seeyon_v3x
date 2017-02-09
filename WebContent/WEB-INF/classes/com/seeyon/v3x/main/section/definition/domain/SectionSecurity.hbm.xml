@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.main.section.definition.domain.SectionSecurity" 
+    table="v3x_section_security"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="sectionDefinitionId"
+        type="long"
+        column="section_definition_id"
+    />
+    <property
+        name="entityId"
+        type="long"
+        column="entity_id"
+    />
+    <property
+        name="entityType"
+        type="string"
+        column="entity_type"
+        length="255"
+    />
+    <property
+        name="sort"
+        type="int"
+        column="sort"
+    />
+
+
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.resource.domain.Resource" 
+    table="v3x_common_resource"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="name"
+        type="string"
+        column="name"
+        length="200"
+    />
+    <property
+        name="type"
+        type="string"
+        column="type"
+        length="10"
+    />
+    <property
+        name="description"
+        type="string"
+        column="description"
+        length="65535"
+    />
+    <property 
+  		 name="accountId" 
+  		 type="long"
+   		 column="account_id"
+		 length="20"
+	 />
+    <bag name="resourceIpp" lazy="true" cascade="all-delete-orphan"
+			table="v3x_common_resource_ipp">
+			<key>
+				<column name="ref_resource_id" />
+			</key>
+			<one-to-many class="com.seeyon.v3x.resource.domain.ResourceIpp" />
+	</bag>
+</class>
+</hibernate-mapping>

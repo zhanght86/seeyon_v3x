@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.seeyon.v3x.inquiry.domain.InquirySurveybasic" table="inquiry_surveybasic" dynamic-insert="true">
+
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+        
+    </id>
+    
+    <property
+        name="censor"
+        type="integer"
+        column="censor"
+        length="11"
+    />
+    
+    <property
+        name="censorId"
+        type="long"
+        column="censor_id"
+        length="20"
+    />
+    
+    <property
+        name="clickCount"
+        type="integer"
+        column="click_count"
+        length="11"
+    />
+    
+   <property
+        name="totals"
+        type="integer"
+        column="totals"
+        length="11"
+    />
+    
+    <property
+        name="closeDate"
+        type="timestamp"
+        column="close_date"
+        length="19"
+    />
+    
+    <property
+        name="createrId"
+        type="long"
+        column="creater_id"
+        length="20"
+    />
+    
+    <property
+        name="issuerId"
+        type="long"
+        column="issuer_id"
+        length="20"
+    />
+    
+    <property
+        name="cryptonym"
+        type="integer"
+        column="cryptonym"
+        length="11"
+    />
+    
+    <property
+        name="departmentId"
+        type="long"
+        column="department_id"
+        length="20"
+    />
+    
+    <property
+        name="flag"
+        type="integer"
+        column="flag"
+        length="11"
+    />
+    
+    <property
+        name="sendDate"
+        type="timestamp"
+        column="send_date"
+        length="19"
+    />
+    
+    <property
+        name="surveyName"
+        type="string"
+        column="survey_name"
+        length="255"
+    />
+    
+    <property
+        name="surveydesc"
+        type="string"
+        column="surveydesc"
+    />
+    
+    <property
+        name="voteCount"
+        type="integer"
+        column="vote_count"
+        length="11"
+    />
+    
+    <property
+        name="checkMind"
+        type="string"
+        column="check_mind"
+        length="500"
+    />
+
+	<property name="attachmentsFlag"
+	 type="boolean" 
+	 column="att_flag"
+	 not-null="false" length="4" 
+	 />
+	 
+	<property name="allowViewResult"
+	 type="boolean" 
+	 column="allow_view_result"
+	 not-null="true" 
+	 length="4" 
+	 />
+	 
+	<property name="allowViewResultAhead"
+	 type="boolean" 
+	 column="allow_view_result_ahead"
+	 not-null="true" 
+	 length="4" 
+	 />  
+	 
+    <!-- Associations -->
+    <!-- bi-directional many-to-one association to InquiryScope -->
+    <set
+        name="inquiryScopes"
+        inverse="true"
+        lazy="false"
+        cascade="all-delete-orphan"
+        order-by="sort"
+    >
+        <key>
+            <column name="surveybasic_id" /> <!-- a foreign key in inquiry_scope referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.inquiry.domain.InquiryScope" />
+    </set>
+    
+    <!-- bi-directional many-to-one association to InquirySubsurvey -->
+    <set
+        name="inquirySubsurveys"
+        inverse="true"
+        lazy="true"
+        cascade="all-delete-orphan"
+       order-by="sort"
+    >
+        <key>
+            <column name="surveybasic_id" /> <!-- a foreign key in inquiry_subsurvey referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.inquiry.domain.InquirySubsurvey" />
+    </set>
+    
+    <!-- bi-directional many-to-one association to InquirySubsurveyitem -->
+    <set
+        name="inquirySubsurveyitems"
+        inverse="true"
+        lazy="true"
+        cascade="all-delete-orphan"
+         order-by="sort"
+    >
+        <key>
+            <column name="surveybasic_id" /> <!-- a foreign key in inquiry_subsurveyitem referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.inquiry.domain.InquirySubsurveyitem" />
+    </set>
+    <!-- bi-directional many-to-one association to InquirySurveytype -->
+    
+    <!-- 
+    <many-to-one
+        name="inquirySurveytype" lazy="false"
+        class="com.seeyon.v3x.inquiry.domain.InquirySurveytype"
+    >
+        <column name="surveytype_id" not-null="true" length="20"/>
+    </many-to-one>
+    -->
+    
+    <property
+        name="surveyTypeId"
+        type="long"
+        column="surveytype_id"
+        length="20"
+    />
+    
+    <!-- bi-directional many-to-one association to InquirySurveydiscuss -->
+    <set
+        name="inquirySurveydiscusses"
+        inverse="true"
+        lazy="true"
+        cascade="all-delete-orphan"
+    >
+        <key>
+            <column name="surveybasic_id" /> <!-- a foreign key in inquiry_surveydiscuss referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.inquiry.domain.InquirySurveydiscuss" />
+    </set>
+    <!-- bi-directional many-to-one association to InquiryVotedefinite -->
+    <set
+        name="inquiryVotedefinites"
+        inverse="true"
+        lazy="true"
+        cascade="all-delete-orphan"
+    >
+        <key>
+            <column name="surveybasic_id" /> <!-- a foreign key in inquiry_votedefinite referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.inquiry.domain.InquiryVotedefinite" />
+    </set>
+
+</class>
+</hibernate-mapping>

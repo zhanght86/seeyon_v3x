@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.blog.domain.BlogFamily" 
+    table="blog_family"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="nameFamily"
+        type="string"
+        column="name_family"
+        not-null="false"
+        unique="true"
+        length="50"
+    />
+    <property
+        name="remark"
+        type="string"
+        column="remark"
+        not-null="false"
+        unique="true"
+        length="300"
+    />
+    <property
+        name="type"
+        type="string"
+        column="type"
+        not-null="true"
+        unique="true"
+        length="50"
+    />
+    <property
+        name="seqDisplay"
+        type="integer"
+        column="seq_display"
+        not-null="true"
+        length="11"
+    />
+     <property
+        name="createDate"
+        type="java.sql.Timestamp"
+        column="createdate" 
+        length="19"
+    />
+    <property
+        name="articleNumber"
+        type="integer"
+        column="article_number"
+        not-null="true"
+        length="11"
+    />
+     <property
+        name="employeeId"
+        type="long"
+        column="employee_id"
+        length="20"
+    />
+ <!-- 
+     <many-to-one 
+    	name="BlogEmployee"
+        class="com.seeyon.v3x.blog.domain.BlogEmployee"
+        lazy="false"
+         >
+        <column 
+        	name="employee_id" 
+        	not-null="true" 
+        	length="20"/>
+    </many-to-one>
+ -->   
+  
+    <set name="BlogArticle" 
+    	 cascade="all-delete-orphan" 
+    	 inverse="true" 
+    	 lazy="true">
+    	<key>
+    		<column name="family_id" />
+    	</key>
+    	<one-to-many class="com.seeyon.v3x.blog.domain.BlogArticle" />
+    </set>
+    
+
+</class>
+</hibernate-mapping>

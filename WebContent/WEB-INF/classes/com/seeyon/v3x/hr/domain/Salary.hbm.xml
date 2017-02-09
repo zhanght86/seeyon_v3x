@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.seeyon.v3x.hr.domain">
+	<class name="Salary" table="hr_staff_salary" lazy="false">
+		<id
+		 name="id"
+		 type="long"
+		 column="id"
+		 length="20"
+		>
+			<generator class="assigned"/>
+		</id>
+		<property
+		 name="salaryOriginally"
+		 type="big_decimal"
+		 column="salary_originally"
+	
+		 />
+		 <property
+		 name="salaryActually"
+		 type="big_decimal"
+		 column="salary_actually"
+		 not-null="false"
+
+		 />
+		 <property
+		 name="salaryBusiness"
+		 type="big_decimal"
+		 column="salary_business"
+		 not-null="false"
+
+		 />
+		 <property
+		 name="salaryBasic"
+		 type="big_decimal"
+		 column="salary_basic"
+		 not-null="false"
+
+		 />
+		  <property
+		 name="bonus"
+		 type="big_decimal"
+		 column="bonus"
+
+		 />
+		  <property
+		 name="fund"
+		 type="big_decimal"
+		 column="fund"
+
+		 />
+		 <property
+		 name="insurance"
+		 type="big_decimal"
+		 column="insurance"
+
+		 />
+		  <property
+		 name="incomeTax"
+		 type="big_decimal"
+		 column="income_tax"
+
+		 />
+		 <property
+		 name="staffId"
+		 type="long"
+		 column="staff_id"
+		 not-null="true"
+
+		 />
+		 <property
+		 name="year"
+		 type="int"
+		 column="year"
+		 not-null="true"
+
+		 />
+		 <property
+		 name="month"
+		 type="int"
+		 column="month"
+		 not-null="true"
+
+		 />
+		 <property 
+		 name="creatorId"
+		 type="long"
+		 column="creator_id"
+		 not-null="true"
+		 />
+		 <property 
+		 name="createdTimestamp"
+		 type="date"
+		 column="created_timestamp"
+		 not-null="true"
+		 />
+		 <property 
+		 name="modifiedTimestamp"
+		 type="date"
+		 column="modified_timestamp"
+		 not-null="true"
+		 />
+		 <property 
+		 name="status"
+		 type="string"
+		 column="salary_status"
+		 not-null="false"
+		 length="50"
+		 />
+		 <property 
+		 name="name"
+		 type="string"
+		 column="staff_name"
+		 not-null="false"
+		 length="50"
+		 />
+		  <property
+          name="accountId"
+          type="long"
+          column="accountId"
+          length="20"
+             
+       />
+	</class>
+</hibernate-mapping>

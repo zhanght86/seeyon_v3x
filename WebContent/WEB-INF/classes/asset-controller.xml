@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<!-- AssetController -->
+	<bean id="assetController" class="com.seeyon.v3x.office.asset.controller.AssetController">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="assetManager" ref="assetManager" />
+		<property name="myApplyManager" ref="myApplyManager" />
+		<property name="officeAdminManager" ref="officeAdminManager" />
+		<property name="officeApplyManager" ref="officeApplyManager" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+	</bean>
+</beans>

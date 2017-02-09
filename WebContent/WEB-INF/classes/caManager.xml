@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<!-- iTrus CA -->
+	<bean id="caManageriTrus"
+		class="com.seeyon.v3x.plugin.ca.impl.IcaManager4iTrus" init-method="init">
+		<property name="CVMConfigFile" value="/classes/conf/cvm.xml" />
+	</bean>
+</beans>

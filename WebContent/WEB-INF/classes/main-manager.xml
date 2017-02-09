@@ -1,0 +1,888 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName" default-lazy-init="false">
+	<bean id="notepagerManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.notepager.manager.NotepagerManagerImpl">
+				<property name="notepagerdao">
+					<bean id="notepagerdao"
+						class="com.seeyon.v3x.notepager.dao.NotepageDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="phraseManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.main.phrase.CommonPhraseManagerImpl" />
+		</property>
+	</bean>
+	
+	<bean id="resourceManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.resource.manager.ResourceManagerImpl">
+				<property name="resourceDao">
+					<bean id="resourceDao"
+						class="com.seeyon.v3x.resource.dao.ResourceDao" />
+				</property>
+				<property name="resourceIppDao">
+					<bean id="resourceIppDao"
+						class="com.seeyon.v3x.resource.dao.ResourceIppDao" />
+				</property>
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="check*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="find*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="is*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="list*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="del*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="generate*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>	
+	
+	<!-- 导出为EXCEL -->
+	<bean id="fileToExcelManager"
+		class="com.seeyon.v3x.excel.FileToExcelManagerImpl">
+	</bean>
+	
+	<!-- 快捷入口设置 -->
+	<bean id="shortcutManager" parent="baseTxService">
+	   <property name="target">
+			<bean class="com.seeyon.v3x.main.shortcut.manager.ShortcutManagerImpl" init-method="init"> 
+		  		<!--  快捷方式备选菜单 -->
+			 	<property name="shortcutMenus">
+			 		<list>
+			 			<!-- 新建事项 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="101" />
+							<property name="name" value="menu.collaboration.new" />
+							<property name="action" value="/collaboration.do?method=newColl" />
+						</bean>
+						<!-- 待发事项 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="102" />
+							<property name="name" value="menu.collaboration.listWaitsend" />
+							<property name="action" value="/collaboration.do?method=collaborationFrame&amp;from=WaitSend" />
+						</bean>
+						<!-- 已发事项 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="103" />
+							<property name="name" value="menu.collaboration.listsent" />
+							<property name="action" value="/collaboration.do?method=collaborationFrame&amp;from=Sent" />
+						</bean>
+						<!-- 我的邮件 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="402" />
+							<property name="name" value="common.my.email" />
+							<property name="action" value="/webmail.do?method=list&amp;jsp=inbox" />
+						</bean>
+						<!-- 我的日程 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="604" />
+							<property name="name" value="common.my.calendar" />
+							<property name="action" value="/calEvent.do?method=homeEntry" />
+						</bean>
+						<!-- 我的计划 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="601" />
+							<property name="name" value="common.my.plan" />
+							<property name="action" value="/planSystemMgr.do?method=myPlanHome" />
+						</bean>
+						<!-- 我的文档 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="504" />
+							<property name="name" value="menu.doc.lib.personal" />
+							<property name="action" value="/doc.do?method=docIndex&amp;openLibType=1" />
+						</bean>
+						<!-- 知识中心 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="501" />
+							<property name="name" value="menu.doc.kmCenter" />
+							<property name="action" value="/doc.do?method=homepageView" />
+						</bean>
+						<!-- 常用链接 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="1005" />
+							<property name="name" value="menu.tools.links" />
+							<property name="action" value="/linkManager.do?method=commonLinkMore" />
+						</bean>
+						<!-- 待办事项 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="104" />
+							<property name="name" value="menu.collaboration.listPending" />
+							<property name="action" value="/collaboration.do?method=collaborationFrame&amp;from=Pending" />
+						</bean>
+						<!-- 已办事项 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="105" />
+							<property name="name" value="menu.collaboration.listDone" />
+							<property name="action" value="/collaboration.do?method=collaborationFrame&amp;from=Done" />
+						</bean>
+						<!-- 表单查询 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="302" />
+							<property name="name" value="menu.formquery.label" />
+							<property name="action" value="/formquery.do?method=formQueryShow" />
+						</bean>
+						<!-- 表单统计 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="303" />
+							<property name="name" value="menu.formstat.label" />
+							<property name="action" value="/formreport.do?method=formReportShow" />
+						</bean>
+						<!-- 我的会议 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="603" />
+							<property name="name" value="common.my.meeting" />
+							<property name="action" value="/mtMeeting.do?method=listHome" />
+						</bean>
+						<!-- BLOG -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="505" />
+							<property name="name" value="menu.blog.myblog" />
+							<property name="action" value="/blog.do?method=blogHome" />
+						</bean>
+						<!-- 计划管理 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="602" />
+							<property name="name" value="menu.plan.manage" />
+							<property name="action" value="/planSystemMgr.do?method=planMgrHome" />
+						</bean>
+						<!-- 单位文档 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu4AccountDoc">
+							<property name="id" value="502" />
+							<property name="name" value="menu.doc.lib.account" />
+							<property name="action" value="/doc.do?method=docIndex&amp;openLibType=2" />
+						</bean>
+						<!-- 关联系统 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="1007" />
+							<property name="name" value="menu.relateSystem" />
+							<property name="action" value="/linkManager.do?method=linkMore" />
+						</bean>
+						<!-- RSS -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="503" />
+							<property name="name" value="menu.doc.rss" />
+							<property name="action" value="/rssManager.do?method=rssIndex" />
+							<property name="availableChecker">
+								<bean parent="rssMenuCheckImplBean" />
+							</property>
+						</bean>
+						<!-- 在线打卡 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="803" />
+							<property name="name" value="left.tools.card.lable" />
+							<property name="action" value="/hrRecord.do?method=initRecord" />
+							<property name="availableChecker">
+								<bean parent="timeCardMenuCheckerBean" />
+							</property>
+						</bean>
+						<!-- 收文登记 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="202" />
+							<property name="name" value="menu.edoc.recEdoc" />
+							<property name="action" value="/edocController.do?method=entryManager&amp;entry=newEdoc&amp;edocType=1" />
+							<property name="availableChecker">
+								<bean class="com.seeyon.v3x.menu.check.EdocRecMenuCheckerImpl" />
+							</property>
+						</bean>
+						<!-- 发文拟文 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="201" />
+							<property name="name" value="menu.edoc.sendEdoc" />
+							<property name="action" value="/edocController.do?method=entryManager&amp;entry=newEdoc&amp;edocType=0" />
+							<property name="availableChecker">
+								<bean class="com.seeyon.v3x.menu.check.EdocSendMenuCheckerImpl" />
+							</property>
+						</bean>
+						<!-- 签报拟文 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="206" />
+							<property name="name" value="menu.edoc.signReport" />
+							<property name="action" value="/edocController.do?method=entryManager&amp;entry=newEdoc&amp;edocType=2" />
+							<property name="availableChecker">
+								<bean class="com.seeyon.v3x.menu.check.EdocSignReportMenuCheckerImpl" />
+							</property>
+						</bean>
+						<!-- 公文督办 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="204" />
+							<property name="name" value="menu.edoc.superviseManager" />
+							<property name="action" value="/edocSupervise.do?method=mainEntry" />
+							<property name="availableChecker">
+								<bean class="com.seeyon.v3x.menu.check.EdocSuperviseMenuCheckerImpl" />
+							</property>
+						</bean>
+						<!-- 时间安排  -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="606" />
+							<property name="name" value="menu.timing.manage" />
+							<property name="action" value="/calEvent.do?method=timing" />
+						</bean>
+					</list>
+			 	</property>
+			 	<!-- 工具栏设置菜单 -->
+			 	<property name="toolsMenus">
+			 		<list>
+			 			<!-- 工作管理 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="1" />
+							<property name="name" value="left.tools.workManager" />
+							<property name="icon" value="images/left/1.gif" />
+							<property name="action" value="/workManage.do?method=workManageIndex&amp;from=main" />
+						</bean>
+			 			<!-- 历史消息 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="2" />
+							<property name="name" value="left.history.message.lable" />
+							<property name="icon" value="images/left/2.gif" />
+							<property name="action" value="/main.do?method=showMessages&amp;showType=0&amp;readType=notRead" />
+						</bean>
+			 			<!-- 综合查询 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="3" />
+							<property name="name" value="menu.tools.isearch" />
+							<property name="icon" value="images/left/3.gif" />
+							<property name="action" value="/isearch.do?method=index" />
+						</bean>
+						<!-- 通讯录 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="4" />
+							<property name="refMenuId" value="1006" />
+							<property name="name" value="menu.address.list" />
+							<property name="icon" value="images/left/4.gif" />
+							<property name="action" value="/addressbook.do?method=homeEntry" />
+						</bean>
+						<!-- 天气预报
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="5" />
+							<property name="name" value="menu.tools.weather" />
+							<property name="icon" value="images/left/5.gif" />
+							<property name="action" value="/main.do?method=weather" />
+						</bean>
+						 -->
+						<!-- 便签 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="6" />
+							<property name="name" value="menu.tools.notepager" />
+							<property name="icon" value="images/left/6.gif" />
+							<property name="action" value="/main.do?method=notepager" />
+						</bean>
+						<!-- 万年历 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="7" />
+							<property name="name" value="menu.tools.calendar" />
+							<property name="icon" value="images/left/7.gif" />
+							<property name="action" value="/main.do?method=calendar" />
+						</bean>
+						<!-- 计算器 -->
+						<bean class="com.seeyon.v3x.main.shortcut.ShortcutMenu">
+							<property name="id" value="8" />
+							<property name="name" value="menu.tools.calculator" />
+							<property name="icon" value="images/left/8.gif" />
+							<property name="action" value="/main.do?method=calculator" />
+						</bean>
+					</list>
+				</property>
+				<property name="defaultShortcut">
+					<bean class="com.seeyon.v3x.main.shortcut.domain.Shortcut">
+						<property name="memberId" value="1" />
+						<property name="shortcutSet" value="101,606,2,4,1,3" /> <!-- 新建事件、时间安排、在线消息、通讯录、工作管理、综合查询 -->
+						<property name="toolsSet" value="" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>     
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 空间管理 -->
+	<bean id="spaceManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.space.manager.SpaceManagerImpl" init-method="init" singleton="true">
+				<property name="orgManager" ref="OrgManager" />
+				<property name="pageManager" ref="pageManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>			
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>	
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="pageManager" class="com.seeyon.v3x.space.page.PageManagerImpl" init-method="init">
+		<property name="pageManagerDao">
+			<bean parent="baseTxService">
+				<property name="target">
+					<bean class="com.seeyon.v3x.space.page.dao.PageManagerDaoImpl" />
+				</property>
+				<property name="transactionAttributes">
+					<props>
+						<prop key="*">PROPAGATION_SUPPORTS</prop>
+					</props>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="sectionDefinitionManager" class="com.seeyon.v3x.main.section.definition.SectionDefinitionManagerImpl" init-method="init">
+		<property name="sectionDefinitionDao">
+			<bean parent="baseTxService">
+				<property name="target">
+					<bean class="com.seeyon.v3x.main.section.definition.SectionDefinitionDaoImpl">
+						<property name="orgManager" ref="OrgManager" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="portletEntityPropertyManager" parent="baseTxService" singleton="true">
+		<property name="target">
+			<bean class="com.seeyon.v3x.space.manager.PortletEntityPropertyManagerImpl" init-method="init" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="spaceSortManager" parent="baseTxService" singleton="true">
+		<property name="target">
+			<bean class="com.seeyon.v3x.space.manager.SpaceSortManagerImpl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 消息清除设置管理 -->
+	<bean id="messageDelsetManager" class="com.seeyon.v3x.messageManager.manager.MessageDelsetManagerImpl" init-method="init">
+		<property name="messageDelsetDao">
+			<bean parent="baseTxService">
+				<property name="target">
+					<bean class="com.seeyon.v3x.messageManager.dao.MessageDelsetDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>	
+	
+	<!-- 部门空间　留言管理 -->
+	<bean id="guestbookManager" parent="baseTxService">
+	   <property name="target">
+	     <bean class="com.seeyon.v3x.guestbook.manager.GuestbookManagerImpl"/>
+	   </property>
+	</bean>
+	
+	<!-- 系统菜单与权限 -->
+	<bean  id="menuManager" parent="baseTxService">
+	   <property name="target">
+			<bean class="com.seeyon.v3x.menu.manager.MenuManagerImpl" singleton="true" init-method="init">
+			 	<property name="orgManager" ref="OrgManager" />
+			 	<property name="systemConfig" ref="systemConfig" />
+			 	<property name="forceMenus">
+			 		<list>
+			 			<value>104</value>
+			 			<value>105</value>
+			 			<value>501</value>
+			 			<value>502</value>
+			 			<value>606</value>
+			 			<value>602</value>
+			 			<value>604</value>
+			 			<value>605</value>
+			 			<value>801</value>
+			 			<value>808</value>
+			 			<value>810</value>
+			 			<value>806</value>
+			 			<value>810</value>
+			 			<value>813</value>
+			 			<value>1001</value>
+			 			<value>1002</value>
+			 			<value>1003</value>
+			 			<value>1004</value>
+			 			<value>1005</value>
+			 			<value>1007</value>
+			 			<value>1008</value>
+			 			<value>1009</value>
+			 		</list>
+			 	</property>
+			 	
+			 	<!-- 企业版中强制需要有的公共信息菜单 -->
+			 	<property name="enterpriseForceMenus">
+			 		<list>
+			 			<value>711</value>
+			 			<value>712</value>
+			 			<value>713</value>
+			 			<value>714</value>
+			 		</list>
+			 	</property>
+			 	<!-- 集团版中强制需要有的公共信息菜单 -->
+			 	<property name="groupForceMenus">
+			 		<list>
+			 			<value>701</value>
+			 			<value>702</value>
+			 			<value>703</value>
+			 			<value>704</value>
+			 			<value>7011</value>			 			
+			 			<value>7021</value>			 			
+			 			<value>7031</value>			 			
+			 			<value>7041</value>			 			
+			 			<value>7013</value>		 			
+			 			<value>7022</value>	 			
+			 			<value>7033</value>		 			
+			 			<value>7042</value>
+			 		</list>
+			 	</property>
+			 	<!-- 外部人员菜单权限需要增加的菜单 -->
+			 	<property name="outerIncludeMenus">
+			 		<list>
+			 		</list>
+			 	</property>
+			 	<!-- 外部人员菜单权限需要剔除的菜单 -->
+			 	<property name="outerExtcludeMenus">
+			 		<list>
+			 			<value>201</value>
+			 			<value>202</value>
+			 			<value>206</value>
+			 			<value>207</value>
+			 			<value>204</value>
+			 			<value>504</value>
+			 			<value>503</value>
+			 			<value>505</value>
+			 			<value>601</value>
+			 			<value>602</value>
+			 			<value>604</value>
+			 			<value>605</value>
+			 			<value>606</value>
+			 			<value>7033</value>
+			 			<value>7022</value>
+			 			<value>7013</value>
+			 			<value>7042</value>
+			 			<value>802</value>
+			 			<value>809</value>
+			 			</list>
+			 	</property>
+			 	<!-- 外部人员强制剔除的菜单 -->
+			 	<property name="outerForceRemoveMenus">
+			 		<list>
+			 			<value>7013</value>		
+			 			<value>7022</value>		
+			 			<value>7033</value> 			
+			 			<value>7042</value>
+			 		</list>
+			 	</property>
+			 	<property name="roleOrSecurityMenus">
+			 		<list>
+			 			<value>201</value>
+			 			<value>202</value>
+			 			<value>206</value>
+			 		</list>
+			 	</property>
+			 	<property name="relationMenu">
+			 		<map>
+			 			<entry key="101">
+			 				<list>
+			 					<value>102</value>
+			 					<value>103</value>
+			 				</list>
+			 			</entry>
+			 			<entry key="401">
+			 				<list>
+			 					<value>402</value>
+			 					<value>403</value>
+			 					<value>404</value>
+			 					<value>405</value>
+			 					<value>812</value>
+			 					<value>407</value>
+			 				</list>
+			 			</entry>
+			 			<entry key="402">
+			 				<list>
+			 					<value>401</value>
+			 					<value>403</value>
+			 					<value>404</value>
+			 					<value>405</value>
+			 					<value>812</value>
+			 					<value>407</value>
+			 				</list>
+			 			</entry>
+			 			<entry key="403">
+			 				<list>
+			 					<value>401</value>
+			 					<value>402</value>
+			 					<value>404</value>
+			 					<value>405</value>
+			 					<value>812</value>
+			 					<value>407</value>
+			 				</list>
+			 			</entry>
+			 			<entry key="404">
+			 				<list>
+			 					<value>401</value>
+			 					<value>402</value>
+			 					<value>403</value>
+			 					<value>405</value>
+			 					<value>812</value>
+			 					<value>407</value>
+			 				</list>
+			 			</entry>
+			 			<entry key="405">
+			 				<list>
+			 					<value>401</value>
+			 					<value>402</value>
+			 					<value>403</value>
+			 					<value>404</value>
+			 					<value>812</value>
+			 					<value>407</value>
+			 				</list>
+			 			</entry>
+			 			<entry key="812">
+			 				<list>
+			 					<value>401</value>
+			 					<value>402</value>
+			 					<value>403</value>
+			 					<value>404</value>
+			 					<value>405</value>
+			 					<value>407</value>
+			 				</list>
+			 			</entry>
+			 			<entry key="407">
+			 				<list>
+			 					<value>401</value>
+			 					<value>402</value>
+			 					<value>403</value>
+			 					<value>404</value>
+			 					<value>405</value>
+			 					<value>812</value>
+			 				</list>
+			 			</entry>
+			 		</map>
+			 	</property>
+			 	<property name="menuCheckers">
+			 		<!-- key为菜单id ，ref-value是MenuCheck的实现 -->
+			 		<map>
+				 		<entry key="811">
+			 				<bean class="com.seeyon.v3x.publicManager.PublicPrintCipherMenuCheckImpl" />
+			 			</entry>
+				 		<entry key="106">
+			 				<bean class="com.seeyon.v3x.collaboration.templete.TempleteManageMenuCheckImpl" />
+			 			</entry>
+			 			<entry key="503">
+			 				<bean parent="rssMenuCheckImplBean" />
+			 			</entry>
+			 			<!--  取消公共信息管理菜单
+			 			<entry key="705">
+			 				<bean class="com.seeyon.v3x.publicManager.PublicInfoMenuCheckImpl" />
+			 			</entry>
+			 			-->
+			 			<!-- 部门公告、部门讨论菜单需要检测：主岗或兼职部门是否有开通部门空间 -->
+			 			<entry key="7012,7032">
+			 				<bean class="com.seeyon.v3x.publicManager.DeptMenuCheckImpl" />
+			 			</entry>
+			 			<entry key="715,716">
+			 				<bean class="com.seeyon.v3x.publicManager.EnterpriseDeptMenuCheckImpl" />
+			 			</entry>
+			 			<entry key="803">
+			 				<bean parent="timeCardMenuCheckerBean" />
+			 			</entry>
+			 			<entry key="1204">
+			 				<bean class="com.seeyon.v3x.menu.check.TimeCardManagerMenuCheckerImpl">
+			 					<property name="orgManager" ref="OrgManager" />
+			 				</bean>
+			 			</entry>
+			 			<entry key="1301,1302,1303">
+			 				<bean parent="departmentAdminMenuChecker" />
+			 			</entry>
+			 			<entry key="1601,1602,1603,1604,1605,1606" value-ref="workFlowAnalysisMenuCheck">
+			 			</entry>
+			 		   <entry key="2001">
+			 				<bean class="com.seeyon.v3x.menu.check.DepartmentAdminMenuCheckerAppLogImpl">
+			 					<property name="orgManager" ref="OrgManager" />
+			 				</bean>
+			 			</entry>
+			 			<entry key="2106"><!-- 会议基础数据 -->  
+			 				<bean class="com.seeyon.v3x.menu.check.MeetingAdminMenuCheckerImpl"/>
+			 			</entry>
+			 			<entry key="2107"><!-- 会议领导查阅权限-->
+			 				<bean class="com.seeyon.v3x.menu.check.MeetingLeaderMenuCheckerImpl">
+			 					<property name="orgManager" ref="OrgManager"></property>
+			 				</bean>
+			 			</entry>
+			 			<!-- blog需要检查开关 -->
+			 			<entry key="505">
+			 				<bean class="com.seeyon.v3x.menu.check.BlogMenuCheckerImpl">
+			 				</bean>
+			 			</entry>
+			 		</map>
+			 	</property>
+			 	<!-- 控制是否在菜单树上显示 -->
+			 	<property name="menuTreeCheckers">
+			 		<!-- key为菜单id ，ref-value是MenuTreeCheck的实现 -->
+			 		<map>
+			 			<!-- blog需要检查开关 -->
+			 			<entry key="505,506">
+			 				<bean class="com.seeyon.v3x.menu.check.BlogMenuTreeCheckerImpl">
+			 				</bean>
+			 			</entry>
+			 			<!-- 政务版屏蔽会议室管理 -->
+			 			<entry key="906">
+			 				<bean class="com.seeyon.v3x.menu.check.MeetingRoomMenuTreeCheckerImpl" />
+			 			</entry>
+						<!-- 政务信息报送二级菜单屏蔽 start -->
+						<entry key="3101"><!-- 信息上报 -->
+			 				<bean class="com.seeyon.v3x.menu.check.InfoReportMenuCheckerImpl" autowire="byName">
+			 					<property name="orgManager" ref="OrgManager"></property>
+			 				</bean>
+			 			</entry>
+			 			<!--branches_a8_v350_r_gov 王为 信息审核权限不用授权 start-->
+			 			<!--<entry key="3102"> 信息审核
+			 				<bean class="com.seeyon.v3x.menu.check.InfoAuditMenuCheckerImpl" autowire="byName">
+			 					<property name="orgManager" ref="OrgManager"></property>
+			 				</bean>
+			 			</entry> -->
+			 			<!--branches_a8_v350_r_gov 王为 信息审核权限不用授权 END-->
+			 			<entry key="3104"><!-- 期刊管理 -->
+			 				<bean class="com.seeyon.v3x.menu.check.InfoMagazineManagerMenuCheckerImpl" autowire="byName">
+			 					<property name="orgManager" ref="OrgManager"></property>
+			 				</bean>
+			 			</entry>
+			 			<entry key="3105"><!-- 信息发布 -->
+			 				<bean class="com.seeyon.v3x.menu.check.InfoPublishMenuCheckerImpl">
+			 					<property name="orgManager" ref="OrgManager"></property>
+			 				</bean>
+			 			</entry>
+			 			<entry key="3106"><!-- 信息考核 -->
+			 				<bean class="com.seeyon.v3x.menu.check.InfoCheckMenuCheckerImpl">
+			 					<property name="orgManager" ref="OrgManager"></property>
+			 				</bean>
+			 			</entry>
+			 			<entry key="3108"><!-- 信息统计 -->
+			 				<bean class="com.seeyon.v3x.menu.check.InfoStatMenuCheckerImpl">
+			 					<property name="orgManager" ref="OrgManager"></property>
+			 				</bean>
+			 			</entry>
+			 			 <entry key="3109"><!-- 基础数据 -->
+			 				<bean class="com.seeyon.v3x.menu.check.InfoDatabaseMenuCheckerImpl">
+			 					<property name="orgManager" ref="OrgManager" />
+			 				</bean>
+			 			</entry>
+			 			<!-- 政务信息报送二级菜单屏蔽 end -->
+			 		</map>
+			 	</property>
+			 	
+			 	<!-- 默认菜单顺序 -->
+			 	<property name="defaultMenuSort">
+			 		<map>
+			 			<entry key="1" value="1" />
+			 			<entry key="101" value="1" />
+			 			<entry key="102" value="2" />
+			 			<entry key="103" value="3" />
+			 			<entry key="104" value="4" />
+			 			<entry key="105" value="5" />
+			 			<entry key="106" value="7" />
+			 			<entry key="107" value="6" />
+			 			
+			 			<entry key="2" value="2" />
+			 			<entry key="201" value="1" />
+			 			<entry key="202" value="2" />
+			 			<entry key="203" value="5" />
+			 			<entry key="204" value="7" />
+			 			<entry key="205" value="6" />
+			 			<entry key="206" value="3" />
+			 			<entry key="207" value="4" />
+			 			
+			 			<entry key="3" value="3" />
+			 			<entry key="301" value="1" />
+			 			<entry key="302" value="5" />
+			 			<entry key="303" value="6" />
+			 			<entry key="304" value="3" />
+			 			<entry key="305" value="2" />
+			 			<entry key="306" value="4" />
+			 			
+			 			<entry key="4" value="12" />
+			 			<entry key="401" value="1" />
+			 			<entry key="402" value="2" />
+			 			<entry key="403" value="3" />
+			 			<entry key="404" value="4" />
+			 			<entry key="405" value="5" />
+			 			<entry key="407" value="7" />
+			 			<entry key="812" value="6" />
+			 			
+			 			<entry key="5" value="4" />
+			 			<entry key="501" value="1" />
+			 			<entry key="502" value="2" />
+			 			<entry key="503" value="3" />
+			 			<entry key="504" value="4" />
+			 			<entry key="505" value="5" />
+			 			<entry key="506" value="6" />
+			 			
+			 			<entry key="6" value="6" />
+			 			<entry key="601" value="2" />
+			 			<entry key="602" value="3" />
+			 			<entry key="603" value="4" />
+			 			<entry key="604" value="5" />
+			 			<entry key="605" value="6" />
+			 			<entry key="606" value="1" />
+			 			
+			 			<entry key="7" value="5" />
+			 			<entry key="701" value="3" />
+			 			<entry key="702" value="2" />
+			 			<entry key="703" value="1" />
+			 			<entry key="704" value="4" />
+			 			<entry key="711" value="1" />
+			 			<entry key="712" value="2" />
+			 			<entry key="713" value="3" />
+			 			<entry key="714" value="4" />
+			 			<entry key="715" value="5" />
+			 			<entry key="716" value="6" />
+			 			<entry key="7011" value="6" />
+			 			<entry key="7012" value="7" />
+			 			<entry key="7013" value="8" />
+			 			<entry key="7021" value="4" />
+			 			<entry key="7022" value="5" />
+			 			<entry key="7031" value="1" />
+			 			<entry key="7032" value="2" />
+			 			<entry key="7033" value="3" />
+			 			<entry key="7041" value="9" />
+			 			<entry key="7042" value="10" />
+			 			
+			 			<entry key="8" value="14" />
+			 			<entry key="801" value="7" />
+			 			<entry key="802" value="3" />
+			 			<entry key="803" value="4" />
+			 			<entry key="806" value="5" />
+			 			<entry key="808" value="6" />
+			 			<entry key="809" value="2" />
+			 			<entry key="810" value="1" />
+			 			<entry key="811" value="8" />
+			 			<entry key="813" value="9" />
+			 			
+			 			<entry key="9" value="13" />
+			 			<entry key="901" value="1" />
+			 			<entry key="902" value="2" />
+			 			<entry key="903" value="3" />
+			 			<entry key="904" value="4" />
+			 			<entry key="906" value="5" />
+			 			
+			 			<entry key="10" value="15" />
+			 			<entry key="1001" value="2" />
+			 			<entry key="1002" value="4" />
+			 			<entry key="1004" value="5" />
+			 			<entry key="1005" value="6" />
+			 			<entry key="1006" value="3" />
+			 			<entry key="1007" value="7" />
+			 			<entry key="1008" value="1" />
+			 			<entry key="1009" value="8" />
+			 			
+			 			<entry key="12" value="8" />
+			 			<entry key="1201" value="1" />
+			 			<entry key="1202" value="2" />
+			 			<entry key="1203" value="3" />
+			 			<entry key="1204" value="4" />
+			 			<entry key="1206" value="5" />
+			 			<entry key="1207" value="6" />
+			 			<entry key="1208" value="7" />
+			 			
+			 			<entry key="13" value="9" />
+			 			<entry key="1301" value="1" />
+			 			<entry key="1302" value="2" />
+			 			<entry key="1303" value="3" />
+			 			
+			 			<entry key="15" value="7" />
+			 			<entry key="1501" value="1" />
+			 			<entry key="1502" value="2" />
+			 			<entry key="1503" value="3" />
+			 			<entry key="1504" value="4" />
+			 			<entry key="1505" value="5" />
+			 			<entry key="1506" value="6" />
+			 			
+			 			<entry key="16" value="11" />
+			 			<entry key="1601" value="1" />
+			 			<entry key="1602" value="2" />
+			 			<entry key="1603" value="4" />
+			 			<entry key="1604" value="5" />
+			 			<entry key="1605" value="3" />
+			 			<entry key="1606" value="6" />
+			 			
+			 			<entry key="20" value="10" />
+			 			<entry key="2001" value="1" />
+			 		</map>
+			 	</property>
+			</bean>
+		</property>
+		
+		<property name="transactionAttributes">
+			<props>
+                <prop key="create*">PROPAGATION_REQUIRED</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>     
+			</props>
+		</property>
+	</bean>
+
+	<bean id="workFlowAnalysisMenuCheck" class="com.seeyon.v3x.workflowanalysis.manager.impl.WorkFlowAnalysisMenuCheck" />
+	<bean id="rssMenuCheckImplBean" class="com.seeyon.v3x.doc.util.RssMenuCheckImpl" />
+	<bean id="timeCardMenuCheckerBean" class="com.seeyon.v3x.menu.check.TimeCardMenuCheckerImpl" />	
+	<bean id="edocMenuCheckerBean" class="com.seeyon.v3x.menu.check.EdocMenuCheckerImpl" />	
+	<bean id="departmentAdminMenuChecker" class="com.seeyon.v3x.menu.check.DepartmentAdminMenuCheckerImpl">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	
+	<bean id="timeJobForMessageQuartzJob" class="com.seeyon.v3x.messageManager.TimeJobForMessage" />
+	
+	<bean class="com.seeyon.v3x.main.listener.MainOrganizationEventListener">
+		<property name="phraseManager" ref="phraseManager" />
+	</bean>
+	<bean class="com.seeyon.v3x.resource.listener.ResourceOrganizationEventListener">
+		<property name="resourceManager" ref="resourceManager" />
+	</bean>
+	<bean class="com.seeyon.v3x.space.listener.SpaceOrganizationEventListener">
+		<property name="spaceManager" ref="spaceManager" />
+	</bean>
+	
+	<bean class="com.seeyon.v3x.isearch.manager.ISearchManagerRegister" init-method="init">
+	</bean>
+	
+	<bean id="resourceManagerCAP" class="com.seeyon.v3x.resource.manager.cap.ResourceManagerCAPImpl" singleton="true">
+    </bean>
+    
+    <!-- 栏目公示板内容 -->
+	<bean id="noticeManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.notice.manager.NoticeManagerImpl"/>
+		</property>
+	</bean>
+	
+	<!-- webim -->
+	<bean id="wimManager" class="com.seeyon.v3x.online.manager.WIMManagerImpl">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	
+	<bean id="mainManager" class="com.seeyon.v3x.main.manager.MainManagerImpl" init-method="initBean" lazy-init="true">
+	</bean>
+    
+</beans>

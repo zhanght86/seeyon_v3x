@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd"><!--  - Application context definition for "springapp" DispatcherServlet.  -->
+<beans>
+	<bean id="configBean"
+		class="com.seeyon.v3x.util.PropertyHolderConfigurer">
+		<property name="locations">
+			<list>
+				<value>signetdatasource.properties</value>
+			</list>
+		</property>
+	</bean>
+
+
+</beans>

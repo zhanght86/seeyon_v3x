@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.main.section.definition.domain.SectionProps" 
+    table="v3x_section_props"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="sectionDefinitionId"
+        type="long"
+        column="section_definition_id"
+    />
+    <property
+        name="propName"
+        type="string"
+        column="prop_name"
+        length="255"
+    />
+    <property
+        name="propValue"
+        type="string"
+        column="prop_value"
+        length="255"
+    />
+
+
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.seeyon.v3x.bulletin.domain">
+	<class
+		name="BulRead"
+		table="bul_read"
+	>
+		<meta attribute="sync-DAO">false</meta>
+
+		<meta attribute="sync-DAO">false</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="id"
+		>
+			<generator class="assigned"/>
+		</id>
+
+		<property
+			name="managerId"
+			column="manager_id"
+			type="java.lang.Long"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="readFlag"
+			column="read_flag"
+			type="boolean"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="readDate"
+			column="read_date"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="feedback"
+			column="feedback"
+			type="clob"
+			not-null="false"
+		/>
+		<property
+			name="accountId"
+			column="accountId"
+			type="java.lang.Long"
+			not-null="true"
+		/>
+		<property
+			name="ext1"
+			column="ext1"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="ext2"
+			column="ext2"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<many-to-one
+			name="bulletin"
+			column="bulletin_id"
+			class="BulData"
+			not-null="true"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

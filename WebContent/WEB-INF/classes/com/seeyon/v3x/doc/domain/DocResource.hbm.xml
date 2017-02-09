@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocResource" lazy="false" table="doc_resources">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />			
+		</id>
+		<property name="accessCount" type="integer"
+			column="access_count" not-null="true" length="11" />
+		<property name="commentCount" type="integer"
+			column="comment_count" not-null="true" length="11" />
+		<property name="commentEnabled" type="boolean"
+			column="comment_enabled" not-null="true" length="4" />
+		<property name="createTime" type="timestamp"
+			column="create_time" not-null="true" length="19" />
+		<property name="createUserId" type="long"
+			column="create_user_id" length="20" />
+		<property name="docLibId" type="long" column="doc_lib_id"
+			not-null="true" length="20" />
+		<property name="frDesc" type="string" column="fr_desc"
+			length="255" />
+		<property name="frName" type="string" column="fr_name"
+			not-null="true" length="1000" />
+		<property name="frOrder" type="integer" column="fr_order"
+			not-null="true" length="11" />
+		<property name="frSize" type="long" column="fr_size"
+			not-null="true" length="20" />
+		<property name="frType" type="long" column="fr_type"
+			not-null="true" length="20" />
+		<property name="lastUpdate" type="timestamp"
+			column="last_update" not-null="true" length="19" />
+		<property name="lastUserId" type="long" column="last_user_id"
+			length="20" />
+		<property name="parentFrId" type="long" column="parent_fr_id"
+			not-null="true" length="20" />
+		<property name="sourceId" type="long" column="source_id"
+			length="20" />
+		<property name="status" type="byte" column="status"
+			not-null="true" length="4" />
+		<property name="statusDate" type="timestamp"
+			column="status_date" not-null="true" length="19" />
+		<property name="subfolderEnabled" type="boolean"
+			column="subfolder_enabled" not-null="true" length="4" />
+		<property name="isFolder" type="boolean" column="is_folder"
+			not-null="true" length="4" />
+		<property name="logicalPath" type="string" column="logical_path"
+			not-null="false" length="1024" />
+		<property name="mimeTypeId" type="long" column="mime_type_id"
+			not-null="true" length="20" />
+		<property name="isCheckOut" type="boolean" column="is_check_out"
+			not-null="true" length="4" />
+		<property name="checkOutUserId" type="long"
+			column="check_out_user_id" length="20" />
+		<property name="checkOutTime" type="timestamp"
+			column="check_out_time" length="19" />
+		<property name="keyWords" type="string" column="key_words"
+			length="255" />
+			
+		<property name="hasAttachments" type="boolean" column="has_attachments"
+			not-null="true" length="4" />
+		<property name="isLearningDoc" type="boolean" column="is_learning_doc"
+			not-null="true" length="4" />
+		<property name="third_hasPingHole" type="boolean" column="third_hasPingHole"
+			  length="4"></property>			
+					<property name="mimeOrder" type="integer" column="mime_order"
+			not-null="true" length="11" />
+		
+		<!-- 文档版本管理 -->	
+		<property name="versionEnabled" type="boolean" 
+			column="version_enabled" not-null="true" length="4" />
+		<property name="versionComment" type="string" 
+			column="version_comment" length="1000" />
+		
+		<property name="pigeonholeType" type="integer" 
+			column="pigeonhole_type"  length="2"/>
+			
+		<property name="secretLevel" type="integer" 
+			column="secret_level"  length="4"/>
+		<!-- Associations -->
+
+		<!--bag name="docMetadata"
+			inverse="true"
+			lazy="false"
+			cascade="all">
+			<key column="doc_resource_id"/>
+			<one-to-many entity-name="DocMetadata"/>
+			</bag-->
+
+	</class>
+</hibernate-mapping>

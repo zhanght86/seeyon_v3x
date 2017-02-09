@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.seeyon.v3x.addressbook.domain">
+  <class name="AddressBookTeam" table="addressbook_team" lazy="false">
+      <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+        <property
+        name="name"
+        type="string"
+        column="name"
+        not-null="true"
+        length="255"
+    />
+    <property
+        name="type"
+        type="int"
+        column="type"
+        not-null="true"
+        length="4"
+    />
+    <property
+        name="creatorId"
+        type="long"
+        column="creator_id"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="creatorName"
+        type="string"
+        column="creator_name"
+        not-null="true"
+        length="255"
+    />
+    <property
+        name="createdTime"
+        type="date"
+        column="created_time"
+    />
+    <property
+        name="modifiedTime"
+        type="date"
+        column="modified_time"
+    />
+    <property
+        name="memo"
+        type="clob"
+        column="memo"
+    />
+    <!-- 
+    <set name="members" table="addressbook_team_members">
+    	<key column="team_id"/>
+    	<many-to-many column="member_id"  class="AddressBookMember">
+    	</many-to-many>
+    </set>
+     -->
+  </class>
+</hibernate-mapping>

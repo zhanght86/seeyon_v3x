@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocLearning" lazy="false"
+		table="doc_learning">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		
+		<!--property name="docResourceId" type="long"
+			column="doc_resource_id" not-null="true" length="20" /-->
+			
+		<many-to-one name="docResource" column="doc_resource_id"
+			 class="com.seeyon.v3x.doc.domain.DocResource" not-null="true" />	
+		<property name="orgId" type="long"
+			column="org_id" not-null="true" length="20" />
+		<property name="orgType" type="string" column="org_type"
+			not-null="true" length="255" />
+		<property name="orderNum" type="int" column="order_num" 
+			length="11" />
+		<property name="createUserId" type="long"
+			column="create_user_id" not-null="true" length="20" />
+		<property name="createTime" type="timestamp"
+			column="create_time" not-null="true" length="19" />
+
+
+	</class>
+</hibernate-mapping>

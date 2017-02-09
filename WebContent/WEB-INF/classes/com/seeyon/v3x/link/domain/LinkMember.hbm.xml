@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.link.domain.LinkMember" 
+    table="v3x_link_member"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="memberid"
+        type="long"
+        column="member_id"
+        not-null="false"
+        length="20"
+    />
+    <property
+        name="linkSystemId"
+        type="long"
+        column="link_system_id"
+        not-null="false"
+        length="20"
+    />
+    <property
+        name="userLinkSort"
+        type="int"
+        column="user_link_sort"
+        length="11"
+    />
+
+</class>
+</hibernate-mapping>

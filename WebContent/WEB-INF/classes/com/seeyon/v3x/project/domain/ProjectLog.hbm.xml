@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.project.domain.ProjectLog" table="project_log" lazy="true">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="userid" type="long" column="userid" not-null="true" length="20" />
+		<property name="projectId" type="long" column="project_id" not-null="true" length="20" />
+		<property name="memberDesc" type="clob" column="member_desc" />
+		<property name="projectDesc" type="clob" column="option_desc" />
+		<property name="managerDesc" type="clob" column="manager_desc" />
+		<property name="chargeDesc" type="clob" column="charge_desc" />
+		<property name="interfixDesc" type="clob" column="interfix_desc" />
+		<property name="optionDate" type="timestamp" column="option_date" />
+		<property name="assistantDesc" type="clob" column="assistant_desc" />
+	</class>
+</hibernate-mapping>

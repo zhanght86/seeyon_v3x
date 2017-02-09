@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	
+	<!-- 代理接口 -->
+	<bean id="proxyManager" class="com.seeyon.v3x.indexInterface.ProxyManager" >
+	</bean>
+	
+	<!-- 分区管理 -->
+	<bean id="partitionController"
+		class="com.seeyon.v3x.system.controller.PartitionController"
+		autowire="byName"
+		depends-on="proxyManager" >
+	</bean>
+	<!-- 系统管理员密码管理 -->
+	<bean id="managerController"
+		class="com.seeyon.v3x.system.controller.ManagerController"
+		autowire="byName">
+	</bean>
+	<!-- 系统元数据管理 -->
+	<bean id="metaDataMgrController"
+		class="com.seeyon.v3x.system.controller.MetaDataMgrController"
+		autowire="byName">	
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />	
+		<property name="orgManager" ref="OrgManager" />	
+	</bean>	
+	<!-- 单位管理员密码管理 -->
+	<bean id="accountManagerController"
+		class="com.seeyon.v3x.system.controller.AccountManagerController"
+		autowire="byName">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="configManager" ref="configManager" />
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	<!-- 个人用户密码管理 -->
+	<bean id="individualManagerController"
+		class="com.seeyon.v3x.system.controller.IndividualManagerController"
+		autowire="byName">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+	</bean>
+	<!-- 未分配人员管理 -->
+	<bean id="distributeManagerController"
+		class="com.seeyon.v3x.system.controller.DistributeManagerController"
+		autowire="byName">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="orgManager" ref="OrgManager" />	
+	</bean>
+	<!-- 工作范围管理 -->
+	<bean id="workscopeController"
+		class="com.seeyon.v3x.system.controller.WorkscopeController"
+		autowire="byName">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+	</bean>
+	<!-- 角色管理 -->
+	<bean id="roleController"
+		class="com.seeyon.v3x.system.controller.RoleController"
+		autowire="byName">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+	</bean>
+	<!-- 印章管理事务处理 -->
+	<bean id="signetManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.system.signet.manager.SignetManagerImpl" init-method="init">
+				<property name="signetDao">
+					<bean
+						class="com.seeyon.v3x.system.signet.dao.SignetDaoImpl">
+						<property name="sessionFactory" ref="sessionFactory" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="insert*">PROPAGATION_REQUIRED</prop>                
+				<prop key="*">PROPAGATION_SUPPORTS</prop>     
+			</props>
+		</property>
+	</bean>
+	<!-- 印章管理 -->
+	<bean id="signetController"
+		class="com.seeyon.v3x.system.signet.controller.SignetController"
+		autowire="byName">
+		<property name="signetManager" ref="signetManager" />
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+	</bean>
+	<!-- 代理管理 -->
+	<bean id="proxyController"
+		class="com.seeyon.v3x.system.controller.ProxyController"
+		autowire="byName">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+		<property name="onLineManager" ref="onLineManager" />
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	<!-- 系统岗位管理 -->
+	<bean id="postController"
+		class="com.seeyon.v3x.system.controller.PostController"
+		autowire="byName">
+		<property name="metadataManager" ref="metadataManager" />
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+	</bean>
+	 <!-- 系统兼职管理 -->
+	 <bean id="pluralityManagerController" class="com.seeyon.v3x.system.controller.PluralityManagerController" autowire="byName">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="orgManager" ref="OrgManager" />
+		<property name="fileToExcelManager" ref="fileToExcelManager" />
+		<property name="menuManager" ref="menuManager" />
+	 </bean>
+	 <!-- 印章记录 -->
+	 <bean id="documentSignatureDao"
+		class="com.seeyon.v3x.system.signet.dao.DocumentSignatureDao">
+	</bean>
+	<!-- html签章控件 -->
+	<bean id="v3xHtmDocumentSignatureDao"
+		class="com.seeyon.v3x.system.signet.dao.V3xHtmDocumentSignatureDao">
+	</bean>
+	<!-- html签章控件 -->
+	<bean id="htmlSignatureHistoryDao"
+		class="com.seeyon.v3x.system.signet.dao.HtmlSignatureHistoryDao">
+	</bean>
+	
+	<bean id="serverStateController" class="com.seeyon.v3x.system.runtime.ServerStateController" />
+	
+	<!-- 移动应用管理 -->
+	<bean id="mobileManagerController"
+		class="com.seeyon.v3x.system.controller.MobileManagerController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="mobileMessageDao" ref="mobileMessageDao" />
+	</bean>
+	<!-- 流程日志 -->
+	<bean id="processLogController"
+		class="com.seeyon.v3x.system.controller.ProcessLogController" autowire="byName">
+		<property name="processLogManager" ref="processLogManager"/>
+		<property name="fileToExcelManager" ref="fileToExcelManager" />
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	<bean id="appLogController" 
+	      class="com.seeyon.v3x.system.controller.AppLogController"
+	      autowire="byName"> 
+	      <property name="orgManagerDirect" ref="OrgManagerDirect"></property> 
+		<property name="orgManager" ref="OrgManager" />
+		<property name="appLogManager" ref="appLogManager"/>
+		<property name="fileToExcelManager" ref="fileToExcelManager" />
+	</bean>
+	<!-- 锁定账户管理 -->
+	<bean id="lockedUserManagerController" class="com.seeyon.v3x.system.controller.LockedUserManagerController" autowire="byName">
+		
+	</bean>
+	<!-- 访问控制 -->
+	<bean id="ipcontrolManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.system.ipcontrol.manager.IpcontrolManagerImpl" init-method="init">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="insert*">PROPAGATION_REQUIRED</prop>                
+				<prop key="*">PROPAGATION_SUPPORTS</prop>     
+			</props>
+		</property>
+	</bean>
+	<!-- 访问控制管理 -->
+	<bean id="ipcontrolController" class="com.seeyon.v3x.system.ipcontrol.controller.IpcontrolController" autowire="byName">
+		<property name="orgManagerDirect" ref="OrgManagerDirect"></property> 
+	</bean>
+	
+	<bean id="infoOpenController" class="com.seeyon.v3x.system.debug.InfoOpenController" autowire="byName" />
+	<bean id="infoOpenManager" class="com.seeyon.v3x.system.debug.InfoOpenManagerImpl" init-method="init" autowire="byName" />
+	
+	<!-- 皮肤设置 -->
+	<bean id="skinController" class="com.seeyon.v3x.system.controller.SkinController" autowire="byName" />
+	
+	<!-- 组织模型同步事件监听 -->
+	<bean class="com.seeyon.v3x.system.signet.listener.SignetOrganizationSyncEventListener" autowire="byName">
+		<property name="signetManager" ref="signetManager"/>
+	</bean>
+	
+	<bean id="signetOrganizationEventListener" 
+		class="com.seeyon.v3x.system.signet.listener.SignetOrganizationEventListener"
+	    init-method="init"></bean>
+	
+	<!-- 分表转储 -->
+	<bean id="storeRuleController" class="com.seeyon.v3x.system.store.StoreRuleController">
+	</bean>
+	
+	<bean id="storeRuleManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.system.store.StoreRuleManagerImpl">
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="insert*">PROPAGATION_REQUIRED</prop>                
+				<prop key="*">PROPAGATION_SUPPORTS</prop>     
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="StoreJob" class="com.seeyon.v3x.system.store.StoreJob" init-method="init">
+		<property name="storeJobManager">
+			<ref local="storeJobManager" />
+		</property>
+	</bean>
+	
+	<bean id="storeJobManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.system.store.StoreJobManager">
+				<property name="colManager" ref="colManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+                <prop key="doCut">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>     
+			</props>
+		</property>
+	</bean>
+</beans>

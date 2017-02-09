@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="meetingUtils" class="com.seeyon.v3x.meeting.util.MeetingUtils" autowire="byName">
+    	<property name="orgManager" ref="OrgManager"></property>
+    </bean>
+       
+	<bean id="mtContentTemplateController"
+          class="com.seeyon.v3x.meeting.controller.MtContentTemplateController" autowire="byName">
+          <property name="orgManager" ref="OrgManager" />
+    </bean>    
+    <bean id="mtContentTemplateManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.meeting.manager.MtContentTemplateManagerImpl"/>          
+		</property>
+        <property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="mtContentTemplateDao" class="com.seeyon.v3x.meeting.dao.MtContentTemplateDao"></bean>
+    
+    
+    <bean id="mtSummaryTemplateController"
+          class="com.seeyon.v3x.meeting.controller.MtSummaryTemplateController" autowire="byName">
+          <property name="userMessageManager" ref="UserMessageManager" />
+          <property name="orgManager" ref="OrgManager"></property>
+    </bean>    
+    <bean id="mtSummaryTemplateManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.meeting.manager.MtSummaryTemplateManagerImpl"/>            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="is*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="mtSummaryTemplateDao" class="com.seeyon.v3x.meeting.dao.MtSummaryTemplateDao"></bean>
+    
+    
+    <bean id="mtMeetingController"
+          class="com.seeyon.v3x.meeting.controller.MtMeetingController" autowire="byName">
+          <property name="userMessageManager" ref="UserMessageManager" />
+          <property name="mtResourcesManager" ref="resourcesManager" />
+          <property name="orgManager" ref="OrgManager" />
+          <property name="meetingRoomManager" ref="meetingRoomManager"></property>
+    </bean>
+    <bean id="mtMeetingManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.meeting.manager.MtMeetingManagerImpl">
+            	<property name="orgManager" ref="OrgManager" />
+            	<property name="mtResourcesManager" ref="resourcesManager" /> 
+            </bean>          
+        </property>
+        <property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="iSearch">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="mtMeetingDao" class="com.seeyon.v3x.meeting.dao.MtMeetingDao"></bean>
+    
+    <bean id="mtConfereeDao" class="com.seeyon.v3x.meeting.dao.MtConfereeDao"></bean>
+    
+    
+    <bean id="replyManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.meeting.manager.MtReplyManagerImpl">
+            	<property name="orgManager" ref="OrgManager"></property>     
+            </bean>  
+        </property>
+        <property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="mtReplyDao" class="com.seeyon.v3x.meeting.dao.MtReplyDao"></bean>
+    
+    
+    
+    <bean id="resourcesManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.meeting.manager.MtResourcesManagerImpl"/>            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="mtResourcesDao" class="com.seeyon.v3x.meeting.dao.MtResourcesDao"></bean>
+    
+    
+    <bean id="mtTemplateController"
+          class="com.seeyon.v3x.meeting.controller.MtTemplateController" autowire="byName">
+          <property name="mtResourcesManager" ref="resourcesManager" />
+          <property name="orgManager" ref="OrgManager" />
+    </bean>  
+    <bean id="mtTemplateManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.meeting.manager.MtTemplateManagerImpl">
+            	<property name="orgManager" ref="OrgManager" />
+            	<property name="mtTemplateUserManager" ref="mtTemplateUserManager"/>
+            </bean>          
+        </property>
+        <property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="is*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="mtTemplateDao" class="com.seeyon.v3x.meeting.dao.MtTemplateDao"></bean>
+    
+    
+    <bean id="mtTemplateUserDao" class="com.seeyon.v3x.meeting.dao.MtTemplateUserDao"></bean>    
+    <bean id="mtTemplateUserManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.meeting.manager.MtTemplateUserManagerImpl"/>            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean> 
+    
+    <bean id="meetingManager4ISearch" parent="baseTxService" >
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.meeting.manager.MeetingManager4ISearch" init-method="init">
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="mtMeetingManagerCAP" class="com.seeyon.v3x.meeting.manager.cap.MtMeetingManagerCAPImpl" singleton="true">
+	</bean>
+
+	<bean id="mtReplyManagerCAP" class="com.seeyon.v3x.meeting.manager.cap.MtReplyManagerCAPImpl" singleton="true">
+	</bean>
+
+	<bean id="mtTemplateManagerCAP" class="com.seeyon.v3x.meeting.manager.cap.MtTemplateManagerCAPImpl" singleton="true">
+	</bean>
+	
+	<bean id="mtContentTemplateManagerCAP" class="com.seeyon.v3x.meeting.manager.cap.MtContentTemplateManagerCAPImpl" singleton="true">
+	</bean>
+	<bean id="MtMeetingClearManager" class="com.seeyon.v3x.meeting.manager.MtMeetingClearManagerImpl" singleton="true">
+	</bean>
+    
+</beans>

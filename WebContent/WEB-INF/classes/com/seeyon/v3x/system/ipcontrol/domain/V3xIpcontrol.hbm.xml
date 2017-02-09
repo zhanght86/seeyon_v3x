@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.seeyon.v3x.system.ipcontrol.domain">
+	<class
+		name="V3xIpcontrol"
+		table="v3x_ipcontrol"
+	>
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="id"
+		>
+			<generator class="assigned"/>
+		</id>
+
+		<property
+			name="type"
+			column="type"
+			type="integer"
+			not-null="true"
+			length="11"
+		/>
+		<property
+			name="name"
+			column="name"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
+		<property
+			name="users"
+			column="users"
+			type="clob"
+			not-null="true"
+		/>
+		<property
+			name="address"
+			column="address"
+			type="clob"
+			not-null="false"
+		/>
+		<property
+			name="createUser"
+			column="create_user"
+			type="java.lang.Long"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="createTime"
+			column="create_time"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="modifyTime"
+			column="modify_time"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="accountId"
+			column="account_id"
+			type="java.lang.Long"
+			not-null="true"
+			length="20"
+		/>
+
+	</class>	
+</hibernate-mapping>

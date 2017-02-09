@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class 
+		name="com.seeyon.v3x.blog.domain.BlogReply"
+		table="blog_reply" 
+		lazy="false"
+		>
+		
+		<id 
+			name="id" 
+			type="long" 
+			column="id" 
+			length="20">
+			<generator class="assigned" />
+		</id>
+		
+    <property
+        name="subject"
+        type="string"
+        column="subject"
+        not-null="true"
+        length="255"
+    />
+    <property
+        name="content"
+        type="clob"
+        column="content"
+    />
+    <property
+        name="issueTime"
+        type="timestamp"
+        column="issue_time"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="parentId"
+        type="long"
+        column="parent_id"
+        length="20"
+    />
+      <property
+        name="employeeId"
+        type="long"
+        column="employee_id"
+        length="20"
+    />
+  <!--
+       <property
+        name="articleId"
+        type="long"
+        column="article_id"
+        length="20"
+    />
+ 
+     <many-to-one 
+    	name="BlogEmployee"
+        class="com.seeyon.v3x.blog.domain.BlogEmployee"
+        lazy="false"
+         >
+        <column 
+        	name="employee_id" 
+        	not-null="true" 
+        	length="20"/>
+    </many-to-one>
+  
+--> 
+	<many-to-one 
+			name="BlogArticle"
+			class="com.seeyon.v3x.blog.domain.BlogArticle" 
+			lazy="false">
+			<column 
+				name="article_id" 
+				not-null="true"
+				length="20" 
+			/>
+	</many-to-one>
+ 	</class>
+</hibernate-mapping>

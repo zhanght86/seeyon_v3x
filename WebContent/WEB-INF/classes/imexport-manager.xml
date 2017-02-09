@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName" default-lazy-init="true">
+	<bean id="dataDao"
+		class="com.seeyon.v3x.organization.inexportutil.DataDao">
+	</bean>	
+	<bean id="dataManagerImpl" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.organization.inexportutil.DataManagerImpl"></bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>	
+	<bean id="ioManager"
+	 	class="com.seeyon.v3x.organization.inexportutil.manager.IOManagerImpl"
+	   	autowire="byName" >
+		<property name="organizationServices" ref="organizationServices" />	
+		<property name="organization" ref="Organization" />
+		<property name="metadataManager" ref="metadataManager" />
+		<property name="spaceManager" ref="spaceManager" />
+		<property name="fileToExcelManager" ref="fileToExcelManager" />
+		<property name="dataManagerImpl" ref="dataManagerImpl" />
+		<property name="fileManager" ref="fileManager" />
+	</bean>	
+</beans>

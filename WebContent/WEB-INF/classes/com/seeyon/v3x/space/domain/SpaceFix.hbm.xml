@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.space.domain.SpaceFix" 
+    table="v3x_space_fix"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="entityId"
+        type="long"
+        column="entity_id"
+        length="20"
+    />
+    <property
+        name="extAttributes"
+        type="string"
+        column="ext_attributes"
+        length="65535"
+    />
+    <property
+        name="pagePath"
+        type="string"
+        column="page_path"
+        length="255"
+    />
+    <property
+        name="type"
+        type="integer"
+        column="type"
+        length="4"
+    />
+    <property
+        name="updateTime"
+        type="timestamp"
+        column="update_time"
+        length="19"
+    />
+    <property
+        name="accountId"
+        type="long"
+        column="account_id"
+        length="20"
+    />
+    <property
+        name="state"
+        type="int"
+        column="state"
+        length="4"
+    />
+    
+    <property
+        name="spaceName"
+        type="string"
+        column="space_name"
+        length="255"
+    />
+    
+    <property
+		name="spaceMenuEnabled"
+		column="space_menu_enabled"
+		type="boolean"
+		not-null="true"
+		length="1"
+	/>
+	<property
+        name="parentId"
+        type="long"
+        column="parent_id"
+        length="20"
+    />
+</class>
+</hibernate-mapping>

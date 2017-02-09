@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<bean id="myApplyInfoTarget" class="com.seeyon.v3x.office.myapply.manager.impl.MyApplyManagerImpl" autowire="byName">
+  		<property name="applyListDAO">
+   			<ref bean="applyListDAO" />
+  		</property>
+  		
+ 	</bean>
+	
+	<bean id="myApplyManager" parent="baseTxService">
+		<property name="target">
+		    <ref local="myApplyInfoTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="applyListDAO" class="com.seeyon.v3x.office.myapply.dao.impl.ApplyListDAOImpl" ></bean>
+	
+</beans>
+

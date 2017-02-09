@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.seeyon.v3x.formbizconfig.domain">
+<class 
+    name="FormBizConfigTempletProfile" 
+    table="form_bf_templet_profile"
+    lazy="false"
+>
+    <id
+		name="id"
+		type="java.lang.Long"
+		column="id"
+		length="20"
+	>
+		<generator class="assigned"/>
+	</id>
+
+    <property
+        name="formTempletId"
+        type="java.lang.Long"
+        column="form_templet_id"
+        length="20"
+    />
+    
+    <property
+		name="sortId"
+		column="sort_id"
+		type="integer"
+		length="11"
+	/>
+
+	<property
+        name="formBizConfigId"
+        type="java.lang.Long"
+        column="form_biz_config_id"
+        length="20"
+    />
+
+</class>
+</hibernate-mapping>

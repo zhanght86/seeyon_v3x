@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="com.seeyon.v3x.calendar.domain.CalEventTran" lazy="false" table="cal_event_tran">
+	<id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+		<generator class="assigned" />
+	</id>
+	<property
+        name="entityId"
+        type="long"
+        column="entity_id"
+        length="20"
+    />
+    
+    <property
+        name="receiveId"
+        type="long"
+        column="receive_id"
+        length="20"
+    />
+    
+	<property
+        name="eventId"
+        type="long"
+        column="event_id"
+        not-null="true"
+        length="20"
+    />
+	<property
+        name="sourceRecordId"
+        type="long"
+        column="source_record_id"
+        not-null="true"
+        length="20"
+    />
+	<property
+        name="type"
+        type="integer"
+        column="type"
+        length="11"
+    />
+
+	<!-- Associations -->
+
+</class>
+</hibernate-mapping>

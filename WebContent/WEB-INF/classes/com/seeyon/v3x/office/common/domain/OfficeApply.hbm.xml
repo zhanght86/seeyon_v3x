@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class
+    name="com.seeyon.v3x.office.common.domain.OfficeApply" 
+    table="T_ApplyList"
+>
+	<id
+        name="applyId"
+        type="long"
+        column="apply_id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="applyUserName"
+        type="long"
+        column="apply_username"
+        length="20"
+    />
+    <property
+        name="applyDepId"
+        type="long"
+        column="apply_depid"
+        length="20"
+    />
+    
+    <property
+        name="applyUser"
+        type="long"
+        column="apply_user"
+        length="20"
+    />
+    <property
+        name="applyUseDep"
+        type="long"
+        column="apply_usedep"
+        length="20"
+    />
+    
+    <property
+        name="applyDate"
+        type="date"
+        column="apply_date"
+    />
+    
+    <property 
+    	name="applyState"
+    	type="integer"
+    	column="apply_state"
+    	length="1"
+    />
+    <property 
+    	name="applyType"
+    	type="string"
+    	column="apply_type"
+    	length="1"
+    />
+    
+    <property 
+    	name="applyMemo"
+    	type="string"
+    	column="apply_memo"
+    	length="4000"
+     />
+     
+     <property
+     	name="applyManager"
+     	type="long"
+     	column="apply_mge"
+     	length="20"
+    />
+     	
+    <property
+        name="applyExam"
+        type="long"
+        column="apply_exam"
+        length="20"
+    />
+
+	<property
+        name="auditTime"
+        type="date"
+        column="audit_time"
+    />
+    
+    <property 
+    	name="deleteFlag"
+    	type="integer"
+    	column="del_flag"
+    	length="1"
+    />
+</class>
+</hibernate-mapping>    

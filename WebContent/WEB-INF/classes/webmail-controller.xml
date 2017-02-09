@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<!-- WebMailController -->
+	<bean id="webMailController" class="com.seeyon.v3x.webmail.controller.WebMailController">
+		<property name="webMailManager" ref="webMailManager" />
+		<property name="orgManager">
+			<ref bean="OrgManager" />
+		</property>
+		<property name="addressBookManager" ref="addressBookManager" />
+		<property name="messageMailManager" ref="messageMailManager" />
+		<property name="attachmentManage" ref="attachmentManager" />
+	</bean>
+</beans>
+
+<!--<prop key="/webmail.do">webMailController</prop>-->

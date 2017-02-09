@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="metadataDefManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.MetadataDefManagerImpl" />
+
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="has*">PROPAGATION_SUPPORTS</prop>
+				<prop key="init">PROPAGATION_SUPPORTS</prop>
+				<prop key="containMetadataDef">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="metadataDefDao"
+		class="com.seeyon.v3x.doc.dao.MetadataDefDao">
+	</bean>
+	<bean id="metadataUseDao"
+		class="com.seeyon.v3x.doc.dao.MetadataUseDao" init-method="init">
+	</bean>
+
+	<bean id="metadataOptionsDao"
+		class="com.seeyon.v3x.doc.dao.MetadataOptionsDao">
+	</bean>
+
+	<bean id="contentTypeManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.ContentTypeManagerImpl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="is*">PROPAGATION_SUPPORTS</prop>				
+				<prop key="contain*">PROPAGATION_SUPPORTS</prop>				
+				<prop key="init">PROPAGATION_SUPPORTS</prop>				
+				<prop key="has*">PROPAGATION_SUPPORTS</prop>				
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="contentTypeDao"
+		class="com.seeyon.v3x.doc.dao.ContentTypeDao">
+	</bean>
+	<bean id="contentTypeDetailsDao"
+		class="com.seeyon.v3x.doc.dao.ContentTypeDetailsDao">
+	</bean>
+
+	<bean id="docMetadataManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.DocMetadataManagerImpl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+			<prop key="get*">PROPAGATION_SUPPORTS</prop>
+			<prop key="find*">PROPAGATION_SUPPORTS</prop>
+			
+			<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="htmlUtil"
+		class="com.seeyon.v3x.doc.manager.HtmlUtil">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	<bean id="docUtils"
+		class="com.seeyon.v3x.doc.util.DocUtils">
+	</bean>
+	
+	<bean id="docResourceDao"
+		class="com.seeyon.v3x.doc.dao.DocResourceDao">
+	</bean>
+		
+
+	
+	<bean id="docFromPotentDao"
+		class="com.seeyon.v3x.doc.dao.DocFromPotentDao">
+	</bean>
+
+	<bean id="docAclManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.doc.manager.DocAclManagerImpl"  init-method="init" singleton="true">
+				<property name="orgManager" ref="OrgManager" /><!-- 成发集团项目 -->
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+			<prop key="get*">PROPAGATION_SUPPORTS</prop>
+			<prop key="find*">PROPAGATION_SUPPORTS</prop>
+			<prop key="canBeDelete">PROPAGATION_SUPPORTS</prop>
+			<prop key="isNoInherit">PROPAGATION_SUPPORTS</prop>
+			<prop key="inheritUser">PROPAGATION_SUPPORTS</prop>
+			<prop key="has*">PROPAGATION_SUPPORTS</prop>
+			<prop key="is*">PROPAGATION_SUPPORTS</prop>
+			
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="docAclDao" class="com.seeyon.v3x.doc.dao.DocAclDao">
+	</bean>
+
+	<bean id="docLibMemberDao"
+		class="com.seeyon.v3x.doc.dao.DocLibMemberDao">
+	</bean>
+
+	<!-- doc_space begin -->
+	<bean id="docSpaceManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.DocSpaceManagerImpl">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+			<prop key="get*">PROPAGATION_SUPPORTS</prop>
+			
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="docSpaceDao" class="com.seeyon.v3x.doc.dao.DocSpaceDao">
+	</bean>
+
+	<!-- doc_space end -->
+
+	<!-- doc_lib begin -->
+	<bean id="docLibManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.doc.manager.DocLibManagerImpl" init-method="initialize" singleton="true">
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="is*">PROPAGATION_SUPPORTS</prop>
+				<prop key="has*">PROPAGATION_SUPPORTS</prop>
+				
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="docLibDao" class="com.seeyon.v3x.doc.dao.DocLibDao">
+	</bean>
+	<bean id="ownerDao" class="com.seeyon.v3x.doc.dao.DocLibOwnerDao">
+	</bean>
+	<bean id="docListColumnDao"
+		class="com.seeyon.v3x.doc.dao.DocListColumnDao">
+	</bean>
+	<bean id="docSearchConfigDao"
+		class="com.seeyon.v3x.doc.dao.DocSearchConfigDao">
+	</bean>
+	<bean id="docTypeListDao"
+		class="com.seeyon.v3x.doc.dao.DocTypeListDao">
+	</bean>
+	<bean id="defaultListColumn" class="com.seeyon.v3x.doc.manager.DefaultListColumn">
+	</bean>
+	<bean id="defaultSearchCondition" class="com.seeyon.v3x.doc.manager.DefaultSearchCondition" init-method="init">
+	</bean>
+
+	<!-- doc_lib end -->
+
+	<!-- alter -->
+	<bean id="docAlertManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.doc.manager.DocAlertManagerImpl" init-method="init" singleton="true">
+					<property name="orgManager" ref="OrgManager" />
+				</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+			<prop key="find*">PROPAGATION_SUPPORTS</prop>
+			<prop key="get*">PROPAGATION_SUPPORTS</prop>
+			
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="docAlertLatestManager" parent="baseTxService">
+		<property name="target">
+		<bean class="com.seeyon.v3x.doc.manager.DocAlertLatestManagerImpl" >
+				<property name="orgManager" ref="OrgManager" />
+				<property name="userMessageManager" ref="UserMessageManager" />
+				</bean>
+		</property>
+	<property name="transactionAttributes">
+		<props>
+			<prop key="find*">PROPAGATION_SUPPORTS</prop>
+			<prop key="pagedFindAlertLatest">PROPAGATION_SUPPORTS</prop>
+			
+			<prop key="*">PROPAGATION_REQUIRED</prop>
+		</props>
+	</property>
+	</bean>
+
+	<bean id="docAlertDao" class="com.seeyon.v3x.doc.dao.DocAlertDao">
+	</bean>
+	<bean id="docAlertLatestDao" class="com.seeyon.v3x.doc.dao.DocAlertLatestDao">
+	</bean>
+
+	<!-- doc_link -->
+	<bean id="docLinkManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.doc.manager.DocLinkManagerImpl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="docLinkDao" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.doc.dao.DocLinkDao" />
+		</property>
+	</bean>
+		
+	<!-- doc_Session -->
+	<bean id="docSessionManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.doc.manager.DocSessionManagerImpl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="docSessionDao" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.doc.dao.DocSessionDao" />
+		</property>
+	</bean>	
+	
+	<bean id="docManageLock" parent="lockManager">
+		<property name="module" value="docManageLock"/>
+	</bean>
+
+	<!-- doc hierarchy  -->
+	<!-- DocHierarchyManager -->
+	<bean id="docHierarchyManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.DocHierarchyManagerImpl"  init-method="init" singleton="true">
+				<property name="orgManager" ref="OrgManager" />
+				<property name="docManageLock" ref="docManageLock"/>
+				<!-- <property name="userMessageManager" ref="UserMessageManager" />  -->
+				<!-- 文档ID改为UUID之后，为避免查询速度影响过大，将文档夹层级总数进行限制，上限为10级(配置超过此值，仍限制为10级) -->
+				<property name="folderLevelLimit" value="20" />
+			</bean>
+		</property>		
+		<property name="transactionAttributes">
+			<props>
+			<prop key="find*">PROPAGATION_SUPPORTS</prop>
+			<prop key="get*">PROPAGATION_SUPPORTS</prop>
+			<prop key="is*">PROPAGATION_SUPPORTS</prop>
+			<prop key="has*">PROPAGATION_SUPPORTS</prop>
+			<prop key="iSearch*">PROPAGATION_SUPPORTS</prop>
+			<prop key="check*">PROPAGATION_SUPPORTS</prop>
+			
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- DocVersionInfo：文档历史版本信息 -->
+	<bean id="docVersionInfoManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.doc.manager.DocVersionInfoManagerImpl" />
+		</property>
+	</bean>
+	<bean id="docVersionInfoDao" class="com.seeyon.v3x.doc.dao.DocVersionInfoDao">
+	</bean>
+	
+	<!-- DocMimeTypeManager -->
+	<bean id="docMimeTypeManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.DocMimeTypeManagerImpl" init-method="init" singleton="true"/>
+		</property>
+		<property name="transactionAttributes">
+			<props>	
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- DocMimeTypeDao -->
+	<bean id="docMimeTypeDao"
+		class="com.seeyon.v3x.doc.dao.DocMimeTypeDao" />
+
+	<!-- DocBodyDao -->
+	<bean id="docBodyDao" class="com.seeyon.v3x.doc.dao.DocBodyDao" />
+	
+	<!-- 文档收藏begin -->
+	<bean id="docFavoriteManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.DocFavoriteManagerImpl">
+			</bean>
+
+		</property>
+		<property name="transactionAttributes">
+			<props>
+			<prop key="get*">PROPAGATION_SUPPORTS</prop>
+			<prop key="find*">PROPAGATION_SUPPORTS</prop>
+			<prop key="pagedFindFavorite">PROPAGATION_SUPPORTS</prop>
+			
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="docFavoriteDao"
+		class="com.seeyon.v3x.doc.dao.DocFavoriteDao">
+	</bean>
+	<!-- 文档收藏end -->
+
+	<!-- 文档评论begin -->
+	<bean id="docForumManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.DocForumManagerImpl" />
+
+		</property>
+		<property name="transactionAttributes">
+			<props>		
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="docForumDao" class="com.seeyon.v3x.doc.dao.DocForumDao">
+	</bean>
+	<!-- 文档评论end -->
+
+	<!-- 文档统计begin -->
+	<bean id="docCountManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.DocCountManagerImpl" />
+
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 文档统计end -->
+
+	<!-- 借阅历史 -->
+	<bean id="docBorrowHistoryDao"
+		class="com.seeyon.v3x.doc.dao.DocBorrowHistoryDao">
+	</bean>
+	<bean id="docBorrowHistoryManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.DocBorrowHistoryManagerImpl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="docMetadataDao" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.dao.DocMetadataDao">
+				<property name="sessionFactory" ref="docSessionFactory" />
+			</bean>
+		</property>
+	</bean>	
+		<bean id="docSessionFactory"
+		class="com.seeyon.v3x.doc.util.db.DocSessionFactory">
+   		<property name="dataSource" ref="seeyonDataSource" />
+		<property name="mappingResources">
+			<list>
+                 <value>DocMetadata.hbm.xml</value>
+                 <value>DocResource.hbm.xml</value>
+			</list>
+		</property>
+		<!--  oracle9 配置
+	    <property name="lobHandler" ref="lobHandler" />-->
+   		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${db.hibernateDialect}</prop>
+				<prop key="hibernate.show_sql">false</prop><!-- 已经采用Log4j -->
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.generate_statistics">false</prop>
+				<prop key="hibernate.jdbc.batch_size">${db.jdbc.batch_size}</prop>
+				<prop key="hibernate.cache.use_second_level_cache">${db.cache.use_second_level_cache}</prop>
+			</props>
+		</property>
+	</bean>
+	
+		<!-- DocLearningManager -->
+	<bean id="docLearningManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.DocLearningManagerImpl">
+				<property name="userMessageManager" ref="UserMessageManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+			<prop key="get*">PROPAGATION_SUPPORTS</prop>
+			
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- DocLearningDao -->
+	<bean id="docLearningDao"
+		class="com.seeyon.v3x.doc.dao.DocLearningDao" />
+	<bean id="docLearningHistoryDao"
+		class="com.seeyon.v3x.doc.dao.DocLearningHistoryDao" />
+		
+				<!-- 综合查询 -->
+	<bean id="docManager4ISearch" parent="baseTxService" >
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.DocManager4ISearch" init-method="initDoc">
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+		<bean id="docPigeonholeManager4ISearch" parent="baseTxService" >
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.doc.manager.DocPigeonholeManager4ISearch" init-method="init">
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+		<!-- 综合查询 -->
+	</bean>
+	<bean class="com.seeyon.v3x.doc.listener.DocOrganizationEventListener">
+		<property name="docLibManager" ref="docLibManager" />
+	</bean>
+	
+	<bean id="docHierarchyManagerCAP" class="com.seeyon.v3x.doc.manager.cap.DocHierarchyManagerCAPImpl" singleton="true">
+    </bean>
+    
+</beans>

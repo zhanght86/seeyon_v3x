@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="CMPP3PluginDefintion" class="com.seeyon.v3x.plugin.mobile.SMSPluginDefintion">
+		<property name="id" value="sms" />
+		<property name="name" value="短信插件" />
+		<property name="contextConfigLocation">
+			<list>
+				<value>classpath*:smsAdapterManager.xml</value>
+			</list>
+		</property>
+		<property name="properties">
+			<list>
+				<value>classpath*:conf/sms.properties</value>
+			</list>
+		</property>
+	</bean>
+</beans>

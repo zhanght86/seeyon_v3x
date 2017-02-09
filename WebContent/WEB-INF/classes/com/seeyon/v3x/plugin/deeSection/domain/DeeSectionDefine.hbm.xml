@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.plugin.deeSection.domain.DeeSectionDefine" 
+    table="v3x_section_dee"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="flowId"
+        type="long"
+        column="flow_id"
+        length="20"
+    />
+    <property
+        name="moduleName"
+        type="string"
+        column="module_name"
+        length="50"
+    />
+    <property
+        name="pageHeight"
+        type="integer"
+        column="page_height"
+        length="4"
+    />
+    <property
+        name="deeSectionName"
+        type="string"
+        column="dee_section_name"
+        length="255"
+    />
+    <property
+        name="flowDisName"
+        type="string"
+        column="flow_disname"
+        length="255"
+    />
+</class>
+</hibernate-mapping>

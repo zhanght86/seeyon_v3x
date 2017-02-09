@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.space.domain.SpaceSort" 
+    table="v3x_space_sort" 
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="memberId"
+        type="long"
+        column="member_id"
+        length="20"
+    />
+    <property
+        name="spacePath"
+        type="string"
+        column="space_path"
+        length="255"
+        
+    />
+    <property
+        name="sort"
+        type="integer"
+        column="sort"
+        length="11"
+    />
+    <property
+        name="type"
+        type="integer"
+        column="type"
+        length="11"
+    />
+    <property
+        name="accountId"
+        type="long"
+        column="account_id"
+        length="20"
+    />
+    <property
+        name="isDeleted"
+        type="boolean"
+        column="is_deleted"
+        length="11"
+    />
+</class>
+</hibernate-mapping>

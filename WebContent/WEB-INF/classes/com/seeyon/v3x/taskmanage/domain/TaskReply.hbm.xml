@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.taskmanage.domain.TaskReply" lazy="false" table="task_reply">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />			
+		</id>
+		<property name="content" type="string" column="content" not-null="true" length="4000" />
+		<property name="createTime" type="timestamp" column="create_time" not-null="true" length="19" />
+		<property name="createUser" type="long" column="create_user" not-null="true" length="20" />
+		<property name="parentReplyId" type="long" column="parent_reply_id" not-null="true" length="20" />
+		<property name="taskId" type="long" column="task_id" not-null="true" length="20" />
+	</class>
+</hibernate-mapping>

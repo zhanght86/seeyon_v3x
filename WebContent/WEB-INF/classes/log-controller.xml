@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<bean id="logController" class="com.seeyon.v3x.log.controller.LogController" autowire="byName">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+	</bean>
+
+	<bean id="logonLogController" class="com.seeyon.v3x.log.controller.LogonLogController" autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+</beans>

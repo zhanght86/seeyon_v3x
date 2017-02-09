@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.workflowanalysis.domain.WorkFlowAnalysisAcl" 
+    table="v3x_workflow_analysis_acl"
+    lazy="true"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="memberIds"
+        type="string"
+        column="member_ids"
+        not-null="true"
+        length="4000"
+    />
+    <property
+        name="memberNames"
+        type="string"
+        column="member_names"
+        not-null="true"
+        length="4000"
+    />
+    <property
+        name="templeteIds"
+        type="string"
+        column="templete_ids"
+        length="4000"
+    />
+     <property
+        name="templeteNames"
+        type="string"
+        column="templete_names"
+        length="4000"
+    />
+    <property
+        name="orgAccountId"
+        type="long"
+        column="org_account_id"
+		not-null="true"
+    /> 
+	
+	<property
+        name="createDate"
+        type="timestamp"
+        column="create_date"
+		not-null="true"
+        length="19"
+    />
+	<property
+        name="updateDate"
+        type="timestamp"
+        column="update_date"
+		not-null="true"
+        length="19"
+    />
+</class>
+</hibernate-mapping>

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.office.auto.domain.AutoInfo"
+		table="m_auto_info">
+		<id name="autoId" type="string" column="auto_id" length="7">
+			<generator class="assigned"></generator>
+		</id>
+
+		<property name="autoName" type="string" column="auto_name"
+			length="50" />
+		<property name="autoModel" type="string" column="auto_model"
+			length="10" />
+		<!-- 
+			
+			<property
+			name="officeType"
+			type="OfficeTypeInfo"
+			column="auto_type"
+			length="20"
+			/>
+		-->
+
+		<property name="autoEngine" type="string" column="auto_engine"
+			length="12" />
+
+		<property name="autoCode" type="string" column="auto_code"
+			length="17" />
+
+		<property name="autoStatus" type="integer" column="auto_status"
+			length="1" />
+
+		<property name="autoDate" type="date" column="auto_date" />
+
+		<property name="autoPrice" type="float">
+			<column name="auto_price" sql-type="decimal(10,2)" />
+		</property>
+
+		<property name="autoDriver" type="long" column="auto_driver"
+			length="20" />
+
+		<property name="autoInsurer" type="string" column="auto_insurer"
+			length="50" />
+
+		<property name="autoInsurNo" type="string" column="auto_insurno"
+			length="30" />
+
+		<property name="autoInsurDate" type="date"
+			column="auto_insurdate" />
+
+		<property name="autoInsurDetail" type="string"
+			column="auto_insurdetail" length="100" />
+
+
+		<property name="autoState" type="integer" column="auto_state"
+			length="1" />
+
+		<property name="autoMemo" type="string" column="auto_memo"
+			length="4000" />
+
+		<property name="autoManager" type="long" column="auto_mge"
+			length="20" />
+
+		<property name="createDate" type="date" column="create_date" />
+
+		<property name="modifyDate" type="date" column="modify_date" />
+
+		<property name="deleteFlag" type="integer" column="del_flag"
+			length="1" />
+		<property name="autoDept" type="long" column="auto_dept"
+			length="20" />
+		<property name="domainId" type="java.lang.Long"
+			column="domain_id" not-null="true" length="20" />
+		<many-to-one name="officeType"
+			class="com.seeyon.v3x.office.common.domain.OfficeTypeInfo"
+			lazy="false">
+			<column name="auto_type" not-null="true" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

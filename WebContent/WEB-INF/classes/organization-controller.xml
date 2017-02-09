@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- 注册controller -->
+	<bean id="organizationController"
+	 	class="com.seeyon.v3x.organization.controller.OrganizationController"
+	   	autowire="byName" >
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />	
+		<property name="orgManager" ref="OrgManager"/>
+		<property name="menuManager" ref="menuManager" />
+		<property name="ioManager" ref="ioManager" />
+	</bean>
+	
+	<bean id="memberLeaveController"
+	 	class="com.seeyon.v3x.organization.controller.MemberLeaveController"
+	   	autowire="byName" >
+	   	<property name="orgManager" ref="OrgManager" />
+	</bean>
+	
+	<bean id="memberLeaveManager" 
+		class="com.seeyon.v3x.organization.manager.MemberLeaveManagerImpl" 
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager"/>
+		<property name="userMessageManager" ref="UserMessageManager" />
+	</bean>
+	
+	<bean id="organizationServices"
+	 	class="com.seeyon.v3x.organization.services.OrganizationServicesImpl"
+	   	autowire="byName" >
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />	 	
+		<property name="bbsBoardManager" ref="bbsBoardManager" />
+		<property name="docLibManager" ref="docLibManager" />
+		<property name="blogManager" ref="blogManager" />
+		<property name="affairManager" ref="affairManager" />
+		<property name="bulTypeManager" ref="bulTypeManager" />
+		<property name="menuManager" ref="menuManager"/>
+		<property name="orgManager" ref="OrgManager"/>
+		
+		<property name="docHierarchyManager" ref="docHierarchyManager"/>
+		<property name="docAlertManager" ref="docAlertManager"/>
+		<property name="docAclManager" ref="docAclManager"/>
+		<property name="inquiryManager" ref="inquiryManager"/>
+		<property name="newsTypeManager" ref="newsTypeManager"/>
+		<property name="officeAdminManager" ref="officeAdminManager"/>
+		<property name="signetManager" ref="signetManager"/>
+		<property name="workStatManager" ref="workStatManager"/>
+	</bean>	
+</beans>

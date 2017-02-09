@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.plugin.deeSection.domain.DeeSectionSecurity" 
+    table="v3x_section_dee_security"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="deeSectionId"
+        type="long"
+        column="dee_section_id"
+    />
+    <property
+        name="entityId"
+        type="long"
+        column="entity_id"
+    />
+    <property
+        name="entityType"
+        type="string"
+        column="entity_type"
+        length="255"
+    />
+    <property
+        name="sort"
+        type="int"
+        column="sort"
+    />
+
+
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

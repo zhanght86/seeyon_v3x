@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.collaboration.templete.domain.TempleteConfig" lazy="false"
+    table="v3x_templete_config"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id> 
+    <property
+        name="memberId"
+        type="long"
+        column="member_id"
+        length="20"
+        not-null="true"
+    />
+    <property
+        name="type"
+        type="integer"
+        column="type"
+        length="11"
+    />
+    <property
+        name="templeteId"
+        type="long"
+        column="templete_id"
+        length="20"
+    />
+    <property
+        name="sort"
+        type="integer"
+        column="sort"
+        length="11"
+    />
+</class>
+</hibernate-mapping>

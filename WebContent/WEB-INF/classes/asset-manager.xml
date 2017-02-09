@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<bean id="assetInfoTarget" class="com.seeyon.v3x.office.asset.manager.impl.AssetManagerImpl" autowire="byName">
+		<property name="assetInfoDAO">
+   			<ref bean="assetInfoDAO" />
+  		</property>
+  		<property name="applyListDAO">
+   			<ref bean="applyListDAO" />
+  		</property>
+  		<property name="assetApplyInfoDAO">
+   			<ref bean="assetApplyInfoDAO" />
+  		</property>
+  		<property name="assetDepartInfoDao">
+  			<ref bean="assetDepartInfoDao"/>
+  		</property>
+  		<property name="userMessageManager" ref="UserMessageManager" />
+ 	</bean>
+	
+	<bean id="assetManager" parent="baseTxService">
+		<property name="target">
+		    <ref local="assetInfoTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="create*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="assetInfoDAO" class="com.seeyon.v3x.office.asset.dao.impl.AssetInfoDAOImpl" ></bean>
+	<bean id="applyListDAO" class="com.seeyon.v3x.office.myapply.dao.impl.ApplyListDAOImpl" ></bean>
+	<bean id="assetApplyInfoDAO" class="com.seeyon.v3x.office.asset.dao.impl.AssetApplyInfoDAOImpl" ></bean>
+	<bean id="assetDepartInfoDao" class="com.seeyon.v3x.office.asset.dao.impl.AssetDepartInfoDAOImpl"></bean>
+</beans>
+

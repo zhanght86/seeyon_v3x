@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="officeOcxPluginDefintion" class="com.seeyon.v3x.plugin.officeOcx.OfficeOcxPluginDefintion">
+		<property name="id" value="officeOcx" />
+		<property name="name" value="office插件" />
+		<property name="contextConfigLocation">
+			<list>
+				<value>classpath*:officeOcx.xml</value>
+			</list>
+		</property>
+	</bean>
+</beans>

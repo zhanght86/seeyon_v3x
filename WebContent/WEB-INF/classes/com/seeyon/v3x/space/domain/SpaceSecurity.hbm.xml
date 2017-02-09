@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.space.domain.SpaceSecurity" 
+    table="v3x_space_security"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="entityId"
+        type="long"
+        column="entity_id"
+        length="20"
+    />
+    <property
+        name="entityType"
+        type="string"
+        column="entity_type"
+        length="20"
+    />
+    <property
+        name="sort"
+        type="integer"
+        column="sort"
+        length="11"
+    />
+    <property
+        name="spaceFixId"
+        type="long"
+        column="space_id"
+        length="20"
+    />
+    <property
+        name="securityType"
+        type="int"
+        column="security_type"
+        length="4"
+    />
+</class>
+</hibernate-mapping>

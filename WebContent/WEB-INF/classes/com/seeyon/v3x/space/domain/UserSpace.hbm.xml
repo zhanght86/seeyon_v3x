@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.space.domain.UserFix" 
+    table="v3x_user_fix"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="memberId"
+        type="long"
+        column="member_id"
+        length="20"
+    />
+    <property
+        name="proKey"
+        type="string"
+        column="pro_key"
+        length="20"
+    />
+    <property
+        name="value"
+        type="string"
+        column="value"
+        length="255"
+    />
+</class>
+</hibernate-mapping>

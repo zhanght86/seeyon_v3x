@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.RecordWorkingTime" table="hr_record_workingtime">
+	    <id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+	    </id>
+	    <property
+          name="begin_hour"
+          type="integer"
+          column="begin_hour"
+          length="2"
+        />
+        <property
+          name="begin_minute"
+          type="integer"
+          column="begin_minute"
+          length="2"
+        />
+        <property
+          name="end_hour"
+          type="integer"
+          column="end_hour"
+          length="2"
+        />
+        <property
+          name="end_minute"
+          type="integer"
+          column="end_minute"
+          length="2"
+        />
+		<property
+          name="accountId"
+          type="long"
+          column="account_id"
+          length="20"
+       />
+	
+	</class>
+</hibernate-mapping>

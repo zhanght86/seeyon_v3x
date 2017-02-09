@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<!-- dongjw -->
+	<!-- 人员基本信息 -->
+	<bean id="hrStaffInfoController"
+		class="com.seeyon.v3x.hr.controller.HrStaffInfoController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="staffInfoManager" ref="staffInfoManager" />
+		<property name="metadataManager" ref="metadataManager" />
+		<property name="attachmentManager" ref="attachmentManager" />
+		<property name="fileToExcelManager" ref="fileToExcelManager" />
+		<property name="userDefinedManager" ref="hrUserDefinedManager" />
+		<property name="projectManager" ref="projectManager" />
+	</bean>
+	<bean id="staffInfoManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.hr.manager.StaffInfoManagerImpl" init-method="init" singleton="true">
+				<property name="staffInfoDao">
+			       <ref local="staffInfoDao" />
+		        </property>
+		        <property name="orgManagerDirect" ref="OrgManagerDirect" />
+		        <property name="attachmentManager" ref="attachmentManager" />
+		        <property name="operationlogManager" ref="operationlogManager" />
+		        <property name="fileManager" ref="fileManager" />
+		        <property name="orgManager" ref="OrgManager" />
+	        </bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="staffInfoDao" class="com.seeyon.v3x.hr.dao.StaffInfoDao"></bean>
+	
+	<!-- 打卡记录 -->
+	<bean id="hrRecordController"
+		class="com.seeyon.v3x.hr.controller.HrRecordController"
+		autowire="byName">
+		<property name="recordManager" ref="recordManager" />
+		<property name="orgManager" ref="OrgManager" />
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+	</bean>
+
+	<bean id="recordManager"  parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.hr.manager.RecordManagerImpl" init-method="init" singleton="true">
+				<property name="recordDao">
+					<ref local="recordDao" />
+				</property>
+				<property name="workSetDao">
+					<ref local="workSetDao" />
+				</property>
+				<property name="orgManager" ref="OrgManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="recordDao" class="com.seeyon.v3x.hr.dao.RecordDao"></bean>
+	<bean id="workSetDao" class="com.seeyon.v3x.worktimeset.dao.WorkSetDao"></bean>
+	
+	<!-- 调配管理 -->
+	<bean id="hrStaffTransferController"  init-method="initialized"
+		class="com.seeyon.v3x.hr.controller.HrStaffTransferController"
+		autowire="byName">
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="staffTransferManager" ref="staffTransferManager" />
+		<property name="staffInfoManager" ref="staffInfoManager" />
+		<property name="jsonView" value="jsonView"/>
+	</bean>
+	<bean id="staffTransferManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.hr.manager.StaffTransferManagerImpl" >
+				<property name="staffTransferDao">
+					<ref local="staffTransferDao" />
+				</property>
+				<property name="staffInfoDao">
+					<ref local="staffInfoDao" />
+				</property>
+				<property name="orgManagerDirect" ref="OrgManagerDirect" />
+				<property name="operationlogManager" ref="operationlogManager" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+               
+	<bean id="staffTransferDao" class="com.seeyon.v3x.hr.dao.StaffTransferDao"></bean>
+	
+	<!-- gaiht -->
+	<!-- 工资管理 -->
+	<bean id="hrSalaryController"
+		class="com.seeyon.v3x.hr.controller.SalaryController"
+		autowire="byName">
+		<property name="salaryManager">
+			<ref local="hrSalaryManager" />
+		</property>
+		<property name="attachmentManager" ref="attachmentManager" />
+		<property name="fileManager" ref="fileManager" />
+		<property name="fileToExcelManager" ref="fileToExcelManager" />
+		<property name="orgManager" ref="OrgManager" />
+		<property name="userDefinedManager" ref="hrUserDefinedManager" />
+		<property name="taskManager" ref="taskManager" />
+		<property name="jsonView" value="jsonView"/>
+	</bean>
+	<bean id="hrViewSalaryController"
+		class="com.seeyon.v3x.hr.controller.ViewSalaryController"
+		autowire="byName">
+		<property name="salaryManager">
+			<ref local="hrSalaryManager" />
+		</property>
+		<property name="userDefinedManager">
+			<ref local="hrUserDefinedManager" />
+		</property>
+	</bean>
+
+
+
+	<bean id="hrSalaryManager"  parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.hr.manager.SalaryManagerImpl">
+				<property name="salaryDao">
+					<ref local="hrSalaryDao" />
+				</property>
+				<property name="hrSalaryPasswordDao">
+					<ref local="hrSalaryPasswordDao"/>
+				</property>
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="hrSalaryDao" class="com.seeyon.v3x.hr.dao.SalaryDao"></bean>
+	<bean id="hrSalaryPasswordDao" class="com.seeyon.v3x.hr.dao.HrSalaryPasswordDao"></bean>
+	
+	<!-- 统计分析-->
+	<bean id="hrStatisticController"
+		class="com.seeyon.v3x.hr.controller.StatisticController"
+		autowire="byName">
+		<property name="statisticManager">
+			<ref local="hrStatisticManager" />
+		</property>
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	
+	<bean id="hrStatisticManager" parent="baseTxService">
+		<property name="target">
+			<bean id="hrStatisticTarget" class="com.seeyon.v3x.hr.manager.StatisticManagerImpl">
+				<property name="statisticDao">
+					<ref local="hrStatisticDao" />
+				</property>
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="hrStatisticDao" class="com.seeyon.v3x.hr.dao.StatisticDao"></bean>
+	
+	<!-- 日志查询 -->
+	<bean id="hrLogController"
+		class="com.seeyon.v3x.hr.controller.HrLogController"
+		autowire="byName">
+		<property name="operationlogManager" ref="operationlogManager" />
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="searchManager" ref="searchManager" />
+		<property name="invalidEntityDAO" ref="InvalidDaoBean" />
+	</bean>
+
+	<!-- 打印 -->
+	<bean id="hrPrintController"
+		class="com.seeyon.v3x.hr.controller.HrPrintController"
+		autowire="byName">
+	</bean>
+	
+	<!-- 表单 -->
+	<bean id="hrFormController"
+		class="com.seeyon.v3x.hr.controller.HrFormController" init-method="initialized"
+		autowire="byName">
+		<property name="searchManager" ref="searchManager" />
+		<property name="jsonView" value="jsonView"/>
+	</bean>
+	
+	<!-- 考勤申请表单 -->
+	<bean id="hrRecordAppController"
+		class="com.seeyon.v3x.hr.controller.HrRecordApplicationController"
+		autowire="byName">
+		<property name="recordManager" ref="recordManager" />
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
+		<property name="dynamicFormManager" ref="dynamicFormManager" />
+	</bean>
+	<bean id="dynamicFormManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.hr.manager.DynamicFormManagerImpl" >
+				<property name="dynamicFormDao">
+					<ref local="hrDynamicFormDao" />
+				</property>
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!--taowy-->
+	<!-- hr组织管理-->
+    <bean id="hrOrgMgrController"
+		class="com.seeyon.v3x.hr.controller.HrOrgMgrController"
+		autowire="byName">
+	</bean>
+
+	<!--自定义选项-->
+	<bean id="hrUserDefinedController"
+		class="com.seeyon.v3x.hr.controller.HrUserDefinedController"
+		autowire="byName">
+		<property name="userDefinedManager">
+			<ref local="hrUserDefinedManager" />
+		</property>
+		<property name="jsonView" value="jsonView"/>
+		<property name="methodNameResolver" ref="methodNameResolver" />
+	</bean>
+
+	<bean id="hrUserDefinedManager" parent="baseTxService">
+	 <property name="target">
+			<bean class="com.seeyon.v3x.hr.manager.UserDefinedManagerImpl">
+				<property name="languageDao"><ref local="hrLanguageDao" /></property>
+				<property name="pageDao"><ref local="hrPageDao" /></property>
+				<property name="pageLabelDao"><ref local="hrPageLabelDao" /></property>
+				<property name="pagePropertyDao"><ref local="hrPagePropertyDao" /></property>
+				<property name="propertyLabelDao"><ref local="hrPropertyLabelDao" /></property>
+				<property name="repositoryDao"><ref local="hrRepositoryDao" /></property>
+				<property name="propertyCategoryDao"><ref local="hrPropertyCategoryDao" /></property>
+				<property name="pagePropertiesDao"><ref local="hrPagePropertiesDao" /></property>
+			</bean>
+	 </property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="hrLanguageDao" class="com.seeyon.v3x.hr.dao.LanguageDao"></bean>
+	<bean id="hrPageDao" class="com.seeyon.v3x.hr.dao.PageDao"></bean>
+	<bean id="hrPageLabelDao" class="com.seeyon.v3x.hr.dao.PageLabelDao"></bean>
+	<bean id="hrPagePropertyDao" class="com.seeyon.v3x.hr.dao.PagePropertyDao"></bean>
+	<bean id="hrPropertyLabelDao" class="com.seeyon.v3x.hr.dao.PropertyLabelDao"></bean>
+	<bean id="hrRepositoryDao" class="com.seeyon.v3x.hr.dao.RepositoryDao"></bean>
+	<bean id="hrPropertyCategoryDao" class="com.seeyon.v3x.hr.dao.PropertyCategoryDao"></bean>
+	<bean id="hrPagePropertiesDao" class="com.seeyon.v3x.hr.dao.PagePropertiesDao"></bean>	
+	<bean id="hrDynamicFormDao" class="com.seeyon.v3x.hr.dao.DynamicFormDao"></bean>
+
+	<bean id="hrOrganizationEventListener" class="com.seeyon.v3x.hr.util.listener.HrOrganizationEventListener">
+		<property name="userDefinedManager" ref="hrUserDefinedManager" />
+	</bean>
+	
+</beans>

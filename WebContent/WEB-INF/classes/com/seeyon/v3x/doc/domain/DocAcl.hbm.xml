@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocAcl" lazy="false"
+		table="doc_acl">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="potenttype" type="int" column="potenttype"
+			not-null="true" length="11" />
+		<property name="userId" type="long" column="user_id"
+			not-null="true" length="20" />
+		<property name="userType" type="string" column="user_type"
+			not-null="true" length="50" />
+		<property name="sharetype" type="byte" column="sharetype"
+			not-null="true" length="4" />
+		<property name="lenPotent" type="byte" column="len_potent"
+			not-null="true" length="3" />
+		<property name="lenPotent2" type="string" column="len_potent2"
+			not-null="false" length="16" />
+		<property name="docResourceId" type="long"
+			column="doc_resource_id" not-null="true" length="20" />
+		<property name="ownerId" type="long" column="owner_id"
+			not-null="false" length="20" />
+		<property name="sdate" type="timestamp" column="sdate"
+			not-null="false" length="19" />
+		<property name="edate" type="timestamp" column="edate"
+			not-null="false" length="19" />
+			
+		<property name="isAlert" type="boolean" column="is_alert"
+			not-null="true" length="4" />
+		<property name="docAlertId" type="long" column="doc_alert_id" length="20" />
+		<property name="aclOrder" type="int" column="acl_order" 
+		    not-null="true" length="11" />
+
+		<!-- Associations -->
+
+	</class>
+</hibernate-mapping>

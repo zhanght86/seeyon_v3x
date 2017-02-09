@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.Record" table="hr_record">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		
+		<many-to-one name="state" 
+                    column="state"
+                    class="com.seeyon.v3x.hr.domain.RecordState"/> 
+           
+		<property
+          name="staffer_id"
+          type="long"
+          column="staffer_id"
+          length="20"
+          not-null="true"
+       />
+       <property
+          name="dep_id"
+          type="long"
+          column="dep_id"
+          length="20"
+          not-null="true"
+       />
+       <property
+          name="begin_work_time"
+          type="timestamp"
+          column="begin_work_time"
+          length="19"
+       />
+       <property
+          name="end_work_time"
+          type="timestamp"
+          column="end_work_time"
+          length="19"
+       />
+       <property
+          name="year"
+          type="integer"
+          column="year"
+          length="4"
+       />
+       <property
+          name="month"
+          type="integer"
+          column="month"
+          length="2"
+       />
+       <property
+          name="day"
+          type="integer"
+          column="day"
+          length="2"
+       />
+       <property
+          name="begin_hour"
+          type="string"
+          column="begin_hour"
+          length="2"
+        />
+        <property
+          name="begin_minute"
+          type="string"
+          column="begin_minute"
+          length="2"
+        />
+        <property
+          name="end_hour"
+          type="string"
+          column="end_hour"
+          length="2"
+        />
+        <property
+          name="end_minute"
+          type="string"
+          column="end_minute"
+          length="2"
+        />
+       <property
+          name="remark"
+          type="clob"
+          column="remark"
+       />
+        <property
+          name="accountId"
+          type="long"
+          column="accountId"
+          length="20"
+             
+       />
+		<property
+          name="signInIP"
+          type="string"
+          column="sign_in_ip"
+          length="255"
+        />
+		<property
+          name="signOutIP"
+          type="string"
+          column="sign_out_ip"
+          length="255"
+        />
+        <property
+          name="isWorkDay"
+          type="integer"
+          column="is_work_day"
+          length="4"
+          not-null="true"
+       />
+    </class>
+</hibernate-mapping>

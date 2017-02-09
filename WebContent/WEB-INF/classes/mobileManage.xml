@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd" >
+<beans default-autowire="byName">
+	
+	<!-- controller begin-->
+	<!-- 移动授权Controller -->
+	<bean id="mobileAuthController"
+		class="com.seeyon.v3x.plugin.mobilemanage.controller.MobileAuthController" autowire="byName">
+		<property name="mobileAuthService" ref="mobileAuthService" />
+	</bean>
+	<!-- 设备绑定Controller -->
+	<bean id="clientBindController"
+		class="com.seeyon.v3x.plugin.mobilemanage.controller.ClientBindController" autowire="byName">
+		<property name="clientBindService" ref="clientBindService" />
+	</bean>
+	<!-- controller end-->
+	
+	<!-- service begin-->
+	<!-- 移动授权Service -->
+	<bean id="mobileAuthService"
+		class="com.seeyon.v3x.plugin.mobilemanage.service.MobileAuthServiceImpl">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="mobileAuthDao" ref="mobileAuthDao" />
+	</bean>
+	<!-- 设备绑定Service -->
+	<bean id="clientBindService"
+		class="com.seeyon.v3x.plugin.mobilemanage.service.ClientBindServiceImpl">
+		<property name="clientBindDao" ref="clientBindDao" />
+	</bean>
+	<!-- 移动管理Service -->
+	<bean id="mobileManageService"
+		class="com.seeyon.v3x.plugin.mobilemanage.service.MobileManageService">
+		<property name="mobileManageDao" ref="mobileManageDao" />
+		<property name="userMessageManager" ref="UserMessageManager" />
+	</bean>
+	<!-- 单位用户同步监听器 -->
+	<bean id="orgUserSyncListener"
+		class="com.seeyon.v3x.plugin.mobilemanage.service.OrgUserSyncListener" lazy-init="false">
+		<property name="orgUserSyncDao" ref="orgUserSyncDao" />
+	</bean>
+	<!-- service end-->
+	
+	<!-- dao begin-->
+	<!-- 移动授权Dao -->
+	<bean id="mobileAuthDao" class="com.seeyon.v3x.plugin.mobilemanage.dao.MobileAuthDaoImpl">
+		<property name="jdbcTemplate" ref="mmJdbcTemplate" />
+	</bean>
+	<!-- 设备绑定Dao -->
+	<bean id="clientBindDao" class="com.seeyon.v3x.plugin.mobilemanage.dao.ClientBindDaoImpl">
+		<property name="jdbcTemplate" ref="mmJdbcTemplate" />
+	</bean>
+	<!-- 移动管理Dao -->
+	<bean id="mobileManageDao" class="com.seeyon.v3x.plugin.mobilemanage.dao.MobileManageDaoImpl">
+		<property name="jdbcTemplate" ref="mmJdbcTemplate" />
+	</bean>
+	<!-- 单位用户同步Dao -->
+	<bean id="orgUserSyncDao" class="com.seeyon.v3x.plugin.mobilemanage.dao.OrgUserSyncDaoImpl">
+		<property name="jdbcTemplate" ref="mmJdbcTemplate" />
+	</bean>
+	<!-- dao end-->
+	
+	<bean id="mmJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="seeyonDataSource" />
+	</bean>
+	<bean id="mmTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="seeyonDataSource"/>
+	</bean>
+	<bean id="mmTransactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>mobileAuthDao</value>
+				<value>clientBindDao</value>
+				<value>mobileManageDao</value>
+				<value>orgUserSyncDao</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>mmTransactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

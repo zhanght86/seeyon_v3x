@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd"><!--  - Application context definition for "springapp" DispatcherServlet.  -->
+<beans default-autowire="byName">
+	<!-- 注册Controller -->
+
+	<!-- Generic Controller -->
+	<bean id="genericController"
+		class="com.seeyon.v3x.common.controller.GenericController"
+		autowire="byName">
+	</bean>
+
+	<bean id="fileUploadController"
+		class="com.seeyon.v3x.common.fileupload.FileUploadController">
+		<property name="clientAbortExceptionName" value="ClientAbortException" />
+		<property name="htmlSuffix" value="htm|html|shtm|shtml|xhtml|hta|htc|mht|wml|xml|xslt|xsl|jsp|asp|php|css|js|sql" />
+	</bean>
+
+	<bean id="officeController"
+		class="com.seeyon.v3x.common.office.OfficeController"
+		autowire="byName">
+		<property name="handWriteManager" ref="handWriteManager" />
+	</bean>
+
+	<bean id="selectPeopleController"
+		class="com.seeyon.v3x.common.selectPeople.SelectPeopleController">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	
+	<bean id="officeTransController"
+		class="com.seeyon.v3x.common.office.trans.OfficeTransController">
+	</bean>
+
+</beans>

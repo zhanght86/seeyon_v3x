@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.inquiry.domain.InquirySubsurvey"
+		table="inquiry_subsurvey">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="discuss" type="integer" column="discuss"
+			length="11" />
+		<property name="sort" type="integer" column="sort" length="11" />
+		<property name="otheritem" type="integer" column="otheritem"
+			length="11" />
+		<property name="singleMany" type="integer" column="single_many"
+			length="11" />
+		<property name="maxSelect" type="integer" column="max_select"
+			length="11" />
+			
+			
+		<property name="subsurveyDesc" type="string"
+			column="subsurvey_desc" length="1000" />
+		<property name="title" type="string" column="title"
+			length="255" />
+
+		<!-- Associations -->
+		<!-- bi-directional many-to-one association to InquirySurveybasic -->
+		<many-to-one name="inquirySurveybasic"
+			class="com.seeyon.v3x.inquiry.domain.InquirySurveybasic">
+			<column name="surveybasic_id" not-null="true" length="20" />
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>

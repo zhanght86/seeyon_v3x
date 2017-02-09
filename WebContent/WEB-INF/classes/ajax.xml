@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <!--
+    AJAX Service
+    Registe all AJAX services, define entries' key as the external's request service's name，value as BO's id
+  -->
+  <bean id="AJAXService" class="com.seeyon.v3x.common.ajax.impl.AJAXServiceImpl">
+    <constructor-arg>
+      <map>
+      	<!-- 可以不在这里配置，直接使用bean的Id的Ajax Service Name -->
+        <entry key="ajaxSelectPeopleManager" value="selectPeopleManager" />
+        <entry key="ajaxMessageController" value="messageController" />
+        <entry key="ajaxNotepagerManager" value="notepagerManager" />
+        <entry key="ajaxValidateBoardNameManager" value="validateBoardNameManager" />
+        <entry key="ajaxTempleteManager" value="templeteManager" />
+        <entry key="ajaxTempleteCategoryManager" value="templeteCategoryManager" />
+        <entry key="ajaxDocHierarchyManager" value="docHierarchyManager" />
+        <entry key="ajaxDocAclManager" value="docAclManager" />
+        <entry key="ajaxDocAlertManager" value="docAlertManager" />
+        <entry key="ajaxContentTypeManager" value="contentTypeManager" />
+        <entry key="ajaxHtmlUtil" value="htmlUtil" />
+        <entry key="ajaxDocLibManager" value="docLibManager" />
+        <entry key="ajaxMetadataDefManager" value="metadataDefManager" />
+        <entry key="ajaxMetadataManager" value="metadataManager" />
+        <entry key="ajaxColManager" value="colManager" />
+        <entry key="ajaxOuterlinkManager" value="outerlinkManager" />
+        <entry key="ajaxBulDataManager" value="bulDataManager" />
+        <entry key="ajaxNewsDataManager" value="newsDataManager" />
+        <entry key="ajaxBlogArticleManager" value="blogArticleManager" />
+        <entry key="ajaxAddressBookManager" value="addressBookManager" />
+        <entry key="ajaxRssManagerController" value="rssManagerController"/>
+        <entry key="ajaxRssChannelManager" value="rssChannelManager"/>
+        
+        
+        <entry key="ajaxSendEdocManager" value="sendEdocManager" />
+        <entry key="ajaxEdocFormManager" value="edocFormManager" />
+        <entry key="ajaxEdocFormManager" value="edocFormManager" />
+        <entry key="ajaxEdocExchangeManager" value="edocExchangeManager" />
+        <entry key="ajaxEdocMarkManager" value="edocMarksManager" />
+        <entry key="ajaxEdocObjTeamManager" value="edocObjTeamManager" />
+        <entry key="ajaxEdocSummaryManager" value="edocSummaryManager" />
+        <entry key="ajaxEdocMarkHistoryManager" value="edocMarkHistoryManager" />
+        <entry key="ajaxEdocMarkDefinitionManager" value="edocMarkDefinitionManager" />
+        <entry key="ajaxEdocController" value="edocController"></entry>
+        <entry key="ajaxEdocDocTemplateController" value="edocDocTemplateController"></entry>
+        <entry key="ajaxTempleteController" value="templeteController"></entry>
+        <entry key="ajaxEdocKeyWordManager" value="edocKeyWordManager" />
+        <entry key="ajaxEdocSuperviseManager" value="edocSuperviseManager" />
+        <!-- 公文发文支持手工输入单位 -->
+        <entry key="ajaxEdocExchangeAccountManager" value="exchangeAccountManager" />
+        
+        
+        <entry key="ajaxHandWriteManager" value="handWriteManager" />              
+        <entry key="ajaxHtmlHandWriteManager" value="htmlHandWriteManager" />
+        <entry key="ajaxPartitionManager" value="partitionManager" />
+        <entry key="ajaxSignetManager" value="signetManager" />
+        <entry key="ajaxOrgManager" value="OrgManager" />
+        <entry key="ajaxEdocManager" value="edocManager" />
+        <entry key="ajaxResourceManager" value="resourceManager" />
+        <entry key="ajaxPlanManager" value="planManager" />
+        <entry key="ajaxInquiryManager" value="inquiryManager" />
+        <entry key="ajaxBbsBoardManager" value="bbsBoardManager" />
+        <entry key="ajaxOrgManagerDirect" value="OrgManagerDirect" />
+        
+        <entry key="ajaxColSuperviseManager" value="colSuperviseManager" />
+        <entry key="ajaxMtTemplateManager" value="mtTemplateManager" />
+        <entry key="ajaxMtMeetingManager" value="mtMeetingManager" />
+        <entry key="ajaxBookManager" value="bookManager" />
+        <entry key="ajaxMtSummaryTemplateManager" value="mtSummaryTemplateManager" />
+        <!-- 邮件 -->
+        <entry key="ajaxWebMailManager" value="webMailManager" />
+        <entry key="ajaxguestbookManager" value="guestbookManager" />
+        <entry key="ajaxGuestbookController" value="guestbookController" />
+        
+        <entry key="ajaxOrgIoManager" value="ioManager" />
+        <!-- offic -->
+        <entry key="ajaxOfficeCommonManager" value="officeCommonManager" />
+        <!-- rtx -->
+        <entry key="ajaxRtxOrgSycManager" value="rtxOrgSycManager"/>
+        <entry key="ajaxRtxController" value="rtxController" />
+        
+        <!-- gke -->
+        <entry key="ajaxGKESynchronController" value="gkeSynchronController" />
+        <!-- videoconference -->
+        
+        <entry key="ajaxVideoConfController" value="videoConfController" />
+        <!--  Other BUSINESS Facades   -->
+        
+        <!-- agent -->
+        <entry key="ajaxAgentIntercalateManager" value="agentIntercalateManager" />
+        
+        <!-- 会议室管理 -->
+        <entry key="ajaxMeetingRoomManager" value="meetingRoomManager" />
+        <!-- 综合办公管理 -->
+        <entry key="ajaxOfficeCommonManager" value="officeCommonManager" />
+        <!-- 办公用品管理 -->
+        <entry key="ajaxStockManager" value="stockManager"></entry>
+        
+        <entry key="ajaxMtMeetingController" value="mtMeetingController"/>
+		<!-- 工作管理 -->
+        <entry key="ajaxWorkSataManager" value="workStatManager"/>
+        
+        <!-- 首页栏目 -->
+        <entry key="ajaxSectionRegisterManager" value="sectionRegisterManager"/>
+        <entry key="ajaxSpaceManager" value="spaceManager"/>
+         <!-- ldap_ad -->
+        <entry key="ajaxLdapBindingMgr" value="ldapBindingMgr"/>
+        
+        <!-- 表单业务配置 -->
+        <entry key="ajaxFormBizConfigManager" value="formBizConfigManager"/>
+        <entry key="ajaxV3xBizConfigManager" value="v3xBizConfigManager"/>
+        
+        <!-- 扩展栏目配置 -->
+        <entry key="ajaxSectionDefinitionManager" value="sectionDefinitionManager"></entry>
+        <entry key="ajaxNCOrgManager" value="NCOrgManager"></entry>
+        <entry key="ajaxNCSSOService" value="ncSSOService"></entry>
+        
+        <!-- 工作时间设置 -->
+        <entry key="ajaxWorkTimeSetManager" value="workTimeSetManager" />
+        <!-- 协同 公文批处理 -->
+        <entry key="ajaxBatchManager" value="batchManager" />
+        <!-- 关联表单数据值记录 -->
+        <entry key="ajaxColQuoteformRecordManger" value="colQuoteformRecordManger" />
+		<!-- 关联表单授权 -->
+        <entry key="ajaxColRelationAuthorityManager" value="colRelationAuthorityManager" />
+        <!-- 表单 -->
+        <entry key="ajaxFormAppMainController" value="formAppMainController" />
+        <entry key="ajaxAppFormController" value="appFormController" />
+        <entry key="ajaxTriggerController" value="triggerController" />
+        <entry key="ajaxIndex" value="indexManager" />
+        <!-- 提示窗口组件 -->
+        <entry key="oncealertManager" value="oncealertManager" />
+        <entry key="ajaxSAPOrgManager" value="sapOrgManager" />
+        <!-- 栏目公示板内容 -->
+        <entry key="ajaxNoticeController" value="noticeController" />
+        <!-- Dee栏目 -->
+        <entry key="ajaxDeeSectionManager" value="deeSectionManager" />
+        <entry key="ajaxcollaborationBeforeListener" value="collaborationFormBindEventListener" />
+        <entry key="ajaxNCBusinessController" value="NCBusinessController"></entry>
+      </map>
+    </constructor-arg>
+  </bean>
+</beans>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- 日程事件 -->
+<beans default-autowire="byName">
+	<!-- 日程事件基本信息 -->
+    <bean id="calEventController"
+          class="com.seeyon.v3x.calendar.controller.CalEventController" autowire="byName">
+		<property name="peopleRelateManager" ref="peoplerelateManager"></property>
+		<property name="orgManager" ref="OrgManager"></property>
+		<property name="userMessageManager" ref="UserMessageManager"></property>
+    </bean>    
+    <bean id="calCancelManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.calendar.manager.CalCancelManagerImpl"/>            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="calCancelDao" class="com.seeyon.v3x.calendar.dao.CalCancelDao"></bean>
+    
+    <bean id="calContentManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.calendar.manager.CalContentManagerImpl"/>         
+        </property>
+        
+        <property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="calContentDao" class="com.seeyon.v3x.calendar.dao.CalContentDao"></bean>
+	
+	<bean id="calEventManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.calendar.manager.CalEventManagerImpl" init-method="init" singleton="true">
+            	 <property name="orgManager" ref="OrgManager"></property>
+            	 <property name="indexManager" ref="indexManager" ></property>
+            	 <property name="peopleRelateManager" ref="peoplerelateManager" ></property>
+            	 <property name="userMessageManager" ref="UserMessageManager"></property>
+             	 <!-- 默认显示一天以后的周期性事件 -->
+           		 <property name="showFatherDay" value="0" ></property>
+            </bean>            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+			<prop key="get*">PROPAGATION_SUPPORTS</prop>
+			<prop key="iSearch">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="calEventDao" class="com.seeyon.v3x.calendar.dao.CalEventDao"></bean>
+    
+    <bean id="calEventTranManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.calendar.manager.CalEventTranManagerImpl"/>            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+			<prop key="get*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="calEventTranDao" class="com.seeyon.v3x.calendar.dao.CalEventTranDao"></bean>
+    
+    <bean id="calReplyManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.calendar.manager.CalReplyManagerImpl"/>            
+        </property>
+        <property name="transactionAttributes">
+			<props>
+			<prop key="get*">PROPAGATION_SUPPORTS</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    <bean id="calReplyDao" class="com.seeyon.v3x.calendar.dao.CalReplyDao"></bean>
+    
+    
+    <bean id="calendarUtils" class="com.seeyon.v3x.calendar.util.CalendarUtils" autowire="byName">
+    	<property name="orgManager" ref="OrgManager"></property>
+    </bean>
+    
+    	<!-- DocLearningManager 综合查询-->
+	<bean id="CalEventManager4ISearch" parent="baseTxService" >
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.calendar.manager.CalEventManager4ISearch" init-method="init">
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="calEventManagerCAP" class="com.seeyon.v3x.calendar.manager.cap.CalEventManagerCAPImpl" singleton="true">
+    </bean>
+    
+</beans>

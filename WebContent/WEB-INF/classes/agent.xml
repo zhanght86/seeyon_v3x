@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- 代理设置 -->
+<beans default-autowire="byName">
+	<bean id="agentIntercalateController" 
+		class="com.seeyon.v3x.agent.controller.AgentIntercalateController" autowire="byName" >
+		<property name="orgManager" ref="OrgManager" />
+	</bean>    
+    <bean id="agentIntercalateManager" parent="baseTxService">
+        <property name="target">
+            <bean class="com.seeyon.v3x.agent.manager.AgentIntercalateManagerImpl" init-method="init" singleton="true">
+            	<property name="userMessageManager" ref="UserMessageManager" />
+				<property name="orgManager" ref="OrgManager" />
+            	<property name="agentIntercalateDAO">
+					<bean id="agentIntercalateDAO"
+						class="com.seeyon.v3x.agent.dao.AgentIntercalateDAOImpl" />
+				</property>    
+            </bean>        
+        </property>
+        <property name="transactionAttributes">
+			<props>			
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+				<prop key="query*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="list*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="get*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="find*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+    </bean>    
+    
+    <bean class="com.seeyon.v3x.agent.listener.AgentOrganizationEventListener">
+		<property name="agentIntercalateManager" ref="agentIntercalateManager" />
+	</bean>
+    
+</beans>

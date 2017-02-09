@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="seeyonDataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean"
+		abstract="false" singleton="true"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="jndiName" value="${db.jndiName}" />
+	</bean>
+	<!-- 
+	<bean id="seeyonDataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close" abstract="false" singleton="true"
+		lazy-init="default" autowire="default" dependency-check="default">
+		
+		<property name="driverClass">
+		<value>${db.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+		<value>${db.url}</value>
+		</property>
+		<property name="user">
+		<value>${db.username}</value>
+		</property>
+		<property name="password">
+		<value>${db.password}</value>
+		</property>
+		
+		<property name="minPoolSize">
+		<value>5</value>
+		</property>
+		<property name="maxIdleTime">
+		<value>280</value>
+		</property>
+		<property name="maxPoolSize">
+		<value>30</value>
+		</property>
+		<property name="initialPoolSize">
+		<value>10</value>
+		</property>
+		<property name="checkoutTimeout">
+		<value>1800</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+		<value>360</value>
+		</property>
+	</bean>
+	-->
+	<bean id="nativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" lazy-init="true">
+	</bean>
+	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true">
+     <property name="nativeJdbcExtractor">
+         <ref local="nativeJdbcExtractor"/>
+     </property>
+	</bean>
+	<bean id="sessionFactory"
+		class="com.seeyon.v3x.common.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref local="seeyonDataSource" />
+		</property>
+		<!-- 解决在oracle9i中保存clob字段长度大于2000时候报错问题 -->
+		<!--
+		<property name="lobHandler"><ref bean="lobHandler"/></property>
+		-->
+		<property name="mappingResources">
+			<list>
+                 <value>
+					com/seeyon/v3x/notepager/domain/Notepage.hbm.xml
+				</value>
+				
+				<!-- ORM module: metadata -->
+				<value>com/seeyon/v3x/doc/domain/DocLib.hbm.xml</value>
+				<value>com/seeyon/v3x/doc/domain/DocAcl.hbm.xml</value>
+
+				<value>
+					com/seeyon/v3x/doc/domain/DocAlert.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocAlertLatest.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocLibOwner.hbm.xml
+				</value>
+
+				<value>
+					com/seeyon/v3x/doc/domain/DocLibMember.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocMetadataDefinition.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocMetadataOption.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocTypeDetail.hbm.xml
+				</value>
+				<value>com/seeyon/v3x/doc/domain/DocType.hbm.xml</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocMetadataUse.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocResource.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocListColumn.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocTypeList.hbm.xml
+				</value>
+
+				<value>
+					com/seeyon/v3x/doc/domain/DocStorageSpace.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocFavorite.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocForum.hbm.xml
+				</value>
+				<value>com/seeyon/v3x/doc/domain/DocBody.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocResHistoryBody.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocMimeType.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocLink.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocSession.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocLearning.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/doc/domain/DocLearningHistory.hbm.xml
+				</value>
+				
+				<value>
+					com/seeyon/v3x/doc/domain/DocFromPotent.hbm.xml
+				</value>
+				
+				<!-- OperationLog -->
+				<value>
+					com/seeyon/v3x/common/operationlog/domain/OperationLog.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/common/logonlog/domain/LogonLog.hbm.xml
+				</value>
+				
+                <!-- ORM module: Orgnanization -->
+                 <!-- ORM module: Orgnanization -->
+                <value>
+                    com/seeyon/v3x/organization/domain/V3xOrgAccount.hbm.xml
+                </value>
+                <value>
+                    com/seeyon/v3x/organization/domain/V3xOrgDepartment.hbm.xml
+                </value>
+                <value>
+                    com/seeyon/v3x/organization/domain/V3xOrgLevel.hbm.xml
+                </value>
+                <value>
+                    com/seeyon/v3x/organization/domain/V3xOrgMember.hbm.xml
+                </value>
+                <value>
+                    com/seeyon/v3x/organization/domain/V3xOrgPost.hbm.xml
+                </value>
+                <value>
+                    com/seeyon/v3x/organization/domain/V3xOrgTeam.hbm.xml
+                </value>
+                <value>
+                    com/seeyon/v3x/organization/domain/V3xOrgRole.hbm.xml
+                </value>
+                <value>
+                    com/seeyon/v3x/organization/domain/V3xOrgRelationship.hbm.xml
+                </value>                
+                <value>
+                    com/seeyon/v3x/organization/domain/JetSpeed_Credential.hbm.xml
+                </value>
+                <value>
+                    com/seeyon/v3x/organization/domain/JetSpeed_Principal.hbm.xml
+                </value>
+                <value>
+                    com/seeyon/v3x/organization/domain/V3xOrgProperty.hbm.xml
+                </value>
+                <value>
+                    com/seeyon/v3x/organization/domain/Jetspeed_User_Role.hbm.xml
+                </value>
+				
+				<!-- 常用链接 -->
+				<value>
+					com/seeyon/v3x/link/domain/LinkAcl.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/link/domain/LinkCategory.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/link/domain/LinkOption.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/link/domain/LinkOptionValue.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/link/domain/LinkSystem.hbm.xml
+				</value>
+								
+				<!-- 个人模板 -->
+				<!-- 模板 -->
+				<value>com/seeyon/v3x/collaboration/templete/domain/TempleteCategory.hbm.xml</value>
+				<value>com/seeyon/v3x/collaboration/templete/domain/Templete.hbm.xml</value>
+				<value>com/seeyon/v3x/collaboration/templete/domain/TempleteAuth.hbm.xml</value>
+				<value>com/seeyon/v3x/collaboration/templete/domain/TempleteConfig.hbm.xml</value>
+				
+				<!-- 协同应用 -->
+				<value>
+					com/seeyon/v3x/collaboration/domain/ColSummary.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/collaboration/domain/ColBody.hbm.xml
+				</value>
+                <value>
+					com/seeyon/v3x/collaboration/domain/ColOpinion.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/collaboration/domain/ColComment.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/collaboration/templete/domain/ColBranch.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/collaboration/domain/ColSuperviseDetail.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/collaboration/domain/ColSuperviseLog.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/collaboration/domain/ColSuperviseReceiver.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/collaboration/domain/ColSupervisor.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/collaboration/domain/SuperviseTemplateRole.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/collaboration/domain/NewflowSetting.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/collaboration/domain/NewflowRunning.hbm.xml
+				</value>
+				<!-- 消息组件   -->             
+				<value>com/seeyon/v3x/common/task/domain/Task.hbm.xml</value>				
+				<value>com/seeyon/v3x/common/usermessage/domain/UserMessage.hbm.xml</value> 
+				<value>com/seeyon/v3x/common/usermessage/domain/UserHistoryMessage.hbm.xml</value> 
+				<value>com/seeyon/v3x/common/usermessage/domain/UserMessageConfig.hbm.xml</value> 
+				
+				<!-- 元数据管理组件 -->
+				<value>com/seeyon/v3x/common/metadata/Metadata.hbm.xml</value>
+				<value>com/seeyon/v3x/common/metadata/MetadataItem.hbm.xml</value>
+				<value>com/seeyon/v3x/common/metadata/MetadataValue.hbm.xml</value>
+
+				<!-- 元数据自定义管理组件 -->
+				<value>com/seeyon/v3x/common/metadata/userdefined/domain/FormEnumList.hbm.xml</value>
+				<value>com/seeyon/v3x/common/metadata/userdefined/domain/FormEnumValue.hbm.xml</value>		
+				
+				<value>com/seeyon/v3x/main/phrase/CommonPhrase.hbm.xml</value>
+
+                <!-- 个人事项管理 -->
+                <value>com/seeyon/v3x/affair/domain/AffairFilter.hbm.xml</value>
+                <value>com/seeyon/v3x/affair/domain/Affair.hbm.xml</value>
+
+				<!-- 文件管理 -->
+				<value>com/seeyon/v3x/common/filemanager/Attachment.hbm.xml</value>
+				<value>com/seeyon/v3x/common/filemanager/V3XFile.hbm.xml</value>
+				<value>com/seeyon/v3x/common/filemanager/Partition.hbm.xml</value>
+				
+				<!-- common config -->
+				<value>com/seeyon/v3x/config/domain/ConfigItem.hbm.xml</value>
+			
+				<!-- RSS应用 -->
+                <value>
+					com/seeyon/v3x/common/rss/domain/RssSubscribe.hbm.xml
+				</value>				
+				<value>
+					com/seeyon/v3x/common/rss/domain/RssChannelItems.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/common/rss/domain/RssCategoryChannel.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/common/rss/domain/RssItemStatus.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/common/rss/domain/RssCategory.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/common/rss/domain/RssChannelInfo.hbm.xml
+				</value>
+			
+
+				<!-- bbs -->
+				<value>com/seeyon/v3x/bbs/domain/V3xBbsArticle.hbm.xml</value>
+				<value>com/seeyon/v3x/bbs/domain/V3xBbsArticleReply.hbm.xml</value>
+				<value>com/seeyon/v3x/bbs/domain/V3xBbsArticleIssueArea.hbm.xml</value>
+				<value>com/seeyon/v3x/bbs/domain/V3xBbsBoard.hbm.xml</value>
+				<value>com/seeyon/v3x/bbs/domain/V3xBbsBoardAuth.hbm.xml</value>				
+
+				<!-- blog -->
+				<value>com/seeyon/v3x/blog/domain/BlogEmployee.hbm.xml</value>				
+				<value>com/seeyon/v3x/blog/domain/BlogArticle.hbm.xml</value>
+				<value>com/seeyon/v3x/blog/domain/BlogFamily.hbm.xml</value>
+ 				<value>com/seeyon/v3x/blog/domain/BlogReply.hbm.xml</value>
+				<value>com/seeyon/v3x/blog/domain/BlogFavorites.hbm.xml</value>				
+				<value>com/seeyon/v3x/blog/domain/BlogAttention.hbm.xml</value>
+				<value>com/seeyon/v3x/blog/domain/BlogShare.hbm.xml</value>	
+
+				<!-- 调查  -->
+				<value>com/seeyon/v3x/inquiry/domain/InquiryAuthority.hbm.xml</value>
+				<value>com/seeyon/v3x/inquiry/domain/InquiryClick.hbm.xml</value>
+				<value>com/seeyon/v3x/inquiry/domain/InquiryScope.hbm.xml</value>
+				<value>com/seeyon/v3x/inquiry/domain/InquirySubsurvey.hbm.xml</value>
+				<value>com/seeyon/v3x/inquiry/domain/InquirySubsurveyitem.hbm.xml</value>
+				<value>com/seeyon/v3x/inquiry/domain/InquirySurveybasic.hbm.xml</value>
+				<value>com/seeyon/v3x/inquiry/domain/InquirySurveydiscuss.hbm.xml</value>
+				<value>com/seeyon/v3x/inquiry/domain/InquirySurveytype.hbm.xml</value>
+				<value>com/seeyon/v3x/inquiry/domain/InquirySurveytypeextend.hbm.xml</value>
+				<value>com/seeyon/v3x/inquiry/domain/InquiryVotedefinite.hbm.xml</value>				
+
+				<!-- 公告管理 -->
+				<value>com/seeyon/v3x/bulletin/domain/BulData.hbm.xml</value>
+				<value>com/seeyon/v3x/bulletin/domain/BulBody.hbm.xml</value>
+				<value>com/seeyon/v3x/bulletin/domain/BulRead.hbm.xml</value>
+				<value>com/seeyon/v3x/bulletin/domain/BulTemplate.hbm.xml</value>
+				<value>com/seeyon/v3x/bulletin/domain/BulType.hbm.xml</value>
+				<value>com/seeyon/v3x/bulletin/domain/BulTypeManagers.hbm.xml</value>
+				<value>com/seeyon/v3x/bulletin/domain/BulLog.hbm.xml</value>
+				<value>com/seeyon/v3x/bulletin/domain/BulPublishScope.hbm.xml</value>
+				
+				<!-- 新闻管理 -->
+				<value>com/seeyon/v3x/news/domain/NewsData.hbm.xml</value>
+				<value>com/seeyon/v3x/news/domain/NewsBody.hbm.xml</value>
+				<value>com/seeyon/v3x/news/domain/NewsRead.hbm.xml</value>
+				<value>com/seeyon/v3x/news/domain/NewsTemplate.hbm.xml</value>
+				<value>com/seeyon/v3x/news/domain/NewsType.hbm.xml</value>
+				<value>com/seeyon/v3x/news/domain/NewsTypeManagers.hbm.xml</value>
+				<value>com/seeyon/v3x/news/domain/NewsLog.hbm.xml</value>
+				
+				<!-- 计划 -->
+				<value>com/seeyon/v3x/plan/domain/Plan.hbm.xml</value>
+				<value>com/seeyon/v3x/plan/domain/PlanRelevantUser.hbm.xml</value>
+				<value>com/seeyon/v3x/plan/domain/PlanReply.hbm.xml</value>
+				<value>com/seeyon/v3x/plan/domain/PlanStyle.hbm.xml</value>
+				<value>com/seeyon/v3x/plan/domain/PlanSummary.hbm.xml</value>
+				<value>com/seeyon/v3x/plan/domain/PlanBody.hbm.xml</value>
+				<value>com/seeyon/v3x/plan/domain/PlanStyleBody.hbm.xml</value>
+				<value>com/seeyon/v3x/plan/domain/PlanUserScope.hbm.xml</value>
+				
+				<!-- 会议管理 -->
+				<value>com/seeyon/v3x/meeting/domain/MtMeeting.hbm.xml</value>
+				<value>com/seeyon/v3x/meeting/domain/MtContentTemplate.hbm.xml</value>
+				<value>com/seeyon/v3x/meeting/domain/MtSummaryTemplate.hbm.xml</value>
+				<value>com/seeyon/v3x/meeting/domain/MtReply.hbm.xml</value>
+				<value>com/seeyon/v3x/meeting/domain/MtResources.hbm.xml</value>
+				<value>com/seeyon/v3x/meeting/domain/MtTemplate.hbm.xml</value>
+				<value>com/seeyon/v3x/meeting/domain/MtTemplateUser.hbm.xml</value>
+				<value>com/seeyon/v3x/meeting/domain/MtConferee.hbm.xml</value>
+				
+				<!-- 日程事件 -->
+				<value>com/seeyon/v3x/calendar/domain/CalEvent.hbm.xml</value>
+				<value>com/seeyon/v3x/calendar/domain/CalEventTran.hbm.xml</value>
+				<value>com/seeyon/v3x/calendar/domain/CalReply.hbm.xml</value>
+				<value>com/seeyon/v3x/calendar/domain/CalCancel.hbm.xml</value>
+				<value>com/seeyon/v3x/calendar/domain/CalContent.hbm.xml</value>
+				<value>com/seeyon/v3x/calendar/domain/CalEventRelevancy.hbm.xml</value>
+				
+				
+				<!-- 全文检索 -->
+				<value>
+					com/seeyon/v3x/indexInterface/domain/V3xUpdateIndex.hbm.xml
+				</value>
+				
+				<!-- 考勤管理 -->
+				<value>
+					com/seeyon/v3x/timecard/domain/TimecardCollect.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/timecard/domain/TimecardRecord.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/timecard/domain/TimecardIntercalate.hbm.xml
+				</value>
+				
+				<!-- 关联人员设置 -->
+				<value>
+					com/seeyon/v3x/peoplerelate/domain/PeopleRelate.hbm.xml
+				</value>
+				
+				<!-- 文号管理 -->
+				<value>
+					com/seeyon/v3x/edoc/domain/EdocMarkDefinition.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/edoc/domain/EdocMarkAcl.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/edoc/domain/EdocMarkCategory.hbm.xml
+				</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocInnerMarkDefinition.hbm.xml</value>
+				 <!-- 公文部分开始 -->
+				<value>com/seeyon/v3x/edoc/domain/EdocMark.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocMarkHistory.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocSummary.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocBody.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocOpinion.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocElement.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocForm.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocFormAcl.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocFormElement.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocDocTemplate.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocDocTemplateAcl.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocElementFlowPermAcl.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocStat.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocFormFlowPermBound.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocObjTeam.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocObjTeamMember.hbm.xml</value>
+				
+				<!-- 公文部分结束 -->
+				
+				<!-- 公文督办开始 -->
+
+				<value>com/seeyon/v3x/edoc/domain/EdocSuperviseDetail.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocSuperviseLog.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocSuperviseRemind.hbm.xml</value>
+				<value>com/seeyon/v3x/edoc/domain/EdocSupervisor.hbm.xml</value>
+				
+				<!-- 公文督办结束 -->
+				
+				<!-- 公文交换开始 -->
+				
+				<value>com/seeyon/v3x/exchange/domain/ExchangeServer.hbm.xml</value>
+				<value>com/seeyon/v3x/exchange/domain/ExchangeAccount.hbm.xml</value>
+				<value>com/seeyon/v3x/exchange/domain/EdocRecieveRecord.hbm.xml</value>
+				<value>com/seeyon/v3x/exchange/domain/EdocSendRecord.hbm.xml</value>
+				<value>com/seeyon/v3x/exchange/domain/EdocSendDetail.hbm.xml</value>
+				
+				<!-- 公文交换结束  -->
+				
+				<!-- 项目管理 -->
+				<value>
+					com/seeyon/v3x/project/domain/ProjectEvolution.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/project/domain/ProjectMember.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/project/domain/ProjectPhase.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/project/domain/ProjectSummary.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/project/domain/ProjectLog.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/project/domain/ProjectType.hbm.xml
+				</value>
+				<!-- 项目管理 -->
+				<!-- 资源管理 -->
+				<value>
+					com/seeyon/v3x/resource/domain/Resource.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/resource/domain/ResourceIpp.hbm.xml
+				</value>				
+				<!-- 资源管理 -->
+				<!-- 通讯录 -->
+				<value>com/seeyon/v3x/addressbook/domain/AddressBookTeam.hbm.xml</value>
+   				<value>com/seeyon/v3x/addressbook/domain/AddressBookMember.hbm.xml</value>
+				<!-- 通讯录 -->
+				
+				<!-- hr工资管理 -->
+				<value>com/seeyon/v3x/hr/domain/Salary.hbm.xml</value>
+				<!-- hr人员基本信息 -->
+				<value>com/seeyon/v3x/hr/domain/StaffInfo.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/ContactInfo.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/Relationship.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/Assess.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/EduExperience.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/PostChange.hbm.xml</value>				
+				<value>com/seeyon/v3x/hr/domain/RewardsAndPunishment.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/WorkRecord.hbm.xml</value>
+				<!-- hr考勤开始 -->
+				<value>com/seeyon/v3x/hr/domain/Record.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/RecordState.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/RecordWorkingTime.hbm.xml</value>
+                <!-- hr调配管理 -->
+				<value>com/seeyon/v3x/hr/domain/StaffTransfer.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/StaffTransferType.hbm.xml</value>
+				<!-- hr自定义选项 -->
+				<value>com/seeyon/v3x/hr/domain/Language.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/Page.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/PageLabel.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/PageProperty.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/PropertyLabel.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/Repository.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/PropertyCategory.hbm.xml</value>
+				<value>com/seeyon/v3x/hr/domain/PageProperties.hbm.xml</value>
+				
+				<value>com/seeyon/v3x/interfaces/domain/WebServiceRegister.hbm.xml</value>
+
+				<!-- 空间管理 -->
+				<value>com/seeyon/v3x/space/domain/SpaceFix.hbm.xml</value>
+				<value>com/seeyon/v3x/space/domain/SpaceSecurity.hbm.xml</value>
+				<value>com/seeyon/v3x/space/domain/SpaceSort.hbm.xml</value>
+				<value>com/seeyon/v3x/space/domain/Fragment.hbm.xml</value>
+				<value>com/seeyon/v3x/space/domain/PortletEntityProperty.hbm.xml</value>
+				
+				<value>com/seeyon/v3x/main/section/definition/domain/SectionDefinition.hbm.xml</value>
+				<value>com/seeyon/v3x/main/section/definition/domain/SectionProps.hbm.xml</value>
+				<value>com/seeyon/v3x/main/section/definition/domain/SectionSecurity.hbm.xml</value>
+				
+				<!-- 印章管理 -->
+				<value>com/seeyon/v3x/system/signet/domain/V3xSignet.hbm.xml</value>
+				<value>com/seeyon/v3x/system/signet/domain/V3xDocumentSignature.hbm.xml</value>
+				<value>com/seeyon/v3x/system/signet/domain/V3xHtmDocumentSignature.hbm.xml</value>
+				<value>com/seeyon/v3x/system/signet/domain/V3xHtmSignatureHistory.hbm.xml</value>
+			    <!-- 消息管理 -->
+				<value>
+					com/seeyon/v3x/messageManager/domain/MessageDelset.hbm.xml
+				</value>
+				<!-- 综合办公 -->
+				<value>
+					com/seeyon/v3x/office/asset/domain/MAssetInfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/asset/domain/TAssetApplyinfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/asset/domain/TAssetDepartinfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/book/domain/MBookInfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/book/domain/TBookApplyinfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/book/domain/TBookDepartinfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/myapply/domain/TApplylist.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/auto/domain/AutoInfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/auto/domain/AutoApplyInfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/auto/domain/AutoDepartInfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/auto/domain/AutoOffense.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/common/domain/OfficeApply.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/common/domain/OfficeTypeInfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/common/domain/OfficeLossInfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/stock/domain/StockInfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/stock/domain/StockApplyInfo.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/office/admin/domain/MAdminSetting.hbm.xml
+				</value>
+				<!-- 移动应用-->
+				<value>
+					com/seeyon/v3x/mobile/message/domain/MobileMessage.hbm.xml
+				</value>
+				<value>
+					com/seeyon/v3x/mobile/adapter/jindi/domain/SendTask.hbm.xml
+				</value>
+				
+				<!-- 快捷入口设置 -->
+				<value>
+				    com/seeyon/v3x/main/shortcut/domain/Shortcut.hbm.xml
+				</value>
+                
+                <!-- 部门空间留言本 -->
+				<value>
+				    com/seeyon/v3x/guestbook/domain/LeaveWord.hbm.xml
+				</value>
+				
+				<!-- 系统菜单与权限 -->
+				<value>com/seeyon/v3x/menu/domain/Menu.hbm.xml</value>
+				<value>com/seeyon/v3x/menu/domain/MenuProfile.hbm.xml</value>
+				<value>com/seeyon/v3x/menu/domain/RoleMenu.hbm.xml</value>
+				<value>com/seeyon/v3x/menu/domain/Security.hbm.xml</value>
+				<value>com/seeyon/v3x/menu/domain/SecurityMenu.hbm.xml</value>
+				<value>com/seeyon/v3x/menu/domain/SecurityMember.hbm.xml</value>
+				
+				<!-- guid mapper -->
+				<value>
+				    com/seeyon/v3x/common/propertymapper/idmapper/db/domain/GuidMapperPojo.hbm.xml
+				</value>
+				
+				<!-- user mapper -->
+				<value>com/seeyon/v3x/common/usermapper/domain/V3xOrgUserMapper.hbm.xml</value>
+				
+				<!-- 自增字段实现 -->
+				<value>
+					com/seeyon/v3x/common/increment/domain/AutoIncrement.hbm.xml
+				</value>	
+				
+				<!-- 代理设置 -->
+				<value>
+					com/seeyon/v3x/agent/domain/V3xAgent.hbm.xml
+				</value>	
+
+				<!-- 会议室管理 -->
+				<value>com/seeyon/v3x/meetingroom/domain/Meetingroom.hbm.xml</value>
+				<value>com/seeyon/v3x/meetingroom/domain/Meetingroomapp.hbm.xml</value>
+				<value>com/seeyon/v3x/meetingroom/domain/Meetingroomperm.hbm.xml</value>
+				<value>com/seeyon/v3x/meetingroom/domain/Meetingroomrecord.hbm.xml</value>
+				
+				<!-- 工作管理授权设置 -->
+				<value>com/seeyon/v3x/collaboration/domain/ManagementSet.hbm.xml</value>
+				<value>com/seeyon/v3x/collaboration/domain/ManagementSetAcl.hbm.xml</value>
+
+				<!-- 应用日志 -->
+				<value>com/seeyon/v3x/common/appLog/domain/AppLog.hbm.xml</value>
+				
+				<!-- 表单业务配置 -->
+				<value>com/seeyon/v3x/formbizconfig/domain/FormBizConfigShareStatus.hbm.xml</value>
+				<value>com/seeyon/v3x/formbizconfig/domain/FormBizConfigShareScope.hbm.xml</value>
+				<value>com/seeyon/v3x/formbizconfig/domain/FormBizConfigMenuProfile.hbm.xml</value>
+				<value>com/seeyon/v3x/formbizconfig/domain/FormBizConfigTempletProfile.hbm.xml</value>
+				<value>com/seeyon/v3x/formbizconfig/domain/FormBizConfig.hbm.xml</value>
+				<value>com/seeyon/v3x/formbizconfig/domain/FormBizConfigColumn.hbm.xml</value>  
+				<value>com/seeyon/v3x/common/processlog/domain/ProcessLog.hbm.xml</value>  
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${db.hibernateDialect}</prop>
+				<prop key="hibernate.show_sql">false</prop><!-- 已经采用Log4j -->
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.generate_statistics">false</prop>
+				<prop key="hibernate.jdbc.batch_size">${db.jdbc.batch_size}</prop>
+				<prop key="hibernate.cache.use_second_level_cache">${db.cache.use_second_level_cache}</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="baseTxService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="proxyTargetClass" value="true" />
+
+		<property name="transactionAttributes">
+			<props>
+                <prop key="get*">PROPAGATION_SUPPORTS,readOnly</prop>
+                <prop key="find*">PROPAGATION_SUPPORTS,readOnly</prop>
+                <prop key="load*">PROPAGATION_SUPPORTS,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="insert*">PROPAGATION_REQUIRED</prop>                
+                <prop key="getRemove*">PROPAGATION_SUPPORTS</prop> 
+                <prop key="getProcess*">PROPAGATION_SUPPORTS</prop>              
+				<prop key="*">PROPAGATION_REQUIRED</prop>     
+			</props>
+		</property>
+		<!--
+			<property name="preInterceptors">
+			<list>
+			<ref bean="methodSecurityInterceptor"/>
+			</list>
+			</property>
+		-->
+	</bean>
+
+
+</beans>

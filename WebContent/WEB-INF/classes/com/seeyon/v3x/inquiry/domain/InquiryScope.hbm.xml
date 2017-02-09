@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.inquiry.domain.InquiryScope"
+		table="inquiry_scope">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="scopeDesc" type="string" column="scope_desc"
+			length="255" />
+		<property name="scopeId" type="long" column="scope_id"
+			length="20" />
+
+		<property name="sort" type="integer" column="sort" length="11" />
+
+		<!-- Associations -->
+		<!-- bi-directional many-to-one association to InquirySurveybasic -->
+		<many-to-one name="inquirySurveybasic"
+			class="com.seeyon.v3x.inquiry.domain.InquirySurveybasic">
+			<column name="surveybasic_id" not-null="true" length="20" />
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>

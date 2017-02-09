@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+
+	<!-- UFMobile -->
+	<bean id="adaptUFmobileManager"
+		class="com.seeyon.v3x.mobile.adapter.ufmobile.AdaptUFmobileManagerImpl" 
+		autowire="byName" lazy-init="true">
+		<property name="host" value="${UFmobile.host}" />
+		<property name="port" value="${UFmobile.port}" />
+		<property name="supportRecive" value="${UFmobile.supportRecive}" />
+	</bean>
+	
+	<!--  中国移动CMPP3的连接配置 -->
+	<bean id="adapterMobileMessageManagerCMPP3" 
+		class="com.seeyon.v3x.mobile.adapter.cmpp3.AdapterMobileMessageMangerCMPP3Impl">	
+
+		<!-- Socket连接配置 -->
+		<!-- ISMG主机地址 -->
+		<property name="host" value="${CMPP3.host}" />
+	    <!-- ISMG主机端口号 -->
+		<property name="port" value="${CMPP3.port}" />
+	    <!--SP…ID(最大为六位字符)-->
+	    <property name="sourceAddr" value="${CMPP3.SPID}" />
+	    <!--shared-secret由中国移动与ICP事先商定-->
+	    <property name="sharedSecret" value="${CMPP3.password}" />
+	    <!--双方协商的版本号(大于0，小于256)-->
+	    <property name="version" value="${CMPP3.version}" />
+		<!-- 心跳信息发送间隔时间(单位：秒) -->
+		<property name="heartbeatInterval" value="${CMPP3.heartbeatInterval}" />
+	    <!-- 连接中断时重连间隔时间(单位：秒)-->
+		<property name="reconnectInterval" value="${CMPP3.reconnectInterval}" />
+	    <!-- 需要重连时，连续发出心跳而没有接收到响应的个数（单位：个)-->
+		<property name="heartbeatNoresponseout" value="${CMPP3.heartbeatNoresponseout}" />
+	    <!-- 链接超时时间 (单位：秒)-->
+		<property name="transactionTimeout" value="30" />
+		<!-- debug -->
+		<property name="debug" value="false" />
+
+		<!-- 短信收发配置 -->
+		<!-- 相同Msg_id消息的总条数，目前只能为1-->
+		<property name="pkTotal" value="1" />
+		<!-- 相同Msg_id的消息序号，目前只能为1-->
+		<property name="pkNumber" value="1" />
+		<!-- 是否需要状态报告，0:不需要，1:需要，2:产生SMS话单-->
+		<property name="registeredDelivery" value="0" />
+		<!-- 信息类别-->
+		<property name="msgLevel" value="${CMPP3.msgLevel}" />
+		<!-- 业务类型，应与Infox对应-->
+		<property name="serviceId" value="${CMPP3.serviceId}" />
+		<!-- 计费用户类型，0:对目的终端MSISDN计费，1:对源终端MSISDN计费，2:对SP计费，3:本字段无效-->
+		<property name="feeUserType" value="2" />
+		<!-- GSM协议类型-->
+		<property name="tpPid" value="0" />
+		<!-- GSM协议类型-->
+		<property name="tpUdhi" value="0" />
+		<!-- 信息内容来源，对应于登录Infox的帐号-->
+		<property name="msgSrc" value="${CMPP3.SPID}" />
+		<!-- 资费类别，“短消息类型”为“发送”，对“计费用户号码”不计信息费，此类话单仅用于核减SP对称的信道费-->
+		<property name="feeType" value="02" />
+		<!-- 资费代码，以分为单位-->
+		<property name="feeCode" value="0" />
+		<!-- 源终端MSISDN号码(为SP的服务代码或前缀, 为服务代码的长号码, 网关将该号码完整的填到SMPP协议相应的destination_address字段，该号码最终在用户手机上显示为短消息的主叫号码) (没有可以为空)-->
+		<property name="srcTerminalId" value="${CMPP3.srcTerminalId}" />
+		<!-- 被计费用户的号码类型-->
+		<property name="feeTerminalType" value="1" />
+	</bean>
+		
+	<!--  短信王的配置 -->
+	<bean id="adapterMobileMessageManagerShortMessageKing" 
+		class="com.seeyon.v3x.mobile.adapter.king.AdapterMobileMessageManagerShortMessageKingImpl"
+		autowire="byName" lazy-init="true">
+		<property name="kingName" value="${mobile.kingname}" />
+		<property name="kingPassword" value="${mobile.kingpassword}" />
+		<property name="supportRecive" value="${mobile.kingsupportRecive}" />
+	</bean>
+	<!--  金迪Modem池 -->
+	<bean id="adaptMobileJindiModemPoolImpl" singleton="true"
+		class="com.seeyon.v3x.mobile.adapter.jindi.AdaptMobileJindiModemPoolImpl"
+		autowire="byName" init-method="init">
+		<property name="comNum" value="${mobile.jindi.comNum}"></property>
+		<property name="needSetIdSQL">
+			<list>
+				<!-- 金迪短信 oracle 数据库不支持自增 -->
+				<value>Oracle</value>
+			</list>
+		</property>
+		<property name="adapterMobileJinDiDao">
+			<bean class="com.seeyon.v3x.mobile.adapter.jindi.dao.AdapterMobileJinDiDao">
+				<property name="sqlResourceBundles">
+					<list>
+						<value>com.seeyon.v3x.mobile.adapter.jindi.sql.AdaptMobilJinDiSqlResource</value>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- NC-MERP -->
+	<bean id="adapterMobileMessageManagerMerpImpl" class="com.seeyon.v3x.mobile.adapter.merp.AdapterMobileMessageManagerMerpImpl">
+		<property name="host" value="${merp.host}" />
+		<property name="port" value="${merp.port}" />
+	</bean>
+</beans>

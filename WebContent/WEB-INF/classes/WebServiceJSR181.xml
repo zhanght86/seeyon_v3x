@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+
+ <import resource="classpath:org/codehaus/xfire/spring/xfire.xml"/>
+    
+    <!-- 获得applicationContext中所有bean的JSR181 annotation -->
+ <bean id="webAnnotations" class="org.codehaus.xfire.annotations.jsr181.Jsr181WebAnnotations"  lazy-init="false"/>
+
+
+ <!-- 定义handler mapping,将所有JSR181定义的bean导出为web service -->
+ <bean id="jsr181HandlerMapping" class="org.codehaus.xfire.spring.remoting.Jsr181HandlerMapping"  lazy-init="false">
+  <property name="xfire" ref="xfire"/>
+  <property name="webAnnotations" ref="webAnnotations"/>
+ </bean>
+<bean id="webServiceDAO" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.interfaces.dao.WebServiceDAO" >
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<!--  
+	<bean id="wsCallBackService" class="com.seeyon.v3x.interfaces.WSCallBackService">
+	</bean>
+	-->
+</beans>

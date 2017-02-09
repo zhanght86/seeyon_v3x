@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<bean id="officeAdminInfoTarget" class="com.seeyon.v3x.office.admin.manager.impl.AdminManagerImpl" autowire="byName">
+		<property name="adminSettingDAO">
+   			<ref bean="adminSettingDAO" />
+  		</property>
+		<property name="orgManager" ref="OrgManager" />
+		<property name="orgDirect" ref="OrgManagerDirect" />
+		<property name="bookApplyDao" ref="bookApplyInfoDAO" />
+		<property name="assetApplyDao" ref="assetApplyInfoDAO" />
+ 	</bean>
+	
+	<bean id="officeAdminManager" parent="baseTxService">
+		<property name="target">
+		    <ref local="officeAdminInfoTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="adminSettingDAO" class="com.seeyon.v3x.office.admin.dao.impl.AdminSettingDAOImpl" ></bean>
+	
+	<bean id="adminManagerCAP" class="com.seeyon.v3x.office.admin.manager.cap.AdminManagerCAPImpl" singleton="true">
+    </bean>
+    
+</beans>

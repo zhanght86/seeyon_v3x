@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocBorrowHistory"
+		lazy="false" table="doc_borrow_history">
+		<id name="id" type="integer" column="id" length="11">
+			<generator class="assigned" />
+		</id>
+
+		<property name="userId" type="long" column="user_id"
+			not-null="true" length="20" />
+		<property name="userType" type="string" column="user_type"
+			not-null="true" length="50" />
+		<property name="borrowType" type="byte" column="borrow_type"
+			not-null="true" length="4" />
+		<property name="docResourceId" type="long"
+			column="doc_resource_id" not-null="true" length="20" />
+		<property name="sdate" type="timestamp" column="sdate"
+			not-null="false" length="19" />
+		<property name="edate" type="timestamp" column="edate"
+			not-null="false" length="19" />
+
+		<!-- Associations -->
+
+	</class>
+</hibernate-mapping>

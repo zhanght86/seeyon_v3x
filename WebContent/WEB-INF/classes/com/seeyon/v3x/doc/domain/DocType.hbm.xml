@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocType" lazy="false"
+		table="doc_types">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="description" type="string" column="description"
+			length="255" />		
+		<property name="formDefinitionId" type="long"
+			column="form_definition_id" length="20" />
+		<property name="name" type="string" column="name"
+			not-null="true" length="255" />
+		<property name="parentType" type="byte"
+			column="parent_type" not-null="true" length="4" />
+		<property name="editable" type="boolean" column="editable"
+			not-null="true" length="4" />
+		<property name="isSystem" type="boolean" column="is_system"
+			not-null="true" length="4" />
+		<property name="status" type="byte" column="status"
+			not-null="true" length="4" />
+		<property name="seartchStatus" type="byte" column="seartch_status"
+			not-null="true" length="4" />
+		<property name="domainId" type="long" column="domain_id"
+			not-null="true" length="20" />
+		<set name="docTypeDetail" inverse="true" lazy="false"
+			cascade="all-delete-orphan" order-by="order_num">
+			<key column="doc_type_id" />
+			<one-to-many
+				class="com.seeyon.v3x.doc.domain.DocTypeDetail" />
+		</set>
+		<!-- Associations -->
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocMetadataOption"
+		lazy="false" table="doc_metadata_options">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="optionItem" type="string" column="option_item"
+			not-null="true" length="255" />
+
+		<!-- Associations -->
+		<many-to-one name="metadataDef"
+			class="com.seeyon.v3x.doc.domain.DocMetadataDefinition"
+			not-null="true" cascade="none" lazy="false">
+			<column name="metadata_definition_id" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

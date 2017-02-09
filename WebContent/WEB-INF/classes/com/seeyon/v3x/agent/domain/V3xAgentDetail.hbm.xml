@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.agent.domain.V3xAgentDetail" 
+    table="v3x_agent_detail"
+    lazy="false"
+    dynamic-update="true"
+    dynamic-insert="true"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="agentId"
+        type="long"
+        column="agent_id"
+        length="20"
+    />
+    <property
+        name="app"
+        type="integer"
+        column="app"
+        length="10"
+    />
+    <property
+        name="entityId"
+        type="long"
+        column="entity_id"
+        length="20"
+    />
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

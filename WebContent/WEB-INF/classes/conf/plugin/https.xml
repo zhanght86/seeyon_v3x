@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="httpsPluginDefintion" class="com.seeyon.v3x.plugin.https.HttpsPluginDefintion">
+		<property name="id" value="https" />
+		<property name="name" value="https" />
+		<property name="contextConfigLocation">
+			<list>
+				<value>classpath*:httpsManager.xml</value>
+			</list>
+		</property>
+		<property name="urlMapping">
+			<props>
+				<prop key="/https.do">httpsController</prop>
+			</props>
+		</property>
+    	<property name="noCheckSessionURL">
+   			<map>
+   				<entry key="com.seeyon.v3x.plugin.https.HttpsController">
+   					<list>
+   						<value>index</value>
+   					</list>
+   				</entry>
+   			</map>
+    	</property>
+		
+	</bean>
+</beans>

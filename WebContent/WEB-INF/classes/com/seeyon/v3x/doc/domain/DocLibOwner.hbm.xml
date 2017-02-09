@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocLibOwner" lazy="false"
+		table="doc_lib_owners">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="docLibId" type="long" column="doc_lib_id" not-null="true" length="20" />
+		<property name="ownerId" type="long" column="owner_id" not-null="true" length="20" />
+		<property name="sortId" column="sort_id" type="integer" not-null="true" length="4" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.StaffTransfer" table="hr_staff_transfer">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		
+		<many-to-one name="type" 
+                    column="type"
+                    class="com.seeyon.v3x.hr.domain.StaffTransferType"/> 
+         
+        <property
+          name="refer_time"
+          type="timestamp"
+          column="refer_time"
+          length="19"
+        /> 
+        <property
+          name="deal_time"
+          type="timestamp"
+          column="deal_time"
+          length="19"
+        /> 
+        <property
+          name="transfer_time"
+          type="timestamp"
+          column="transfer_time"
+          length="19"
+        />    
+		<property
+          name="fromDepartment_id"
+          type="long"
+          column="fromDepartment_id"
+          length="20"
+        />
+        <property
+          name="toDepartment_id"
+          type="long"
+          column="toDepartment_id"
+          length="20"
+        />
+        <property
+          name="fromPost_id"
+          type="long"
+          column="fromPost_id"
+          length="20"
+        />
+        <property
+          name="toPost_id"
+          type="long"
+          column="toPost_id"
+          length="20"
+        />
+        <property
+          name="fromLevel_id"
+          type="long"
+          column="fromLevel_id"
+          length="20"
+        />
+        <property
+          name="toLevel_id"
+          type="long"
+          column="toLevel_id"
+          length="20"
+        />
+       <property
+          name="fromMember_type"
+          type="integer"
+          column="fromMember_type"
+          length="4"
+       />
+       <property
+          name="toMember_type"
+          type="integer"
+          column="toMember_type"
+          length="2"
+       />
+       <property
+          name="fromMember_state"
+          type="integer"
+          column="fromMember_state"
+          length="4"
+       />
+       <property
+          name="toMember_state"
+          type="integer"
+          column="toMember_state"
+          length="2"
+       />
+       <property
+          name="state"
+          type="integer"
+          column="state"
+          length="2"
+       />
+       <property
+          name="reason"
+          type="clob"
+          column="reason"
+       />
+       <property
+          name="member_id"
+          type="long"
+          column="member_id"
+          length="20"
+        />
+
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.resource.domain.ResourceIpp" 
+    table="v3x_common_resource_ipp"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <many-to-one name="resource" column="ref_resource_id" class="com.seeyon.v3x.resource.domain.Resource"/>    
+    <property name="refAppId" type="java.lang.Long">
+			<column name="ref_app_id" />
+	</property>
+	<property name="startTime" type="java.util.Date">
+			<column name="start_time" length="19" not-null="true" />
+	</property>
+	<property name="endTime" type="java.util.Date">
+			<column name="end_time" length="19" not-null="true" />
+	</property>
+</class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+
+	<bean id="bookInfoTarget" class="com.seeyon.v3x.office.book.manager.Impl.BookManagerImpl" autowire="byName">
+		<property name="applyListDAO">
+   			<ref bean="applyListDAO" />
+  		</property>
+  		<property name="bookInfoDAO">
+   			<ref bean="bookInfoDAO" />
+  		</property>
+  		<property name="bookApplyInfoDAO">
+   			<ref bean="bookApplyInfoDAO" />
+  		</property>
+  		<property name="bookDepartInfoDAO">
+   			<ref bean="bookDepartInfoDAO" />
+  		</property>
+  		<property name="userMessageManager" ref="UserMessageManager" />
+	</bean>
+	
+	<bean id="bookManager" parent="baseTxService">
+		<property name="target">
+		    <ref local="bookInfoTarget" />
+		</property>
+	</bean>
+
+	<bean id="bookInfoDAO" class="com.seeyon.v3x.office.book.dao.impl.BookInfoDAOImpl" ></bean>
+	<bean id="applyListDAO" class="com.seeyon.v3x.office.myapply.dao.impl.ApplyListDAOImpl" ></bean>
+	<bean id="bookApplyInfoDAO" class="com.seeyon.v3x.office.book.dao.impl.BookApplyInfoDAOImpl" ></bean>
+	<bean id="bookDepartInfoDAO" class="com.seeyon.v3x.office.book.dao.impl.BookDepartInfoDAOImpl"></bean>
+</beans>
+

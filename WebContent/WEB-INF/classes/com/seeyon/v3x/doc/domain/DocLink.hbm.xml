@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.doc.domain.DocLink" lazy="false"
+		table="doc_links">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+		<property name="createTime" type="timestamp"
+			column="create_time" not-null="true" length="19" />
+		<property name="createUserId" type="long"
+			column="create_user_id" length="20" />
+		<property name="docResourceId1" type="long"
+			column="doc_resource_id1" not-null="true" length="20" />
+		<property name="docResourceId2" type="long"
+			column="doc_resource_id2" not-null="true" length="20" />
+
+		<!-- Associations -->
+
+	</class>
+</hibernate-mapping>

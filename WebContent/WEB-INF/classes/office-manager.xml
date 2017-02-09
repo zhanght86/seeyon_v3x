@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName" default-lazy-init="true">
+	
+	<bean id="autoManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.office.auto.manager.impl.AutoManagerImpl">
+				<property name="autoDao" ref="autoDao"></property>
+				<property name="officeApplyDao" ref="officeApplyDao"></property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="stockManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.office.stock.manager.impl.StockManagerImpl">
+				<property name="stockDao" ref="stockDao"></property>
+				<property name="officeApplyDao" ref="officeApplyDao"></property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="officeCommonManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.office.common.manager.impl.OfficeCommonManagerImpl">
+				<property name="officeApplyDao" ref="officeApplyDao"></property>
+				<property name="officeTypeDao" ref="officeTypeDao"></property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="officeApplyManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.office.common.manager.impl.OfficeApplyManagerImpl">
+				<property name="officeApplyDao" ref="officeApplyDao"></property>
+				<property name="officeTypeDao" ref="officeTypeDao"></property>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 车辆数据库操作类 -->
+	<bean id="autoDao" class="com.seeyon.v3x.office.auto.dao.impl.AutoDaoImpl">
+		<property name="sessionFactory"
+					ref="sessionFactory" />
+	</bean>
+	
+	<!-- 申请单数据库操作类 -->
+	<bean id="officeApplyDao" class="com.seeyon.v3x.office.common.dao.impl.OfficeApplyDaoImpl">
+		<property name="sessionFactory"
+					ref="sessionFactory" />
+	</bean>
+	<!-- 分类信息数据库操作类 -->
+	<bean id="officeTypeDao" class="com.seeyon.v3x.office.common.dao.impl.OfficeTypeDaoImpl">
+		<property name="sessionFactory"
+					ref="sessionFactory" />
+	</bean>
+	<!-- 办公用品数据库操作类 -->
+	<bean id="stockDao" class="com.seeyon.v3x.office.stock.dao.impl.StockDaoImpl">
+		<property name="sessionFactory"
+					ref="sessionFactory" />
+	</bean>
+	
+	<bean id="officeApplyManagerCAP" class="com.seeyon.v3x.office.common.manager.cap.OfficeApplyManagerCAPImpl" singleton="true">
+    </bean>
+    
+</beans>

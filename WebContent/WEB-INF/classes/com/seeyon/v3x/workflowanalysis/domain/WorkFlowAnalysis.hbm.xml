@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.workflowanalysis.domain.WorkFlowAnalysis" 
+    table="v3x_workflow_analysis"
+    lazy="true"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+   
+	<property
+        name="year"
+        type="integer"
+        column="year"
+        length="4"
+    /> 
+    <property
+        name="month"
+        type="integer"
+        column="month"
+        length="4"
+    /> 
+       <property
+        name="statDate"
+        type="date"
+        column="stat_date"
+        length="10"
+    /> 
+     <property
+        name="orgAccountId"
+        type="long"
+        column="org_account_id"
+        length="20"
+    /> 
+     <property
+        name="templeteId"
+        type="long"
+        column="templete_id"
+        length="20"
+    /> 
+     <property
+        name="catagory"
+        type="integer"
+        column="catagory"
+        length="11"
+    /> 
+    <property
+        name="caseCount"
+        type="integer"
+        column="case_count"
+        length="11"
+    />
+    <property
+        name="allCaseCount"
+        type="integer"
+        column="all_case_count"
+        length="11"
+    />
+    <property
+        name="overCaseCount"
+        type="integer"
+        column="over_case_count"
+        length="11"
+    />
+     <property
+        name="useRadio"
+        type="double"
+        column="use_radio"
+        length="16"
+    />
+     <property
+        name="efficiency"
+        type="double"
+        column="efficiency"
+        length="16"
+    />
+     <property
+        name="overTimeRatio"
+        type="double"
+        column="over_time_ratio"
+        length="16"
+    />
+    
+    <property
+        name="avgRunTime"
+        type="integer"
+        column="avg_run_time"
+        length="4"
+    /> 
+    <property
+        name="standardTime"
+        type="integer"
+        column="standard_time"
+        length="4"
+    /> 
+    <property
+        name="avgOverTime"
+        type="integer"
+        column="avg_over_time"
+        length="4"
+    /> 
+</class>
+</hibernate-mapping>

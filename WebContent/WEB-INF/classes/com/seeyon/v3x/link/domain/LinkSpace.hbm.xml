@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.link.domain.LinkSpace" 
+    table="v3x_link_space"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="spaceName"
+        type="string"
+        column="space_name"
+        length="255"
+    />
+    <property
+        name="targetPageUrl"
+        type="string"
+        column="target_page_url"
+        length="255"
+    />
+    <property
+        name="openType"
+        type="int"
+        column="open_type"
+        not-null="false"
+        length="4"
+    />
+    <property
+        name="sort"
+        type="int"
+        column="sort"
+        length="4"
+    />
+	<property
+        name="linkSystemId"
+        type="long"
+        column="link_system_id"
+        length="20"
+    />
+    <!-- Associations -->
+    <set
+        name="linkSpaceAcls"
+        inverse="true"
+        lazy="true"
+        cascade="all-delete-orphan" >
+        <key>
+            <column name="link_space_id" />
+        </key>
+        <one-to-many class="com.seeyon.v3x.link.domain.LinkSpaceAcl" />
+    </set>
+</class>
+</hibernate-mapping>

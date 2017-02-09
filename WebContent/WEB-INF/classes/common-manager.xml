@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd"><!--  - Application context definition for "springapp" DispatcherServlet.  -->
+<beans default-autowire="byName">
+	<!-- 注册service -->
+	<bean id="selectPeopleManager" singleton="true"
+		class="com.seeyon.v3x.common.selectPeople.SelectPeopleManager" init-method="init">
+		<property name="orgManager" ref="OrgManager" />
+		<property name="exchangeAccountManager" ref="exchangeAccountManager" />
+		<property name="mobileMessageManager" ref="mobileMessageManager" />
+	</bean>
+
+	<bean id="handWriteManager"
+		class="com.seeyon.v3x.common.office.HandWriteManager"
+		singleton="false">
+		<property name="fileManager" ref="fileManager" />
+		<property name="signetManager" ref="signetManager" />
+		<property name="officeTransManager" ref="officeTransManager" />
+	</bean>
+	
+	<bean id="pdfHandWriteManager"
+		class="com.seeyon.v3x.common.office.PdfHandWriteManager"
+		singleton="false">
+	</bean>
+	
+	<bean id="htmlHandWriteManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.common.office.HtmlHandWriteManager">
+				<property name="htmlSignDao" ref="v3xHtmDocumentSignatureDao">					
+				</property>
+				
+				<property name="signHistoryDao" ref="htmlSignatureHistoryDao">					
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="securityCheck" class="com.seeyon.v3x.common.security.SecurityCheck">
+		<property name="securityCheckers">
+			<map>
+				<entry key="1">
+					<bean parent="colSecurityControlManager" />
+				</entry>
+				<entry key="3">
+					<bean class="com.seeyon.v3x.common.security.SecurityControlDocImpl"></bean>
+				</entry>
+				<entry key="4">
+					<bean class="com.seeyon.v3x.common.security.SecurityControlEdocImpl"></bean>
+				</entry>
+				<entry key="5">
+					<bean class="com.seeyon.v3x.common.security.SecurityControlPlanImpl"></bean>
+				</entry>
+				<entry key="6">
+					<bean class="com.seeyon.v3x.common.security.SecurityControlMeetingImpl"></bean>
+				</entry>
+				<entry key="7">
+					<bean class="com.seeyon.v3x.common.security.SecurityControlBulletinImpl"></bean>
+				</entry>
+				<entry key="9">
+					<bean class="com.seeyon.v3x.common.security.SecurityControlBBSImpl"></bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="colSecurityControlManager" class="com.seeyon.v3x.common.security.SecurityControlColImpl">
+		<property name="colSuperviseManager" ref="colSuperviseManager"></property>
+	</bean>
+	
+	<!--  
+	<bean id="htmlHandWriteManager"
+		class="com.seeyon.v3x.common.office.HtmlHandWriteManager"
+		singleton="false">
+		<property name="htmlSignDao" ref="v3xHtmDocumentSignatureDao" />
+		<property name="signHistoryDao" ref="htmlSignatureHistoryDao" />
+	</bean>
+	-->
+	<bean id="officeTransCleanTimeJob" class="com.seeyon.v3x.common.office.trans.OfficeTransCleanTimeJob"/>
+	
+	<bean id="officeTransManager" class="com.seeyon.v3x.common.office.trans.manager.OfficeTransManagerImpl"
+		init-method="init" destroy-method="destroy" depends-on="officeTransCleanTimeJob">
+		<property name="host" value="${officeTarns.rmi.host}" />
+		<property name="port" value="${officeTarns.rmi.port}" />
+		<property name="outputPath" value="${officeTarns.cache.folder}" />
+		<property name="retainDay" value="${officeTarns.retainDay}" />
+		<property name="fileMaxSize" value="${officeTarns.file.maxSize}" />
+	</bean>
+	
+	<bean id="configGrantManager" class="com.seeyon.v3x.common.manager.ConfigGrantManagerImpl">
+		<property name="orgManager" ref="OrgManager"></property>
+	</bean>
+	
+	<bean id="securityCheckCAP" class="com.seeyon.v3x.common.security.cap.SecurityCheckCAPImpl" singleton="true">
+    </bean>
+		
+	<bean id="iSignatureHtmlManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.common.isignature.ISignatureHtmlManagerImpl"></bean>
+		</property>	
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+			</props>
+		</property>
+	</bean>	
+	<bean id="iSignatureHtmlDao" class="com.seeyon.v3x.common.isignature.dao.ISignatureHtmlDaoImpl"></bean>
+	
+	<!-- 二维码信息 -->
+	<bean id="barCodeManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.common.barCode.manager.BarCodeManagerImpl"/>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="barCodeDao" class="com.seeyon.v3x.common.barCode.dao.BarCodeDao"/>
+	<!-- 二维码结束 -->
+</beans>

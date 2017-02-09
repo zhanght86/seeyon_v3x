@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="CAPluginDefintion" class="com.seeyon.v3x.plugin.ca.CAPluginDefintion">
+		<property name="id" value="ca" />
+		<property name="name" value="CA插件" />
+		<property name="contextConfigLocation">
+			<list>
+				<value>classpath*:caManager.xml</value>
+				<value>classpath*:caaccount.xml</value>
+			</list>
+		</property>
+		<property name="properties">
+			<list>
+				<value>classpath*:conf/ca.properties</value>
+			</list>
+		</property>
+		<property name="hbmResources">
+			<list>
+				<value>com/seeyon/v3x/plugin/ca/caaccount/domain/CAAccount.hbm.xml</value>	
+			</list>
+		</property>	
+		<property name="urlMapping">
+			<props>
+				<prop key="/caAccountManagerController.do">caAccountManagerController</prop>
+			</props>
+		</property>
+		<property name="menuI18NResource" value="com.seeyon.v3x.plugin.ca.caaccount.resources.i18n.CAAccountResources" />
+		<property name="systemMenus">
+			<list>
+				<bean class="com.seeyon.v3x.plugin.PluginMainMenu">
+					<property name="name" value="ca.menu.manage" />
+					<property name="children">
+						<list>
+							<bean class="com.seeyon.v3x.plugin.PluginMenu">
+								<property name="name" value="ca.account.binding" />
+								<property name="icon" value="/apps_res/plugin/ca/images/menu.gif" />
+								<property name="url"  value="/caAccountManagerController.do?method=goToCAAccountManage" />
+							</bean>
+							<bean class="com.seeyon.v3x.plugin.PluginMenu">
+								<property name="name" value="ca.menu.options"></property>
+								<property name="icon" value="/apps_res/plugin/ca/images/menu.gif"></property>
+								<property name="url" value="/caAccountManagerController.do?method=goToCAAccountOptions"></property>
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+</beans>

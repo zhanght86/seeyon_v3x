@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pigeonhole>
+	<!--  
+	    class:   	被归档的数据对象类型 
+		method:  	取得对象属性的方法 getXxx
+		setMethod:  DocResource对象的属性设置方法 setXxx
+		column:    	doc_metadata表的对应列名
+		type:  		1. DocResource对象的设置属性方法的参数类型 setXxx(type); doc_metadata表的对应列的数据类型。
+					2. 如果set,get方法的参数是基本类型，这里需要写基本类型，如int。
+					
+		2007.6.1   	将关联项目的保存属性也定义在这里, 定义 doc_metadata 字段和对应数据类的属性的对应关系
+		           	project_data 对应 ProjectData
+		           	project_phase_data  对应 ProjectPhaseData
+		           	
+		collaboration  	协同
+		edoc			公文
+		meeting        	会议
+		plan		   	计划(2008.03.19 取消)
+		inquiry        	调查
+		mail			邮件(2008.03.19 取消)
+		news			新闻
+		bulletin		公告
+		project_data   	项目
+		project_phase_data 项目阶段
+		info            信息报送
+		infoStat        信息报送统计
+ 	-->
+	<collaboration
+		class="com.seeyon.v3x.affair.domain.Affair">
+		<doc_resources>
+			<property method="getSubject" setMethod="setFrName"
+				type="java.lang.String" />
+		</doc_resources>
+		<doc_metadata>
+			<property method="getSubject" column="avarchar1"
+				type="java.lang.String" />
+			<property method="getSenderId" column="reference1"
+				type="java.lang.Long" />
+			<property method="getCreateDate" column="date1"
+				type="java.util.Date" />
+		</doc_metadata>
+	</collaboration>
+	
+	
+
+	<edoc
+		class="com.seeyon.v3x.edoc.domain.EdocSummary">
+		<doc_resources>
+			<property method="getSubjectA" setMethod="setFrName"
+				type="java.lang.String" />
+			<property method="getKeywords" setMethod="setKeyWords"
+				type="java.lang.String" />
+		</doc_resources>
+		<doc_metadata>
+			<property method="getSubjectA" column="avarchar1" type="java.lang.String" />
+			<property method="getDocType" column="avarchar15"	type="java.lang.String" />
+			<property method="getSendType" column="avarchar16" type="java.lang.String" />
+			<property method="getDocMark" column="avarchar17" type="java.lang.String" />
+			<property method="getSerialNo" column="avarchar18"	type="java.lang.String" />
+			<property method="getSecretLevel" column="avarchar19" type="java.lang.String" />
+			<property method="getUrgentLevel" column="avarchar20" type="java.lang.String" />
+			<property method="getKeepPeriod" column="integer3" type="java.lang.Integer" />
+			<property method="getCreatePerson" column="avarchar4"	type="java.lang.String" />
+			<property method="getSendUnit" column="avarchar22"	type="java.lang.String" />
+			<property method="getIssuer" column="avarchar23"	type="java.lang.String" />
+			<property method="getSigningDate" column="date4" type="java.util.Date" />
+			<property method="getSendTo" column="avarchar24"	type="java.lang.String" />
+			<property method="getCopyTo" column="avarchar25"	type="java.lang.String" />
+			<property method="getReportTo" column="avarchar26"	type="java.lang.String" />
+			<property method="getKeywords" column="avarchar27"	type="java.lang.String" />
+			<property method="getPrintUnit" column="avarchar28"	type="java.lang.String" />						
+			<property method="getCopies" column="integer4" type="java.lang.Integer" />			
+			<property method="getPrinter" column="avarchar29"	type="java.lang.String" />
+			
+			<property method="getStartUserId" column="reference1" type="java.lang.Long" />
+			<property method="getStartTime" column="date1" type="java.util.Date" />
+			<property method="getOrgDepartmentId" column="reference10" type="java.lang.Long" />
+			
+		</doc_metadata>
+	</edoc>
+	<!--  公文 联合发文第二次归档  -->
+	<edoc2
+		class="com.seeyon.v3x.edoc.domain.EdocSummary">
+		<doc_resources>
+			<property method="getSubjectB" setMethod="setFrName"
+				type="java.lang.String" />
+			<property method="getKeywords" setMethod="setKeyWords"
+				type="java.lang.String" />
+		</doc_resources>
+		<doc_metadata>
+			<property method="getSubjectB" column="avarchar1" type="java.lang.String" />
+			<property method="getDocType" column="avarchar15"	type="java.lang.String" />
+			<property method="getSendType" column="avarchar16" type="java.lang.String" />
+			<property method="getDocMark2" column="avarchar17" type="java.lang.String" />
+			<property method="getSerialNo" column="avarchar18"	type="java.lang.String" />
+			<property method="getSecretLevel" column="avarchar19" type="java.lang.String" />
+			<property method="getUrgentLevel" column="avarchar20" type="java.lang.String" />
+			<property method="getKeepPeriod" column="integer3" type="java.lang.Integer" />
+			<property method="getCreatePerson" column="avarchar4"	type="java.lang.String" />
+			<property method="getSendUnit2" column="avarchar22"	type="java.lang.String" />
+			<property method="getIssuer" column="avarchar23"	type="java.lang.String" />
+			<property method="getSigningDate" column="date4" type="java.util.Date" />
+			<property method="getSendTo2" column="avarchar24"	type="java.lang.String" />
+			<property method="getCopyTo2" column="avarchar25"	type="java.lang.String" />
+			<property method="getReportTo2" column="avarchar26"	type="java.lang.String" />
+			<property method="getKeywords" column="avarchar27"	type="java.lang.String" />
+			<property method="getPrintUnit" column="avarchar28"	type="java.lang.String" />						
+			<property method="getCopies2" column="integer4" type="java.lang.Integer" />			
+			<property method="getPrinter" column="avarchar29"	type="java.lang.String" />
+			
+						<property method="getStartUserId" column="reference1" type="java.lang.Long" />
+			<property method="getStartTime" column="date1" type="java.util.Date" />
+			<property method="getOrgDepartmentId" column="reference10" type="java.lang.Long" />
+
+		</doc_metadata>
+	</edoc2>
+	
+
+	<meeting
+		class="com.seeyon.v3x.meeting.domain.MtMeeting">
+		<doc_resources>
+			<property method="getTitle" setMethod="setFrName"
+				type="java.lang.String" />
+		</doc_resources>
+		<doc_metadata>
+			<property method="getTitle" column="avarchar1"
+				type="java.lang.String" />
+			<property method="getCreateDate" column="date1"
+				type="java.util.Date" />
+			<property method="getEndDate" column="date3"
+				type="java.util.Date" />
+			<property method="getCreateUser" column="reference1"
+				type="java.lang.Long" />
+			<property method="getEmceeId" column="reference8"
+				type="java.lang.Long" />
+
+			<property method="getRecorderId" column="reference9"
+				type="java.lang.Long" />
+				
+
+		</doc_metadata>
+	</meeting>
+	
+
+	<inquiry class="com.seeyon.v3x.inquiry.webmdoel.InquiryBasicData">
+		<doc_resources>
+			<property method="getName" setMethod="setFrName"
+				type="java.lang.String" />
+		</doc_resources>
+		<doc_metadata>
+			<property method="getName" column="avarchar1"
+				type="java.lang.String" />
+			<property method="getType" column="avarchar3"
+				type="java.lang.String" />
+    		<property method="getSendDate" column="date1"
+				type="java.util.Date" />
+    		<property method="getCloseDate" column="date3"
+				type="java.util.Date" />
+			<property method="getDepartmentId" column="reference10"
+				type="java.lang.Long" />
+				
+			<property method="getIssuerId" column="reference1" type="java.lang.Long" />
+
+		</doc_metadata>
+	</inquiry>
+	
+
+
+	<news class="com.seeyon.v3x.news.domain.NewsData">
+		<doc_resources>
+			<property method="getTitle" setMethod="setFrName"
+				type="java.lang.String" />
+			<property method="getKeywords" setMethod="setKeyWords"
+				type="java.lang.String" />
+		</doc_resources>
+		<doc_metadata>
+			<property method="getTitle" column="avarchar1"
+				type="java.lang.String" />
+			<property method="getTypeName" column="avarchar3"
+				type="java.lang.String" />
+				
+							<property method="getPublishUserId" column="reference1" type="java.lang.Long" />
+			<property method="getPublishDate" column="date1" type="java.util.Date" />
+
+		</doc_metadata>
+	</news>
+	
+
+	<bulletin class="com.seeyon.v3x.bulletin.domain.BulData">
+		<doc_resources>
+			<property method="getTitle" setMethod="setFrName"
+				type="java.lang.String" />
+		</doc_resources>
+		<doc_metadata>
+			<property method="getTitle" column="avarchar1"
+				type="java.lang.String" />
+			<property method="getTypeName" column="avarchar3"
+				type="java.lang.String" />
+
+
+							<property method="getPublishUserId" column="reference1" type="java.lang.Long" />
+			<property method="getPublishDate" column="date1" type="java.util.Date" />
+
+		</doc_metadata>
+	</bulletin>
+	
+	<project_data class="com.seeyon.v3x.project.webmodel.ProjectSummaryData">
+		<doc_resources>
+		</doc_resources>
+		<doc_metadata>
+			<property method="getProjectName" column="avarchar1"
+				type="java.lang.String" />
+			<property method="getProjectType" column="avarchar3"
+				type="java.lang.String" />
+			<property method="getBeginDate" column="date1"
+				type="java.util.Date" />
+			<property method="getEndDate" column="date3"
+				type="java.util.Date" />
+			<property method="getManagerId" column="reference7"
+				type="java.lang.Long" />
+
+
+
+
+		</doc_metadata>
+	</project_data>
+	<project_phase_data class="com.seeyon.v3x.project.domain.ProjectPhase">
+		<doc_resources>
+		</doc_resources>
+		<doc_metadata>
+			<property method="getPhaseName" column="avarchar1"
+				type="java.lang.String" />
+			<property method="getPhaseBegintime" column="date1"
+				type="java.util.Date" />
+			<property method="getPhaseClosetime" column="date3"
+				type="java.util.Date" />
+
+
+		</doc_metadata>
+	</project_phase_data>
+	
+	<info class="com.seeyon.cap.info.domain.InfoSummaryCAP">
+		<doc_resources>
+		</doc_resources>
+		<doc_metadata>
+			<property method="getSubject" column="subject"	type="java.lang.String" />
+			<property method="getInfoType" column="info_type"	type="java.lang.Integer" />
+			<property method="getReporter" column="reporter"	type="java.lang.String" />
+			<property method="getReportUnit" column="reportUnit" type="java.lang.String" />
+			<property method="getReportDate" column="reportDate" type="java.util.Date" />
+			<property method="getKeywords" column="keywords"	type="java.lang.String" />
+			<property method="getStartUserId" column="start_user_id" type="java.lang.Long" />
+			<property method="getStartTime" column="start_time" type="java.util.Date" />
+		</doc_metadata>
+	</info>
+	
+	<info_stat class="com.seeyon.cap.info.domain.InfoStatCAP">
+		<doc_resources>
+		</doc_resources>
+		<doc_metadata>
+			<property method="getName" column="name" type="java.lang.String" />
+			<property method="getStatType" column="stat_type" type="java.lang.Long" />
+			<property method="getStatTimeType" column="stat_time_type" type="java.lang.String" />
+			<property method="getStatState" column="stat_state" type="java.lang.Long" />
+			<property method="getSubCount" column="sub_count" type="java.lang.Long" />
+			<property method="getStatPeople" column="stat_people" type="java.lang.Long" />
+			<property method="getUseCount" column="use_count" type="java.lang.Long" />
+		</doc_metadata>
+	</info_stat>
+	
+</pigeonhole>

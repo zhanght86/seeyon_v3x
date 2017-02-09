@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.seeyon.v3x.news.domain">
+	<class
+		name="NewsType"
+		table="news_type"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="id"
+		>
+			<generator class="assigned"/>
+		</id>
+
+		<property
+			name="typeName"
+			column="type_name"
+			type="string"
+			not-null="true"
+			length="50"
+		/>
+		<property
+			name="usedFlag"
+			column="used_flag"
+			type="boolean"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="description"
+			column="description"
+			type="clob"
+			not-null="false"
+		/>
+		<property
+			name="topCount"
+			column="top_count"
+			type="java.lang.Byte"
+			not-null="true"
+			length="4"
+		/>
+		<property
+			name="auditFlag"
+			column="audit_flag"
+			type="boolean"
+			not-null="true"
+			length="1"
+		/>
+		<property
+			name="auditUser"
+			column="audit_user"
+			type="java.lang.Long"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="createDate"
+			column="create_date"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="createUser"
+			column="create_user"
+			type="java.lang.Long"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="updateDate"
+			column="update_date"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="updateUser"
+			column="update_user"
+			type="java.lang.Long"
+			not-null="false"
+			length="20"
+		/>
+		<property
+			name="accountId"
+			column="accountId"
+			type="java.lang.Long"
+			not-null="true"
+		/>
+		<property
+			name="spaceType"
+			column="spaceType"
+			type="java.lang.Integer"
+			not-null="true"
+		/>
+		<property
+			name="ext1"
+			column="ext1"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<property
+			name="ext2"
+			column="ext2"
+			type="string"
+			not-null="false"
+			length="50"
+		/>
+		<many-to-one
+			name="defaultTemplate"
+			column="default_template_id"
+			class="NewsTemplate"
+			not-null="false"
+		>
+		</many-to-one>
+		
+		
+				<property
+			name="sortNum"
+			column="sort_num"
+			type="java.lang.Integer"
+			not-null="true"
+		/>
+				<property
+			name="outterPermit"
+			column="outter_permit"
+			type="java.lang.Boolean"
+			not-null="true"
+		/>
+		
+	
+
+		<set name="newsTypeManagers" inverse="true" cascade="delete" lazy="false">
+			<key column="type_id"/>
+			<one-to-many class="NewsTypeManagers"/>
+		</set>
+
+		<!--set name="newsDatas" inverse="true" cascade="delete">
+			<key column="type_id"/>
+			<one-to-many class="NewsData"/>
+		</set-->
+
+
+	</class>	
+</hibernate-mapping>

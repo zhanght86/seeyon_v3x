@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.mobile.adapter.jindi.domain.SendTask" lazy="false"
+		table="T_SendTask">
+		<id name="taskId" type="long" column="TaskID" length="10">
+			<generator class="assigned" />
+		</id>
+		<property name="destNumber" type="string" column="DestNumber"
+			not-null="false" length="255" />
+		<property name="content" type="string" column="Content"
+			not-null="false" length="255" />
+		<property name="signName" type="string" column="SignName"
+			not-null="false" length="16" />
+		<property name="sendPriority" type="long" column="SendPriority"
+			not-null="false" length="10" />
+		<property name="sendTime" type="timestamp" column="SendTime"
+			not-null="false" length="6" />
+		<property name="statusReport" type="string" column="StatusReport"
+			not-null="false" length="10" />
+		<property name="englishFlag" type="string"
+			column="EnglishFlag" not-null="false" length="10" />
+		<property name="MsgTyep" type="long" column="MsgType"
+			not-null="false" length="10" />
+		<property name="pushUrl" type="string" column="PushUrl"
+			not-null="false" length="255" />
+		<property name="recAction" type="long" column="RecAction"
+			not-null="false" length="10" />
+		<property name="validMinute" type="long" column="ValidMinute"
+			not-null="false" length="10" />
+		<property name="sendFlag" type="long" column="SendFlag" length="10" />
+		<property name="commPort" type="long" column="CommPort" length="2" />
+		<property name="splitCount" type="long" column="SplitCount" length="10" />
+		<property name="batchId" type="string" column="batchId" length="32" />
+		
+		<!-- Associations -->
+
+	</class>
+</hibernate-mapping>

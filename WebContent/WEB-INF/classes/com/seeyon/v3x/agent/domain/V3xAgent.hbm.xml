@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.agent.domain.V3xAgent" 
+    table="v3x_agent"
+    lazy="false"
+    dynamic-update="true"
+    dynamic-insert="true"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="agentId"
+        type="long"
+        column="agent_id"
+        length="20"
+    />
+    <property
+        name="agentOption"
+        type="string"
+        column="agent_option"
+        length="50"
+    />
+    <property
+        name="agentToId"
+        type="long"
+        column="agent_to_id"
+        length="20"
+    />
+    <property
+        name="cancelDate"
+        type="timestamp"
+        column="cancel_date"
+        length="19"
+    />
+    <property
+        name="cancelFlag"
+        type="boolean"
+        column="cancel_flag"
+        length="4"
+    />
+    <property
+        name="createDate"
+        type="timestamp"
+        column="create_date"
+        length="19"
+    />
+    <property
+        name="endDate"
+        type="timestamp"
+        column="end_date"
+        length="19"
+    />
+    <property
+        name="startDate"
+        type="timestamp"
+        column="start_date"
+        length="19"
+    />
+	<property
+        name="agentRemind"
+        type="boolean"
+        column="agent_remind"
+        length="4"
+    />
+    <property
+        name="agentToRemind"
+        type="boolean"
+        column="agent_to_remind"
+        length="4"
+    />
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.link.domain.LinkCategory" 
+    table="v3x_link_category"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="createTime"
+        type="timestamp"
+        column="create_time"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="createUserId"
+        type="long"
+        column="create_user_id"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="description"
+        type="string"
+        column="description"
+        length="255"
+    />
+    <property
+        name="isSystem"
+        type="byte"
+        column="is_system"
+        length="4"
+    />
+    <property
+        name="lastUpdate"
+        type="timestamp"
+        column="last_update"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="lastUserId"
+        type="long"
+        column="last_user_id"
+        length="20"
+    />
+    <property
+        name="name"
+        type="string"
+        column="name"
+        not-null="true"
+        length="100"
+    />
+    <property
+        name="orderNum"
+        type="integer"
+        column="order_num"
+        not-null="true"
+        length="4"
+    />
+    
+    <set
+        name="linkAcl"
+        inverse="true"
+        lazy="true"
+        cascade="all-delete-orphan"
+    >
+        <key>
+            <column name="link_category_id" /> <!-- a foreign key in v3x_bbs_article_issue_area referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.link.domain.LinkAcl" />
+    </set>
+    
+   <set
+        name="linkSystem"
+        inverse="true"
+        lazy="true"
+        cascade="all-delete-orphan"
+    >
+        <key>
+            <column name="link_category_id" /> <!-- a foreign key in v3x_bbs_article_issue_area referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.link.domain.LinkSystem" />
+    </set>
+
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

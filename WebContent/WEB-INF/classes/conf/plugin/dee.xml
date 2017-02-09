@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="DEEPluginDefintion" class="com.seeyon.v3x.plugin.dee.DEEPluginDefintion">
+		<property name="id" value="dee" />
+		<property name="name" value="数据交换插件" />
+		<property name="contextConfigLocation">
+			<list>
+				<value>classpath*:deeManager.xml</value>
+				<value>classpath*:deeSectionManager.xml</value>
+			</list>
+		</property>
+		<property name="properties">
+			<list>
+				<value>classpath*:conf/dee.properties</value>
+			</list>
+		</property>
+		<property name="urlMapping">
+			<props>
+				<prop key="/deeSectionController.do">deeSectionController</prop>
+				<prop key="/DeeSynchronLogController.do">DeeSynchronLogController</prop>
+				<prop key="/DeeDataSourceController.do">DeeDataSourceController</prop>
+				<prop key="/DeeScheduleController.do">DeeScheduleController</prop>
+				<prop key="/DeeDeployDRPController.do">DEEDeployDRPController</prop>
+			</props>
+		</property>
+		
+		<property name="menuI18NResource" value="com.seeyon.v3x.plugin.dee.resources.i18n.DeeResources"/>
+		<property name="adminMenus">
+			<list>
+				<bean class="com.seeyon.v3x.plugin.PluginMainMenu">
+					<property name="name" value="dee.pluginMainMenu.label"/>
+					<property name="children">
+						<list>
+							<bean class="com.seeyon.v3x.plugin.PluginMenu">
+								<property name="name" value="dee.deeLog.label"/>
+								<property name="icon" value="/apps_res/plugin/nc/images/menu.gif"/>
+								<property name="url" value="/DeeSynchronLogController.do?method=synchronLogFrame"/>
+							</bean>
+							<bean class="com.seeyon.v3x.plugin.PluginMenu">
+								<property name="name" value="dee.dataSource.manager.label"/>
+								<property name="icon" value="/apps_res/plugin/nc/images/menu.gif"/>
+								<property name="url" value="/DeeDataSourceController.do?method=dataSourceFrame"/>
+							</bean>
+							<bean class="com.seeyon.v3x.plugin.PluginMenu">
+								<property name="name" value="dee.schedule.manager.label"/>
+								<property name="icon" value="/apps_res/plugin/nc/images/menu.gif"/>
+								<property name="url" value="/DeeScheduleController.do?method=scheduleFrame"/>
+							</bean>
+							<bean class="com.seeyon.v3x.plugin.PluginMenu">
+								<property name="name" value="dee.deploy.label"/>
+								<property name="icon" value="/apps_res/plugin/nc/images/menu.gif"/>
+								<property name="url" value="/DeeDeployDRPController.do?method=show"/>
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+</beans>

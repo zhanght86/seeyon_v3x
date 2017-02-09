@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	 <bean id="a8geniusController" class="com.seeyon.v3x.a8genius.controller.A8geniusController">
+    	<property name="orgManager" ref="OrgManager"/>
+    	<property name="partitionManager" ref="partitionManager"/>
+    	<property name="systemConfig" ref="systemConfig"/>
+    	<property name="fileManager" ref="fileManager"/>
+    </bean>
+</beans>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="outerlinkManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.link.manager.OuterlinkManagerImpl" >
+				<property name="orgManager" ref="OrgManager" />
+				</bean>
+
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_SUPPORTS</prop>
+				<prop key="find*">PROPAGATION_SUPPORTS</prop>
+				<prop key="validate*">PROPAGATION_SUPPORTS</prop>
+				<prop key="is*">PROPAGATION_SUPPORTS</prop>
+				<prop key="has*">PROPAGATION_SUPPORTS</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="linkManagerController"
+		class="com.seeyon.v3x.link.controller.LinkManagerController"
+		autowire="byName">
+		<property name="sectionDefinitionManager" ref="sectionDefinitionManager" />
+		<property name="orgManager" ref="OrgManager" />
+		<property name="fileToExcelManager" ref="fileToExcelManager" />
+	</bean>
+	
+	<bean id="linkSystemDao"
+		class="com.seeyon.v3x.link.dao.LinkSystemDao">
+	</bean>
+	
+	<bean id="linkAclDao"
+		class="com.seeyon.v3x.link.dao.LinkAclDao">
+	</bean>
+	
+	<bean id="linkOptionDao"
+		class="com.seeyon.v3x.link.dao.LinkOptionDao">
+	</bean>
+	
+	<bean id="linkOptionValueDao"
+		class="com.seeyon.v3x.link.dao.LinkOptionValueDao">
+	</bean>
+	
+	<bean id="linkCategoryDao"
+		class="com.seeyon.v3x.link.dao.LinkCategoryDao">
+	</bean>
+	
+	<bean id="linkSpaceDao"
+		class="com.seeyon.v3x.link.dao.LinkSpaceDao">
+	</bean>
+	
+	<bean id="linkSpaceAclDao"
+		class="com.seeyon.v3x.link.dao.LinkSpaceAclDao">
+	</bean>
+
+</beans>

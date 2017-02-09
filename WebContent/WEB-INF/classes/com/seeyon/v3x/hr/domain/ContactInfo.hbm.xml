@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.ContactInfo" table="hr_staff_contactInfo">
+	<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+        <property
+          name="telephone"
+          type="string"
+          column="telephone"
+          length="255"
+        />
+        <property
+          name="email"
+          type="string"
+          column="email"
+          length="255"
+        />
+        <property
+          name="communication"
+          type="string"
+          column="communication"
+          length="255"
+        />
+        <property
+          name="blog"
+          type="string"
+          column="blog"
+          length="255"
+        />
+        <property
+          name="website"
+          type="string"
+          column="website"
+          length="255"
+        />
+        <property
+          name="postalcode"
+          type="string"
+          column="postalcode"
+          length="255"
+        />
+        <property
+          name="address"
+          type="string"
+          column="address"
+          length="255"
+        />
+        <property
+          name="member_id"
+          type="long"
+          column="member_id"
+          length="20"
+          not-null="true"
+        />
+	</class>
+</hibernate-mapping>

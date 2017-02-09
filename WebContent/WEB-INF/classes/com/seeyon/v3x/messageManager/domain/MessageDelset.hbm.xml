@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.messageManager.domain.MessageDelset" 
+    table="v3x_user_message_delset"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="messageCount"
+        type="long"
+        column="message_count"
+        length="20"
+    />
+    <property
+        name="messageDay"
+        type="long"
+        column="message_day"
+        length="20"
+    />
+    <property
+        name="status"
+        type="int"
+        column="status"
+        length="4"
+    />
+</class>
+</hibernate-mapping>

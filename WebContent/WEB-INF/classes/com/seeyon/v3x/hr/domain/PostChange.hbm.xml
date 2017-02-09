@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.PostChange" table="hr_staff_postchange">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property
+          name="start_time"
+          type="timestamp"
+          column="start_time"
+          length="19"
+        />
+        <property
+          name="end_time"
+          type="timestamp"
+          column="end_time"
+          length="19"
+        />
+	    <property
+          name="post_name"
+          type="string"
+          column="post_name"
+          length="255"
+        />
+        <property
+          name="organization"
+          type="string"
+          column="organization"
+          length="255"
+        />
+        <property
+          name="wordnumber"
+          type="string"
+          column="wordnumber"
+          length="255"
+        />
+        <property
+          name="member_id"
+          type="long"
+          column="member_id"
+          length="20"
+          not-null="true"
+        />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+
+	<!-- WorkTimeSetController -->
+	<bean id="workTimeSetController" class="com.seeyon.v3x.worktimeset.controller.WorkTimeSetController" autowire="byName">
+		<property name="workTimeSetManager" ref="workTimeSetManager"></property>
+		<property name="appLogManager" ref="appLogManager"></property>
+	</bean>
+	
+	<bean id="workTimeSetManagerTarget" class="com.seeyon.v3x.worktimeset.manager.WorkTimeSetManagerImpl" autowire="byName" init-method="initCache">
+		<property name="workSetDao" ref="workSetDao"></property>
+		<property name="appLogManager" ref="appLogManager"></property>
+		<property name="orgManager" ref="OrgManager"></property>
+		<property name="recordManager" ref="recordManager"></property>
+	</bean>
+ 	<bean id="workTimeSetManager" parent="baseTxService">
+		<property name="target">
+		    <ref local="workTimeSetManagerTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_SUPPORTS</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="copy*">PROPAGATION_REQUIRED</prop>
+				<prop key="sync*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>	
+	<bean id="workSetDao" class="com.seeyon.v3x.worktimeset.dao.WorkSetDao" autowire="byName">
+	</bean>
+	<bean id="workTimeManager" class="com.seeyon.v3x.worktimeset.manager.WorkTimeManagerImpl" autowire="byName">
+	</bean>
+</beans>

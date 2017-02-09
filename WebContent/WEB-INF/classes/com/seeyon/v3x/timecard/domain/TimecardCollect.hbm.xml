@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.timecard.domain.TimecardCollect" 
+    table="timecard_collect"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="beginTime"
+        type="string"
+        column="begin_time"
+        length="20"
+    />
+    <property
+        name="endTime"
+        type="string"
+        column="end_time"
+        length="20"
+    />
+    <property
+        name="ispass"
+        type="boolean"
+        column="ispass"
+        length="1"
+    />
+    <property
+        name="memberId"
+        type="long"
+        column="member_id"
+        not-null="true"
+        length="20"
+    />
+    <property
+        name="remark"
+        type="string"
+        column="remark"
+        not-null="true"
+        length="100"
+    />
+    <property
+        name="state"
+        type="boolean"
+        column="state"
+        not-null="true"
+        length="1"
+    />
+    <property
+        name="workDate"
+        type="string"
+        column="work_date"
+        not-null="true"
+        length="20"
+    />
+
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>

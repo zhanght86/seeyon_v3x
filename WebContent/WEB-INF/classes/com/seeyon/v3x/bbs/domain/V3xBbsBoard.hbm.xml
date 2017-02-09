@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.bbs.domain.V3xBbsBoard" 
+    table="v3x_bbs_board"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="anonymousFlag"
+        type="byte"
+        column="anonymous_flag"
+        not-null="true"
+        length="4"
+    />
+    <!-- 讨论版块增加一项设定：是否允许匿名回复 added by Meng Yang 2009-05-11 -->
+    <property
+        name="anonymousReplyFlag"
+        type="byte"
+        column="anonymous_reply_flag"
+        not-null="true"
+        length="4"
+    />    
+    <property
+        name="affiliateroomFlag"
+        type="int"
+        column="affiliateroom_flag"
+        not-null="true"
+        length="6"
+    />
+   <property 
+  		 name="accountId" 
+  		 type="long"
+   		 column="account_id"
+		 length="20"
+		 not-null="true" />
+    <property
+        name="description"
+        type="string"
+        column="description"
+        length="65535"
+    />
+    <property
+        name="name"
+        type="string"
+        column="name"
+        not-null="true"
+        unique="true"
+        length="255"
+    />
+    <property
+        name="boardTime"
+        type="timestamp"
+        column="board_time"
+        not-null="true"
+        length="19"
+    />
+    <property
+        name="topNumber"
+        type="integer"
+        column="top_number"
+        not-null="true"
+        length="11"
+    />
+    
+    <property name="sort" type="integer" column="sort" length="11" />
+    <property name="orderFlag" type="integer" column="order_flag" length="11" />
+
+</class>
+</hibernate-mapping>

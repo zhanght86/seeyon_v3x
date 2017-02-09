@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.Language" table="hr_languages">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property
+          name="languageName"
+          type="string"
+          column="language_name"
+          length="255"
+          not-null="true"
+       />
+       <property
+          name="languageShortName"
+          type="string"
+          column="language_short_name"
+          length="20"
+          not-null="true"
+       />
+       <property
+          name="languageLabel"
+          type="string"
+          column="language_label"
+          length="255"
+          not-null="true"
+       />
+	</class>
+</hibernate-mapping>

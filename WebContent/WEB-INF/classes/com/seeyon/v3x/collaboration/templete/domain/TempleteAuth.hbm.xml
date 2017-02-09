@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.collaboration.templete.domain.TempleteAuth" 
+    table="v3x_templete_auth"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="authId"
+        type="long"
+        column="auth_id"
+        length="20"
+    />
+    <property
+        name="authType"
+        type="string"
+        column="auth_type"
+        length="255"
+    />
+    <property
+        name="sort"
+        type="integer"
+        column="sort"
+        length="11"
+    />
+    <property
+        name="objectId"
+        column="object_id"
+        not-null="true"
+        length="20"/>
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.system.store.StoreRule" 
+    table="v3x_store_rule"
+    lazy="false"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="beginDate"
+        type="timestamp"
+        column="begin_date"
+        length="19"
+    />
+    <property
+        name="endDate"
+        type="timestamp"
+        column="end_date"
+        length="50"
+    />
+    <property
+        name="dataScorp"
+        type="string"
+        column="data_scorp"
+        length="255"
+    />
+    <property
+        name="flowState"
+        type="string"
+        column="flow_state"
+        length="255"
+    />
+    <property
+        name="startTime"
+        type="string"
+        column="start_time"
+        length="255"
+    />
+    <property
+        name="stopTime"
+        type="string"
+        column="stop_time"
+        length="20"
+    />
+    <property
+        name="state"
+        type="int"
+        column="state"
+        length="4"
+    />
+    <property
+        name="result"
+        type="int"
+        column="result"
+        length="4"
+    />
+    <property
+        name="createDate"
+        type="timestamp"
+        column="create_date"
+    />
+
+</class>
+</hibernate-mapping>

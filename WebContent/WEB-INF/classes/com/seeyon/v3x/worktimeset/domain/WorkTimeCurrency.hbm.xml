@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="com.seeyon.v3x.worktimeset.domain.WorkTimeCurrency" lazy="false" table="v3x_worktime_currency">
+	<id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+		<generator class="assigned" />
+	</id>
+	<property
+        name="orgAcconutID"
+        type="long"
+        column="ORG_ACCOUNT_ID"
+        length="20"
+    />
+	<property
+        name="amWorkTimeBeginTime"
+        type="string"
+        column="AM_WORK_BEGINTIME"
+        length="19"
+    />
+   	<property
+        name="amWorkTimeEndTime"
+        type="string"
+        column="AM_WORK_ENDTIME"
+        length="19"
+    />
+    	<property
+        name="pmWorkTimeBeginTime"
+        type="string"
+        column="PM_WORK_BEGINTIME"
+        length="19"
+    />
+   	<property
+        name="pmWorkTimeEndTime"
+        type="string"
+        column="PM_WORK_ENDTIME"
+        length="19"
+    />
+   	<property
+        name="weekDayName"
+        type="string"
+        column="WEEK_DAY_NAME"
+        length="8"
+    />
+   	<property
+        name="isWork"
+        type="string"
+        column="IS_WORK"
+        length="8"
+    />
+   	<property
+        name="year"
+        type="string"
+        column="YEAR"
+        length="6"
+    />    
+   	<property
+        name="updateTime"
+        type="timestamp"
+        column="UPDATE_TIME"
+        length="19"
+    />
+</class>
+</hibernate-mapping>

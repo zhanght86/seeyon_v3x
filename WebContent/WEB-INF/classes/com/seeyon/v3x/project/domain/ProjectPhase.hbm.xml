@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.project.domain.ProjectPhase" 
+    table="project_phase"
+    lazy="true"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="phaseBegintime"
+        type="java.util.Date"
+        column="phase_begintime"
+    />
+    <property
+        name="phaseClosetime"
+        type="java.util.Date"
+        column="phase_closetime"
+    />
+    <property
+        name="phaseDesc"
+        type="string"
+        column="phase_desc"
+        length="255"
+    />
+    <property
+        name="phaseName"
+        type="string"
+        column="phase_name"
+        not-null="true"
+        length="500"
+    />
+    <property
+        name="phasePercent"
+        type="java.lang.Integer"
+        column="phase_percent"
+        length="19"
+    />
+    <property
+        name="phaseSort"
+        type="int"
+        column="phase_sort"
+        length="11"
+    />
+    <property
+        name="beforeAlarmDate"
+        type="long"
+        column="before_alarm_date"
+        length="20"
+    />
+    <property
+        name="endAlarmDate"
+        type="long"
+        column="end_alarm_date"
+        length="20"
+    />
+    
+    <!-- Associations -->
+    <many-to-one name="projectSummary"
+			class="com.seeyon.v3x.project.domain.ProjectSummary">
+			<column name="project_id" not-null="true" length="20" />
+	</many-to-one>
+    <!-- Associations -->
+    <!-- uni-directional many-to-one association to ProjectEvolution -->
+    <set
+        name="projectEvolutions"
+        inverse="true"
+        lazy="true"
+        cascade="delete"
+        order-by="evolution_date"
+    >
+        <key>
+            <column name="phase_id" /> <!-- a foreign key in project_evolution referencing the primary key of this table. -->
+        </key>
+        <one-to-many class="com.seeyon.v3x.project.domain.ProjectEvolution" />
+    </set>
+
+</class>
+</hibernate-mapping>

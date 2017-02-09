@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class 
+    name="com.seeyon.v3x.space.domain.PortletEntityProperty" 
+    table="v3x_portlet_entity_property"
+>
+    <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    <property
+        name="entityId"
+        type="string"
+        column="entity_id"
+        length="255"
+    />
+    <property
+        name="propertyName"
+        type="string"
+        column="property_name"
+        length="255"
+    />
+    <property
+        name="propertyValue"
+        type="string"
+        column="property_value"
+        length="255"
+    />
+</class>
+</hibernate-mapping>

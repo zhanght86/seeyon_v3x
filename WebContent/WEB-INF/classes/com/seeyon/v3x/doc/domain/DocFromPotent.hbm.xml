@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.seeyon.v3x.doc.domain">
+	<class
+		name="DocFromPotent"
+		table="doc_form_potent"
+	>
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="id"
+		>
+			<generator class="assigned"/>
+		</id>
+		
+		<property
+	        name="formid"
+	        type="long"
+	        column="formid"
+	        length="20"
+	    />
+		
+		<property
+	        name="operationid"
+	        type="long"
+	        column="operationid"
+	        length="20"
+	    />
+	    
+	    <property
+	        name="docresid"
+	        type="long"
+	        column="doc_res_id"
+	        length="20"
+	    />
+	    
+	    <property
+	        name="affairid"
+	        type="long"
+	        column="affair_id"
+	        length="20"
+	    />
+	    <property
+	        name="extend"
+	        type="string"
+	        column="extend"
+	        length="255"
+	    />
+	</class>	
+</hibernate-mapping>

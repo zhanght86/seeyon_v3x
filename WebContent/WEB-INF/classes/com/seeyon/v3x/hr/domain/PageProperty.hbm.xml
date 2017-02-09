@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hr.domain.PageProperty" table="hr_properties">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property
+          name="name"
+          type="string"
+          column="property_name"
+          length="255"
+          not-null="true"
+       />
+       <property
+          name="type"
+          type="long"
+          column="property_type"
+          length="20"
+          not-null="true"
+       />
+       <property
+          name="length"
+          type="int"
+          column="property_length"
+          length="4"
+          not-null="false"
+       />
+       <property
+          name="ordering"
+          type="int"
+          column="property_ordering"
+          length="4"
+          not-null="true"
+       />
+       <property
+          name="defaultValue"
+          type="string"
+          column="default_value"
+          length="255"
+          not-null="false"
+       />
+       <property
+          name="not_null"
+          type="int"
+          column="not_null"
+          length="4"
+          not-null="false"
+       />
+       <property
+          name="remove"
+          type="int"
+          column="remove"
+          length="4"
+          not-null="true"
+       />
+       <property
+          name="category_id"
+          type="long"
+          column="category_id"
+          length="20"
+          not-null="false"
+       />
+       <property
+          name="accountId"
+          type="long"
+          column="accountId"
+          length="20"
+       />
+       <property
+			name="sysFlag"
+			column="sys_flag"
+			type="boolean"
+			not-null="true"
+			length="1"
+		/>
+	</class>
+</hibernate-mapping>

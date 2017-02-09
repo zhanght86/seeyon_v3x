@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="rssSubscribeDao" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.common.rss.dao.RssSubscribeDao">
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="rssChannelInfoDao" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.common.rss.dao.RssChannelInfoDao">
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="rssChannelItemDao" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.common.rss.dao.RssChannelItemDao">
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</property>
+	</bean>
+	
+		
+	<bean id="rssItemStatuDao" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.common.rss.dao.RssItemStatuDao">
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="rssCategoryDao" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.common.rss.dao.RssCategoryDao">
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="rssCategoryChannelDao" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.common.rss.dao.RssCategoryChannelDao">
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="rssChannelManager"
+		class="com.seeyon.v3x.common.rss.manager.RssChannelManagerImpl"
+		singleton="true"  autowire="byName"  init-method="startTimer">
+		<property name="firstBeginTime">
+			<value>${rssManager.firstBeginTime}</value>
+		</property>	
+		<property name="intervalTime">
+			<value>${rssManager.intervalTime}</value>
+		</property>
+		<property name="connTimeout">
+			<value>${rssManager.connTimeout}</value>
+		</property>
+	</bean>
+		
+	<bean id="rssManager" parent="baseTxService">
+		<property name="target">
+			<bean
+				class="com.seeyon.v3x.common.rss.manager.RssManagerImpl" />
+
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>	
+	</bean>
+		
+	<bean id="rssManagerController"
+		class="com.seeyon.v3x.common.rss.controller.RssManagerController"
+		autowire="byName">
+		<property name="orgManager" ref="OrgManager" />
+	</bean>
+	
+
+		
+	
+</beans>

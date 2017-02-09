@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class
+    name="com.seeyon.v3x.office.auto.domain.AutoApplyInfo" 
+    table="T_auto_applyinfo"
+>
+	
+	<id
+        name="applyId"
+        type="long"
+        column="apply_id"
+        length="20"
+    >
+        <generator class="assigned" />
+    </id>
+    
+    <property
+        name="autoId"
+        type="string"
+        column="auto_id"
+        length="20"
+    />
+    
+    <property
+        name="autoDepartTime"
+        type="string"
+        column="auto_departtime"
+        length="20"
+    />
+    
+    <property
+        name="autoBackTime"
+        type="string"
+        column="auto_backtime"
+        length="20"
+    />
+    
+    <property
+        name="autoOrigin"
+        type="string"
+        column="auto_origin"
+        length="200"
+    />
+    
+    <property
+        name="autoDep"
+        type="string"
+        column="auto_dep"
+        length="200"
+    />
+    
+    <property
+        name="autoDes"
+        type="string"
+        column="auto_des"
+        length="200"
+    />
+    
+    <property 
+    	name="deleteFlag"
+    	type="integer"
+    	column="del_flag"
+    	length="1"
+    />
+</class>
+</hibernate-mapping>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<bean id="applicationContextHolder"
+		 class="com.seeyon.v3x.common.web.util.ApplicationContextHolder" singleton="true">
+	</bean>
+	
+	<bean id="configBean"
+		class="com.seeyon.v3x.util.PropertyHolderConfigurer">
+		<property name="fileEncoding" value="UTF-8" />
+		<property name="locations">
+			<list>
+				<!-- classpath*:表示从classpath下记载，否则从WEB-INF下加载 -->
+				<!-- 方式一：   classpath*:conf/system.properties   -->
+				<!-- 方式二：   /WEB-INF/conf/system.properties     -->
+				<!-- 注意事项： properties禁止打到jar包                 -->
+				<value>classpath*:conf/datasource.properties</value>
+				<value>classpath*:conf/system.properties</value>
+				<value>classpath*:conf/message-link.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- MultipartResolver for parsing file uploads, implementation for Commons FileUpload -->
+	<bean id="multipartResolver"
+		class="com.seeyon.v3x.common.fileupload.FileuploadManagerImpl">
+		<property name="maxUploadSize" value="${fileUpload.maxSize}" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<!-- 定义语言管理器 -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+		
+	<!--
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName">
+			<value>Language</value>
+		</property>
+	</bean>
+	-->
+	    
+    <bean id="annotationFactory" class="com.seeyon.v3x.util.annotation.AnnotationHandler" init-method="init">
+    	<property name="annotationTypes">
+    		<list>
+    			<value>com.seeyon.v3x.util.annotation.SetContentType</value>
+    			<value>com.seeyon.v3x.util.annotation.NeedlessCheckLogin</value>
+    			<value>com.seeyon.v3x.util.annotation.HandleNotification</value>
+    			<value>com.seeyon.v3x.common.security.roleauthcheck.CheckRoleAccess</value>
+    			<value>com.seeyon.v3x.util.annotation.ListenEvent</value>
+    			<value>com.seeyon.v3x.util.annotation.RegisterFormInputExtend</value>
+    			<value>com.seeyon.v3x.common.web.security.qs.EncoderQueryString</value>
+    		</list>
+    	</property>
+    </bean>
+
+</beans>
+

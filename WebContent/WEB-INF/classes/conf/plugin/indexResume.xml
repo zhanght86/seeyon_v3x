@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans default-autowire="byName">
+	<bean id="indexResumePluginDefintion" class="com.seeyon.v3x.indexresume.IndexResumePluginDefintion">
+		<property name="id" value="indexResume" />
+		<property name="name" value="全文检索索引重建插件" />
+		<property name="pluginInitializtion" value="com.seeyon.v3x.indexresume.IndexResumeInitImpl"/>
+		<property name="contextConfigLocation">
+			<list>
+				<value>classpath*:indexResumeImp.xml</value>
+			</list>
+		</property>
+		<property name="urlMapping">
+			<props>
+				<prop key="/indexResume.do">indexResumeController</prop>
+			</props>
+		</property>
+		<property name="menuI18NResource" value="com.seeyon.v3x.indexresume.resource.i18n.IndexResumeResources" />
+	</bean>
+</beans>

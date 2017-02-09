@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.seeyon.v3x.collaboration.domain">
+<class 
+    name="ColQuoteformRecord" 
+    table="col_quoteform_record"
+    lazy="false"
+>
+   <!-- <id
+        name="id"
+        type="long"
+        column="id"
+        length="20"
+    >
+        <generator class="increment" />
+    </id>
+    -->
+        <id
+			name="id"
+			type="java.lang.Long"
+			column="id"
+		>
+			<generator class="assigned"/>
+		</id>
+    <property
+        name="colSummaryId"
+        type="long"
+        column="colsummary_id"
+        length="20"
+    />
+    <property
+        name="refColSummaryId"
+        type="long"
+        column="ref_colsummary_id"
+        length="20"
+    />
+    <property
+        name="state"
+        type="integer"
+        column="state"
+        length="6"
+    />
+    
+    <property
+        name="fieldName"
+        type="string"
+        column="field_name"
+        length="255"
+    />
+    <property
+        name="memberId"
+        type="long"
+        column="member_id" 
+        not-null="true" 
+        length="20"
+    />
+    <property
+        name="type"
+        type="integer"
+        column="type"
+        length="6"
+    />
+    <property
+        name="subRecordId"
+        type="long"
+        column="sub_record_id"
+        length="20"
+    />
+    <!-- Associations -->
+
+</class>
+</hibernate-mapping>
