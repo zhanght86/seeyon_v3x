@@ -1,0 +1,16 @@
+V350sp1_201402_V3XCommon      对应    V350sp1_201402_V3XApp\WebContent\WEB-INF\lib\v3x-common.jar
+
+V350sp1_201402_V3XShare      对应     V350sp1_201402_V3XApp\WebContent\WEB-INF\lib\seeyon-common.jar
+
+
+------------------------------------------------------------------------------------------------
+
+整合三元分离插件步骤：
+
+将V350sp1_201402_V3XCommon 工程中的class 手动  托到V3XApp\WebContent\WEB-INF\lib\v3x-common.jar中
+
+将V350sp1_201402_V3XShare 工程中的class 手动  托到V3XApp\WebContent\WEB-INF\lib\seeyon-common.jar中
+
+最后再将  V3XApp  工程的  WebContent 目录下面的文件  替换到   OA 安装目录 ApacheJetspeed/webapps/seeyon/下面
+
+
