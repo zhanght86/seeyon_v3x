@@ -446,31 +446,61 @@ function checkPwdIsExpired(){
 				alert(_("V3XLang.message_pwd_expired1"));
 			</c:when>
 			<c:when test="${empty pwdExpirationInfo[1]}">
-				var result = confirm(_("V3XLang.message_pwd_expired1"));
+				//var result = confirm(_("V3XLang.message_pwd_expired1"));
+				var result = true;
+				alert(_("V3XLang.message_pwd_expired1"));
 			</c:when>
 			<c:otherwise>
-				var result = confirm(_("V3XLang.message_pwd_expired", '<fmt:formatDate value="${pwdExpirationInfo[1]}" pattern="${datePattern}"/>'));
+				//var result = confirm(_("V3XLang.message_pwd_expired", '<fmt:formatDate value="${pwdExpirationInfo[1]}" pattern="${datePattern}"/>'));
+				var result = true;
+				alert(_("V3XLang.message_pwd_expired", '<fmt:formatDate value="${pwdExpirationInfo[1]}" pattern="${datePattern}"/>'));
 			</c:otherwise>
 		</c:choose>
 		if(result){
+			// 2017-2-28 诚佰公司 添加密码过期强制修改
+			var url = null;
+			
 			if(${currentUser.systemAdmin}){
 			//系统管理员
-				parent.mainFrame.location = "${managerController}?method=managerFrame&result=" + result;
+				//parent.mainFrame.location = "${managerController}?method=managerFrame&result=" + result;
+				url = "${managerController}?method=managerFrame&result=" + result;
 			}else if(${currentUser.auditAdmin}){
 			//审计管理员	
-				parent.mainFrame.location = "${managerController}?method=managerFrame&from=audit&result=" + result;
+				//parent.mainFrame.location = "${managerController}?method=managerFrame&from=audit&result=" + result;
+				url = "${managerController}?method=managerFrame&from=audit&result=" + result;
 			}else if(${currentUser.secretAdmin}){
-				//安全管理员	
-				parent.mainFrame.location = "${managerController}?method=managerFrame&from=secret&result=" + result;
+			//安全管理员	
+				//parent.mainFrame.location = "${managerController}?method=managerFrame&from=secret&result=" + result;
+				url = "${managerController}?method=managerFrame&from=secret&result=" + result;
 			}else if(${currentUser.groupAdmin}){
 			//集团管理员
 				parent.mainFrame.location = "${accountManagerController}?method=groupManagerFrame&result=" + result;
+				return;
 			}else if(${currentUser.administrator}){
 			//单位管理员
-				parent.mainFrame.location = "${accountManagerController}?method=managerFrame&result=" + result;
+				//parent.mainFrame.location = "${accountManagerController}?method=managerFrame&result=" + result;
+				url = "${accountManagerController}?method=managerFrame&result=" + result;
 			}else {
-				parent.mainFrame.location = "${individualController}?method=managerFrame";
+				//parent.mainFrame.location = "${individualController}?method=managerFrame";
+				url = "${individualController}?method=managerFrame";
 			}
+			
+			 var rv = getA8Top().v3x.openWindow({
+			    	url: url + "&pwdAlert=1",
+			        width: "550",
+			       	height: "400",
+			       	resizable: "no"
+			    });
+				 //alert("窗口返回值：" + rv);
+				 
+				 if (!rv) {
+					 getA8Top().logout();
+					 endA8genius();
+				 }
+			    //activeOcx();
+		} else { // 2017-2-27 诚佰公司添加 如果取消修改密码则强制退出系统
+			 getA8Top().logout();
+			 endA8genius();
 		}
 	}
 }

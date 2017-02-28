@@ -1,12 +1,16 @@
 package com.seeyon.v3x.system.controller;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.JSONObject;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyon.v3x.common.appLog.AppLogAction;
@@ -72,7 +76,14 @@ public class ManagerController extends BaseController {
 	 */
 	public ModelAndView managerFrame(HttpServletRequest request,
 			HttpServletResponse response) {
-		ModelAndView result = new ModelAndView("sysMgr/manager/manager");
+		// 2017-2-27 诚佰公司 添加密码强制弹出修改
+		String defaultView = "sysMgr/manager/manager";
+		String pwdAlert = request.getParameter("pwdAlert");
+		if (!StringUtils.isEmpty(pwdAlert)) {
+			defaultView = "sysMgr/manager/pwdEdit";
+		}
+		ModelAndView result = new ModelAndView(defaultView);
+		// 诚佰公司
 
 		User user = CurrentUser.get();
 		boolean isShowMore = true;
@@ -112,6 +123,9 @@ public class ManagerController extends BaseController {
 	 */
 	public ModelAndView modifyManager(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
+		// 2017-2-27 诚佰公司 添加密码强制弹出修改
+		String pwdAlert = request.getParameter("pwdAlert");
+				
 		String redirectURL = "/manager.do?method=managerFrame";
 		User user = CurrentUser.get();
 		PrintWriter out = null;
@@ -136,10 +150,18 @@ public class ManagerController extends BaseController {
             loginName = secretName;			
 		}else{
 			out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('登录用户不是系统管理员或审计管理员或安全管理员。')");
-			out.println("</script>");
-			out.flush();	
+			
+			if (pwdAlert == null || pwdAlert.isEmpty()) {
+				out.println("<script>");
+				out.println("alert('登录用户不是系统管理员或审计管理员或安全管理员。')");
+				out.println("</script>");
+				out.flush();	
+			} else {
+				Map<String,Object> data = new HashMap<String, Object>();
+				data.put("success", false);
+				data.put("message", "登录用户不是系统管理员或审计管理员或安全管理员。");
+				out.println(new JSONObject(data));
+			}
 			return null;
 		}
 // 		JetspeedCredential credential = systemAdminManager.findCredentialByColumnValue(principal.getPrincipalId());
@@ -195,28 +217,56 @@ public class ManagerController extends BaseController {
 				appLogManager.insertLog(user, AppLogAction.Systemmanager_UpdateAdminPassWord, user.getName(), user.getName());
 
 				out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('"+Constants.getString4CurrentUser("system.manager.ok")+"')");
-				out.println("</script>");
-				out.flush();
 				
-				//日志
-				return super.redirectModelAndView(redirectURL);
+				if (pwdAlert == null || pwdAlert.isEmpty()) {
+					out.println("<script>");
+					out.println("alert('"+Constants.getString4CurrentUser("system.manager.ok")+"')");
+					out.println("</script>");
+					out.flush();
+					
+					//日志
+					return super.redirectModelAndView(redirectURL);
+				} else {
+					Map<String,Object> data = new HashMap<String, Object>();
+					data.put("success", true);
+					data.put("message", Constants.getString4CurrentUser("system.manager.ok"));
+					out.println(new JSONObject(data));
+					
+					return null;
+				}
 			}
 			else {
 				out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('密码和验证码不一致！！！')");
-				out.println("</script>");
-				out.flush();
+				
+				if (pwdAlert == null || pwdAlert.isEmpty()) {
+					out.println("<script>");
+					out.println("alert('密码和验证码不一致！！！')");
+					out.println("</script>");
+					out.flush();
+				} else {
+					Map<String,Object> data = new HashMap<String, Object>();
+					data.put("success", false);
+					data.put("message", "密码和验证码不一致！！！");
+					out.println(new JSONObject(data));
+				}
+				
 				return null;
 			}
 		}
 		catch (Exception e) {
 			log.error("", e);
-			out.println("<script>");
-			out.println("alert('源码错误！！！')");
-			out.println("</script>");
+			
+			if (pwdAlert == null || pwdAlert.isEmpty()) {
+				out.println("<script>");
+				out.println("alert('源码错误！！！')");
+				out.println("</script>");
+			} else {
+				Map<String,Object> data = new HashMap<String, Object>();
+				data.put("success", false);
+				data.put("message", "源码错误！！！");
+				out.println(new JSONObject(data));
+			}
+			
 			return null;
 		}
 	}

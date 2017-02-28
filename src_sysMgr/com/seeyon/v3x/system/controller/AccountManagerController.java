@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +19,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.JSONObject;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyon.v3x.cluster.notification.NotificationManager;
@@ -89,7 +92,15 @@ public class AccountManagerController extends BaseController {
     @CheckRoleAccess(roleTypes={RoleType.Administrator, RoleType.SystemAdmin})
 	public ModelAndView managerFrame(HttpServletRequest request,
 			HttpServletResponse response) {
-		ModelAndView result = new ModelAndView("sysMgr/account/accountManager");
+    	// 2017-2-27 诚佰公司 添加密码强制弹出修改
+		String defaultView = "sysMgr/account/accountManager";
+		String pwdAlert = request.getParameter("pwdAlert");
+		if (!StringUtils.isEmpty(pwdAlert)) {
+			defaultView = "sysMgr/account/pwdEdit";
+		}
+		ModelAndView result = new ModelAndView(defaultView);
+		// 诚佰公司
+    			
 		String logerName = null;
 		try {
 			logerName = orgManagerDirect.getAccountById(CurrentUser.get().getLoginAccount()).getAdminName();
@@ -168,6 +179,9 @@ public class AccountManagerController extends BaseController {
 	@CheckRoleAccess(roleTypes={RoleType.Administrator, RoleType.SystemAdmin})
 	public ModelAndView modifyManager(HttpServletRequest request,
 			HttpServletResponse response) {
+		// 2017-2-27 诚佰公司 添加密码强制弹出修改
+		String pwdAlert = request.getParameter("pwdAlert");
+				
 		ModelAndView result = new ModelAndView("sysMgr/account/accountManager");
 		PrintWriter out = null;
 		String name = request.getParameter("name");
@@ -216,11 +230,21 @@ public class AccountManagerController extends BaseController {
 		} catch (IOException e1) {
 			logger.error("", e1);
 		}
-		out.println("<script>");
-		out.println("alert('"+Constants.getString4CurrentUser("system.manager.ok")+"')");
-		out.println("parent.location='accountManager.do?method=managerFrame';");
-		out.println("</script>");
-		out.flush();
+		
+		if (pwdAlert == null || pwdAlert.isEmpty()) {
+			out.println("<script>");
+			out.println("alert('"+Constants.getString4CurrentUser("system.manager.ok")+"')");
+			out.println("parent.location='accountManager.do?method=managerFrame';");
+			out.println("</script>");
+			out.flush();
+		} else {
+			Map<String,Object> data = new HashMap<String, Object>();
+			data.put("success", true);
+			data.put("message", Constants.getString4CurrentUser("system.manager.ok"));
+			out.println(new JSONObject(data));
+			return null;
+		}
+		
 		// 从新获得登录名称
 		result.addObject("logerName", name);
 //		读取是否启用密码强度检查
