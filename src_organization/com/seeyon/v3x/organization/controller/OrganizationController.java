@@ -5760,7 +5760,8 @@ public class OrganizationController extends BaseController {
             /******************** 成发集团项目 *****************************/
             
 			// 2017-01-11 诚佰公司 密级空值判断
-            if(secretLevel != null && !memberBeforeUpdate.getSecretLevel().equals(secretLevel)) {
+            if(secretLevel != null && (memberBeforeUpdate.getSecretLevel() == null 
+            		|| !memberBeforeUpdate.getSecretLevel().equals(secretLevel))) {
                 // 删除掉以前的待审核记录
                 secretAuditManager.deleteWaitAudit(memberBeforeUpdate.getId());
                 
