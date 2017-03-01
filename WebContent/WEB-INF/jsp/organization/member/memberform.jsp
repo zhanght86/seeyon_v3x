@@ -246,7 +246,7 @@ function isCriterionWord4Member(element){
 			</tr>
 			<!-- 成发集团二开项目 增加涉密 -->
 			<tr>
-				<td  valign="top" class="bg-gray" width="25%" nowrap="nowrap"><fmt:message key="secretLevel" bundle="${v3xSecretI18N}"/>:</td>
+				<td  valign="top" class="bg-gray" width="25%" nowrap="nowrap"><font color="red">*</font><fmt:message key="secretLevel" bundle="${v3xSecretI18N}"/>:</td>
 				<td class="new-column" width="75%">
 	              	<select name="secretLevel"  id="secretLevel" inputName="<fmt:message key="secretLevel" bundle="${v3xSecretI18N}"/>" class="input-100per" ${v3x:outConditionExpression(readOnly, 'disabled', '')}>
 	                    <!-- 2017-01-11 诚佰公司 -->

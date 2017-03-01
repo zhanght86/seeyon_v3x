@@ -152,11 +152,11 @@ function isIdCardNo()
 	
 	//2017-01-11 诚佰公司
 	function checkSecret(){
-		/*var secretLevel = document.getElementById("secretLevel").value;
+		var secretLevel = document.getElementById("secretLevel").value;
 	    if(secretLevel==null || secretLevel==""){
 	    	alert("涉密等级不能为空。")
 	       	return false;
-	    }*/
+	    }
 	    return true;
 	}
 	
