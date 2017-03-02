@@ -498,7 +498,8 @@ function save() {
     
     theForm.action = genericURL + "?method=save";
 	
-    if (checkForm(theForm)) {
+    //2017-01-11 诚佰公司 添加密级空值校验
+    if (checkForm(theForm) && checkSelectSecret()) {
         if ((!isForm || isForm == "false")&&!saveOffice()) {
             return;
         }
@@ -587,8 +588,9 @@ function saveDraft(){
 	}
     
     theForm.action = genericURL + "?method=saveDraft";
-
-    if (checkForm(theForm)) {
+    
+	//2017-01-11 诚佰公司 添加密级空值校验
+    if (checkForm(theForm) && checkSelectSecret()) {
         if ((!isForm || isForm == "false")&&!saveOffice()) {
             return;
         }
