@@ -240,6 +240,15 @@ function send() {
             	//转换成页面js的json对象
             	var dataObj= eval('('+data+')');
 //                $('#processModeSelectorContainer').html(data);
+            	
+            	// 2017-3-13 诚佰公司 添加流程判断弹出提示
+            	if (dataObj.secretAlert){
+            		alert(dataObj.secretAlert);
+                	enableButtons();
+                	return;
+            	}
+            	// 诚佰公司
+            	
             	var invalidateActivity= dataObj.invalidateActivity;
 	            //if(document.getElementById("invalidateActivity")){
 	            if(dataObj.invalidateActivity!=""){
@@ -762,6 +771,9 @@ function sendFromWaitSend() {
  		return;
     }
     
+    // 2017-3-15 诚佰公司 添加密级值，发送时传递到后台
+    var secretLevel = "";
+    
     var summaryId = "";
     var affairId = "";
     var processId = "";
@@ -788,6 +800,10 @@ function sendFromWaitSend() {
         	if(id_checkbox[i].templeteId != ""){
         		isTemplate = true;
         	}
+        	
+        	// 2017-3-15 诚佰公司 添加密级值
+        	secretLevel = id_checkbox[i].getAttribute("secretLevel");
+        	//alert(secretLevel);
             break;
         }
     }
@@ -798,7 +814,8 @@ function sendFromWaitSend() {
         disableButtons();   
         $('#listForm').ajaxSubmit({
         	//url : genericURL + "?method=preSend&from=waitSend&summaryId=" + summaryId + "&processId="+ processId +"&currentNodeId=start&isFromTemplate=" + isTemplate,
-        	url : genericURL + "?method=prePopNew&from=waitSend&summaryId=" + summaryId + "&processId="+ processId +"&currentNodeId=start&isFromTemplate=" + isTemplate,
+        	url : genericURL + "?method=prePopNew&from=waitSend&summaryId=" + summaryId + "&processId="+ processId 
+        						+"&currentNodeId=start&isFromTemplate=" + isTemplate +"&secretLevel="+secretLevel, // 2017-3-15 诚佰公司 添加密级值
         	type : 'post',
         	async : false,
             //target : '#processModeSelectorContainer',
@@ -808,6 +825,15 @@ function sendFromWaitSend() {
             	document.getElementById("popJsonId").value=data;
             	//转换成页面js的json对象
             	var dataObj= eval('('+data+')');
+            	
+            	// 2017-3-13 诚佰公司 添加流程判断弹出提示
+            	if (dataObj.secretAlert){
+            		alert(dataObj.secretAlert);
+                	enableButtons();
+                	return;
+            	}
+            	// 诚佰公司
+            	
             	var invalidateActivity= dataObj.invalidateActivity;
 	            //if(document.getElementById("invalidateActivity")){
 	            if(dataObj.invalidateActivity!=""){

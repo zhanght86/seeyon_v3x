@@ -41,6 +41,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.servlet.ModelAndView;
@@ -190,6 +193,7 @@ import com.seeyon.v3x.news.manager.BaseNewsManager;
 import com.seeyon.v3x.news.manager.NewsDataManager;
 import com.seeyon.v3x.news.manager.NewsTypeManager;
 import com.seeyon.v3x.news.util.Constants.NewsTypeSpaceType;
+import com.seeyon.v3x.organization.directmanager.OrgManagerDirect;
 import com.seeyon.v3x.organization.domain.V3xOrgAccount;
 import com.seeyon.v3x.organization.domain.V3xOrgDepartment;
 import com.seeyon.v3x.organization.domain.V3xOrgEntity;
@@ -306,6 +310,13 @@ public class CollaborationController extends BaseController {
 	private ISignatureHtmlManager iSignatureHtmlManager;
 	private InfoManagerCAP infoManagerCAP;
 	private InfoSummaryManagerCAP infoSummaryManagerCAP;
+	
+	// 2017-3-14 诚佰公司 添加
+	private OrgManagerDirect orgManagerDirect;
+	public void setOrgManagerDirect(OrgManagerDirect orgManagerDirect) {
+		this.orgManagerDirect = orgManagerDirect;
+	}
+	// 诚佰公司
 
 	public void setInfoManagerCAP(InfoManagerCAP infoManagerCAP) {
 		this.infoManagerCAP = infoManagerCAP;
@@ -2404,6 +2415,23 @@ public class CollaborationController extends BaseController {
             	processId = request.getParameter("processId");
             	process = ColHelper.getCaseProcess(processId);
             }
+            
+            // 2017-3-13 诚佰公司 只处理发起者自建协同流程
+        	if (!templateFlag && !isEdoc && currentNodeId.equals("start")) { 
+	        	String secretLevel = request.getParameter("secretLevel");
+	        	String outMsg = validateFlow(secretLevel, process.toXML());
+	        	if (outMsg != null && !outMsg.isEmpty()) {
+					mainMap = new JSONObject();
+					mainMap.put("secretAlert", outMsg);
+			    	
+			    	PrintWriter pw = response.getWriter();
+			        pw.write(mainMap.toString());
+			        pw.flush();
+			        return null;
+	        	}
+        	}
+        	// 2017-3-13 诚佰公司
+        	
             mainMap.put("processId", process.getId());
             //新流程匹配处理,判断当前节点是否设置了新流程
         	if(Strings.isNotBlank(currentNodeId) && !"start".equals(currentNodeId)){
@@ -2935,6 +2963,8 @@ public class CollaborationController extends BaseController {
 	    				if(memberSecretLevel != null && memberSecretLevel >= Integer.parseInt(secretLevel)){
 	    					newList.add(personInfo);
 	    				}
+	    				//newList.add(personInfo);
+	    				// 2017-02-09 诚佰公司
 					}
 	    			selectorModel.getAddition().setPeople(newList);
 	            }
@@ -3427,7 +3457,7 @@ public class CollaborationController extends BaseController {
 
 
     /**
-     * 发起协同,跳转到已�?
+     * 发起协同,跳转到已发事项
      *
      * @param request
      * @param response
@@ -3473,7 +3503,7 @@ public class CollaborationController extends BaseController {
         //成发集团项目 程炯
         if(colSummary.getSecretLevel() == null || "".equals(colSummary.getSecretLevel()))
         	colSummary.setSecretLevel(1);
-            
+        
         //来自流程模版
     	if(templeteId != null && !"".equals(templeteId)){
     		Long tId = Long.parseLong(templeteId);
@@ -3493,7 +3523,6 @@ public class CollaborationController extends BaseController {
     		}
     		colSummary.setTempleteId(tId);
     	}
-
 
         //是否重复发起
         if (null != request.getParameter("resend") && !"".equals(request.getParameter("resend"))) {
@@ -3754,6 +3783,13 @@ public class CollaborationController extends BaseController {
         return super.redirectModelAndView("/collaboration.do?method=collaborationFrame&from=Sent");
     }
 
+    /**
+     * 待发事项,发起协同
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     public ModelAndView sendImmediate(HttpServletRequest request,
             							HttpServletResponse response) throws Exception {
 		ModelAndView mv = super.redirectModelAndView("/collaboration.do?method=collaborationFrame&from=WaitSend");
@@ -3898,7 +3934,7 @@ public class CollaborationController extends BaseController {
 	        }
 			sentFlag= colManagerFacade.runCaseImmediateFacade(colSummary, flowData, _affairIds[i], body, user, processId);
 		}
-		//跳转到已�?
+		//跳转到已发事项
 		if (sentFlag) {
 			mv = super.redirectModelAndView("/collaboration.do?method=collaborationFrame&from=Sent");
 		}
@@ -6299,7 +6335,7 @@ public class CollaborationController extends BaseController {
 	}
 
     /**
-     * 显示协同内容和处理信�?
+     * 显示协同内容和处理信息
      *
      * @param request
      * @param response
@@ -6851,7 +6887,7 @@ public class CollaborationController extends BaseController {
 			java.util.Set<ColComment> allComments = summary.getComments();
 			//当前协同的处理人意见
 			java.util.List<ColOpinion> opinions = new java.util.ArrayList<ColOpinion>();
-			//原协同的处理人意�?
+			//原协同的处理人意见
 			java.util.Map<Integer, List<ColOpinion>> originalSignOpinion = new java.util.HashMap<Integer, List<ColOpinion>>();
 			//原协同的发起人附言
 			java.util.Map<Integer, List<ColOpinion>> originalSendOpinion = new java.util.HashMap<Integer, List<ColOpinion>>();
@@ -6925,7 +6961,7 @@ public class CollaborationController extends BaseController {
 
 
     /*
-      * 默认方法为查看协�?get()
+      * 默认方法为查看协同get()
       *
       * @see com.seeyon.v3x.common.web.BaseController#index(javax.servlet.http.HttpServletRequest,
       *      javax.servlet.http.HttpServletResponse)
@@ -9504,6 +9540,20 @@ public class CollaborationController extends BaseController {
 
         //从request对象取到选人信息
         FlowData flowData = FlowData.flowdataFromRequest();
+        
+        // 2017-3-13 诚佰公司 流程转发时验证
+        JSONObject mainMap = new JSONObject();
+    	String secretLevel = request.getParameter("secretLevel");
+    	String outMsg = validateFlow(secretLevel, flowData.getXml());
+    	if (outMsg != null && !outMsg.isEmpty()) {
+    		mainMap = new JSONObject();
+			mainMap.put("secretAlert", outMsg);
+	    	PrintWriter pw = response.getWriter();
+	        pw.write(mainMap.toString());
+	        pw.flush();
+	        return null;
+    	}
+    	// 2017-3-13 诚佰公司
 
         Long newSummaryId = UUIDLong.longUUID();
         //保存附件
@@ -9545,17 +9595,28 @@ public class CollaborationController extends BaseController {
 		} catch (Throwable e) {
 			log.error(e.getMessage(),e);
 		}
+        
+        /** 2017-3-16 诚佰公司 注释 修改输出方式
 		PrintWriter out = response.getWriter();
-
         out.println("<script>");
-
         if((Boolean)BrowserFlag.PageBreak.getFlag(request)){
         	out.println("parent.afterForward()");
     	}else{//ipad
     		out.println("parent.parent.afterForward()");
     	}
-
-        out.println("</script>");
+        out.println("</script>");*/
+        
+        // 2017-3-16 诚佰公司
+        mainMap = new JSONObject();
+        if((Boolean)BrowserFlag.PageBreak.getFlag(request)){
+        	 outMsg = "parent.afterForward()";
+    	}else{//ipad
+    		 outMsg = "parent.parent.afterForward()";
+    	}
+		mainMap.put("afterForward", outMsg);
+    	PrintWriter pw = response.getWriter();
+        pw.write(mainMap.toString());
+        pw.flush();
 
         return null;
     }
@@ -12218,4 +12279,104 @@ public class CollaborationController extends BaseController {
         // 成发集团二开 郝后成 发起时解析流程并且判断流程中是否超出保密等级之下的人员 2012-09-04 end
         return null;
     }
+    
+    /** 
+     * 2017-3-13 诚佰公司 添加自建流程判断 密级协同发送,转发必须经过部门主管审批
+     * @param string 密级策略
+     * @param string 流程xml
+     */
+    private String validateFlow(String secretLevel, String flowXml) throws Exception {
+    	String outMsg = null;
+    	
+		if(null == secretLevel || "".equals(secretLevel)) {
+			secretLevel = "1";
+		}
+		
+		if (Integer.parseInt(secretLevel) <= 1) {
+			return outMsg;
+		}
+		
+		User user = CurrentUser.get();
+		Long startPartyId = user.getId(); // 发起者职员id
+		Long startDeptId = user.getDepartmentId();// 发起者部门id
+		Long startAccountId = user.getAccountId(); // 发起者公司id
+		
+		// 1.先查找发起者所在部门的部门主管和分管领导，如果未设置，则不允许发送
+		// 2.如果发起者本身就是部门主管或分管领导，则直接发送。如果不是，则判断部门主管和分管领导是否是流程的第一个接受者
+		List<Long> memberIds = new ArrayList<Long>();
+		List<V3xOrgMember> members = new ArrayList<V3xOrgMember>();
+		
+		// 查找部门主管
+		/*V3xOrgRole role = orgManagerDirect.getRoleByName(V3xOrgEntity.ORGENT_META_KEY_DEPMANAGER, startAccountId);
+	    if (role != null) {
+	    	members = orgManagerDirect.getMemberByRole(role.getBond(), startDeptId, role.getId());
+			if(members != null && !members.isEmpty()) {
+				for(V3xOrgMember vom : members) {
+					memberIds.add(vom.getId());
+				}
+			}
+	    }*/
+	    
+	    // 查找分管领导
+		V3xOrgRole role = orgManagerDirect.getRoleByName(V3xOrgEntity.ORGENT_META_KEY_DEPLEADER, startAccountId);
+	    if (role != null) {
+	    	members = orgManagerDirect.getMemberByRole(role.getBond(), startDeptId, role.getId());
+			if(members != null && !members.isEmpty()) {
+				for(V3xOrgMember vom : members) {
+					memberIds.add(vom.getId());
+				}
+			} else {
+				Long parentDeptId = startDeptId; // 初始化部门id
+		    	while (true) {
+		    		V3xOrgDepartment parentDept = orgManagerDirect.getParentDepartment(parentDeptId);
+    		    	if (parentDept == null) break;
+    		    	
+    		    	parentDeptId = parentDept.getId(); // 父部门id
+    		    	members = orgManagerDirect.getMemberByRole(role.getBond(), parentDeptId, role.getId()); // 查找父部门分管领导
+    				if(members != null && !members.isEmpty()) {
+    					for(V3xOrgMember vom : members) {
+    						memberIds.add(vom.getId());
+    					}
+    				}
+		    	}
+		    }
+	    }
+	    
+	    if (memberIds.isEmpty()) {
+	    	outMsg = "密级协同发起者所在部门未设置分管领导。";
+	    	return outMsg;
+	    }
+	    
+	    // 发起者不是部门主管或分管领导
+	    if (!memberIds.contains(startPartyId)) {
+	    	// 解析流程XML
+			Document document = DocumentHelper.parseText(flowXml);
+    		
+    		String xpath ="/processes/process/link[@from='start']";
+    		Element startLinkNode = (Element) document.selectSingleNode(xpath);
+    		String startToId = startLinkNode.attribute("to").getText(); // 第一个接收者
+    		
+    		// 查找第一个接收者的节点数目，判断是否串行发送
+    		xpath ="/processes/process/link[@from='" + startToId + "']";
+    		List<Element> startToList = document.selectNodes(xpath);
+    		
+    		outMsg = "密级流程第一个接收者必须是分管领导。";
+    		if (startToList.size() != 1) {
+    	        return outMsg;
+    		}
+    		
+			// 查找第一个接收者职员信息
+			xpath ="/processes/process/node[@id='" + startToId + "']";
+    		Element secondNode = (Element) document.selectSingleNode(xpath);
+    		Element secondActor = secondNode.element("actor"); // 职员信息
+    		String secondPartyId =  secondActor.attribute("partyId").getText(); // 职员id
+    		
+    		// 第一个接受者不是发起者部门主管或分管领导
+    		if (!memberIds.contains(Long.parseLong(secondPartyId))) {
+    			 return outMsg;
+    		}
+	    }
+	    return null;
+    }
+    
 }

@@ -169,7 +169,27 @@ function doForward() {
 
     theForm.b1.disabled = true;
     theForm.b2.disabled = true;
-    theForm.submit();
+    
+    // 2017-3-16 诚佰公司 添加异步提交表单
+    $('#sendForm').ajaxSubmit({
+        url : "${detailURL}?method=doForward",
+        type : 'POST',
+        async : false,
+        success : function(data) {
+        	//转换成页面js的json对象
+        	var dataObj= eval('('+data+')');
+        	if (dataObj.secretAlert){
+        		alert(dataObj.secretAlert);
+        		theForm.b1.disabled = false;
+        	    theForm.b2.disabled = false;
+            	return;
+        	}
+        	eval('('+dataObj.afterForward+')');
+        }
+    });
+    
+   // 2017-3-16 诚佰公司 注释
+   //theForm.submit();
 }
 
 var hiddenMultipleRadio_forward = true;
@@ -220,11 +240,13 @@ function showAttachment(){
 	<c:set value="Account," var="accountStr"/>
 </c:if>
 <v3x:selectPeople id="forward" panels="Department,Team,Post,Outworker,RelatePeople" jsFunction="setPeopleFields(elements)" selectType="${accountStr}Department,Team,Post,Member" viewPage="selectNode4Workflow" />
-<form name="sendForm" action="${detailURL}?method=doForward" target="forwardIframe" method="post" onsubmit="return false">
+<form id="sendForm" name="sendForm" action="${detailURL}?method=doForward" target="forwardIframe" method="post" onsubmit="return false">
 <input type="hidden" name="summaryId" value="${param.summaryId}">
 <input type="hidden" name="process_desc_by" value="people">
 <input type="hidden" name="process_xml" id="process_xml" value="" />
 <input type="hidden" name="formContent" value="">
+<!-- 2017-3-16 诚佰公司 添加密级值 转发协同判断是否密级协同 -->
+<input type="hidden" name="secretLevel" value="${secretLevel}" />
 <span id="people" style="display:none;"></span>
 <table class="popupTitleRight" width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#F0F5F9">
 	<tr>

@@ -8,6 +8,8 @@
 		<property name="orgManager" ref="OrgManager" />
 		<property name="permissionManager" ref="permissionManager" />
 		<property name="userMessageManager" ref="UserMessageManager" />
+		<!-- 2017-3-14 诚佰公司 添加 -->
+		<property name="orgManagerDirect" ref="OrgManagerDirect" />
 	</bean>
 
 	<bean id="templeteController"
