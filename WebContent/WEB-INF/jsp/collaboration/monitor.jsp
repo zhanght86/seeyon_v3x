@@ -589,6 +589,11 @@ function propertyItem(args) {
 <%-- Flash国际化，Flash提示信息待清理 --%>
 function showAlert(args) {
 	args= decodeArgsFromFlash(args);
+	
+	// 2017-3-22 诚佰公司 添加解码
+	args = flashArgDecode(args);
+	// 诚佰公司
+	
 	try{
 		var message = _("collaborationLang.FlashTip_" + args) || args;
 		alert(message);
