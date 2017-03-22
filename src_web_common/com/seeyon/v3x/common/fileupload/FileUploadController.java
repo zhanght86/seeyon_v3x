@@ -31,6 +31,7 @@ import org.apache.commons.logging.LogFactory;
 import org.json.JSONObject;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.seeyon.v3x.common.authenticate.domain.User;
 import com.seeyon.v3x.common.constants.ApplicationCategoryEnum;
 import com.seeyon.v3x.common.constants.SystemProperties;
 import com.seeyon.v3x.common.encrypt.CoderFactory;
@@ -44,8 +45,12 @@ import com.seeyon.v3x.common.i18n.ResourceBundleUtil;
 import com.seeyon.v3x.common.taglibs.functions.Functions;
 import com.seeyon.v3x.common.utils.OperationControllable;
 import com.seeyon.v3x.common.utils.OperationCounter;
+import com.seeyon.v3x.common.utils.UUIDLong;
 import com.seeyon.v3x.common.web.BaseController;
+import com.seeyon.v3x.common.web.login.CurrentUser;
 import com.seeyon.v3x.common.web.util.WebUtil;
+import com.seeyon.v3x.hbcb.domain.FileDownload;
+import com.seeyon.v3x.hbcb.manager.FileDownloadManager;
 import com.seeyon.v3x.util.Datetimes;
 import com.seeyon.v3x.util.EnumUtil;
 import com.seeyon.v3x.util.annotation.SetContentType;
@@ -91,6 +96,14 @@ public class FileUploadController extends BaseController {
 	public void setClientAbortExceptionName(String clientAbortExceptionName) {
 		this.clientAbortExceptionName = clientAbortExceptionName;
 	}
+	
+	// 2017-3-20 诚佰公司 添加注入
+	private FileDownloadManager fileDownloadManager;
+	public void setFileDownloadManager(FileDownloadManager fileDownloadManager) {
+		this.fileDownloadManager = fileDownloadManager;
+	}
+	// 诚佰公司
+	
 
 	/**
 	 * 上传文件
@@ -267,6 +280,39 @@ public class FileUploadController extends BaseController {
 	
 	public ModelAndView download(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView m = new ModelAndView("common/fileUpload/download");
+		
+		// 2017-3-20 诚佰公司 添加下载次数判断
+		User user = CurrentUser.get();
+		String filename = request.getParameter("filename");
+		Long fileId = Long.parseLong(request.getParameter("fileId"));
+		V3XFile v3xFile = fileManager.getV3XFile(fileId);
+		if (v3xFile.getCategory() == 1) { // 只处理用户上传的附件，排除系统自带模板文件
+			FileDownload fileDownload = fileDownloadManager.getFileDownload(user.getId(), fileId);
+			if (fileDownload.getTimes() == null || fileDownload.getTimes() == 0) {
+				Date date = new Date();
+				fileDownload = new FileDownload();
+				fileDownload.setId(UUIDLong.longUUID());
+				fileDownload.setState(1);
+				fileDownload.setStart_member_id(user.getId());
+				fileDownload.setStart_date(date);
+				fileDownload.setFinishedflag(0);
+				fileDownload.setMemberId(user.getId());
+				fileDownload.setFileId(fileId);
+				fileDownload.setFilename(filename);
+				fileDownload.setTimes(1);
+				fileDownload.setDepartmentId(user.getDepartmentId());
+				fileDownload.setAccountId(user.getAccountId());
+				fileDownload.setTs(Datetimes.formatDatetime(date));
+				fileDownloadManager.saveFileDownload(fileDownload);
+			} else {
+				PrintWriter out = response.getWriter();
+	    		String msg = "您已下载过此文件，不能重复下载。";
+	    		out.println("<script>alert('"+msg+"');</script>");
+				return null;
+			}
+		}
+		// 诚佰公司
+				
 		if(!downloadCounter.check()){
     		PrintWriter out = response.getWriter();
     		String msg = ResourceBundleUtil.getString("com.seeyon.v3x.main.resources.i18n.MainResources", "fileuoload.downoad.exceedConnection",this.maxDownloadConnections);
@@ -281,7 +327,6 @@ public class FileUploadController extends BaseController {
 		
 		m.addObject("ps", ps);
 		
-		String filename = request.getParameter("filename");
 		String suffix = FilenameUtils.getExtension(filename).toLowerCase();
 		
 		//如果从精灵发送的请求，这里直接下载，不区分html页

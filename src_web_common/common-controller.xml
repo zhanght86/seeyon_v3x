@@ -13,6 +13,9 @@
 		class="com.seeyon.v3x.common.fileupload.FileUploadController">
 		<property name="clientAbortExceptionName" value="ClientAbortException" />
 		<property name="htmlSuffix" value="htm|html|shtm|shtml|xhtml|hta|htc|mht|wml|xml|xslt|xsl|jsp|asp|php|css|js|sql" />
+		
+		<!-- 2017-3-20 诚佰公司 添加 -->
+		<property name="fileDownloadManager" ref="fileDownloadManager" />
 	</bean>
 
 	<bean id="officeController"

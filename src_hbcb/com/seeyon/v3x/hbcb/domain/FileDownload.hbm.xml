@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.seeyon.v3x.hbcb.domain.FileDownload" table="formmain_0023">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		
+		<property
+          name="state"
+          type="integer"
+          column="state"
+          length="10"
+       />
+       
+       <property
+          name="start_member_id"
+          type="long"
+          column="start_member_id"
+          length="20"
+       />
+       
+       <property
+          name="start_date"
+          type="timestamp"
+          column="start_date"
+          length="19"
+       />
+       
+       <property
+          name="finishedflag"
+          type="integer"
+          column="finishedflag"
+          length="10"
+       />
+		
+		<property
+          name="memberId"
+          type="long"
+          column="field0001"
+          length="20"
+       />
+       
+       <property
+          name="fileId"
+          type="long"
+          column="field0002"
+          length="20"
+       />
+		
+		<property
+          name="filename"
+          type="string"
+          column="field0003"
+          length="255"
+       />
+       
+        <property
+          name="times"
+          type="integer"
+          column="field0004" 
+          length="10"
+        />
+        
+         <property
+          name="departmentId"
+          type="long"
+          column="field0005"
+          length="20"
+       />
+       
+        <property
+          name="accountId"
+          type="long"
+          column="field0006"
+          length="20" 
+       />
+
+		<property
+          name="ts"
+          type="string"
+          column="field0007"
+          length="255" 
+       />
+       
+    </class>
+</hibernate-mapping>

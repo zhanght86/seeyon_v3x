@@ -767,6 +767,9 @@
 				
 				<!--成发集团项目 密级审核表  yangyh-->
 				<value>com/seeyon/v3x/secret/domain/SecretAudit.hbm.xml</value>
+				
+				<!--2017-3-20 诚佰公司 增加文件下载 zhaohf-->
+				<value>com/seeyon/v3x/hbcb/domain/FileDownload.hbm.xml</value>
 			</list>
 		</property>
 

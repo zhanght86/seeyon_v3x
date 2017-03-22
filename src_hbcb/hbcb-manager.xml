@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	<!-- zhaohf -->
+	<!-- 文件下载记录 -->
+	<bean id="fileDownloadManager" parent="baseTxService">
+		<property name="target">
+			<bean class="com.seeyon.v3x.hbcb.manager.FileDownloadManagerImpl">
+				<property name="fileDownloadDao" ref="hbcbFileDownloadDao" />
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="hbcbFileDownloadDao" class="com.seeyon.v3x.hbcb.dao.FileDownloadDao"></bean>
+</beans>
