@@ -3,6 +3,8 @@ package com.seeyon.v3x.hbcb.domain;
 import java.util.Date;
 
 import com.seeyon.v3x.common.domain.BaseModel;
+import com.seeyon.v3x.organization.domain.V3xOrgDepartment;
+import com.seeyon.v3x.organization.domain.V3xOrgMember;
 
 /**
  * 
@@ -15,14 +17,10 @@ public class FileDownload extends BaseModel implements java.io.Serializable {
 
 	private static final long serialVersionUID = -4051323757814867124L;
 
-	// 表单系统属性
+	/**
+	 * 状态
+	 */
 	private Integer state;
-
-	private Long start_member_id;
-
-	private Date start_date;
-
-	private Integer finishedflag;
 
 	public Integer getState() {
 		return state;
@@ -32,34 +30,12 @@ public class FileDownload extends BaseModel implements java.io.Serializable {
 		this.state = state;
 	}
 
-	public Long getStart_member_id() {
-		return start_member_id;
-	}
-
-	public void setStart_member_id(Long start_member_id) {
-		this.start_member_id = start_member_id;
-	}
-
-	public Date getStart_date() {
-		return start_date;
-	}
-
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
-	}
-
-	public Integer getFinishedflag() {
-		return finishedflag;
-	}
-
-	public void setFinishedflag(Integer finishedflag) {
-		this.finishedflag = finishedflag;
-	}
-
 	/**
 	 * 下载人员id
 	 */
 	private Long memberId;
+
+	private V3xOrgMember member;
 
 	/**
 	 * 文件id
@@ -81,6 +57,8 @@ public class FileDownload extends BaseModel implements java.io.Serializable {
 	 */
 	private Long departmentId;
 
+	private V3xOrgDepartment department;
+
 	/**
 	 * 单位id
 	 */
@@ -89,7 +67,7 @@ public class FileDownload extends BaseModel implements java.io.Serializable {
 	/**
 	 * 时间戳
 	 */
-	private String ts;
+	private Date ts;
 
 	public Long getMemberId() {
 		return memberId;
@@ -97,6 +75,14 @@ public class FileDownload extends BaseModel implements java.io.Serializable {
 
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
+	}
+
+	public V3xOrgMember getMember() {
+		return member;
+	}
+
+	public void setMember(V3xOrgMember member) {
+		this.member = member;
 	}
 
 	public Long getFileId() {
@@ -131,6 +117,14 @@ public class FileDownload extends BaseModel implements java.io.Serializable {
 		this.departmentId = departmentId;
 	}
 
+	public V3xOrgDepartment getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(V3xOrgDepartment department) {
+		this.department = department;
+	}
+
 	public Long getAccountId() {
 		return accountId;
 	}
@@ -139,11 +133,11 @@ public class FileDownload extends BaseModel implements java.io.Serializable {
 		this.accountId = accountId;
 	}
 
-	public String getTs() {
+	public Date getTs() {
 		return ts;
 	}
 
-	public void setTs(String ts) {
+	public void setTs(Date ts) {
 		this.ts = ts;
 	}
 

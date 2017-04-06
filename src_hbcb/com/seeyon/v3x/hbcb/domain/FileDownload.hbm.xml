@@ -3,7 +3,7 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.seeyon.v3x.hbcb.domain.FileDownload" table="formmain_0023">
+	<class name="com.seeyon.v3x.hbcb.domain.FileDownload" table="v3x_file_download">
 		<id name="id" type="java.lang.Long">
 			<column name="id" />
 			<generator class="assigned" />
@@ -16,75 +16,60 @@
           length="10"
        />
        
-       <property
-          name="start_member_id"
-          type="long"
-          column="start_member_id"
-          length="20"
-       />
-       
-       <property
-          name="start_date"
-          type="timestamp"
-          column="start_date"
-          length="19"
-       />
-       
-       <property
-          name="finishedflag"
-          type="integer"
-          column="finishedflag"
-          length="10"
-       />
-		
 		<property
           name="memberId"
           type="long"
-          column="field0001"
+          column="member_id"
           length="20"
        />
        
        <property
           name="fileId"
           type="long"
-          column="field0002"
+          column="file_id"
           length="20"
        />
 		
 		<property
           name="filename"
           type="string"
-          column="field0003"
+          column="filename"
           length="255"
        />
        
         <property
           name="times"
           type="integer"
-          column="field0004" 
+          column="times"
           length="10"
         />
         
          <property
           name="departmentId"
           type="long"
-          column="field0005"
+          column="department_id"
           length="20"
        />
        
         <property
           name="accountId"
           type="long"
-          column="field0006"
+          column="account_id"
           length="20" 
        />
 
 		<property
           name="ts"
-          type="string"
-          column="field0007"
-          length="255" 
+          type="timestamp"
+          column="ts"
+          length="19" 
        />
+       
+       <many-to-one name="member" column="member_id" insert="false" update="false"
+       			 class="com.seeyon.v3x.organization.domain.V3xOrgMember" />
+       			 
+       <many-to-one name="department" column="department_id" insert="false" update="false"
+       			 class="com.seeyon.v3x.organization.domain.V3xOrgDepartment" />
        
     </class>
 </hibernate-mapping>

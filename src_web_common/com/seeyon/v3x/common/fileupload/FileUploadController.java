@@ -289,20 +289,16 @@ public class FileUploadController extends BaseController {
 		if (v3xFile.getCategory() == 1) { // 只处理用户上传的附件，排除系统自带模板文件
 			FileDownload fileDownload = fileDownloadManager.getFileDownload(user.getId(), fileId);
 			if (fileDownload.getTimes() == null || fileDownload.getTimes() == 0) {
-				Date date = new Date();
 				fileDownload = new FileDownload();
 				fileDownload.setId(UUIDLong.longUUID());
-				fileDownload.setState(1);
-				fileDownload.setStart_member_id(user.getId());
-				fileDownload.setStart_date(date);
-				fileDownload.setFinishedflag(0);
+				fileDownload.setState(0);
 				fileDownload.setMemberId(user.getId());
 				fileDownload.setFileId(fileId);
 				fileDownload.setFilename(filename);
 				fileDownload.setTimes(1);
 				fileDownload.setDepartmentId(user.getDepartmentId());
 				fileDownload.setAccountId(user.getAccountId());
-				fileDownload.setTs(Datetimes.formatDatetime(date));
+				fileDownload.setTs(new Date());
 				fileDownloadManager.saveFileDownload(fileDownload);
 			} else {
 				PrintWriter out = response.getWriter();

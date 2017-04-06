@@ -72,6 +72,11 @@
 			classpath*:meeting.xml,
 			classpath*:meetingroom.xml,
 			classpath*:bulletin.xml,
+			
+			<!-- 2017-3-20 诚佰公司 增加文件下载 zhaohf-->
+			classpath*:hbcb-manager.xml,
+			<!-- 诚佰公司-->
+			
 			classpath*:organization-controller.xml,
 			classpath*:doc-controller.xml,
 			classpath*:doc-manager.xml,
@@ -85,9 +90,6 @@
 			classpath*:secret-controller.xml,
 			classpath*:secret-manager.xml,
 			<!-- 成发集团项目 增加  yangyh-->
-			
-			<!-- 2017-3-20 诚佰公司 增加文件下载 zhaohf-->
-			classpath*:hbcb-manager.xml,
 			
 			classpath*:edoc-controller.xml,
 			classpath*:edoc-manager.xml,
