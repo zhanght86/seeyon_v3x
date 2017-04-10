@@ -31,6 +31,9 @@ import org.apache.commons.logging.LogFactory;
 import org.json.JSONObject;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.seeyon.v3x.collaboration.Constant.SecretLevel;
+import com.seeyon.v3x.collaboration.domain.ColSummary;
+import com.seeyon.v3x.collaboration.manager.ColManager;
 import com.seeyon.v3x.common.authenticate.domain.User;
 import com.seeyon.v3x.common.constants.ApplicationCategoryEnum;
 import com.seeyon.v3x.common.constants.SystemProperties;
@@ -99,8 +102,13 @@ public class FileUploadController extends BaseController {
 	
 	// 2017-3-20 诚佰公司 添加注入
 	private FileDownloadManager fileDownloadManager;
+	private ColManager colManager;
+	
 	public void setFileDownloadManager(FileDownloadManager fileDownloadManager) {
 		this.fileDownloadManager = fileDownloadManager;
+	}
+	public void setColManager(ColManager colManager) {
+		this.colManager = colManager;
 	}
 	// 诚佰公司
 	
@@ -281,30 +289,37 @@ public class FileUploadController extends BaseController {
 	public ModelAndView download(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView m = new ModelAndView("common/fileUpload/download");
 		
-		// 2017-3-20 诚佰公司 添加下载次数判断
-		User user = CurrentUser.get();
-		String filename = request.getParameter("filename");
 		Long fileId = Long.parseLong(request.getParameter("fileId"));
+		String filename = request.getParameter("filename");
+		
+		// 2017-3-20 诚佰公司 添加下载次数判断
 		V3XFile v3xFile = fileManager.getV3XFile(fileId);
-		if (v3xFile.getCategory() == 1) { // 只处理用户上传的附件，排除系统自带模板文件
-			FileDownload fileDownload = fileDownloadManager.getFileDownload(user.getId(), fileId);
-			if (fileDownload.getTimes() == null || fileDownload.getTimes() == 0) {
-				fileDownload = new FileDownload();
-				fileDownload.setId(UUIDLong.longUUID());
-				fileDownload.setState(0);
-				fileDownload.setMemberId(user.getId());
-				fileDownload.setFileId(fileId);
-				fileDownload.setFilename(filename);
-				fileDownload.setTimes(1);
-				fileDownload.setDepartmentId(user.getDepartmentId());
-				fileDownload.setAccountId(user.getAccountId());
-				fileDownload.setTs(new Date());
-				fileDownloadManager.saveFileDownload(fileDownload);
-			} else {
-				PrintWriter out = response.getWriter();
-	    		String msg = "您已下载过此文件，不能重复下载。";
-	    		out.println("<script>alert('"+msg+"');</script>");
-				return null;
+		if (v3xFile != null && v3xFile.getCategory() == 1) { // 只控制自由协同插入的附件，排除公文及其他功能中的文件，包括系统自带模板文件
+			String s_summaryId = request.getParameter("summaryId");
+			if (!StringUtils.isBlank(s_summaryId)) {
+				ColSummary summary = colManager.getColSummaryById(Long.parseLong(s_summaryId), true);
+				if(summary != null && summary.getSecretLevel() > SecretLevel.noSecret.ordinal()) { //只控制密级协同附件下载
+			    	User user = CurrentUser.get();
+					FileDownload fileDownload = fileDownloadManager.getFileDownload(user.getId(), fileId);
+					if (fileDownload.getTimes() == null || fileDownload.getTimes() == 0) {
+						fileDownload = new FileDownload();
+						fileDownload.setId(UUIDLong.longUUID());
+						fileDownload.setState(0);
+						fileDownload.setMemberId(user.getId());
+						fileDownload.setFileId(fileId);
+						fileDownload.setFilename(filename);
+						fileDownload.setTimes(1);
+						fileDownload.setDepartmentId(user.getDepartmentId());
+						fileDownload.setAccountId(user.getAccountId());
+						fileDownload.setTs(new Date());
+						fileDownloadManager.saveFileDownload(fileDownload);
+					} else {
+						PrintWriter out = response.getWriter();
+			    		String msg = "您已下载过此文件，不能重复下载。";
+			    		out.println("<script>alert('"+msg+"');</script>");
+						return null;
+					}
+			    }
 			}
 		}
 		// 诚佰公司

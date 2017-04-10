@@ -666,10 +666,11 @@ var templateFlag = "${templateFlag}";
 														<td colspan="2" height="${param.openLocation=='detailFrame'? '30':'40'}"  class=" deal_padding_r">
 														<div height="36">
 															<c:if test="${uploadAttachment && v3x:getBrowserFlagByRequest('HideOperation', pageContext.request)}">
+															<!-- 2017-3-22 诚佰公司 屏蔽协同回复插入附件
 											                <a href="javascript:insertAttachment()">
 																<img src="<c:url value='/common/images/attachment.gif' />" border="0" align="absmiddle">
 																<fmt:message key="collaboration.deal.insert.label"/></a>
-															(<span id="attachmentNumberDiv">0</span>)&nbsp;&nbsp;
+															(<span id="attachmentNumberDiv">0</span>)&nbsp;&nbsp; -->
 															</c:if>
 															<c:if test="${uploadRelDoc}">
 															<a href="javascript:quoteDocumentTarget()">

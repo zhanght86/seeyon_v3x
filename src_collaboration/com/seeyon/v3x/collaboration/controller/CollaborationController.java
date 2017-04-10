@@ -12286,14 +12286,12 @@ public class CollaborationController extends BaseController {
      * @param string 流程xml
      */
     private String validateFlow(String secretLevel, String flowXml) throws Exception {
-    	String outMsg = null;
-    	
-		if(null == secretLevel || "".equals(secretLevel)) {
+    	if(null == secretLevel || "".equals(secretLevel)) {
 			secretLevel = "1";
 		}
 		
 		if (Integer.parseInt(secretLevel) <= 1) {
-			return outMsg;
+			return null;
 		}
 		
 		User user = CurrentUser.get();
@@ -12342,8 +12340,8 @@ public class CollaborationController extends BaseController {
 		    }
 	    }
 	    
+	    String outMsg = "涉密流程发起必须经过部门领导审批。";
 	    if (memberIds.isEmpty()) {
-	    	outMsg = "密级协同发起者所在部门未设置分管领导。";
 	    	return outMsg;
 	    }
 	    
@@ -12360,7 +12358,6 @@ public class CollaborationController extends BaseController {
     		xpath ="/processes/process/link[@from='" + startToId + "']";
     		List<Element> startToList = document.selectNodes(xpath);
     		
-    		outMsg = "密级流程第一个接收者必须是分管领导。";
     		if (startToList.size() != 1) {
     	        return outMsg;
     		}

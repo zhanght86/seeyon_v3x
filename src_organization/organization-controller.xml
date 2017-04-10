@@ -9,6 +9,8 @@
 		<property name="orgManager" ref="OrgManager"/>
 		<property name="menuManager" ref="menuManager" />
 		<property name="ioManager" ref="ioManager" />
+		<!-- 2017-4-5 诚佰公司 添加 -->
+		<property name="fileDownloadManager" ref="fileDownloadManager" />
 	</bean>
 	
 	<bean id="memberLeaveController"
