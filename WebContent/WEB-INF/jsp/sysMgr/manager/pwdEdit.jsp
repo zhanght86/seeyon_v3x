@@ -94,16 +94,14 @@
 		var password =  document.getElementById("oldpassword").value;
 		var score = 0;
 		var tmpString = "密码强度不够";
-		 if (password.match(/(.*[0-9])/)){score += 5;}else{tmpString += "，至少包含一个数字";}
+
+		if (password.match(/(.*[a-zA-Z])/)){ score += 5;}else{tmpString += "，至少包含一个大小写字母";}
 		 if (password.match(/(.*[!,@,#,$,%,^,&,*,?,_,~])/)){ score += 5 ;}else{tmpString += "，至少包含一个特殊字符";}
-		 if (password.match(/(.*[a-z])/)){ score += 5;}else{tmpString += "，至少包含一个小写字母";}
-		 if (password.match(/(.*[A-Z])/)){ score += 5;}else{tmpString += "，至少包含一个大写字母";}
-		 if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)){ score += 15;}
+		 if (password.match(/(.*[0-9])/)){ score += 5;}else{tmpString += "，至少包含一个数字";}
 		 if (password.match(/([!,@,#,$,%,^,&,*,?,_,~])/) && password.match(/([0-9])/)){ score += 15;}
 		 if (password.match(/([!,@,#,$,%,^,&,*,?,_,~])/) && password.match(/([a-zA-Z])/)){score += 15;}
-		 if (password.match(/(\w)*(\w)\2{2}(\w)*/)){ score -= 10;tmpString += "，不能包含3个连续相同字符";}
 		 
-		 if(score>=65){
+		 if(score>=45){
 			 return true;
 		 }else{
 			 	
