@@ -614,12 +614,8 @@ public class CollaborationController extends BaseController {
                     secretLevel = getSecretLevelName(summary,secret);
                     modelAndView.addObject("secret", secret);
                  }else{
-                	// 2017-01-13 诚佰公司 注释新增
-                	/*secretLevel = getSecretLevelName(summary,1);
-                	modelAndView.addObject("secret", 1);*/
-                	secretLevel = "";
-                	modelAndView.addObject("secret", "");
-                	// 诚佰公司
+                	secretLevel = getSecretLevelName(summary,1);
+                	modelAndView.addObject("secret", 1);
                  }
                modelAndView.addObject("flowSecretLevel", secretLevel);
 				//end
@@ -1481,6 +1477,17 @@ public class CollaborationController extends BaseController {
         modelAndView.addObject("colMetadata", colMetadata);
         modelAndView.addObject("comMetadata", comMetadata);
         modelAndView.addObject("comImportanceMetadata", comImportanceMetadata);
+        
+        //2017-4-13 诚佰公司 为页面传入当前用户的密级
+        User user = CurrentUser.get();
+        try {
+        	Integer peopleSecretLevel = orgManager.getMemberById(user.getId()).getSecretLevel();
+        	modelAndView.addObject("peopleSecretLevel", peopleSecretLevel);
+        } catch(Exception e) {
+        	log.error("人员密级信息获取失败。", e);
+			throw new RuntimeException("人员密级信息获取失败。");
+        }
+        //诚佰公司
 
         List<ProjectSummary> projectList = null;
 		try {
