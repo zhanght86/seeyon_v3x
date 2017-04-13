@@ -757,7 +757,10 @@ public class EdocController extends BaseController{
 				if(summary.getEdocSecretLevel() != null){
 					secret = summary.getEdocSecretLevel();
 					edocSecretLevel = this.getSecretLevelName(summary, secret);
-				}
+				} else { // 2017-4-11 诚佰公司 公文模块密级为空时默认显示为内部
+					secret = 1;
+					edocSecretLevel = this.getSecretLevelName(summary, secret);
+                 }
 			}
 
 			modelAndView.addObject("secret", secret);
