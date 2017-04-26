@@ -112,6 +112,7 @@ public class DocResource extends BaseModel implements Comparable<DocResource> {
 	private Integer secretLevel;
 	
 	public Integer getSecretLevel() {
+		// 2017-4-26 诚佰公司 添加保存时默认为内部
 		if (secretLevel == null) {
 			secretLevel = 1;
 		}
