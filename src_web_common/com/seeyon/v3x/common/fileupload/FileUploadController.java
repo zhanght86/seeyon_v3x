@@ -52,6 +52,8 @@ import com.seeyon.v3x.common.utils.UUIDLong;
 import com.seeyon.v3x.common.web.BaseController;
 import com.seeyon.v3x.common.web.login.CurrentUser;
 import com.seeyon.v3x.common.web.util.WebUtil;
+import com.seeyon.v3x.edoc.domain.EdocSummary;
+import com.seeyon.v3x.edoc.manager.EdocManager;
 import com.seeyon.v3x.hbcb.domain.FileDownload;
 import com.seeyon.v3x.hbcb.manager.FileDownloadManager;
 import com.seeyon.v3x.util.Datetimes;
@@ -103,6 +105,7 @@ public class FileUploadController extends BaseController {
 	// 2017-3-20 诚佰公司 添加注入
 	private FileDownloadManager fileDownloadManager;
 	private ColManager colManager;
+	private EdocManager edocManager;
 	
 	public void setFileDownloadManager(FileDownloadManager fileDownloadManager) {
 		this.fileDownloadManager = fileDownloadManager;
@@ -110,8 +113,10 @@ public class FileUploadController extends BaseController {
 	public void setColManager(ColManager colManager) {
 		this.colManager = colManager;
 	}
+	public void setEdocManager(EdocManager edocManager) {
+		this.edocManager = edocManager;
+	}
 	// 诚佰公司
-	
 
 	/**
 	 * 上传文件
@@ -292,13 +297,22 @@ public class FileUploadController extends BaseController {
 		Long fileId = Long.parseLong(request.getParameter("fileId"));
 		String filename = request.getParameter("filename");
 		
-		// 2017-3-20 诚佰公司 添加下载次数判断
-		V3XFile v3xFile = fileManager.getV3XFile(fileId);
-		if (v3xFile != null && v3xFile.getCategory() == 1) { // 只控制自由协同插入的附件，排除公文及其他功能中的文件，包括系统自带模板文件
+		// 2017-3-20 诚佰公司 添加下载次数判断，只控制密级表单协同和表单公文中附件的下载
+		V3XFile file = fileManager.getV3XFile(fileId);
+		if (file != null) {
 			String s_summaryId = request.getParameter("summaryId");
 			if (!StringUtils.isBlank(s_summaryId)) {
-				ColSummary summary = colManager.getColSummaryById(Long.parseLong(s_summaryId), true);
-				if(summary != null && summary.getSecretLevel() > SecretLevel.noSecret.ordinal()) { //只控制密级协同附件下载
+				Long summaryId = Long.parseLong(s_summaryId);
+				Integer attachLevel = 1; // 表单协同和表单公文附件密级
+				if (file.getCategory() == 1) { // 协同
+					ColSummary summary = colManager.getColSummaryById(summaryId, false);
+					attachLevel = summary.getAttachLevel();
+				} else if (file.getCategory() == 4) { // 公文
+					EdocSummary edocSummary = edocManager.getEdocSummaryById(summaryId, false);
+					attachLevel = edocSummary.getEdocAttachLevel();
+				}
+				// 如果是密级附件，则限制下载次数
+				if(attachLevel > SecretLevel.noSecret.ordinal()) {
 			    	User user = CurrentUser.get();
 					FileDownload fileDownload = fileDownloadManager.getFileDownload(user.getId(), fileId);
 					if (fileDownload.getTimes() == null || fileDownload.getTimes() == 0) {

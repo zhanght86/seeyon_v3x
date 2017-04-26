@@ -17,6 +17,7 @@
 		<!-- 2017-3-20 诚佰公司 添加 -->
 		<property name="fileDownloadManager" ref="fileDownloadManager" />
 		<property name="colManager" ref="colManager" />
+		<property name="edocManager" ref="edocManager" />
 	</bean>
 
 	<bean id="officeController"
