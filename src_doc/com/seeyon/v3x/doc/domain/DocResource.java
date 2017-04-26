@@ -112,6 +112,9 @@ public class DocResource extends BaseModel implements Comparable<DocResource> {
 	private Integer secretLevel;
 	
 	public Integer getSecretLevel() {
+		if (secretLevel == null) {
+			secretLevel = 1;
+		}
 		return secretLevel;
 	}
 
