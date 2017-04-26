@@ -83,10 +83,10 @@ getA8Top().showLocation(1702);
 		var tmpString = "密码强度不够";
 		
 		if (password.match(/(.*[a-zA-Z])/)){ score += 5;}else{tmpString += "，至少包含一个大小写字母";}
-		 if (password.match(/(.*[!,@,#,$,%,^,&,*,?,_,~])/)){ score += 5 ;}else{tmpString += "，至少包含一个特殊字符";}
+		 if (password.match(/(.*[^a-zA-Z0-9])/)){ score += 5 ;}else{tmpString += "，至少包含一个特殊字符";}
 		 if (password.match(/(.*[0-9])/)){ score += 5;}else{tmpString += "，至少包含一个数字";}
-		 if (password.match(/([!,@,#,$,%,^,&,*,?,_,~])/) && password.match(/([0-9])/)){ score += 15;}
-		 if (password.match(/([!,@,#,$,%,^,&,*,?,_,~])/) && password.match(/([a-zA-Z])/)){score += 15;}
+		 if (password.match(/([^a-zA-Z0-9])/) && password.match(/([0-9])/)){ score += 15;}
+		 if (password.match(/([^a-zA-Z0-9])/) && password.match(/([a-zA-Z])/)){score += 15;}
 		 
 		 if(score>=45){
 			 return true;
