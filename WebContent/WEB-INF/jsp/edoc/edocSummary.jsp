@@ -1092,7 +1092,13 @@
 																						   &nbsp;&nbsp;
 																					   </c:if>
 																					   <c:if test="${canUploadAttachment}">
-																					   	 <a href="javascript:insertAttachment()"><fmt:message key="common.toolbar.insertAttachment.label" bundle="${v3xCommonI18N}"/></a>
+																<!-- 2017-3-22 诚佰公司 协同附件 -->
+																<c:if test="${summary.edocAttachLevel == null || summary.edocAttachLevel == 1}">
+																	<a href="javascript:insertAttachment()"><fmt:message key="common.toolbar.insertAttachment.label" bundle="${v3xCommonI18N}"/></a>
+																</c:if>
+																<c:if test="${summary.edocAttachLevel > 1}">
+																	<a disabled="disabled"><fmt:message key="common.toolbar.insertAttachment.label" bundle="${v3xCommonI18N}"/></a>
+																</c:if>
 																					   	 (<span id="attachmentNumberDiv">0</span>)
 																					   </c:if>
 																					</div>
