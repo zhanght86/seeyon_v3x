@@ -204,7 +204,7 @@ function send() {
 
 	//2017-01-11 诚佰公司 添加密级空值校验
     //校验超期提醒，提前提醒时间
-	if(!checkForm(theForm) || !checkSelectSecret() || !checkSelectWF() || !compareTime() || !checkSupervisor()){
+	if(!checkForm(theForm) || !checkSelectSecret(theForm) || !checkSelectWF() || !compareTime() || !checkSupervisor()){
 		enableButtons();
 		return;
 	}
@@ -508,7 +508,7 @@ function save() {
     theForm.action = genericURL + "?method=save";
 	
     //2017-01-11 诚佰公司 添加密级空值校验
-    if (checkForm(theForm) && checkSelectSecret()) {
+    if (checkForm(theForm) && checkSelectSecret(theForm)) {
         if ((!isForm || isForm == "false")&&!saveOffice()) {
             return;
         }
@@ -599,7 +599,7 @@ function saveDraft(){
     theForm.action = genericURL + "?method=saveDraft";
     
 	//2017-01-11 诚佰公司 添加密级空值校验
-    if (checkForm(theForm) && checkSelectSecret()) {
+    if (checkForm(theForm) && checkSelectSecret(theForm)) {
         if ((!isForm || isForm == "false")&&!saveOffice()) {
             return;
         }
@@ -730,11 +730,26 @@ function resend() {
     parent.parent.location.href = genericURL + "?method=newColl&summaryId=" + summaryId + "&from=resend";
 }
 
-// 2017-01-11 诚佰公司 发送表单验证流程密级是否为空
-function checkSelectSecret() {
-    if (flowSecretLevel_wf == null || flowSecretLevel_wf == "") {
+//2017-01-11 诚佰公司 发送表单验证流程密级是否为空
+function checkSelectSecret(theForm) {
+	
+	var secretLevel = theForm.secretLevel.value;
+	//alert("流程密级：" + secretLevel);
+    if (secretLevel == null || secretLevel == "") {
     	alert("流程密级不能为空。");
         return false;
+    }
+  
+    //alert("isFromTemplate: " + isFromTemplate);
+    // 如果是表单流程则判断附件密级，否则自由协同不判断
+    if (isFromTemplate) {
+    	// 判断附件密级是否存在，是否为空
+    	var attachLevel = theForm.attachLevel.value;
+    	//alert("附件密级：" + attachLevel);
+    	if (attachLevel == null || attachLevel == "") {
+        	alert("密级不能为空。");
+            return false;
+        }
     }
 
     return true;
@@ -7199,6 +7214,12 @@ function changeSecretLevel(object){
 			flowSecretLevel_wf = object.value;
 		    hasWorkflow = false;
 		    isFromTemplate = false;
+		    
+		    // 2017-4-24 诚佰公司 添加改变流程密级，设置附件密级
+		    if (document.getElementById("attachLevel")) {
+		    	document.getElementById("attachLevel").value =  flowSecretLevel_wf;
+		    }
+		    
             return true;
          }else{
         	document.getElementById("secretLevel").value = flowSecretLevel_wf;
@@ -7206,6 +7227,11 @@ function changeSecretLevel(object){
         }
     }else{
     	flowSecretLevel_wf = object.value;
+    	
+    	// 2017-4-24 诚佰公司 添加改变流程密级(包括流程表单制作更改密级)，设置附件密级
+    	if (document.getElementById("attachLevel")) {
+    		document.getElementById("attachLevel").value =  flowSecretLevel_wf;
+    	}
 	}
     
 }

@@ -244,6 +244,15 @@ public class EdocSummary extends BaseModel  implements Serializable {
 	
 	private Integer edocSecretLevel;//成发集团项目 程炯 2012-8-29 增加公文流程密级属性 
 	
+	private Integer edocAttachLevel; // 2017-4-12 诚佰公司 公文附件密级 
+    
+	public Integer getEdocAttachLevel() {
+		return edocAttachLevel;
+	}
+	public void setEdocAttachLevel(Integer edocAttachLevel) {
+		this.edocAttachLevel = edocAttachLevel;
+	}
+	
 	public Integer getEdocSecretLevel() {
 		return edocSecretLevel;
 	}

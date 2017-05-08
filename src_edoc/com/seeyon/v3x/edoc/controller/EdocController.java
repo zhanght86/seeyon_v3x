@@ -753,6 +753,10 @@ public class EdocController extends BaseController{
 			//成发集团项目 程炯 2012-8-30 公文显示模板密级 begin
 			String edocSecretLevel = "";
 			Integer secret = null;
+			
+			// 2017-4-21 诚佰公司 附件密级
+			Integer edocAttachLevel = null;
+			
 			if(summary != null){
 				if(summary.getEdocSecretLevel() != null){
 					secret = summary.getEdocSecretLevel();
@@ -761,10 +765,16 @@ public class EdocController extends BaseController{
 					secret = 1;
 					edocSecretLevel = this.getSecretLevelName(summary, secret);
                  }
+				
+				//2017-4-21 诚佰公司 附件密级 begin
+	            if(summary.getEdocAttachLevel() != null){
+	            	edocAttachLevel = summary.getEdocAttachLevel();
+	            }
+				//end
 			}
-
 			modelAndView.addObject("secret", secret);
 			modelAndView.addObject("flowSecretLevel", edocSecretLevel);
+			modelAndView.addObject("edocAttachLevel", edocAttachLevel);
 			//end
 
             edocFormId=summary.getFormId();
@@ -990,15 +1000,26 @@ public class EdocController extends BaseController{
         	//成发集团项目 程炯 2012-8-30 公文显示模板密级 begin
 			String edocSecretLevel = "";
 			Integer secret = null;
+			
+			// 2017-4-21 诚佰公司 附件密级
+			Integer edocAttachLevel = null;
+			
 			if(summary != null){
 				if(summary.getEdocSecretLevel() != null){
 					secret = summary.getEdocSecretLevel();
 					edocSecretLevel = this.getSecretLevelName(summary, secret);
 				}
+				
+				//2017-4-21 诚佰公司 附件密级 begin
+	            if(summary.getEdocAttachLevel() != null){
+	            	edocAttachLevel = summary.getEdocAttachLevel();
+	            }
+				//end
 			}
 
 			modelAndView.addObject("secret", secret);
 			modelAndView.addObject("flowSecretLevel", edocSecretLevel);
+			modelAndView.addObject("edocAttachLevel", edocAttachLevel);
 			modelAndView.addObject("secretFlag","wait");
 			//end
 

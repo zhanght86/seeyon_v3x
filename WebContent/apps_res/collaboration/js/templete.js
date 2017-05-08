@@ -317,6 +317,9 @@ function showSystemDetail(templeteId,categoryType){
  * 保存模板
  */
 function saveTemplete() {
+	// 2017-4-27 诚佰公司
+	alert("保存模板开始调用!!!");
+	
     var theForm = document.getElementsByName("sendForm")[0];
 
     if(!notSpecChar(theForm.subject)) {
@@ -338,7 +341,7 @@ function saveTemplete() {
     categoryId = categoryId.options[categoryId.selectedIndex];
     
     //2017-01-11 诚佰公司 添加密级空值校验
-    if (checkForm(theForm) && checkSelectSecret() && checkRepeatTempleteSubject(theForm, true) && checkTemplateCategory(categoryId.value,trim(categoryId.text))) {
+    if (checkForm(theForm) && checkSelectSecret(theForm) && checkRepeatTempleteSubject(theForm, true) && checkTemplateCategory(categoryId.value,trim(categoryId.text))) {
     	if(_type != 'text' && !checkSelectWF1()){ //协同正文，不用流程
     		return;
     	}
@@ -816,17 +819,6 @@ function checkRepeatCategoryName(form1){
 
 	return true;
 }
-
-//2017-01-11 诚佰公司 发送表单验证流程密级是否为空
-function checkSelectSecret() {
-    if (flowSecretLevel_wf == null || flowSecretLevel_wf == "") {
-    	alert("流程密级不能为空。");
-        return false;
-    }
-
-    return true;
-}
-// 诚佰公司
 
 /**
  * 检测模板标题是否重名

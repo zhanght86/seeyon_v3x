@@ -1218,5 +1218,12 @@
         column="edoc_secret_level"
         length="4"
     />
+    <!-- //2017-4-12 诚佰公司 公文附件密级  -->
+    <property
+        name="edocAttachLevel"
+        type="integer"
+        column="edoc_attach_level"
+        length="4"
+    />
 </class>
 </hibernate-mapping>

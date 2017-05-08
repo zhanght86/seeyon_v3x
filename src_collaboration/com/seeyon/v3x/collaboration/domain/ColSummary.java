@@ -193,8 +193,16 @@ public class ColSummary extends BaseModel implements Serializable {
     
     private Integer secretLevel;//成发集团项目 程炯 2012-8-29 流程密级
 
+    private Integer attachLevel; // 2017-4-12 诚佰公司 附件密级 
     
-    
+	public Integer getAttachLevel() {
+		return attachLevel;
+	}
+
+	public void setAttachLevel(Integer attachLevel) {
+		this.attachLevel = attachLevel;
+	}
+
 	public Integer getSecretLevel() {
 		return secretLevel;
 	}

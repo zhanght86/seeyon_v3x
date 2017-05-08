@@ -211,6 +211,7 @@ function saveTemplete(_type) {
 
 //2017-01-11 诚佰公司 发送表单验证流程密级是否为空
 function checkSelectSecret(theForm) {
+	
 	var secretLevel = theForm.secretLevel.value;
     if (secretLevel == null || secretLevel == "") {
     	alert("流程密级不能为空。");

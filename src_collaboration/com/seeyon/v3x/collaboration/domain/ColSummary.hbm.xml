@@ -345,5 +345,12 @@
         column="secret_level"
         length="4"
     />
+    <!-- //2017-4-12 诚佰公司 附件密级  -->
+    <property
+        name="attachLevel"
+        type="integer"
+        column="attach_level"
+        length="4"
+    />
 </class>
 </hibernate-mapping>

@@ -457,8 +457,10 @@ if(!v3x.getBrowserFlag('newFlash')){
     		<v3x:metadataItem metadata="${comImportanceMetadata}" showType="option" name="importantLevel" selected="${summary.importantLevel}" />
     	</select>
     </td>
+    
     <%--流程密级--%>
-    <td nowrap="nowrap" class="bg-gray"><font color="red"><fmt:message key="collaboration.secret.flowsecret"/>:</font></td> 
+    <%--
+    <td nowrap="nowrap" class="bg-gray"><font color="red"><fmt:message key="collaboration.secret.flowsecret"/>:</font></td>
     <c:if test="${ templete!=null && templete.isSystem}">	
     <td>
 		<select class="input-100per">
@@ -471,51 +473,81 @@ if(!v3x.getBrowserFlag('newFlash')){
    		</select>
    		<input name="secretLevel" id="secretLevel" type="hidden" value="${secret}"/>
 	</td>
-	</c:if>
-	<c:if test="${ templete!=null && templete.isSystem == false && isFromTemplate}">	
+	</c:if>--%>
+	
+	<!-- 2017-4-21 诚佰公司 添加流程密级隐藏字段和附件密级字段 -->
+    <c:if test="${ templete!=null && templete.isSystem}">
+    <td nowrap="nowrap" class="bg-gray"><font color="red">密级:</font></td>	
     <td>
-    <select name="secretLevel" id="secretLevel" class="input-100per">
-    	<!-- 2017-01-11 诚佰公司 -->
-    	<option value=""></option>
-    	<option value="1" ${secret == 1? 'selected=selected':''}><fmt:message key="collaboration.secret.nosecret"/></option>
-    	<c:if test="${peopleSecretLevel >= 2 }">
-    	<option value="2" ${secret == 2? 'selected=selected':''}><fmt:message key="collaboration.secret.secret"/></option>
-    	</c:if>
-    	<c:if test="${peopleSecretLevel >= 3 }">
-    	<option value="3" ${secret == 3? 'selected=selected':''}><fmt:message key="collaboration.secret.secretmore"/></option>
-    	</c:if>
-    </select>
+    	<!-- 流程密级 -->
+    	<input name="secretLevel" id="secretLevel" type="hidden" value="${secret}"/>
+		<!-- 附件密级 -->    	
+		<select name="attachLevel" id="attachLevel" class="input-100per">
+	    	<!-- 2017-01-11 诚佰公司 -->
+	    	<option value=""></option>
+	    	<option value="1" ${attachLevel == 1? 'selected=selected':''}><fmt:message key="collaboration.secret.nosecret"/></option>
+	    	<c:if test="${peopleSecretLevel >= 2 }">
+	    		<option value="2" ${attachLevel == 2? 'selected=selected':''}><fmt:message key="collaboration.secret.secret"/></option>
+	    	</c:if>
+	    	<c:if test="${peopleSecretLevel >= 3 }">
+	    		<option value="3" ${attachLevel == 3? 'selected=selected':''}><fmt:message key="collaboration.secret.secretmore"/></option>
+	    	</c:if>
+	    </select>
 	</td>
 	</c:if>
-	<c:if test="${templete ==null && (secretFlag == 'wait'||secretFlag == 'resend')}">	
-    <td>
-    <select name="secretLevel" id="secretLevel" class="input-100per" onchange="changeSecretLevel(this);">
-    	<!-- 2017-01-11 诚佰公司 -->
-    	<option value=""></option>
-    	<option value="1" ${secret == 1? 'selected=selected':''}><fmt:message key="collaboration.secret.nosecret"/></option>
-    	<c:if test="${peopleSecretLevel >= 2 }">
-    	<option value="2" ${secret == 2? 'selected=selected':''}><fmt:message key="collaboration.secret.secret"/></option>
-    	</c:if>
-    	<c:if test="${peopleSecretLevel >= 3 }">
-    	<option value="3" ${secret == 3? 'selected=selected':''}><fmt:message key="collaboration.secret.secretmore"/></option>
-    	</c:if>
-    </select>
-	</td>
+	<c:if test="${ templete!=null && templete.isSystem == false && isFromTemplate}">
+		<td nowrap="nowrap" class="bg-gray"><font color="red"><fmt:message key="collaboration.secret.flowsecret"/>:</font></td>	
+	    <td>
+	    <select name="secretLevel" id="secretLevel" class="input-100per" onchange="changeSecretLevel(this);">
+	    	<!-- 2017-01-11 诚佰公司 -->
+	    	<option value=""></option>
+	    	<option value="1" ${secret == 1? 'selected=selected':''}><fmt:message key="collaboration.secret.nosecret"/></option>
+	    	<c:if test="${peopleSecretLevel >= 2 }">
+	    	<option value="2" ${secret == 2? 'selected=selected':''}><fmt:message key="collaboration.secret.secret"/></option>
+	    	</c:if>
+	    	<c:if test="${peopleSecretLevel >= 3 }">
+	    	<option value="3" ${secret == 3? 'selected=selected':''}><fmt:message key="collaboration.secret.secretmore"/></option>
+	    	</c:if>
+	    </select>
+	    <!-- 附件密级 -->
+	    <input name="attachLevel" id="attachLevel" type="hidden" value="${attachLevel}"/>
+		</td>
+	</c:if>
+	<c:if test="${templete ==null && (secretFlag == 'wait'||secretFlag == 'resend')}">
+		<td nowrap="nowrap" class="bg-gray"><font color="red"><fmt:message key="collaboration.secret.flowsecret"/>:</font></td>		
+	    <td>
+	    <select name="secretLevel" id="secretLevel" class="input-100per" onchange="changeSecretLevel(this);">
+	    	<!-- 2017-01-11 诚佰公司 -->
+	    	<option value=""></option>
+	    	<option value="1" ${secret == 1? 'selected=selected':''}><fmt:message key="collaboration.secret.nosecret"/></option>
+	    	<c:if test="${peopleSecretLevel >= 2 }">
+	    	<option value="2" ${secret == 2? 'selected=selected':''}><fmt:message key="collaboration.secret.secret"/></option>
+	    	</c:if>
+	    	<c:if test="${peopleSecretLevel >= 3 }">
+	    	<option value="3" ${secret == 3? 'selected=selected':''}><fmt:message key="collaboration.secret.secretmore"/></option>
+	    	</c:if>
+	    </select>
+	    <!-- 附件密级 -->
+	    <input name="attachLevel" id="attachLevel" type="hidden" value="${attachLevel}"/>
+		</td>
 	</c:if>
 	<c:if test="${ (templete == null || isFromTemplate == false) && secretFlag != 'wait' && secretFlag != 'resend'}">
-    <td>
-    <select name="secretLevel" id="secretLevel" class="input-100per" onchange="changeSecretLevel(this);">
-    	<!-- 2017-01-11 诚佰公司 -->
-    	<option value=""></option>
-    	<option value="1"><fmt:message key="collaboration.secret.nosecret"/></option>
-    	<c:if test="${peopleSecretLevel >= 2 }">
-    	<option value="2"><fmt:message key="collaboration.secret.secret"/></option>
-    	</c:if>
-    	<c:if test="${peopleSecretLevel >= 3 }">
-    	<option value="3"><fmt:message key="collaboration.secret.secretmore"/></option>
-    	</c:if>
-    </select>
-    </td>
+		<td nowrap="nowrap" class="bg-gray"><font color="red"><fmt:message key="collaboration.secret.flowsecret"/>:</font></td>	
+	    <td>
+	    <select name="secretLevel" id="secretLevel" class="input-100per" onchange="changeSecretLevel(this);">
+	    	<!-- 2017-01-11 诚佰公司 -->
+	    	<option value=""></option>
+	    	<option value="1"><fmt:message key="collaboration.secret.nosecret"/></option>
+	    	<c:if test="${peopleSecretLevel >= 2 }">
+	    	<option value="2"><fmt:message key="collaboration.secret.secret"/></option>
+	    	</c:if>
+	    	<c:if test="${peopleSecretLevel >= 3 }">
+	    	<option value="3"><fmt:message key="collaboration.secret.secretmore"/></option>
+	    	</c:if>
+	    </select>
+	    <!-- 附件密级 -->
+	    <input name="attachLevel" id="attachLevel" type="hidden" value="${attachLevel}"/>
+	    </td>
     </c:if>
     <%--关联项目--%>
     <td nowrap="nowrap" class="bg-gray"><fmt:message key="project.label" />:</td> 

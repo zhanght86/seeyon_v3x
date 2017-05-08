@@ -543,6 +543,9 @@ public class CollaborationController extends BaseController {
         modelAndView.addObject("peopleSecretLevel", peopleSecretLevel);
         //end
         
+        // 2017-4-21 诚佰公司 附件密级
+        Integer attachLevel = null;
+        
         //对已有流程的协同（重复发起、转发、保存待发），在页面上存储其定义XML
         if (StringUtils.isNotBlank(templeteId)) {//调用模板
         	modelAndView.addObject("isFromTemplate", true);
@@ -618,6 +621,15 @@ public class CollaborationController extends BaseController {
                 	modelAndView.addObject("secret", 1);
                  }
                modelAndView.addObject("flowSecretLevel", secretLevel);
+				//end
+               
+               //2017-4-21 诚佰公司 附件密级 begin
+               if(summary.getAttachLevel() != null){
+            	    attachLevel = summary.getAttachLevel();
+   	            } else {
+   	            	attachLevel = secret; // 附件密级等于流程密级
+   	            }
+	   			modelAndView.addObject("attachLevel", attachLevel);
 				//end
 				
 				modelAndView.addObject("templete", templete);  
@@ -881,6 +893,15 @@ public class CollaborationController extends BaseController {
 			modelAndView.addObject("flowSecretLevel", secretLevel);
 			modelAndView.addObject("secretFlag", "resend");
 			//end
+			
+			//2017-4-21 诚佰公司 附件密级 begin
+            if(summary.getAttachLevel() != null){
+            	attachLevel = summary.getAttachLevel();
+            } else {
+            	attachLevel = secret; // 附件密级等于流程密级
+            }
+   			modelAndView.addObject("attachLevel", attachLevel);
+			//end
             
             //来自"重新发起" 不允许修改标题
             modelAndView.addObject("readOnly", Boolean.TRUE);
@@ -995,6 +1016,15 @@ public class CollaborationController extends BaseController {
 			modelAndView.addObject("secret", secret);
 			modelAndView.addObject("flowSecretLevel", secretLevel);
 			modelAndView.addObject("secretFlag", "wait");
+			//end
+			
+			//2017-4-21 诚佰公司 附件密级 begin
+            if(summary.getAttachLevel() != null){
+            	attachLevel = summary.getAttachLevel();
+            } else {
+            	attachLevel = secret; // 附件密级等于流程密级
+            }
+   			modelAndView.addObject("attachLevel", attachLevel);
 			//end
             
             if (summary.getProcessId() != null) {

@@ -521,8 +521,9 @@ if(isFromTemplate || "${comm}"=="register" ) {
     </c:forEach>
     </select></td>
     
-    <!--流程密级-->
-	<td width="8%" nowrap="nowrap"  class="bg-gray"><font color="red"><fmt:message key="collaboration.secret.flowsecret" bundle="${colI18N}"/>:</font></td>
+    <%--流程密级--%>
+    <%--
+	<td width="8%" nowrap="nowrap" class="bg-gray"><font color="red"><fmt:message key="collaboration.secret.flowsecret" bundle="${colI18N}"/>:</font></td>
 	<c:if test="${not empty tempId}">	
 	    <td width="10%">
 	    	<select class="input-100per">
@@ -535,8 +536,31 @@ if(isFromTemplate || "${comm}"=="register" ) {
 	   		</select>
 	   		<input name=secretLevel id="secretLevel" type="hidden" value="${secret}"/>
 		</td>
+	</c:if> --%>
+	
+	<!-- 2017-4-21 诚佰公司 添加流程密级隐藏字段和附件密级字段 -->
+	<c:if test="${not empty tempId}">	
+		<td width="8%" nowrap="nowrap" class="bg-gray"><font color="red">密级:</font></td>	
+	    <td width="10%">
+	   		<!-- 流程密级 -->
+	   		<input name=secretLevel id="secretLevel" type="hidden" value="${secret}"/>
+	   		<!-- 附件密级 -->    	
+			<select name="edocAttachLevel" id="edocAttachLevel" class="input-100per">
+		    	<!-- 2017-01-11 诚佰公司 -->
+		    	<option value=""></option>
+		    	<option value="1" ${edocAttachLevel == 1? 'selected=selected':''}><fmt:message key="collaboration.secret.nosecret" bundle="${colI18N}"/></option>
+		    	<c:if test="${peopleSecretLevel >= 2 }">
+		    		<option value="2" ${edocAttachLevel == 2? 'selected=selected':''}><fmt:message key="collaboration.secret.secret" bundle="${colI18N}"/></option>
+		    	</c:if>
+		    	<c:if test="${peopleSecretLevel >= 3 }">
+		    		<option value="3" ${edocAttachLevel == 3? 'selected=selected':''}><fmt:message key="collaboration.secret.secretmore" bundle="${colI18N}"/></option>
+		    	</c:if>
+		    </select>
+		</td>
 	</c:if>
+	
 	<c:if test="${tempId == null && secretFlag != 'wait' && param.reSendSecretLevel!= null}">	
+		<td width="8%" nowrap="nowrap"  class="bg-gray"><font color="red"><fmt:message key="collaboration.secret.flowsecret" bundle="${colI18N}"/>:</font></td>
 		<td width="10%">
 		<select name="secretLevel" id="secretLevel" class="input-100per" onchange="changeSecretLevel(this);">
 			<!-- 2017-01-11 诚佰公司 -->
@@ -551,9 +575,12 @@ if(isFromTemplate || "${comm}"=="register" ) {
 	    	<option value="3" ${param.reSendSecretLevel == 3 ? 'selected' :''}><fmt:message key="collaboration.secret.secretmore" bundle="${colI18N}"/></option>
 	    	</c:if>
     	</select>
+    	<!-- 附件密级 -->
+    	<input name="edocAttachLevel" id="edocAttachLevel" type="hidden" value="${edocAttachLevel}"/>
     	</td>
 	</c:if>
 	<c:if test="${tempId == null && secretFlag != 'wait' && param.reSendSecretLevel== null}">	
+		<td width="8%" nowrap="nowrap"  class="bg-gray"><font color="red"><fmt:message key="collaboration.secret.flowsecret" bundle="${colI18N}"/>:</font></td>
 	    <td width="10%">
 	    <select name="secretLevel" id="secretLevel" class="input-100per" onchange="changeSecretLevel(this);">
 	    	<!-- 2017-01-11 诚佰公司 -->
@@ -566,22 +593,27 @@ if(isFromTemplate || "${comm}"=="register" ) {
 	    	<option value="3"><fmt:message key="collaboration.secret.secretmore" bundle="${colI18N}"/></option>
 	    	</c:if>
 	    </select>
+	    <!-- 附件密级 -->
+    	<input name="edocAttachLevel" id="edocAttachLevel" type="hidden" value="${edocAttachLevel}"/>
 	    </td>
    	</c:if>
    	<c:if test="${tempId == null && secretFlag == 'wait'&& param.reSendSecretLevel== null}">	
-    <td width="10%">
-    <select name="secretLevel" id="secretLevel" class="input-100per" onchange="changeSecretLevel(this);">
-    	<!-- 2017-01-11 诚佰公司 -->
-    	<option value=""></option>
-    	<option value="1" ${secret == 1 ? 'selected' :''}><fmt:message key="collaboration.secret.nosecret" bundle="${colI18N}"/></option>
-    	<c:if test="${peopleSecretLevel >= 2 }">
-    	<option value="2" ${secret == 2 ? 'selected' :''}><fmt:message key="collaboration.secret.secret" bundle="${colI18N}"/></option>
-    	</c:if>
-    	<c:if test="${peopleSecretLevel >= 3 }">
-    	<option value="3" ${secret == 3 ? 'selected' :''}><fmt:message key="collaboration.secret.secretmore" bundle="${colI18N}"/></option>
-    	</c:if>
-    </select>
-    </td>
+	    <td width="8%" nowrap="nowrap"  class="bg-gray"><font color="red"><fmt:message key="collaboration.secret.flowsecret" bundle="${colI18N}"/>:</font></td>
+	    <td width="10%">
+	    <select name="secretLevel" id="secretLevel" class="input-100per" onchange="changeSecretLevel(this);">
+	    	<!-- 2017-01-11 诚佰公司 -->
+	    	<option value=""></option>
+	    	<option value="1" ${secret == 1 ? 'selected' :''}><fmt:message key="collaboration.secret.nosecret" bundle="${colI18N}"/></option>
+	    	<c:if test="${peopleSecretLevel >= 2 }">
+	    	<option value="2" ${secret == 2 ? 'selected' :''}><fmt:message key="collaboration.secret.secret" bundle="${colI18N}"/></option>
+	    	</c:if>
+	    	<c:if test="${peopleSecretLevel >= 3 }">
+	    	<option value="3" ${secret == 3 ? 'selected' :''}><fmt:message key="collaboration.secret.secretmore" bundle="${colI18N}"/></option>
+	    	</c:if>
+	    </select>
+	    <!-- 附件密级 -->
+	   	<input name="edocAttachLevel" id="edocAttachLevel" type="hidden" value="${edocAttachLevel}"/>
+	    </td>
    	</c:if>
    	
  	<td nowrap="nowrap" height="24" colspan="2" class="bg-gray">
