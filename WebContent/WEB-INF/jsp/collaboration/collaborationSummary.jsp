@@ -122,6 +122,18 @@ function beforeUnloadCheck(){
 					<td height="18" nowrap class="bg-gray detail-subject"><fmt:message key="common.sender.label" bundle="${v3xCommonI18N}" /> : </td>
 					<td valign="bottom"><span class="click-link"  onclick="javascript:showV3XMemberCard('${summary.startMemberId}')">${v3x:showMemberName(summary.startMemberId)}</span> (${summaryDate})</td>
 				</tr>
+				<!-- 2017-5-8 诚佰公司 自由流程显示流程密级 -->
+				<c:if test="${summary.templeteId == null }">
+					<tr>
+						<td height="18" nowrap class="bg-gray detail-subject">流程密级 : </td>
+						<td valign="bottom">
+							<c:if test="${summary.secretLevel == null || summary.secretLevel == 1 }">内部</c:if>
+							<c:if test="${summary.secretLevel == 2 }">秘密</c:if>
+							<c:if test="${summary.secretLevel == 3 }">机密</c:if>
+						</td>
+					</tr>
+				</c:if>
+				<!-- 诚佰公司 -->
 				<tr id="attachment2Tr" style="display: none">
 					<td height="18" nowrap class="bg-gray detail-subject" valign="bottom"><fmt:message key="common.toolbar.insert.mydocument.label" bundle="${v3xCommonI18N}" /> : </td>
 					<td valign="bottom" colspan="3">

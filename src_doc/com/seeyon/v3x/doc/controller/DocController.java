@@ -710,6 +710,9 @@ public class DocController extends BaseController {
 			for (DocTableVO docTableVO : docs) {
 				if(docTableVO.getFrType()!=3&&docTableVO.getFrType()!=32&&docTableVO.getFrType()!=43&&docTableVO.getFrType()!=44&&docTableVO.getFrType()!=45&&docTableVO.getFrType()!=46){
 					List<GridVO> listGrid = docTableVO.getGrids();
+					// 2017-5-8 诚佰公司 修改第二列宽度 
+					listGrid.get(1).setPercent(31);
+					// 诚佰公司
 					GridVO gridVo = new GridVO();
 					gridVo.setTitle("文档密级");
 					gridVo.setIsImg(false);
